@@ -5,6 +5,7 @@ import csv
 from pathlib import Path
 import PIL.Image
 import PIL.ImageTk
+from ttkwidgets import CheckboxTreeview
 
 # Import TKinter Libraries
 from tkinter import *
@@ -54,7 +55,7 @@ class database_display(database_maintenance):
             # Set image file
             self.filename = str(Path("raw_data/images/") / self.database[self.collection_index]['items'][self.item_index]['image_file'])
 
-		    # Load Image
+            # Load Image
             self.segment_image = PIL.Image.open(self.filename)
 
             # Find Image Size
@@ -206,7 +207,8 @@ class database_display(database_maintenance):
         if level == 's':
             self.segment_entries = self.make_entry_form(tab,self.segment_questions,'s')
 
-        return;
+        return;				
+	
     def make_annotations_tree(self,tree_name,level):
         
         # Create Tree Structure
@@ -222,7 +224,7 @@ class database_display(database_maintenance):
         # Create Root
         for item,dictionary in self.taxonomy.items():
             
-            top=tree_name.insert("", 1, str(item), text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
+            top=tree_name.insert("", 1, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
             # Recursive Function to Go Through Unknown Number of Layers
             def iterateAllKeys(child_dictionary,parent_branch):
@@ -237,7 +239,7 @@ class database_display(database_maintenance):
                     x = x + 1
 
                     # Create New Branch
-                    d[x+1]=tree_name.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary[	'type'],new_dictionary['definition']))
+                    d[x+1]=tree_name.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary[    'type'],new_dictionary['definition']))
                 
                     # Re-Run Recursive Function with New "children" Dictionary
                     iterateAllKeys(new_dictionary['children'],d[x+1])
@@ -249,7 +251,9 @@ class database_display(database_maintenance):
         if level == 'i':
 
             if 'annotations' in self.database[self.collection_index]['items'][self.item_index]:
-                tree_name.selection_add(self.database[self.collection_index]['items'][self.item_index]['annotations'])
+                for annotation in self.database[self.collection_index]['items'][self.item_index]['annotations']:
+                    tree_name.change_state(tree_name.parent(annotation),"checked")
+                    tree_name.change_state(annotation,"checked")
 
         elif level == 's':
 
@@ -321,7 +325,7 @@ class database_display(database_maintenance):
         self.segment_info.title("Segment: " + self.segment_value)
         self.segment_info.state('zoomed')
         
-	    # Setup Segment Window Panels
+        # Setup Segment Window Panels
         self.segment_panel_control = ttk.PanedWindow(self.segment_info,orient=HORIZONTAL)
         self.segment_pane1 = ttk.Frame(self.segment_panel_control)
         self.segment_pane2 = ttk.Frame(self.segment_panel_control)
@@ -439,7 +443,7 @@ class database_display(database_maintenance):
         # Set up annotations tab (tab2) #
         #################################
         
-        self.segment_tree=ttk.Treeview(self.segment_tab2,height="26",)
+        self.segment_tree=CheckboxTreeview(self.segment_tab2,height="26")
         self.make_annotations_tree(self.segment_tree,'s')           
     def display_item_info_window(self):
         
@@ -455,9 +459,9 @@ class database_display(database_maintenance):
         menubar.add_command(label="Refresh", command=(lambda: self.refresh_segment_list('s')))
         menubar.add_command(label="Add New Segment", command=self.add_new_segment)
 
-		# Get Sizes
+        # Get Sizes
         pane_width = self.half_pane()
-		
+        
         # Setup Item Window Panes
         panel_control = ttk.PanedWindow(self.item_info,orient=HORIZONTAL)
         pane1 = ttk.Frame(panel_control, width = pane_width)
@@ -508,7 +512,7 @@ class database_display(database_maintenance):
             # Set image file
             filename = str(Path("raw_data/images/") / self.database[self.collection_index]['items'][self.item_index]['image_file'])
 
-		    # Load Image
+            # Load Image
             image = PIL.Image.open(filename)
 
             # Find Image Size
@@ -566,7 +570,7 @@ class database_display(database_maintenance):
         # Set up annotations tab #
         ##########################
 
-        self.item_tree = ttk.Treeview(self.item_tab2,height="26",)
+        self.item_tree = CheckboxTreeview(self.item_tab2,height="26",)
         self.make_annotations_tree(self.item_tree,'i')
 
         #######################
@@ -603,7 +607,7 @@ class database_display(database_maintenance):
             segments.insert(END, segment)
     
             # Bind scrollbar to listbox
-            segments.config(yscrollcommand=scrollbar.set)	
+            segments.config(yscrollcommand=scrollbar.set)    
             scrollbar.config(command=segments.yview)
 
             # Bind seleection to event
@@ -682,7 +686,7 @@ class database_display(database_maintenance):
             items.insert(END, item)
 
         # Bind scrollbar to listbox
-        items.config(yscrollcommand=scrollbar.set)	
+        items.config(yscrollcommand=scrollbar.set)    
         scrollbar.config(command=items.yview)
     
         # Bind selected item to event
@@ -779,7 +783,7 @@ class database_display(database_maintenance):
             items.insert(END, item)
 
         # Bind scrollbar to listbox
-        items.config(yscrollcommand=scrollbar.set)	
+        items.config(yscrollcommand=scrollbar.set)    
         scrollbar.config(command=items.yview)
     
         # Bind selected item to event

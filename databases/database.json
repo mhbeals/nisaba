@@ -9,13 +9,18 @@
                 "item_type": "t",
                 "item_title": "Book I: Paragraph 1",
                 "item_author": "Herodotus",
-                "transcription": "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another. Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt. \n",
+                "transcription": " This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another. Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say,\n\n\n\n\n\n",
                 "segments": {
                     "0": {
                         "start": 0,
                         "end": 65,
                         "segment_notes": "Preface",
                         "annotations": [
+                            "Memorial-Justice-Hero_Teleology_of_History",
+                            "Memorial-Justice_Teleology_of_History",
+                            "Memorial_Teleology_of_History",
+                            "Teleology_of_History",
+                            "Teleology",
                             "Memorial-Justice-Hero_Teleology_of_History"
                         ]
                     },
@@ -23,12 +28,18 @@
                         "start": 65,
                         "end": 298,
                         "segment_notes": "",
-                        "annotations": [
-                            "Explanatory-Descriptive_Teleology_of_History"
-                        ]
+                        "annotations": []
                     }
                 },
-                "annotations": [],
+                "annotations": [
+                    "Explanatory-Descriptive_Teleology_of_History",
+                    "Memorial-Justice-Hero_Teleology_of_History",
+                    "Explanatory_Teleology_of_History",
+                    "Memorial-Justice_Teleology_of_History",
+                    "Teleology_of_History",
+                    "Memorial_Teleology_of_History",
+                    "Teleology"
+                ],
                 "item_date": "",
                 "item_page_number": "1",
                 "item_document_number": "1"

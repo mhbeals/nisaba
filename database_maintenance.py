@@ -10,7 +10,9 @@ import urllib.parse
 class database_maintenance:
 
     def __init__(self):
-
+		# Initialise programme with stored databases 
+		
+		# Load JSON database
         with open (Path("databases/") / "database.json", 'r') as file:
             loaddata = file.read()
 
@@ -25,28 +27,26 @@ class database_maintenance:
         self.taxonomy = json.loads(loaddata)
 
     def save_database(self):
-        # convert database to json and place in a variable
+	
+        # Convert database to json and place in a variable
         savedata = json.dumps(self.database, indent=4)
-
-        #save variable to 'most recent' file
-        with open (Path("databases/") / "database.json", 'w') as file:
+		
+        print("Saving to JSON")
+        with open (Path("databases/") / 'database.json', 'w') as file:
+            file.write(savedata)
+        backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'	
+        with open (Path("databases/backups/") / backup_filename, 'w') as file:
             file.write(savedata)
 
-        #create a filename based on the time
-        filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
-
-
-        #save backup
-        with open (Path("databases/") / filename, 'w') as file:
-            file.write(savedata)
-
-        # map the saved JSON into RDF
+        # Map the saved JSON into RDF
+        print("Saving to RDF")
         self.rdf_mapper()
 
         return
 
     def rdf_mapper(self):
-
+		# Map the JSON database to RDF
+		
         # Load previous triples, if any
         self.database_rdf.parse("databases/database.ttl", format='turtle')
 
@@ -127,68 +127,47 @@ class database_maintenance:
 
         self.database_rdf.bind('nisaba', nisaba_v)
 
-        # id RDF version
-        filename_rdf = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
-        with open(Path("databases/") / filename_rdf, 'wb') as file:
-            print('Writing {} triples to Turtle file'.format(len(self.database_rdf)))
+        # Save RDF version
+        with open(Path("databases/") / 'database.ttl', 'wb') as file:
             file.write(self.database_rdf.serialize(format='turtle'))
 
+        backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
+        with open(Path("databases/backups/") / backup_filename, 'wb') as file:
+            file.write(self.database_rdf.serialize(format='turtle'))
 
+    def set_annotation_parents(self,tree_name):
+        annotation_list = tree_name.get_checked()
+        for annotation in annotation_list:
+            if tree_name.parent(annotation) != "" and tree_name.parent(annotation) not in annotation_list:
+                annotation_list.append(tree_name.parent(annotation))
+        return annotation_list
+				
     def save_entries(self, level):
         # Save entries
         for entry in self.collection_entries:
             self.database[self.collection_index][entry[0]] = entry[1].get()
 
-            # self.collection_uri = self.nisaba_c[urllib.parse.quote(entry[1].get())]
-            # self.database_rdf.add(( self.collection_uri, RDF.type, self.nisaba_v['CollectionEntry']))
-            # self.database_rdf.add(( self.collection_uri, RDFS.label, Literal(entry[1].get()) ))
-
         if level == 'i':
-            annotations_list = self.database[self.collection_index]['items'][self.item_index].get('annotations',[])
-            for item in self.item_tree.selection():
-                annotations_list.append(item)
-            self.database[self.collection_index]['items'][self.item_index]['annotations'] = annotations_list
-
-            # self.item_uri = URIRef(self.collection_uri + '/item/' + self.item_index)
-            # self.database_rdf.add(( self.collection_uri, self.nisaba_v['hasItem'], self.item_uri ))
-            # self.database_rdf.add(( self.item_uri, RDF.type, self.nisaba_v['ItemEntry'] ))
-            # for a in annotations_list:
-            #     self.database_rdf.add(( self.item_uri, self.nisaba_v['hasAnnotation'], Literal(a) ))
+            
+            self.database[self.collection_index]['items'][self.item_index]['annotations'] = self.set_annotation_parents(self.item_tree)
 
             if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
                 self.database[self.collection_index]['items'][self.item_index]['transcription'] = self.transcription_text.get("1.0",END)
 
-                # self.database_rdf.add(( self.item_uri, self.nisaba_v['hasTranscription'], Literal(self.transcription_text.get("1.0",END)) ))
-
             elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
                 self.database[self.collection_index]['items'][self.item_index]['image_file'] = self.image_filename.get()
-
-                # self.database_rdf.add(( self.item_uri, self.nisaba_v['hasImage'], Literal(self.image_filename.get()) ))
-
 				
         if level == 'i' or level == 's':
             for entry in self.item_entries:
                 self.database[self.collection_index]['items'][self.item_index][entry[0]] = entry[1].get()
 
-                # self.database_rdf.add(( item_uri, RDFS.label, entry[1].get() ))
-
         if level == 's':
 
-            # self.segment_uri = URIRef(self.item_uri + '/segment/' + self.segment_index)
-            # self.database_rdf.add(( self.item_uri, self.nisaba_v['hasSegment'], self.segment_uri ))
-            # self.database_rdf.add(( self.segment_uri, RDF.type, self.nisaba_v['SegmentEntry'] ))
-
-            for entry in self.segment_entries:
-                self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]] = entry[1].get()
-
-                # self.database_rdf.add(( self.segment_uri, RDFS.label, Literal(entry[1].get()) ))
+            self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.set_annotation_parents(self.segment_tree)
 
             if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['start'] = int(self.start_text.get())
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['end'] = int(self.end_text.get())
-
-                # self.database_rdf.add(( self.segment_uri, self.nisaba_v['start'], Literal(int(self.start_text.get())) ))
-                # self.database_rdf.add(( self.segment_uri, self.nisaba_v['end'], Literal(int(self.end_text.get())) ))
 
             elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['top'] = int(self.top_text.get())
@@ -196,19 +175,10 @@ class database_maintenance:
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'] = int(self.right_text.get())
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'] = int(self.left_text.get())
 
-                # self.database_rdf.add(( self.segment_uri, self.nisaba_v['top'], Literal(int(self.top_text.get())) ))
-                # self.database_rdf.add(( self.segment_uri, self.nisaba_v['bottom'], Literal(int(self.bottom_text.get())) ))
-                # self.database_rdf.add(( self.segment_uri, self.nisaba_v['right'], Literal(int(self.right_text.get())) ))
-                # self.database_rdf.add(( self.segment_uri, self.nisaba_v['left'], Literal(int(self.left_text.get())) ))
-
             annotations_list = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get('annotations',[])
             for item in self.segment_tree.selection():
                 annotations_list.append(item)
             self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = annotations_list
-
-            # add segment annotations to RDF graph too
-            # for a in annotations_list:
-            #     self.database_rdf.add(( self.segment_uri, self.nisaba_v['hasAnnotation'], Literal(a) ))
 
         self.save_database()
 
@@ -240,10 +210,10 @@ class database_maintenance:
 
         iid_finder(self.taxonomy)
 
-        # convert database to json and place in a variable
+        # Convert database to json and place in a variable
         savedata = json.dumps(self.taxonomy, indent=4)
 
-        #save variable to 'most recent' file
+        # Save variable to 'most recent' file
         with open (Path("databases/") / "taxonomy.json", 'w') as file:
             file.write(savedata)
 
