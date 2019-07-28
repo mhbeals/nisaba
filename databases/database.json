@@ -9,30 +9,31 @@
                 "item_type": "t",
                 "item_title": "Book I: Preface",
                 "item_author": "Herodotus",
-                "transcription": "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.",
+                "transcription": "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n",
                 "segments": {
                     "0": {
                         "start": 0,
                         "end": 65,
                         "segment_notes": "",
                         "annotations": [
-                            "Teleology",
-                            "Teleology_of_History",
-                            "Memorial_Teleology_of_History",
+                            "Memorial-Justice-Hero_Teleology_of_History",
                             "Memorial-Justice_Teleology_of_History",
-                            "Memorial-Justice-Hero_Teleology_of_History"
+                            "Memorial_Teleology_of_History",
+                            "Teleology_of_History",
+                            "Teleology"
                         ]
                     }
                 },
                 "annotations": [
                     "Memorial-Justice-Hero_Teleology_of_History",
                     "Memorial-Justice_Teleology_of_History",
-                    "Teleology_of_History",
                     "Memorial_Teleology_of_History",
+                    "Teleology_of_History",
                     "Teleology"
                 ],
                 "item_date": "",
-                "item_page_number": "Preface"
+                "item_page_number": "Preface",
+                "item_document_number": ""
             },
             "1": {
                 "item_type": "t",
@@ -70,11 +71,20 @@
                     "0": {
                         "top": 0,
                         "right": 50,
-                        "bottom": 50,
-                        "left": 0
+                        "bottom": 100,
+                        "left": 0,
+                        "annotations": [
+                            "Primary_Evidence",
+                            "Evidence",
+                            "Ontology"
+                        ]
                     }
                 },
-                "annotations": [],
+                "annotations": [
+                    "Secondary_Evidence",
+                    "Evidence",
+                    "Ontology"
+                ],
                 "item_title": "Sample Image",
                 "item_author": "",
                 "item_date": "",

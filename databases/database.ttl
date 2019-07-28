@@ -37,7 +37,8 @@
         <http://purl.org/nisaba/collection/0/item/0/segment/1> ;
     nisaba:item_author "Herodotus" ;
     nisaba:item_date "" ;
-    nisaba:item_document_number "1",
+    nisaba:item_document_number "",
+        "1",
         "Preface" ;
     nisaba:item_page_number "1",
         "Preface" ;
@@ -87,13 +88,25 @@
 
 
 """,
-        "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another." .
+        "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.",
+        """This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.
+""",
+        """This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.
+
+""",
+        """This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.
+
+
+""" .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 65 ;
-    nisaba:hasAnnotation "Memorial-Justice-Hero_Teleology_of_History",
+    nisaba:hasAnnotation "Evidence",
+        "Memorial-Justice-Hero_Teleology_of_History",
         "Memorial-Justice_Teleology_of_History",
         "Memorial_Teleology_of_History",
+        "Ontology",
+        "Secondary_Evidence",
         "Teleology",
         "Teleology_of_History" ;
     nisaba:segment_notes "",
@@ -133,6 +146,11 @@
     nisaba:start 0 .
 
 <http://purl.org/nisaba/collection/0/item/2> a nisaba:ItemEntry ;
+    nisaba:hasAnnotation "Evidence",
+        "Ontology",
+        "Primary_Evidence",
+        "Secondary_Evidence",
+        "Tertiary_Evidence" ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/2/segment/0> ;
     nisaba:image_file "sample.jpg" ;
     nisaba:item_author "" ;
@@ -143,7 +161,15 @@
     nisaba:item_type "i" .
 
 <http://purl.org/nisaba/collection/0/item/2/segment/0> a nisaba:SegmentEntry ;
-    nisaba:bottom 50 ;
+    nisaba:bottom 50,
+        100 ;
+    nisaba:hasAnnotation "Anti-Positivism",
+        "Empiricism",
+        "Epistemology",
+        "Evidence",
+        "Ontology",
+        "Post-Positivism",
+        "Primary_Evidence" ;
     nisaba:left 0 ;
     nisaba:right 50 ;
     nisaba:top 0 .

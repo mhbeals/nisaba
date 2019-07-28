@@ -175,10 +175,7 @@ class database_maintenance:
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'] = int(self.right_text.get())
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'] = int(self.left_text.get())
 
-            annotations_list = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get('annotations',[])
-            for item in self.segment_tree.selection():
-                annotations_list.append(item)
-            self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = annotations_list
+            self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.set_annotation_parents(self.segment_tree)
 
         self.save_database()
 
