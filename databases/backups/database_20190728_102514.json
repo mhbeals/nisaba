@@ -46,7 +46,8 @@
                         "annotations": [
                             "Secondary_Evidence",
                             "Evidence",
-                            "Ontology"
+                            "Ontology",
+                            "Secondary_Evidence"
                         ]
                     }
                 },

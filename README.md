@@ -3,6 +3,10 @@ A tool for multi-modal annotation
 
 ## Change Log
 
+### v.0.2.3
+
++ Minor bug fix to segment annotation tree (Issue #5)
+
 ### v.0.2.2
 
 + Streamlined windowed (single window open at any time)

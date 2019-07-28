@@ -128,7 +128,6 @@
         1000 ;
     nisaba:hasAnnotation "Evidence",
         "Ontology",
-        "Secondary_Evidence",
         "Tertiary_Evidence" ;
     nisaba:start 0 .
 

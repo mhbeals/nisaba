@@ -248,7 +248,9 @@ class database_display(database_maintenance):
         elif level == 's':
 
             if 'annotations' in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]:
-                tree_name.selection_add(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'])
+                for annotation in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations']:
+                    tree_name.change_state(tree_name.parent(annotation),"checked")
+                    tree_name.change_state(annotation,"checked")
        
         # Display Tree
         tree_name.pack(anchor=NW)

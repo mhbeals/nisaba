@@ -1,0 +1,50 @@
+{
+    "0": {
+        "collection_title": "The History of Herodotus",
+        "collection_date": "440 BC",
+        "collection_holder": "Project Gutenberg",
+        "collection_holder_reference": "2707",
+        "items": {
+            "0": {
+                "item_type": "t",
+                "item_title": "Book I: Paragraph 1",
+                "item_author": "Herodotus",
+                "transcription": "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that 1 neither the deeds of men may be forgotten by lapse of time, nor the works 2 great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.",
+                "segments": {
+                    "0": {
+                        "start": 0,
+                        "end": 65,
+                        "segment_notes": "Preface",
+                        "annotations": [
+                            "Memorial-Justice-Hero_Teleology_of_History",
+                            "Memorial-Justice_Teleology_of_History",
+                            "Memorial_Teleology_of_History",
+                            "Teleology_of_History",
+                            "Teleology",
+                            "Memorial-Justice-Hero_Teleology_of_History"
+                        ]
+                    }
+                },
+                "annotations": [
+                    "Explanatory-Descriptive_Teleology_of_History",
+                    "Memorial-Justice-Hero_Teleology_of_History",
+                    "Primary_Evidence",
+                    "Explanatory_Teleology_of_History",
+                    "Memorial-Justice_Teleology_of_History",
+                    "Evidence",
+                    "Teleology_of_History",
+                    "Memorial_Teleology_of_History",
+                    "Ontology",
+                    "Teleology"
+                ],
+                "item_date": "",
+                "item_page_number": "1",
+                "item_document_number": "1"
+            }
+        },
+        "collection_author": "Herodotus",
+        "collection_place_of_publication": "Internet",
+        "collection_holder_original": "",
+        "collection_holder_reference_original": ""
+    }
+}

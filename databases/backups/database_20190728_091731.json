@@ -42,12 +42,8 @@
                 "segments": {
                     "0": {
                         "start": 0,
-                        "end": 17,
-                        "annotations": [
-                            "Secondary_Evidence",
-                            "Evidence",
-                            "Ontology"
-                        ]
+                        "end": 1000,
+                        "annotations": []
                     }
                 },
                 "annotations": [
@@ -62,24 +58,6 @@
                 "item_date": "",
                 "item_page_number": "1",
                 "item_document_number": "1"
-            },
-            "2": {
-                "item_type": "i",
-                "image_file": "sample.jpg",
-                "segments": {
-                    "0": {
-                        "top": 0,
-                        "right": 50,
-                        "bottom": 50,
-                        "left": 0
-                    }
-                },
-                "annotations": [],
-                "item_title": "Sample Image",
-                "item_author": "",
-                "item_date": "",
-                "item_page_number": "",
-                "item_document_number": ""
             }
         },
         "collection_author": "Herodotus",
