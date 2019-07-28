@@ -1,4 +1,4 @@
 /database/backups/*
-/__pycache__/
-/config_files/DCMI/
-/config_files/Nisaba_Basic/
+/__pycache__/*
+/config_files/DCMI/*
+/config_files/Nisaba_Basic/*
