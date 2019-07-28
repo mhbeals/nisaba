@@ -3,6 +3,11 @@ A tool for multi-modal annotation
 
 ## Change Log
 
+### v.0.2.2
+
++ Streamlined windowed (single window open at any time)
++ Changed add item from menu drop-down to buttons in item list
+
 ### v.0.2.1
 
 + Added checkboxes to annotation tree
