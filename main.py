@@ -1,6 +1,7 @@
 # Import Classes
 from database_display import *
 from taxonomy_display import *
+from metadata_display import *
 
 # Import TKinter Libraries
 from tkinter import *
@@ -9,26 +10,37 @@ from tkinter.ttk import *
 from tkinter import scrolledtext
 
 # Instantiate Database Viewer
-view_window = database_display()
+database_window = database_display()
 taxonomy_window = taxonomy_display()
+metadata_window = metadata_display()
 
 # Create Window
 root = Tk()
 root.title("Nisaba")
-root.geometry('600x200')
+root.minsize(400, 150)
+root.maxsize(400, 150)
+
+# Place Icon
+# "Writing" by IQON from the Noun Project
+root.iconbitmap('icon.ico')
 
 # Setup Menu Tab
 root_window_title = Label(root, text="\nNisaba: Multi-Modal Annotations\n")
 root_window_title.config(font=("Times", 16))  
-root_window_title.grid(column=0,row=0,sticky=W,padx=5, pady=5)
+root_window_title.place(relx=0.5, rely=0.2, anchor=CENTER)
 
 # Setup Menu Options
-view_radio = Button(root,text='View/Edit an Existing Record', command=view_window.collection_selector)
-vocabulary_radio = Button(root,text='Create Controlled Vocabulary', command=taxonomy_window.taxonomy_viewer)
+#edit_metadata = Button(root,text='View/Edit Database Metadata', command=metadata_window.database_metadata_viewer)
+edit_database = Button(root,text='View/Edit Database', command=database_window.collection_selector)
+edit_vocabulary = Button(root,text='Edit Annotation Vocabulary', command=taxonomy_window.taxonomy_viewer)
+
 
 # Display Menu Options
-view_radio.grid(column=0,row=1,sticky=W,padx=5, pady=5)
-vocabulary_radio.grid(column=0,row=3,sticky=W, padx=5, pady=5)
+#edit_metadata.place(relx=0.5, rely=0.45, anchor=CENTER)
+edit_database.place(relx=0.5, rely=0.5, anchor=CENTER)
+edit_vocabulary.place(relx=0.5, rely=0.7, anchor=CENTER)
+
+
 
 # Begin Main Loop  
 root.mainloop()

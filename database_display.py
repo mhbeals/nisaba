@@ -321,10 +321,11 @@ class database_display(database_maintenance):
         self.pane_two.destroy()
 		
         # Setup Segment Window Panels
-        self.segment_pane_one = ttk.Frame(self.panel_control)
-        self.segment_pane_two = ttk.Frame(self.panel_control)
-        self.panel_control.add(self.segment_pane_one, weight=1)
-        self.panel_control.add(self.segment_pane_two, weight=0)
+        self.segment_pane_one = Frame(self.item_info)
+        self.segment_pane_two = Frame(self.item_info)
+        split = 0.5
+        self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
+        self.segment_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
 		
         # If the Segment is Text
         if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
@@ -456,13 +457,11 @@ class database_display(database_maintenance):
         menubar.add_command(label="Add New Segment", command=self.add_new_segment)
         
         # Setup Item Window Panes
-        self.panel_control = ttk.PanedWindow(self.item_info,orient=HORIZONTAL)
-        self.pane_one = ttk.Frame(self.panel_control)
-        self.pane_two = ttk.Frame(self.panel_control)
-        self.panel_control.add(self.pane_one, weight=1)
-
-        # Pack Panes into Frame
-        self.panel_control.pack(expand=1, fill='both')
+        self.pane_one = Frame(self.item_info)
+        self.pane_two = Frame(self.item_info)
+        split = 0.5
+        self.pane_one.place(rely=0, relwidth=split, relheight=1)
+        self.pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
 
         ##############################################
         # Setup Item Display Window (Right / Pane 2) #
@@ -486,7 +485,6 @@ class database_display(database_maintenance):
 
             # Display text box
             self.transcription_text.pack(padx=10,pady=10)
-            self.panel_control.add(self.pane_two, weight=1)
             
         # If the Item is an Image
         elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':      
@@ -526,7 +524,6 @@ class database_display(database_maintenance):
 
             # Add Image to Canvas
             imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
-            self.panel_control.add(self.pane_two, weight=0)
         
         ###########################################
         # Setup Items Window Tabs (Left / Pane 1) #
@@ -738,7 +735,10 @@ class database_display(database_maintenance):
         self.collection_selection_window.title('Collection Selection')
         self.collection_selection_window.state('zoomed')
         
-        
+        # Place Icon
+        # "Writing" by IQON from the Noun Project
+        self.collection_selection_window.iconbitmap('icon.ico')
+
         # Setup Window Menu
         menubar = Menu(self.collection_selection_window)
         addMenu = Menu(menubar, tearoff=False)

@@ -3,6 +3,12 @@ A tool for multi-modal annotation
 
 ## Change Log
 
+### v.0.2.4
+
++ Updated Window Icon
++ Made Window Geometry of Main Menu Relative
++ Improved Item Window Splitting
+
 ### v.0.2.3
 
 + Minor bug fix to segment annotation tree (Issue #5)
