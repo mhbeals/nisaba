@@ -7,6 +7,29 @@ from tkinter.ttk import *
 
 class taxonomy_display(database_maintenance):
 	
+	def	delete_element_recursive(self,dictionary):
+		# Delete item	
+		for key,value in dictionary.items():
+			if value['iid'] == self.taxonomy_iid_entry.get():
+				del dictionary[key]
+				break
+				
+			else:
+				self.delete_element_recursive(value['children'])
+					
+	def	delete_element(self):
+		# Delete item	
+		for key,value in self.taxonomy.items():
+			if value['iid'] == self.taxonomy_iid_entry.get():
+				del dictionary[key]
+				break
+				
+			else:
+				self.delete_element_recursive(value['children'])
+
+		self.taxonomy_window.destroy()
+		self.taxonomy_viewer()
+		
 	def displayEditor(self):
 
 		# Delete Any Existing Information
@@ -20,24 +43,40 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_pane_two = Frame(self.taxonomy_window)
 		self.taxonomy_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
 		
-		entries = ["ID: ","Name: ", "Type: ", "Definition: "]
+		row = Frame(self.taxonomy_pane_two)
+		self.taxonomy_iid_label = Label(row, text="ID", anchor='w', width=10)
+		self.taxonomy_iid_entry = Entry(row)
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		self.taxonomy_iid_label.pack(side=LEFT)
+		self.taxonomy_iid_entry.pack(side=RIGHT, expand=YES, fill=X)
 		
-		for entry in entries:
-			# Create a row 
-			row = Frame(self.taxonomy_pane_two)
-						
-			# Create a label and text box
-			label = Label(row, text=entry, anchor='w', width=10)
-			entry = Entry(row)
-
-			# Package Row
-			row.pack(side=TOP, fill=X, padx=5, pady=5)
-			label.pack(side=LEFT)
-			entry.pack(side=RIGHT, expand=YES, fill=X)
-
-		self.save_button = Button(self.taxonomy_pane_two, text='Save', command=self.save_taxonomy)
-		self.save_button.pack()
-
+		row = Frame(self.taxonomy_pane_two)
+		self.taxonomy_annotation_label = Label(row, text="Annotation", anchor='w', width=10)
+		self.taxonomy_annotation_entry = Entry(row)
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		self.taxonomy_annotation_label.pack(side=LEFT)
+		self.taxonomy_annotation_entry.pack(side=RIGHT, expand=YES, fill=X)
+		
+		row = Frame(self.taxonomy_pane_two)
+		self.taxonomy_type_label = Label(row, text="Type", anchor='w', width=10)
+		self.taxonomy_type_entry = Entry(row)
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		self.taxonomy_type_label.pack(side=LEFT)
+		self.taxonomy_type_entry.pack(side=RIGHT, expand=YES, fill=X)
+		
+		row = Frame(self.taxonomy_pane_two)
+		self.taxonomy_detail_label = Label(row, text="Definition", anchor='w', width=10)
+		self.taxonomy_detail_entry = Entry(row)
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		self.taxonomy_detail_label.pack(side=LEFT)
+		self.taxonomy_detail_entry.pack(side=RIGHT, expand=YES, fill=X)
+		
+		row = Frame(self.taxonomy_pane_two)		
+		row.pack()
+		self.save_button = Button(row, text='Save', command=self.save_taxonomy)
+		self.save_button.pack(side=LEFT)
+		self.delete_button = Button(row, text='Delete', command=self.delete_element)
+		self.delete_button.pack(side=LEFT)
 
 	def iidChecker(self,dictionary):
 

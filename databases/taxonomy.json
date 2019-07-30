@@ -131,8 +131,7 @@
 									"type": "Abstract",
 									"definition": "To use history to honour or make exemplars of heroes of an event or process",
 									"children": {}
-									}
-								},
+									},
 								"1": {
 									"iid": "Memorial-Justice-Victim_Teleology_of_History",
 									"name": "Victims",
@@ -147,4 +146,5 @@
             }
         }
     }
+}
 }
