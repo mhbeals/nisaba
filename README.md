@@ -1,11 +1,11 @@
-# Nisaba 0.2.5
+# Nisaba 0.2.7
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.6.1
+### v.0.2.7
 
-+ Added Reload of Taxonomy on Database Startup
++ Package hierarchy and files for PyPi releases
 
 [Full Change Log](changelog.md)
 

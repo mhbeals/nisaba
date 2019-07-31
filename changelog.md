@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.7
+
++ Package hierarchy and files for PyPi releases
+
 ### v.0.2.6.1
 
 + Added Reload of Taxonomy on Database Startup

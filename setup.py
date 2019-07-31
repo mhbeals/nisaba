@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 # The nisaba version
-nisaba_version = "x.x.x"
+nisaba_version = "0.2.7"
 
 # This call to setup() does all the work
 setup(
@@ -18,6 +18,7 @@ setup(
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/mhbeals/nisaba",
+    download_url = 'https://github.com/mhbeals/nisaba/archive/' + nisaba_version + '.tar.gz',
     author="M. H. Beals",
     author_email="M.H.Beals@lboro.ac.uk",
     license="AGPLv3",
