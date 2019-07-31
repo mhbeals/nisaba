@@ -4,3 +4,5 @@
 .Python
 include/
 lib/
+nisaba/databases/backups/*.ttl
+nisaba/databases/backups/*.json
