@@ -1,7 +1,7 @@
 # Import Classes
 from database_display import *
 from taxonomy_display import *
-from metadata_display import *
+# from metadata_display import *
 
 # Import TKinter Libraries
 from tkinter import *
@@ -12,7 +12,7 @@ from tkinter import scrolledtext
 # Instantiate Database Viewer
 database_window = database_display()
 taxonomy_window = taxonomy_display()
-metadata_window = metadata_display()
+# metadata_window = metadata_display()
 
 # Create Window
 root = Tk()
@@ -26,7 +26,7 @@ root.iconbitmap('icon.ico')
 
 # Setup Menu Tab
 root_window_title = Label(root, text="\nNisaba: Multi-Modal Annotations\n")
-root_window_title.config(font=("Times", 16))  
+root_window_title.config(font=("Times", 16))
 root_window_title.place(relx=0.5, rely=0.2, anchor=CENTER)
 
 # Setup Menu Options
@@ -42,5 +42,5 @@ edit_vocabulary.place(relx=0.5, rely=0.7, anchor=CENTER)
 
 
 
-# Begin Main Loop  
+# Begin Main Loop
 root.mainloop()
