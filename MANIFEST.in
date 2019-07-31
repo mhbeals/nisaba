@@ -1,0 +1,5 @@
+include requirements.txt
+include nisaba/config_files/*.tsv
+include nisaba/databases/*.json
+include nisaba/databases/*.ttl
+include nisaba/raw_data/*.jpg

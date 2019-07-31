@@ -90,6 +90,10 @@
                 "item_date": "",
                 "item_page_number": "",
                 "item_document_number": ""
+            },
+            "3": {
+                "item_type": "t",
+                "segments": {}
             }
         },
         "collection_author": "Herodotus",

@@ -6,14 +6,18 @@ from tkinter import END
 from tkinter.filedialog import askopenfilename
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, Literal
 import urllib.parse
+import os
 
 class database_maintenance:
 
+    database_path = os.path.join(os.path.dirname(__file__), "databases/")
+    database_backup_path = database_path + "backups/"
+
     def __init__(self):
-		# Initialise programme with stored databases 
-		
+		# Initialise programme with stored databases
+
 		# Load JSON database
-        with open (Path("databases/") / "database.json", 'r') as file:
+        with open (Path(self.database_path) / "database.json", 'r') as file:
             loaddata = file.read()
 
         self.database = json.loads(loaddata)
@@ -21,21 +25,21 @@ class database_maintenance:
         # Load RDF database
         self.database_rdf = Graph()
 
-        with open (Path("databases/") / "taxonomy.json", 'r') as file:
+        with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
             loaddata = file.read()
 
         self.taxonomy = json.loads(loaddata)
 
     def save_database(self):
-	
+
         # Convert database to json and place in a variable
         savedata = json.dumps(self.database, indent=4)
-		
+
         print("Saving to JSON")
-        with open (Path("databases/") / 'database.json', 'w') as file:
+        with open (Path(self.database_path) / 'database.json', 'w') as file:
             file.write(savedata)
-        backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'	
-        with open (Path("databases/backups/") / backup_filename, 'w') as file:
+        backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
+        with open (Path(self.database_backup_path) / backup_filename, 'w') as file:
             file.write(savedata)
 
         # Map the saved JSON into RDF
@@ -46,9 +50,9 @@ class database_maintenance:
 
     def rdf_mapper(self):
 		# Map the JSON database to RDF
-		
+
         # Load previous triples, if any
-        self.database_rdf.parse("databases/database.ttl", format='turtle')
+        self.database_rdf.parse(self.database_path + "database.ttl", format='turtle')
 
         nisaba_vocab_uri = URIRef('http://purl.org/nisaba/vocab#')
         nisaba_resource_uri = URIRef('http://purl.org/nisaba/')
@@ -128,11 +132,11 @@ class database_maintenance:
         self.database_rdf.bind('nisaba', nisaba_v)
 
         # Save RDF version
-        with open(Path("databases/") / 'database.ttl', 'wb') as file:
+        with open(Path(self.database_path) / 'database.ttl', 'wb') as file:
             file.write(self.database_rdf.serialize(format='turtle'))
 
         backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
-        with open(Path("databases/backups/") / backup_filename, 'wb') as file:
+        with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
             file.write(self.database_rdf.serialize(format='turtle'))
 
     def set_annotation_parents(self,tree_name):
@@ -141,14 +145,14 @@ class database_maintenance:
             if tree_name.parent(annotation) != "" and tree_name.parent(annotation) not in annotation_list:
                 annotation_list.append(tree_name.parent(annotation))
         return annotation_list
-				
+
     def save_entries(self, level):
         # Save entries
         for entry in self.collection_entries:
             self.database[self.collection_index][entry[0]] = entry[1].get()
 
         if level == 'i':
-            
+
             self.database[self.collection_index]['items'][self.item_index]['annotations'] = self.set_annotation_parents(self.item_tree)
 
             if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
@@ -156,7 +160,7 @@ class database_maintenance:
 
             elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
                 self.database[self.collection_index]['items'][self.item_index]['image_file'] = self.image_filename.get()
-				
+
         if level == 'i' or level == 's':
             for entry in self.item_entries:
                 self.database[self.collection_index]['items'][self.item_index][entry[0]] = entry[1].get()
@@ -183,7 +187,7 @@ class database_maintenance:
 
         # Load Database
         self.collection_selection_window.destroy()
-        file = askopenfilename(initialdir = "databases/",title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
+        file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
         with open (file, 'r') as file:
             loaddata = file.read()
         self.database = json.loads(loaddata)
@@ -211,7 +215,7 @@ class database_maintenance:
         savedata = json.dumps(self.taxonomy, indent=4)
 
         # Save variable to 'most recent' file
-        with open (Path("databases/") / "taxonomy.json", 'w') as file:
+        with open (Path(self.database_path) / "taxonomy.json", 'w') as file:
             file.write(savedata)
 
         return

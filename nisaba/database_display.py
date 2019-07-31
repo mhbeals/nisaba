@@ -1,4 +1,9 @@
-from  database_maintenance import *
+try:
+    # Used when executing with Python
+    from database_maintenance import *
+except ModuleNotFoundError:
+    # Used when calling as library
+    from nisaba.database_maintenance import *
 
 # Import External Libraries
 import csv
@@ -11,8 +16,13 @@ from ttkwidgets import CheckboxTreeview
 from tkinter import *
 from tkinter.ttk import *
 #from tkinter import scrolledtext
+import os
 
 class database_display(database_maintenance):
+
+    config_files_path = os.path.join(os.path.dirname(__file__), "config_files/")
+    raw_data_path = os.path.join(os.path.dirname(__file__), "raw_data/")
+    raw_data_images_path = raw_data_path + "images/"
 
     def update_transcription(self):
 
@@ -32,21 +42,21 @@ class database_display(database_maintenance):
         self.transcription_text.tag_config("faded", foreground="light gray", font=(14))
         self.transcription_text.tag_config("normal", font=(14))
 
-        # Clear Existing Text            
-        self.transcription_text.insert(END,"...") 
+        # Clear Existing Text
+        self.transcription_text.insert(END,"...")
         self.transcription_text.delete("1.0",END)
 
         # Insert Snippet Text
-        self.transcription_text.insert(END,pre_transcription,('faded')) 
-        self.transcription_text.insert(END,transcription,('normal')) 
-        self.transcription_text.insert(END,post_transcription, ('faded')) 
+        self.transcription_text.insert(END,pre_transcription,('faded'))
+        self.transcription_text.insert(END,transcription,('normal'))
+        self.transcription_text.insert(END,post_transcription, ('faded'))
 
         # Display Textbox
         self.transcription_text.grid(column = 0, row = 1, columnspan=8, sticky=NSEW, padx =10, pady = 10)
     def update_cropped_image(self):
 
             # Set image file
-            self.filename = str(Path("raw_data/images/") / self.database[self.collection_index]['items'][self.item_index]['image_file'])
+            self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
 
             # Load Image
             self.segment_image = PIL.Image.open(self.filename)
@@ -90,7 +100,7 @@ class database_display(database_maintenance):
                 self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
 
             self.segment_image = self.segment_image.resize((self.segment_newImageSizeWidth, self.segment_newImageSizeHeight), PIL.Image.ANTIALIAS)
- 
+
             # Prepare Image for Insertion
             self.segment_photoImg = PIL.ImageTk.PhotoImage(self.segment_image)
 
@@ -99,10 +109,10 @@ class database_display(database_maintenance):
             self.segment_imageCanvas.grid(column=0,row=0, columnspan = 8, padx =10, pady = 10)
 
             # Add Image to Canvas
-            self.segment_imageCanvas.create_image(self.segment_newImageSizeWidth/2+6, 
-                                                  self.segment_newImageSizeHeight/2+6, 
-                                                  image=self.segment_photoImg, 
-                                                  anchor="center")   
+            self.segment_imageCanvas.create_image(self.segment_newImageSizeWidth/2+6,
+                                                  self.segment_newImageSizeHeight/2+6,
+                                                  image=self.segment_photoImg,
+                                                  anchor="center")
 
     def refresh_item_list(self):
         self.item_info.destroy()
@@ -126,37 +136,37 @@ class database_display(database_maintenance):
     def import_question_csv(self,datafile):
 
         questions = {}
-        
+
         # Populate dictionary with imported file
-        with open (Path("config_files/") / datafile, 'r') as file:
+        with open (Path(self.config_files_path) / datafile, 'r') as file:
             reader = csv.reader(file, delimiter='\t')
             for line in reader:
-                questions[line[0]] = line[1]    
-                
+                questions[line[0]] = line[1]
+
         return questions;
     def import_bibliographic_fields(self,level):
-        
+
         # Set Collection-Level Questions
         self.collection_questions = self.import_question_csv('collection_bibliographic_annotation.tsv')
 
         # Set Item-Level Questions
         if level == 'i' or level == 's':
             self.item_questions  = self.import_question_csv('item_bibliographic_annotation.tsv')
-        
+
         # Set Segment-Level Questions
         if level == 's':
             self.segment_questions  = self.import_question_csv('segment_bibliographic_annotation.tsv')
-        
+
         return;
-        
+
     def make_entry_form(self,tab,questions,level):
 
         entries = []
 
         # Create Entry Form Elements
         for field,question in questions.items():
-          
-            # Create a row 
+
+            # Create a row
             row = Frame(tab)
 
             # Create a label and text box
@@ -167,20 +177,20 @@ class database_display(database_maintenance):
             row.pack(side=TOP, fill=X, padx=5, pady=5)
             label.pack(side=LEFT)
             entry.pack(side=RIGHT, expand=YES, fill=X)
-          
+
             # Fill entry with database values (if available)
-            
+
             if level == 'c':
                 entry_text = self.database[self.collection_index].get(field,'')
-            
+
             if level == 'i' or level == 's':
                 entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')
-            
-            if level == 's':        
+
+            if level == 's':
                 entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')
-            
+
             entry.insert(0,entry_text)
-            
+
             # Add field and value to save list
             entries.append((field, entry))
 
@@ -188,21 +198,21 @@ class database_display(database_maintenance):
     def make_bibliographic_form(self, tab, level):
 
         self.import_bibliographic_fields(level)
-        
+
         self.collection_entries = self.make_entry_form(tab,self.collection_questions,'c')
-        
+
         if level == 'i' or level == 's':
             self.item_entries = self.make_entry_form(tab,self.item_questions,'i')
-        
+
         if level == 's':
             self.segment_entries = self.make_entry_form(tab,self.segment_questions,'s')
 
-        return;				
-	
+        return;
+
     def make_annotations_tree(self,tree_name,level):
-        
+
         # Create Tree Structure
-        
+
         tree_name["columns"]=("one","two","three")
         tree_name.column("#0")
         tree_name.column("one")
@@ -213,30 +223,30 @@ class database_display(database_maintenance):
 
         # Create Root
         for item,dictionary in self.taxonomy.items():
-            
+
             top=tree_name.insert("", 1, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
             # Recursive Function to Go Through Unknown Number of Layers
             def iterateAllKeys(child_dictionary,parent_branch):
-            
+
                 # Create Lambda Dictionary
                 x, d = -1, {}
 
                 # Go through every key (numerical values) in current "children" dictionary
                 for new_key,new_dictionary in child_dictionary.items():
-                
+
                     # Advance Branch Lambda Variable
                     x = x + 1
 
                     # Create New Branch
                     d[x+1]=tree_name.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary[    'type'],new_dictionary['definition']))
-                
+
                     # Re-Run Recursive Function with New "children" Dictionary
                     iterateAllKeys(new_dictionary['children'],d[x+1])
-        
+
             # Begin Recursive Function
             iterateAllKeys(dictionary['children'],top)
-        
+
         # Highlight Those Already Saved
         if level == 'i':
 
@@ -251,14 +261,14 @@ class database_display(database_maintenance):
                 for annotation in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations']:
                     tree_name.change_state(tree_name.parent(annotation),"checked")
                     tree_name.change_state(annotation,"checked")
-       
+
         # Display Tree
         tree_name.pack(anchor=NW)
 
     def add_new_collection(self):
-        
+
         self.collection_selection_window.destroy()
-        
+
         i = -1
         loop = TRUE
 
@@ -271,7 +281,7 @@ class database_display(database_maintenance):
 
         self.collection_selector()
     def add_new_item(self,type):
-        
+
         i = -1
         loop = TRUE
 
@@ -286,11 +296,11 @@ class database_display(database_maintenance):
             self.database[self.collection_index]['items'][str(i)]= {'item_type': 't', 'segments' : {}}
 
         self.display_collection_item_list()
-        
+
         return
     def add_new_segment(self):
         self.item_info.destroy()
-        
+
         i = -1
         loop = TRUE
 
@@ -298,15 +308,15 @@ class database_display(database_maintenance):
             i = i + 1
             loop = str(i) in self.database[self.collection_index]['items'][self.item_index]['segments']
 
-        
-        if  self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':    
+
+        if  self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
             self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'].split())}
 
-        elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':   
+        elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
             self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'top':0,'right':50,'bottom':50,'left':0}
 
         self.refresh_segment_list('s')
-    
+
     def display_segment_info_window(self):
 
         #########################
@@ -315,34 +325,34 @@ class database_display(database_maintenance):
 
         # Retitle Window
         self.item_info.title("Segment: " + self.segment_value)
-   
-        # Remove Items Window Tabs (Left / Pane 1)	
+
+        # Remove Items Window Tabs (Left / Pane 1)
         self.pane_one.destroy()
         self.pane_two.destroy()
-		
+
         # Setup Segment Window Panels
         self.segment_pane_one = Frame(self.item_info)
         self.segment_pane_two = Frame(self.item_info)
         split = 0.5
         self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
         self.segment_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
-		
+
         # If the Segment is Text
         if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-       
+
             # Pull segmentation data
             start = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['start']
             end = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['end']
 
             # Create text boxes
-            start_label = Label(self.segment_pane_two, text="Starting Word") 
+            start_label = Label(self.segment_pane_two, text="Starting Word")
             self.start_text = Entry(self.segment_pane_two)
             end_label = Label(self.segment_pane_two, text="Ending Word")
             self.end_text = Entry(self.segment_pane_two)
 
             # Fill Entry Boxes
-            self.start_text.insert(4,start) 
-            self.end_text.insert(4,end) 
+            self.start_text.insert(4,start)
+            self.end_text.insert(4,end)
 
             # Pack Labels and Entry Boxes into Frame
             start_label.grid(column = 1, row = 0, sticky=NW, padx =10, pady = 10)
@@ -361,8 +371,8 @@ class database_display(database_maintenance):
             self.update_transcription()
 
         # If the Segment is an Image
-        elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':      
-            
+        elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
+
             # Pull segmentation data
             top = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['top'])
             left = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'])
@@ -370,23 +380,23 @@ class database_display(database_maintenance):
             right = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'])
 
             # Create text boxes
-            self.top_label = Label(self.segment_pane_two, text="% from Top") 
+            self.top_label = Label(self.segment_pane_two, text="% from Top")
             self.top_text = Entry(self.segment_pane_two)
-            self.bottom_label = Label(self.segment_pane_two, text="% to the Bottom") 
+            self.bottom_label = Label(self.segment_pane_two, text="% to the Bottom")
             self.bottom_text = Entry(self.segment_pane_two)
-            self.left_label = Label(self.segment_pane_two, text="% from Left") 
+            self.left_label = Label(self.segment_pane_two, text="% from Left")
             self.left_text = Entry(self.segment_pane_two)
-            self.right_label = Label(self.segment_pane_two, text="% to the Right") 
+            self.right_label = Label(self.segment_pane_two, text="% to the Right")
             self.right_text = Entry(self.segment_pane_two)
 
             # Create Image Canvas
             self.segment_imageCanvas = Canvas(self.segment_pane_two)
 
             # Fill Entry Boxes
-            self.top_text.insert(4,top) 
-            self.bottom_text.insert(4,bottom) 
-            self.left_text.insert(4,left) 
-            self.right_text.insert(4,right) 
+            self.top_text.insert(4,top)
+            self.bottom_text.insert(4,bottom)
+            self.left_text.insert(4,left)
+            self.right_text.insert(4,right)
 
             # Pack Labels and Entry Boxes into Frame
             self.top_label.grid(column = 0, row = 1, sticky=NW)
@@ -402,10 +412,10 @@ class database_display(database_maintenance):
 
             # Create and Pack Update Button
             update_button = Button(self.segment_pane_two, text='Refresh', command=self.update_cropped_image)
-            update_button.grid(column = 4, row = 1, sticky=W, padx =5, pady = 5)                
+            update_button.grid(column = 4, row = 1, sticky=W, padx =5, pady = 5)
 
-        # Setup Segment Window Tabs (Left / Pane 1) 
-	   
+        # Setup Segment Window Tabs (Left / Pane 1)
+
         # Set Up Tabs
         self.segment_tab_control = ttk.Notebook(self.segment_pane_one)
         self.segment_tab1 = ttk.Frame(self.segment_tab_control)
@@ -425,37 +435,37 @@ class database_display(database_maintenance):
         b1.pack(side=LEFT, padx=5, pady=5)
         b2.pack(side=LEFT, padx=5, pady=5)
         b3.pack(side=LEFT, padx=5, pady=5)
-        
+
         ########################################
         # Set up bibliographic information tab #
         ########################################
 
         # Display bibliographic form and create entries database
         self.make_bibliographic_form(self.segment_tab1, 's')
-    
+
         #################################
         # Set up annotations tab (tab2) #
         #################################
-        
+
         self.segment_tree=CheckboxTreeview(self.segment_tab2,height="26")
-        self.make_annotations_tree(self.segment_tree,'s')           
+        self.make_annotations_tree(self.segment_tree,'s')
     def display_item_info_window(self):
-        
-		
+
+
         # Delete Collections Window
         self.collection_selection_window.destroy()
-		
+
         # Set up item window
         self.item_info = Toplevel()
         self.item_info.title("Item: " + self.item_value)
-        self.item_info.state('zoomed')       
+        self.item_info.state('zoomed')
 
         # Set Up Item Information Window Menu
         menubar = Menu(self.item_info)
         self.item_info.config(menu=menubar)
         fileMenu = Menu(menubar, tearoff=False)
         menubar.add_command(label="Add New Segment", command=self.add_new_segment)
-        
+
         # Setup Item Window Panes
         self.pane_one = Frame(self.item_info)
         self.pane_two = Frame(self.item_info)
@@ -466,7 +476,7 @@ class database_display(database_maintenance):
         ##############################################
         # Setup Item Display Window (Right / Pane 2) #
         ##############################################
-        
+
         # If the Item is Text
         if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
 
@@ -476,32 +486,32 @@ class database_display(database_maintenance):
             else:
                 transcription = ""
 
-            # Create wrapping text box 
+            # Create wrapping text box
             self.transcription_text = Text(self.pane_two, wrap=WORD)
 
             # Insert transcription in text box
-            self.transcription_text.insert("1.0",transcription) 
+            self.transcription_text.insert("1.0",transcription)
             self.transcription_text.configure(font=(14))
 
             # Display text box
             self.transcription_text.pack(padx=10,pady=10)
-            
+
         # If the Item is an Image
-        elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':      
-           
+        elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
+
             # Create text boxes
-            self.image_label = Label(self.pane_two, text="Image File") 
+            self.image_label = Label(self.pane_two, text="Image File")
             self.image_filename = Entry(self.pane_two)
 
             # Fill Entry Boxes
-            self.image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['image_file']) 
+            self.image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['image_file'])
 
             # Display Image Filename
             self.image_label.grid(column = 1, row = 0)
             self.image_filename.grid(column = 2, row = 0)
-            
+
             # Set image file
-            filename = str(Path("raw_data/images/") / self.database[self.collection_index]['items'][self.item_index]['image_file'])
+            filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
 
             # Load Image
             image = PIL.Image.open(filename)
@@ -514,7 +524,7 @@ class database_display(database_maintenance):
             newImageSizeWidth = int(imageSizeWidth*sizeRatio)
             newImageSizeHeight = int(imageSizeHeight*sizeRatio)
             image = image.resize((newImageSizeWidth, newImageSizeHeight), PIL.Image.ANTIALIAS)
- 
+
             # Prepare Image for Insertion
             self.photoImg = PIL.ImageTk.PhotoImage(image)
 
@@ -524,7 +534,7 @@ class database_display(database_maintenance):
 
             # Add Image to Canvas
             imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
-        
+
         ###########################################
         # Setup Items Window Tabs (Left / Pane 1) #
         ###########################################
@@ -558,7 +568,7 @@ class database_display(database_maintenance):
         # Display bibliographic form and create entries database
         self.make_bibliographic_form(self.item_tab1, 'i')
 
-        ##########################    
+        ##########################
         # Set up annotations tab #
         ##########################
 
@@ -572,21 +582,21 @@ class database_display(database_maintenance):
         # Set up segment list scrollbar
         self.scrollbar = Scrollbar(self.item_tab3)
         self.scrollbar.pack(side=RIGHT,fill=Y)
-    
+
         # Set Up segment listbox
         self.segments = Listbox(self.item_tab3)
         self.segments.pack(anchor=W, fill=BOTH, expand=True)
 
         #Populate Segment List Box
         for segment_number,dictionary in self.database[self.collection_index]['items'][self.item_index]['segments'].items():
-        
+
             # If the segment is text
             if self.database[self.collection_index]['items'][self.item_index]['item_type'] == "t":
 
                 # Obtain Snippet Transcription and Package for Display
                 transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'].split()
                 display_item = ' '.join(transcription_words[dictionary['start']:dictionary['start']+10])
-        
+
             # If the segment is an image
             elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == "i":
 
@@ -597,9 +607,9 @@ class database_display(database_maintenance):
             segment_number_str = str(int(segment_number)+1)
             segment = segment_number_str + ". " + display_item
             self.segments.insert(END, segment)
-    
+
             # Bind scrollbar to listbox
-            self.segments.config(yscrollcommand=self.scrollbar.set)    
+            self.segments.config(yscrollcommand=self.scrollbar.set)
             self.scrollbar.config(command=self.segments.yview)
 
             # Bind seleection to event
@@ -607,25 +617,25 @@ class database_display(database_maintenance):
 
         return;
     def display_collection_bibliographic_information(self):
-        
+
         ##########################################
         # Set up Bibliographic Information Panel #
         ##########################################
-        
+
         # Delete Any Existing Information
         try:
             self.collection_pane_two.destroy()
         except (NameError, AttributeError):
             pass
 
-        # Setup Bibliographic Form Panel 
+        # Setup Bibliographic Form Panel
         self.collection_pane_two = ttk.Frame(self.collection_panel_control)
         label_2 = Label(self.collection_pane_two, text = "Collection Bibliographic Information").pack(anchor="center", fill=X)
         self.collection_panel_control.add(self.collection_pane_two)
 
         # Display bibliographic form and create entries database
         self.make_bibliographic_form(self.collection_pane_two, 'c')
-    
+
         # Create "save" button
         b1 = Button(self.collection_pane_two, text='Save Values', command=(lambda: self.save_entries('c')))
         b1.pack(anchor=NW, padx=5, pady=5)
@@ -635,7 +645,7 @@ class database_display(database_maintenance):
         ##############################
         # Set up List of Items Panel #
         ##############################
-        
+
         # Delete Any Existing Item Lists
         try:
             self.collection_pane3.destroy()
@@ -668,8 +678,8 @@ class database_display(database_maintenance):
             # If the item has no title
             elif 'collection_title' in self.database[self.collection_index]:
                 display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index]['collection_title']))
-                
-            else:               
+
+            else:
                 display_item = "No title listed"
 
             # Display the item title and author
@@ -678,12 +688,12 @@ class database_display(database_maintenance):
             items.insert(END, item)
 
         # Bind scrollbar to listbox
-        items.config(yscrollcommand=scrollbar.set)    
+        items.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=items.yview)
-    
+
         # Bind selected item to event
         items.bind('<Double-Button>', self.item_informer)
-		
+
 		# Create "save" button for all tabs
         self.buttonFrame = ttk.Frame(self.collection_pane3)
         self.b1 = Button(self.buttonFrame, text='Add New Text', command=(lambda t="t": self.add_new_item(t)))
@@ -699,18 +709,18 @@ class database_display(database_maintenance):
         self.segment_index = str(segment_event_data.curselection()[0])
         self.segment_value = segment_event_data.get( int(self.item_index))
 
-        self.display_segment_info_window()   
+        self.display_segment_info_window()
     def item_informer(self, evt):
-       
+
        # Capture Event Information
         item_event_data = evt.widget
         self.item_index = str(item_event_data.curselection()[0])
         self.item_value = item_event_data.get(int(self.item_index))
 
-        self.display_item_info_window()  
+        self.display_item_info_window()
 
     def item_selector(self, evt):
-	
+
         # Capture Event Information
         collection_event_data = evt.widget
         self.collection_index = str(collection_event_data.curselection()[0])
@@ -719,13 +729,13 @@ class database_display(database_maintenance):
         self.display_collection_bibliographic_information()
         self.display_collection_item_list()
     def collection_selector(self):
-        
+
         # Delete Any Existing Item Windows
         try:
             self.item_info.destroy()
         except (NameError, AttributeError):
-            pass		
-		
+            pass
+
         ######################
         # Collections Window #
         ######################
@@ -734,7 +744,7 @@ class database_display(database_maintenance):
         self.collection_selection_window = Toplevel()
         self.collection_selection_window.title('Collection Selection')
         self.collection_selection_window.state('zoomed')
-        
+
         # Place Icon
         # "Writing" by IQON from the Noun Project
         self.collection_selection_window.iconbitmap('icon.ico')
@@ -762,7 +772,7 @@ class database_display(database_maintenance):
         #####################################
         # Set Up Collection Selection Panel #
         #####################################
-    
+
         # Setup scroll bar
         scrollbar = Scrollbar(self.collection_pane_one)
         scrollbar.pack(side=RIGHT,fill=Y, expand=True)
@@ -778,8 +788,8 @@ class database_display(database_maintenance):
             # If the item has a title
             if 'collection_title' in self.database[collection_number]:
                 display_item = str(dictionary['collection_title'])
-                
-            else:               
+
+            else:
                 display_item = "No title listed"
 
             # Display the item title and author
@@ -788,8 +798,8 @@ class database_display(database_maintenance):
             items.insert(END, item)
 
         # Bind scrollbar to listbox
-        items.config(yscrollcommand=scrollbar.set)    
+        items.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=items.yview)
-    
+
         # Bind selected item to event
         items.bind('<Double-Button>', self.item_selector)
