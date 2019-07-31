@@ -3,10 +3,11 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.5
+### v.0.2.6
 
-+ Added delete button to taxonomy display
-+ Minor bug fixes to taxonomy display
++ Added add child button to taxonomy display
++ Added add root menu option to taxonomy display
++ Minor code refactoring in taxonomy display
 
 [Full Change Log](changelog.md)
 
