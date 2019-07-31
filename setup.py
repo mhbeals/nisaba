@@ -23,7 +23,7 @@ setup(
     author_email="M.H.Beals@lboro.ac.uk",
     license="AGPLv3",
     classifiers=[
-        "OSI Approved :: GNU Affero General Public License v3",
+        "License :: OSI Approved :: GNU Affero General Public License v3",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
