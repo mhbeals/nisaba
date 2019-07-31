@@ -159,6 +159,13 @@
                 "type": "Abstract",
                 "definition": "The use of interviews with people having personal knowledge of past events",
                 "children": {}
+            },
+            "1": {
+                "iid": "Close_Reading",
+                "name": "Close Reading",
+                "type": "Abstract",
+                "definition": "The meticulous reading of a text for vocabulary choices, internal structures, and external references",
+                "children": {}
             }
         }
     }

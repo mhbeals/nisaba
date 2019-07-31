@@ -729,7 +729,13 @@ class database_display(database_maintenance):
 		######################
 		# Collections Window #
 		######################
+		
+		# Reload Taxonomy
+		with open (Path("databases/") / "taxonomy.json", 'r') as file:
+			loaddata = file.read()
 
+		self.taxonomy = json.loads(loaddata)
+		
 		# Setup Collections Window
 		self.collection_selection_window = Toplevel()
 		self.collection_selection_window.title('Collection Selection')

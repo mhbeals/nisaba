@@ -3,11 +3,9 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.6
+### v.0.2.6.1
 
-+ Added add child button to taxonomy display
-+ Added add root menu option to taxonomy display
-+ Minor code refactoring in taxonomy display
++ Added Reload of Taxonomy on Database Startup
 
 [Full Change Log](changelog.md)
 

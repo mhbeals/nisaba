@@ -21,6 +21,7 @@ class database_maintenance:
 		# Load RDF database
 		self.database_rdf = Graph()
 
+		# Load Taxonomy
 		with open (Path("databases/") / "taxonomy.json", 'r') as file:
 			loaddata = file.read()
 
