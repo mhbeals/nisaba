@@ -11,7 +11,7 @@ A tool for multi-modal annotation
 
 ## Install & run instructions
 
-The easiest way to install Nisaba is by using pip:
+Nisaba is on [PyPi](https://pypi.org/project/nisaba/) so the easiest way to install it is by using pip:
 
 ```
 pip install nisaba
