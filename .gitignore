@@ -1,2 +1,6 @@
 /database/backups/*
 /__pycache__/*
+*.pyc
+.Python
+include/
+lib/
