@@ -14,9 +14,9 @@ class database_maintenance:
     database_backup_path = database_path + "backups/"
 
     def __init__(self):
-		# Initialise programme with stored databases
+        # Initialise programme with stored databases
 
-		# Load JSON database
+        # Load JSON database
         with open (Path(self.database_path) / "database.json", 'r') as file:
             loaddata = file.read()
 
@@ -29,6 +29,16 @@ class database_maintenance:
             loaddata = file.read()
 
         self.taxonomy = json.loads(loaddata)
+
+
+    def iid_iterator(self,database,iid,function_call):
+
+        for key,value in database.items():
+            if value['iid'] == iid:
+                function_call(database,key)
+                break
+            else:
+                self.iid_iterator(value['children'],iid,function_call)
 
     def save_database(self):
 
@@ -49,7 +59,7 @@ class database_maintenance:
         return
 
     def rdf_mapper(self):
-		# Map the JSON database to RDF
+        # Map the JSON database to RDF
 
         # Load previous triples, if any
         self.database_rdf.parse(self.database_path + "database.ttl", format='turtle')
@@ -199,7 +209,6 @@ class database_maintenance:
         def iid_finder(dictionary):
 
             for ckey,cvalue in dictionary.items():
-                print(self.clicked_item,cvalue['iid'])
                 if cvalue['iid'] == self.clicked_item:
                     cvalue['iid'] = self.taxonomy_iid_entry.get()
                     cvalue['name'] = self.taxonomy_annotation_entry.get()
@@ -210,6 +219,7 @@ class database_maintenance:
                     iid_finder(cvalue['children'])
 
         iid_finder(self.taxonomy)
+        self.taxonomy_viewer()
 
         # Convert database to json and place in a variable
         savedata = json.dumps(self.taxonomy, indent=4)

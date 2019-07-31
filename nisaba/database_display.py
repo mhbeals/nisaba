@@ -694,7 +694,7 @@ class database_display(database_maintenance):
         # Bind selected item to event
         items.bind('<Double-Button>', self.item_informer)
 
-		# Create "save" button for all tabs
+        # Create "save" button for all tabs
         self.buttonFrame = ttk.Frame(self.collection_pane3)
         self.b1 = Button(self.buttonFrame, text='Add New Text', command=(lambda t="t": self.add_new_item(t)))
         self.b2 = Button(self.buttonFrame, text='Add New Image', command=(lambda t="i": self.add_new_item(t)))
@@ -739,6 +739,12 @@ class database_display(database_maintenance):
         ######################
         # Collections Window #
         ######################
+
+        # Reload Taxonomy
+        with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
+            loaddata = file.read()
+
+        self.taxonomy = json.loads(loaddata)
 
         # Setup Collections Window
         self.collection_selection_window = Toplevel()

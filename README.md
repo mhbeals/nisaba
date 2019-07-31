@@ -3,10 +3,9 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.5
+### v.0.2.6.1
 
-+ Added delete button to taxonomy display
-+ Minor bug fixes to taxonomy display
++ Added Reload of Taxonomy on Database Startup
 
 [Full Change Log](changelog.md)
 

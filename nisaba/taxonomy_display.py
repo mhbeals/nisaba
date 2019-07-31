@@ -12,28 +12,63 @@ from tkinter.ttk import *
 
 class taxonomy_display(database_maintenance):
 
-	def	delete_element_recursive(self,dictionary):
-		# Delete item
-		for key,value in dictionary.items():
-			if value['iid'] == self.taxonomy_iid_entry.get():
-				del dictionary[key]
-				break
+	def rootAdder(self):
+		# Add a Taxon Root
 
-			else:
-				self.delete_element_recursive(value['children'])
+		i = -1
+		loop = TRUE
 
-	def	delete_element(self):
-		# Delete item
-		for key,value in self.taxonomy.items():
-			if value['iid'] == self.taxonomy_iid_entry.get():
-				del dictionary[key]
-				break
+		while loop:
+			i = i + 1
+			loop = str(i) in self.taxonomy
 
-			else:
-				self.delete_element_recursive(value['children'])
+		self.taxonomy[i] = {}
+		self.taxonomy[i]['iid'] = "New_Root"
+		self.taxonomy[i]['name'] = "New Root"
+		self.taxonomy[i]['type'] = "New Root"
+		self.taxonomy[i]['definition'] = "New Root"
+		self.taxonomy[i]['children'] = {}
 
-		self.taxonomy_window.destroy()
 		self.taxonomy_viewer()
+
+	def childAdder(self,database,key):
+		# Add a Taxon Child
+
+		i = -1
+		loop = TRUE
+
+		while loop:
+			i = i + 1
+			loop = str(i) in database[key]['children']
+
+		database[key]['children'][i] = {}
+		database[key]['children'][i]['iid'] = "New_Item"
+		database[key]['children'][i]['name'] = "New Item"
+		database[key]['children'][i]['type'] = "New Item"
+		database[key]['children'][i]['definition'] = "New Item"
+		database[key]['children'][i]['children'] = {}
+
+		self.taxonomy_viewer()
+
+	def elementDeleter(self,database,key):
+		# Delete a Taxon
+
+		del database[key]
+		self.taxonomy_viewer()
+
+	def entryFiller(self,database,key):
+		# Fill in entry boxes
+
+		self.displayEditor()
+		self.taxonomy_iid_entry.insert(0,database[key]['iid'])
+		self.taxonomy_annotation_entry.insert(0,database[key]['name'])
+		self.taxonomy_type_entry.insert(0,database[key]['type'])
+		self.taxonomy_detail_entry.insert(0,database[key]['definition'])
+
+	def treeItemSelector(self,event):
+		# Send selected ID to iterator
+		self.clicked_item = self.taxonomy_tree.identify('item',event.x,event.y)
+		self.iid_iterator(self.taxonomy,self.taxonomy_tree.identify('item',event.x,event.y),self.entryFiller)
 
 	def displayEditor(self):
 
@@ -78,42 +113,25 @@ class taxonomy_display(database_maintenance):
 
 		row = Frame(self.taxonomy_pane_two)
 		row.pack()
+		self.add_button = Button(row, text='Add Child Taxon', command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.childAdder)))
+		self.add_button.pack(side=LEFT)
 		self.save_button = Button(row, text='Save', command=self.save_taxonomy)
 		self.save_button.pack(side=LEFT)
-		self.delete_button = Button(row, text='Delete', command=self.delete_element)
+		self.delete_button = Button(row, text='Delete', command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.elementDeleter)))
 		self.delete_button.pack(side=LEFT)
-
-	def iidChecker(self,dictionary):
-
-		for key,value in dictionary.items():
-			if value['iid'] == self.clicked_item:
-				self.taxonomy_iid_entry.insert(0,value['iid'])
-				self.taxonomy_annotation_entry.insert(0,value['name'])
-				self.taxonomy_type_entry.insert(0,value['type'])
-				self.taxonomy_detail_entry.insert(0,value['definition'])
-			else:
-				self.iidChecker(value['children'])
-
-	def treeItemSelector(self,event):
-
-		self.clicked_item = self.taxonomy_tree.identify('item',event.x,event.y)
-
-		self.displayEditor()
-
-		for key,value in self.taxonomy.items():
-			if value['iid'] == self.clicked_item:
-				self.taxonomy_iid_entry.insert(0,value['iid'])
-				self.taxonomy_annotation_entry.insert(0,value['name'])
-				self.taxonomy_type_entry.insert(0,value['type'])
-				self.taxonomy_detail_entry.insert(0,value['definition'])
-			else:
-				self.iidChecker(value['children'])
 
 	def taxonomy_viewer(self):
 
 		###################
 		# Taxonomy Window #
 		###################
+
+
+		# Delete Any Existing Information
+		try:
+			self.taxonomy_window.destroy()
+		except (NameError, AttributeError):
+			pass
 
 		# Setup Taxonomy Window
 		self.taxonomy_window = Toplevel()
@@ -134,8 +152,7 @@ class taxonomy_display(database_maintenance):
 		addMenu = Menu(menubar, tearoff=False)
 		addItemMenu = Menu(addMenu, tearoff=False)
 		self.taxonomy_window.config(menu=menubar)
-		#menubar.add_command(label="Load New Taxonomy", command=pass)
-		#menubar.add_command(label="Refresh", command=pass)
+		menubar.add_command(label="Add New Root", command=self.rootAdder)
 
 		#####################################
 		# Set Up Definition Selection Panel #
@@ -154,8 +171,7 @@ class taxonomy_display(database_maintenance):
 
 		# Create Root
 		for item,dictionary in self.taxonomy.items():
-
-			top=self.taxonomy_tree.insert("", 1, str(item), text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
+			top=self.taxonomy_tree.insert("", 1, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
 			# Recursive Function to Go Through Unknown Number of Layers
 			def iterateAllKeys(child_dictionary,parent_branch):
