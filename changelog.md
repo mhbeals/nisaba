@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.8
+
++ Minor fixes to get pip install working on Windows
+
 ### v.0.2.7
 
 + Package hierarchy and files for PyPi releases

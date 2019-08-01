@@ -30,7 +30,7 @@ def main():
 
     # Place Icon
     # "Writing" by IQON from the Noun Project
-    root.iconbitmap('icon.ico')
+    # root.iconbitmap('icon.ico')
 
     # Setup Menu Tab
     root_window_title = Label(root, text="\nNisaba: Multi-Modal Annotations\n")

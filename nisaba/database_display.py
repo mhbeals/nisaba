@@ -753,7 +753,7 @@ class database_display(database_maintenance):
 
         # Place Icon
         # "Writing" by IQON from the Noun Project
-        self.collection_selection_window.iconbitmap('icon.ico')
+        # self.collection_selection_window.iconbitmap('icon.ico')
 
         # Setup Window Menu
         menubar = Menu(self.collection_selection_window)

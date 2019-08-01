@@ -1,11 +1,11 @@
-# Nisaba 0.2.7
+# Nisaba 0.2.8
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.7
+### v.0.2.8
 
-+ Package hierarchy and files for PyPi releases
++ Minor fixes to get pip install working on Windows
 
 [Full Change Log](changelog.md)
 
