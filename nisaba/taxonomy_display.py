@@ -140,6 +140,10 @@ class taxonomy_display(database_maintenance):
 		window_width = self.taxonomy_window.winfo_screenwidth()
 		window_height = self.taxonomy_window.winfo_screenheight()
 
+		# Place Icon
+		# "Writing" by IQON from the Noun Project
+		self.taxonomy_window.iconbitmap('icon.ico')
+
 		# Setup Taxonomy Window Panels
 		self.taxonomy_pane_one = Frame(self.taxonomy_window)
 		self.taxonomy_pane_two = Frame(self.taxonomy_window)
