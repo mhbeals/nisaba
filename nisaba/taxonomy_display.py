@@ -136,7 +136,13 @@ class taxonomy_display(database_maintenance):
 		# Setup Taxonomy Window
 		self.taxonomy_window = Toplevel()
 		self.taxonomy_window.title('Taxonomy Development')
-		self.taxonomy_window.state('zoomed')
+		try:
+			self.taxonomy_window.state('zoomed')
+		except (TclError):
+			pass
+			m = self.taxonomy_window.maxsize()
+			self.taxonomy_window.geometry('{}x{}+0+0'.format(*m))
+			
 		window_width = self.taxonomy_window.winfo_screenwidth()
 		window_height = self.taxonomy_window.winfo_screenheight()
 

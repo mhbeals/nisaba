@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.8.1
+
++ Minor fixes to Zoom on Linux
+
 ### v.0.2.8
 
 + Minor fixes to get pip install working on Windows

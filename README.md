@@ -3,9 +3,9 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.8
+### v.0.2.8.1
 
-+ Minor fixes to get pip install working on Windows
++ Minor fixes to Zoom on Linux
 
 [Full Change Log](changelog.md)
 
