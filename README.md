@@ -7,17 +7,18 @@ A tool for multi-modal annotation
 
 + Added Basic Database Metadata Screen / File Structure (schema/foaf compliant)
 
-[Full Change Log](changelog.md)
+[Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 
-## Install & run instructions
+## Easy (PIP) Installation:
 
-Nisaba is on [PyPi](https://pypi.org/project/nisaba/) so the easiest way to install it is by using pip:
+*Nisaba* is now available through [PyPi](https://pypi.org/project/nisaba/). 
+To install using pip, simply run the following command from your terminal:
 
 ```
 pip install nisaba
 ```
 
-Then just do from your terminal:
+After installation, run *Nisaba* using the command:
 
 ```
 nisaba
@@ -25,7 +26,7 @@ nisaba
 
 ## Contributing
 
-If you want to run Nisaba directly from source:
+If you wish to contribute to the development of *Nisaba*, clone and run from the source code using the following commands from your terminal:
 
 ```
 git clone https://github.com/mhbeals/nisaba
@@ -35,24 +36,23 @@ source bin/activate
 pip install -r requirements.txt
 ```
 
-And to run it, just do:
+To run, use
 
 ```
 cd nisaba
 python __main__.py
 ```
 
-Or just:
+or simply:
 
 ```
 python -m nisaba
 ```
 
-## Development History
-Conceived by [M. H. Beals](https://github.com/mhbeals) (Loughborough University) and Olivia Mitchell (Loughborough University)  
-Initial Development (0.1.0) by [M. H. Beals](https://github.com/mhbeals)  
-Continuing Development by [M. H. Beals](https://github.com/mhbeals) and [Albert Meroño Peñuela](https://github.com/albertmeronyo) (Vrije Universiteit Amsterdam)  
 
-## Dependencies
-- [rdflib](https://github.com/RDFLib/rdflib)
-- [ttkwidgets](https://github.com/RedFantom/ttkwidgets)
+## Development History
+*Nisaba* was conceived by [M. H. Beals](https://github.com/mhbeals) (Loughborough University) and [Olivia Mitchell](https://www.lboro.ac.uk/departments/phir/staff/olivia-mitchell/) (Loughborough University) as part of her PhD project (2017-present).
+
+Initial development of the software (v.0.1.0) was undertaken by [M. H. Beals](https://github.com/mhbeals) in 2018-2019.
+ 
+The project is now being developed by [M. H. Beals](https://github.com/mhbeals) and [Albert Meroño Peñuela](https://github.com/albertmeronyo) (Vrije Universiteit Amsterdam). If you would like to contribute, please contact [M. H. Beals](https://github.com/mhbeals) (or submit a pull request!)
