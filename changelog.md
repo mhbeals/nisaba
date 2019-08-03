@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.9
+
++ Added Basic Database Metadata Screen / File Structure (schema/foaf compliant)
+
 ### v.0.2.8.1
 
 + Minor fixes to Zoom on Linux

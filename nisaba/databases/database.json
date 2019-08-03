@@ -1,4 +1,15 @@
 {
+    "users": {
+        "mhb": {
+            "schema:givenName": "M. H.",
+            "schema:familyName": "Beals",
+            "schema:sameAS": "https://orcid.org/0000-0002-2907-3313",
+            "schema:worksFor": "Loughborough University",
+            "schema:memberOf": "Nisaba",
+            "schema:email": "m.h.beals@lboro.ac.uk",
+            "foaf:homepage": "http://www.mhbeals.com"
+        }
+    },
     "0": {
         "collection_title": "The History of Herodotus",
         "collection_date": "440 BC",

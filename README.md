@@ -1,11 +1,11 @@
-# Nisaba 0.2.8
+# Nisaba 0.2.8.1
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.8.1
+### v.0.2.9
 
-+ Minor fixes to Zoom on Linux
++ Added Basic Database Metadata Screen / File Structure (schema/foaf compliant)
 
 [Full Change Log](changelog.md)
 

@@ -3,12 +3,12 @@ try:
 	# Used when executing with Python
 	from database_display import *
 	from taxonomy_display import *
-	# from metadata_display import *
+	from metadata_display import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_display import *
 	from nisaba.taxonomy_display import *
-	# from nisaba.metadata_display import *
+	from nisaba.metadata_display import *
 
 # Import TKinter Libraries
 from tkinter import *
@@ -20,7 +20,7 @@ def main():
 	# Instantiate Database Viewer
 	database_window = database_display()
 	taxonomy_window = taxonomy_display()
-	# metadata_window = metadata_display()
+	metadata_window = metadata_display()
 
 	# Create Window
 	root = Tk()
@@ -38,15 +38,15 @@ def main():
 	root_window_title.place(relx=0.5, rely=0.2, anchor=CENTER)
 
 	# Setup Menu Options
-	#edit_metadata = Button(root,text='View/Edit Database Metadata', command=metadata_window.database_metadata_viewer)
+	edit_metadata = Button(root,text='View/Edit Database Metadata', command=metadata_window.database_metadata_viewer)
 	edit_database = Button(root,text='View/Edit Database', command=database_window.collection_selector)
 	edit_vocabulary = Button(root,text='Edit Annotation Vocabulary', command=taxonomy_window.taxonomy_viewer)
 
 
 	# Display Menu Options
-	#edit_metadata.place(relx=0.5, rely=0.45, anchor=CENTER)
-	edit_database.place(relx=0.5, rely=0.5, anchor=CENTER)
-	edit_vocabulary.place(relx=0.5, rely=0.7, anchor=CENTER)
+	edit_metadata.place(relx=0.5, rely=0.45, anchor=CENTER)
+	edit_database.place(relx=0.5, rely=0.65, anchor=CENTER)
+	edit_vocabulary.place(relx=0.5, rely=0.85, anchor=CENTER)
 
 	# Begin Main Loop
 	root.mainloop()
