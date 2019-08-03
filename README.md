@@ -1,4 +1,4 @@
-# Nisaba 0.2.8.1
+# Nisaba 0.2.9
 A tool for multi-modal annotation
 
 ## Most Recent Update
