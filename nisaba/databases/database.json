@@ -1,13 +1,22 @@
 {
     "users": {
         "mhb": {
-            "schema:givenName": "M. H.",
+            "schema:givenName": "Melodee",
             "schema:familyName": "Beals",
             "schema:sameAS": "https://orcid.org/0000-0002-2907-3313",
             "schema:worksFor": "Loughborough University",
             "schema:memberOf": "Nisaba",
             "schema:email": "m.h.beals@lboro.ac.uk",
             "foaf:homepage": "http://www.mhbeals.com"
+        },
+        "am": {
+            "schema:givenName": "Albert",
+            "schema:familyName": "Mero\u00f1o",
+            "schema:sameAS": "https://orcid.org/0000-0003-4646-5842",
+            "schema:worksFor": "Vrije Universiteit Amsterdam",
+            "schema:memberOf": "Nisaba",
+            "schema:email": "albert.merono@vu.nk",
+            "foaf:homepage": "https://www.albertmeronyo.org/"
         }
     },
     "0": {

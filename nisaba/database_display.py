@@ -802,18 +802,20 @@ class database_display(database_maintenance):
 
 		# Populate listbox
 		for collection_number,dictionary in self.database.items():
+		
+			if collection_number != 'users':
 
-			# If the item has a title
-			if 'collection_title' in self.database[collection_number]:
-				display_item = str(dictionary['collection_title'])
+				# If the item has a title
+				if 'collection_title' in self.database[collection_number]:
+					display_item = str(dictionary['collection_title'])
 
-			else:
-				display_item = "No title listed"
+				else:
+					display_item = "No title listed"
 
-			# Display the item title and author
-			collection_number_str = str(int(collection_number)+1)
-			item = collection_number_str + ". " + display_item
-			items.insert(END, item)
+				# Display the item title and author
+				collection_number_str = str(int(collection_number)+1)
+				item = collection_number_str + ". " + display_item
+				items.insert(END, item)
 
 		# Bind scrollbar to listbox
 		items.config(yscrollcommand=scrollbar.set)

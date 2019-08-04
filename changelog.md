@@ -1,5 +1,11 @@
 # Change Log
 
+### v.0.2.10
+
++ Allowed Multiple Users for Database Metadata
++ Added "New User"
++ Added "Delete User"
+
 ### v.0.2.9
 
 + Added Basic Database Metadata Screen / File Structure (schema/foaf compliant)

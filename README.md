@@ -3,9 +3,11 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.9
+### v.0.2.10
 
-+ Added Basic Database Metadata Screen / File Structure (schema/foaf compliant)
++ Allowed Multiple Users for Database Metadata
++ Added "New User"
++ Added "Delete User"
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

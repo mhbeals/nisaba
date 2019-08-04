@@ -38,9 +38,9 @@ def main():
 	root_window_title.place(relx=0.5, rely=0.2, anchor=CENTER)
 
 	# Setup Menu Options
-	edit_metadata = Button(root,text='View/Edit Database Metadata', command=metadata_window.database_metadata_viewer)
-	edit_database = Button(root,text='View/Edit Database', command=database_window.collection_selector)
-	edit_vocabulary = Button(root,text='Edit Annotation Vocabulary', command=taxonomy_window.taxonomy_viewer)
+	edit_metadata = Button(root,text='Users', command=metadata_window.database_metadata_viewer)
+	edit_database = Button(root,text='Database', command=database_window.collection_selector)
+	edit_vocabulary = Button(root,text='Taxonomy', command=taxonomy_window.taxonomy_viewer)
 
 
 	# Display Menu Options
