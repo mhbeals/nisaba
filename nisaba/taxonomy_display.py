@@ -148,7 +148,11 @@ class taxonomy_display(database_maintenance):
 
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		self.taxonomy_window.iconbitmap('icon.ico')
+		if (sys.platform.startswith('win')): 
+			self.taxonomy_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
+		else:
+			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			self.taxonomy_window.call('wm', 'iconphoto', self.taxonomy_window._w, logo)
 
 		# Setup Taxonomy Window Panels
 		self.taxonomy_pane_one = Frame(self.taxonomy_window)

@@ -1,9 +1,14 @@
 # Change Log
 
+### v.0.2.11.1
+
++ Addressed Issue #13 regarding Linux Icon
++ Added assets folder to hold images for programme
+
 ### v.0.2.11
 
 + Changed bibliographic fields to Dublin Core/FaBiO Ontologies
-+ Added [/config_files/prefixes.txt](/config_files/prefixes.txt) to hold LOD prefixes
++ Added [nisaba/config_files/prefixes.txt](/config_files/prefixes.txt) to hold LOD prefixes
 
 ### v.0.2.10
 

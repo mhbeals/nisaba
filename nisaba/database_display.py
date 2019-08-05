@@ -19,7 +19,7 @@ from tkinter.ttk import *
 import os
 
 class database_display(database_maintenance):
-
+	assets_path_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_files_path = os.path.join(os.path.dirname(__file__), "config_files/")
 	raw_data_path = os.path.join(os.path.dirname(__file__), "raw_data/")
 	raw_data_images_path = raw_data_path + "images/"
@@ -465,6 +465,15 @@ class database_display(database_maintenance):
 			m = self.item_info.maxsize()
 			self.item_info.geometry('{}x{}+0+0'.format(*m))
 
+			
+		# Place Icon
+		# "Writing" by IQON from the Noun Project
+		if (sys.platform.startswith('win')): 
+			self.item_info.iconbitmap(Path(self.assets_path) / 'icon.ico')
+		else:
+			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			self.item_info.call('wm', 'iconphoto', self.item_info._w, logo)
+			
 		# Set Up Item Information Window Menu
 		menubar = Menu(self.item_info)
 		self.item_info.config(menu=menubar)
@@ -765,7 +774,11 @@ class database_display(database_maintenance):
 
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		self.collection_selection_window.iconbitmap('icon.ico')
+		if (sys.platform.startswith('win')): 
+			self.collection_selection_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
+		else:
+			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			self.collection_selection_window.call('wm', 'iconphoto', self.collection_selection_window._w, logo)
 
 		# Setup Window Menu
 		menubar = Menu(self.collection_selection_window)

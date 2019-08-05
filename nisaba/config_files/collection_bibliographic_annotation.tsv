@@ -1,6 +1,6 @@
 dc:creator	Author:
 dc:title	Title:
-fabio:hasShortTitle:	Short Title:
+fabio:hasShortTitle	Short Title:
 prism:volume	Volume Number:
 fabio:hasVolumeCount	Number of Volumes:
 prism:edition	Edition:
@@ -8,9 +8,9 @@ fabio:BookSeries	Book Series:
 fabio:hasSequenceIdentifier	Book Series Number:
 fabio:hasPlaceOfPublication	Place of Publication:
 dc:publisher	Publisher:
-dc:date	Date:
+dc:date	Date
 fabio:hasPageCount	Number of Pages:
 prism:isbn	ISBN:
 prism:doi	DOI:
-dc:language:	Language
+dc:language	Language
 fabio:Abstract	Abstract:

@@ -1,12 +1,12 @@
-# Nisaba 0.2.9
+# Nisaba 0.2.11.1
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.11
+### v.0.2.11.1
 
-+ Changed bibliographic fields to Dublin Core/FaBiO Ontologies
-+ Added [/config_files/prefixes.txt](/config_files/prefixes.txt) to hold LOD prefixes
++ Addressed Issue #13 regarding Linux Icon
++ Added assets folder to hold images for programme
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

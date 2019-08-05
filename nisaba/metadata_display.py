@@ -158,7 +158,11 @@ class metadata_display(database_maintenance):
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		self.metadata_window.iconbitmap('icon.ico')
+		if (sys.platform.startswith('win')): 
+			self.metadata_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
+		else:
+			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			self.metadata_window.call('wm', 'iconphoto', self.metadata_window._w, logo)
 		
 		# Display Dropdown Menu
 		self.load_users()
