@@ -465,15 +465,15 @@ class database_display(database_maintenance):
 			m = self.item_info.maxsize()
 			self.item_info.geometry('{}x{}+0+0'.format(*m))
 
-			
+
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win')): 
+		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
 			self.item_info.iconbitmap(Path(self.assets_path) / 'icon.ico')
 		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.item_info.call('wm', 'iconphoto', self.item_info._w, logo)
-			
+
 		# Set Up Item Information Window Menu
 		menubar = Menu(self.item_info)
 		self.item_info.config(menu=menubar)
@@ -763,7 +763,7 @@ class database_display(database_maintenance):
 		# Setup Collections Window
 		self.collection_selection_window = Toplevel()
 		self.collection_selection_window.title('Collection Selection')
-		
+
 		# Delete Any Existing Item Windows
 		try:
 			self.collection_selection_window.state('zoomed')
@@ -774,10 +774,10 @@ class database_display(database_maintenance):
 
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win')): 
+		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
 			self.collection_selection_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
 		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.collection_selection_window.call('wm', 'iconphoto', self.collection_selection_window._w, logo)
 
 		# Setup Window Menu
@@ -815,7 +815,7 @@ class database_display(database_maintenance):
 
 		# Populate listbox
 		for collection_number,dictionary in self.database.items():
-		
+
 			if collection_number != 'users':
 
 				# If the item has a title

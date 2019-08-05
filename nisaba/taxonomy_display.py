@@ -142,16 +142,16 @@ class taxonomy_display(database_maintenance):
 			pass
 			m = self.taxonomy_window.maxsize()
 			self.taxonomy_window.geometry('{}x{}+0+0'.format(*m))
-			
+
 		window_width = self.taxonomy_window.winfo_screenwidth()
 		window_height = self.taxonomy_window.winfo_screenheight()
 
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win')): 
+		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
 			self.taxonomy_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
 		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.taxonomy_window.call('wm', 'iconphoto', self.taxonomy_window._w, logo)
 
 		# Setup Taxonomy Window Panels

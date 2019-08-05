@@ -19,49 +19,49 @@ class metadata_display(database_maintenance):
 		self.save_database()
 		self.metadata_frame.destroy()
 		self.load_users()
-		
+
 	def save_metadata_entries(self,current_user):
 		# Save a User's Metadata
-		
+
 		if current_user in self.database['users']:
 			for entry in self.entries:
 					self.database['users'][current_user][entry[0]] = entry[1].get()
-		
+
 		else:
 			self.database['users'][current_user] = {}
 			for entry in self.entries:
 					self.database['users'][current_user][entry[0]] = entry[1].get()
-					
+
 		self.save_database()
 		self.metadata_frame.destroy()
 		self.load_users()
-		
-	def load_metadata_entries(self,event):	
+
+	def load_metadata_entries(self,event):
 		# Load Metadata on Selected User
-		
+
 		# Delete Any Existing Information
 		try:
 			self.metadata_frame.destroy()
 		except (NameError, AttributeError):
 			pass
-			
-		# Create Metadata Frame	
+
+		# Create Metadata Frame
 		self.metadata_frame = ttk.Frame(self.metadata_window)
 		self.metadata_frame.pack(anchor=NW)
-	
+
 		# Load Metadata Questions
 		questions = {}
 
 		# Populate dictionary with imported file
 		self.config_files_path = os.path.join(os.path.dirname(__file__), "config_files/")
-		
+
 		with open (Path(self.config_files_path) / 'user_metadata.tsv', 'r') as file:
 			reader = csv.reader(file, delimiter='\t')
 			for line in reader:
 				questions[line[0]] = line[1]
-				
+
 		self.entries = []
-		
+
 		# Designate user id
 		row = Frame(self.metadata_frame)
 		uid_label = Label(row, text="User ID: ", anchor='w', width=30)
@@ -69,12 +69,12 @@ class metadata_display(database_maintenance):
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		uid_label.pack(side=LEFT)
 		self.uid_entry.pack(side=RIGHT, expand=YES, fill=X)
-		
+
 		if self.current_user.get() == 'New User':
 			self.uid_entry.insert(0,'nid')
 		else:
 			self.uid_entry.insert(0,self.current_user.get())
-		
+
 		# Create Entry Form Elements
 		for field,question in questions.items():
 
@@ -89,10 +89,10 @@ class metadata_display(database_maintenance):
 			row.pack(side=TOP, fill=X, padx=5, pady=5,)
 			label.pack(side=LEFT)
 			entry.pack(side=RIGHT, expand=YES, fill=X)
-			
+
 			if self.current_user.get() == 'New User':
 				entry.insert(0,'')
-			
+
 			else:
 				# Fill entry with database values (if available)
 				entry_text = self.database['users'][self.current_user.get()].get(field,'')
@@ -100,15 +100,15 @@ class metadata_display(database_maintenance):
 
 			# Add field and value to save list
 			self.entries.append((field, entry))
-			
+
 		self.buttonFrame = ttk.Frame(self.metadata_frame)
 		self.save_button = Button(self.buttonFrame, text='Save Values', command=(lambda: self.save_metadata_entries(self.uid_entry.get())))
 		self.delete_button = Button(self.buttonFrame, text='Delete User', command=(lambda: self.userDeleter(self.uid_entry.get())))
 		self.buttonFrame.pack(anchor=NW)
 		self.save_button.pack(side=LEFT, padx=5, pady=5)
 		self.delete_button.pack(side=LEFT, padx=5, pady=5)
-		
-		
+
+
 	def load_users(self):
 
 		# Delete Any Existing Information
@@ -116,19 +116,19 @@ class metadata_display(database_maintenance):
 			self.selection_frame.destroy()
 		except (NameError, AttributeError):
 			pass
-		
+
 		######################
 		# Metadata Drop Down #
-		######################		
-		
+		######################
+
 		self.selection_frame = ttk.Frame(self.metadata_window)
-		
+
 		# Retrieve Existing User List
 		users = ['Choose a User','New User']
-		
-		for key,value in self.database['users'].items():	
+
+		for key,value in self.database['users'].items():
 			users.append(key)
-			
+
 		# Create Dropdown Menu
 		self.current_user = StringVar(self.selection_frame)
 		self.current_user.set(users[0]) # default value
@@ -137,16 +137,16 @@ class metadata_display(database_maintenance):
 		# Display Selection Frame
 		self.selection_frame.pack(anchor=NW)
 		users_menu.pack(side=LEFT, padx=5, pady=5)
-		
+
 	def database_metadata_viewer(self):
-	
+
 		# Delete Any Existing Information
 		try:
 			self.selection_frame.destroy()
 			self.metadata_frame.destroy()
 		except (NameError, AttributeError):
 			pass
-			
+
 		###################
 		# Metadata Window #
 		###################
@@ -155,18 +155,14 @@ class metadata_display(database_maintenance):
 		self.metadata_window = Toplevel()
 		self.metadata_window.title('Database Metadata')
 		self.metadata_window.geometry("450x325+0+0")
-		
+
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win')): 
+		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
 			self.metadata_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
 		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'logo.gif')
+			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.metadata_window.call('wm', 'iconphoto', self.metadata_window._w, logo)
-		
+
 		# Display Dropdown Menu
 		self.load_users()
-
-		
-		
-		

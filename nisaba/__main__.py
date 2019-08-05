@@ -19,7 +19,7 @@ from tkinter import scrolledtext
 def main():
 
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
-	
+
 	# Instantiate Database Viewer
 	database_window = database_display()
 	taxonomy_window = taxonomy_display()
@@ -33,10 +33,10 @@ def main():
 
 	# Place Icon
 	# "Writing" by IQON from the Noun Project
-	if (sys.platform.startswith('win')): 
+	if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
 		root.iconbitmap(Path(assets_path) / 'icon.ico')
 	else:
-		logo = PhotoImage(file=Path(assets_path) / 'logo.gif')
+		logo = PhotoImage(file=Path(assets_path) / 'icon.gif')
 		root.call('wm', 'iconphoto', root._w, logo)
 
 	# Setup Menu Tab
