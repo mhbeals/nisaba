@@ -3,11 +3,10 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.10
+### v.0.2.11
 
-+ Allowed Multiple Users for Database Metadata
-+ Added "New User"
-+ Added "Delete User"
++ Changed bibliographic fields to Dublin Core/FaBiO Ontologies
++ Added [/config_files/prefixes.txt](/config_files/prefixes.txt) to hold LOD prefixes
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

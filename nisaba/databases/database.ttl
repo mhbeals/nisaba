@@ -1,18 +1,21 @@
 @prefix nisaba: <http://purl.org/nisaba/vocab#> .
+@prefix ns1: <http://purl.org/nisaba/vocab#dc:> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://purl.org/nisaba/collection/0> a nisaba:CollectionEntry ;
-    nisaba:collection_author "Herodotus" ;
+    nisaba:collection_author "",
+        "Herodotus" ;
     nisaba:collection_date "440 BC" ;
     nisaba:collection_holder "Project Gutenberg" ;
     nisaba:collection_holder_original "" ;
     nisaba:collection_holder_reference "2707" ;
     nisaba:collection_holder_reference_original "" ;
     nisaba:collection_place_of_publication "Internet" ;
-    nisaba:collection_title "The History of Herodotus" ;
+    nisaba:collection_title "",
+        "The History of Herodotus" ;
     nisaba:hasItem <http://purl.org/nisaba/collection/0/item/0>,
         <http://purl.org/nisaba/collection/0/item/1>,
         <http://purl.org/nisaba/collection/0/item/2>,
@@ -107,9 +110,11 @@
 """ .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
+    ns1:description "Preface" ;
     nisaba:end 65 ;
     nisaba:hasAnnotation "Evidence",
         "Memorial-Justice-Hero_Teleology_of_History",
+        "Memorial-Justice-Victim_Teleology_of_History",
         "Memorial-Justice_Teleology_of_History",
         "Memorial_Teleology_of_History",
         "Ontology",

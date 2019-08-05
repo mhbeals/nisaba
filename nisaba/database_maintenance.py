@@ -132,8 +132,8 @@ class database_maintenance:
                                 self.database_rdf.add(( segment_uri, nisaba_v['left'], Literal(v['left']) ))
                             if 'right' in v:
                                 self.database_rdf.add(( segment_uri, nisaba_v['right'], Literal(v['right']) ))
-                            if 'segment_notes' in v:
-                                self.database_rdf.add(( segment_uri, nisaba_v['segment_notes'], Literal(v['segment_notes']) ))
+                            if 'dc:description' in v:
+                                self.database_rdf.add(( segment_uri, nisaba_v['dc:description'], Literal(v['dc:description']) ))
                             if 'annotations' in v:
                                 for a in v['annotations']:
                                     self.database_rdf.add(( segment_uri, nisaba_v['hasAnnotation'], Literal(a) ))
@@ -189,7 +189,10 @@ class database_maintenance:
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'] = int(self.right_text.get())
                 self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'] = int(self.left_text.get())
 
-            self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.set_annotation_parents(self.segment_tree)
+            self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.set_annotation_parents(self.segment_tree)		
+
+            for entry in self.segment_entries:
+                self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]] = entry[1].get()			
 
         self.save_database()
 

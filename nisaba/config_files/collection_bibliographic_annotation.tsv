@@ -1,8 +1,16 @@
-collection_title	What is the title of this collection?
-collection_author	Who or what is the author/creator of this collection?
-collection_date	What is the date of the collection?
-collection_place_of_publication	What is the place of publication for this collection?
-collection_holder	Where is this version of this collection?
-collection_holder_reference	What is the reference / identifier for this version of this collection?
-collection_holder_original	Where is the original of this collection held?
-collection_holder_reference_original	What is the reference / identifier for the original of this collection?
+dc:creator	Author:
+dc:title	Title:
+fabio:hasShortTitle:	Short Title:
+prism:volume	Volume Number:
+fabio:hasVolumeCount	Number of Volumes:
+prism:edition	Edition:
+fabio:BookSeries	Book Series:
+fabio:hasSequenceIdentifier	Book Series Number:
+fabio:hasPlaceOfPublication	Place of Publication:
+dc:publisher	Publisher:
+dc:date	Date:
+fabio:hasPageCount	Number of Pages:
+prism:isbn	ISBN:
+prism:doi	DOI:
+dc:language:	Language
+fabio:Abstract	Abstract:

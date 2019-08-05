@@ -276,7 +276,7 @@ class database_display(database_maintenance):
 			i = i + 1
 			loop = str(i) in self.database
 
-		self.database[str(i)]= {'collection_title': 'New Collection','items' : {}}
+		self.database[str(i)]= {'dc:title': 'New Collection','items' : {}}
 		print (i)
 
 		self.collection_selector()
@@ -675,14 +675,14 @@ class database_display(database_maintenance):
 
 			# If the item has a title
 			if 'item_title' in self.database[self.collection_index]['items'][item_number]:
-				if 'collection_title' in self.database[self.collection_index]:
-					display_item = "{0}, part of the {1} Collection".format(str(dictionary['item_title']),str(self.database[self.collection_index]['collection_title']))
+				if 'dc:title' in self.database[self.collection_index]:
+					display_item = "{0}, part of the {1} Collection".format(str(dictionary['item_title']),str(self.database[self.collection_index]['dc:title']))
 				else:
-					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['collection_title']))
+					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['dc:title']))
 
 			# If the item has no title
-			elif 'collection_title' in self.database[self.collection_index]:
-				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index]['collection_title']))
+			elif 'dc:title' in self.database[self.collection_index]:
+				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index]['dc:title']))
 
 			else:
 				display_item = "No title listed"
@@ -806,8 +806,8 @@ class database_display(database_maintenance):
 			if collection_number != 'users':
 
 				# If the item has a title
-				if 'collection_title' in self.database[collection_number]:
-					display_item = str(dictionary['collection_title'])
+				if 'dc:title' in self.database[collection_number]:
+					display_item = str(dictionary['dc:title'])
 
 				else:
 					display_item = "No title listed"

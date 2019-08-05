@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.11
+
++ Changed bibliographic fields to Dublin Core/FaBiO Ontologies
++ Added [/config_files/prefixes.txt](/config_files/prefixes.txt) to hold LOD prefixes
+
 ### v.0.2.10
 
 + Allowed Multiple Users for Database Metadata
