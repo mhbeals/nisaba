@@ -96,6 +96,8 @@
 """,
         "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.",
         """This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.
+""",
+        """This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.
 
 
 """,
@@ -110,7 +112,8 @@
 """ .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
-    ns1:description "Preface" ;
+    ns1:description "Preface",
+        "Prefaces" ;
     nisaba:end 65 ;
     nisaba:hasAnnotation "Evidence",
         "Memorial-Justice-Hero_Teleology_of_History",

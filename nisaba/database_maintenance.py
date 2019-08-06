@@ -2,69 +2,99 @@
 import json
 import datetime
 from pathlib import Path
-from tkinter import END
-from tkinter.filedialog import askopenfilename
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, Literal
 import urllib.parse
 import os
 
+# Import tkinter Libraries
+from tkinter import END
+from tkinter.filedialog import askopenfilename
+
 class database_maintenance:
 
+	# Set Relative Paths
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
+	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
 	database_backup_path = database_path + "backups/"
 
 	def __init__(self):
 		# Initialise programme with stored databases
 
+		#################
+		# JSON Database #
+		#################
+		
 		# Load JSON database
 		with open (Path(self.database_path) / "database.json", 'r') as file:
 			loaddata = file.read()
-
+		
+		# Import JSON into a Dictionary
 		self.database = json.loads(loaddata)
 
-		# Load RDF database
+		################
+		# RDF Database #
+		################
+		
+		# Create a Blank Graph
 		self.database_rdf = Graph()
-
+		
+		# Load RDF database
 		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
 			loaddata = file.read()
-
+			
+		#######################
+		# Annotation Taxonomy #
+		#######################
+		
+		# Load Taxonomy
 		self.taxonomy = json.loads(loaddata)
 
-
 	def iid_iterator(self,database,iid,function_call):
-
+		# Search through Database for a Specific Branch or Child
+		# Works on Any # - IID,Children - # Database
+	
+		# Go Through Database Items
 		for key,value in database.items():
+		
+			# Check for Passed-Through IID
 			if value['iid'] == iid:
+			
+				# Call Passed-Through Function
 				function_call(database,key)
 				break
+			
+			# If Not Found
 			else:
+			
+				# Run Recursively
 				self.iid_iterator(value['children'],iid,function_call)
 
-	def save_database(self):
-
-		# Convert database to json and place in a variable
+	def database_saver(self):
+		# Save Cached Database to Disk
+	
+		# Convert Database to JSON
 		savedata = json.dumps(self.database, indent=4)
 
-		print("Saving to JSON")
+		# Save JSON to disk
 		with open (Path(self.database_path) / 'database.json', 'w') as file:
 			file.write(savedata)
+			
+		# Save Date-Stamped Backup of Database to Backups
 		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
 		with open (Path(self.database_backup_path) / backup_filename, 'w') as file:
 			file.write(savedata)
 
 		# Map the saved JSON into RDF
-		print("Saving to RDF")
 		self.rdf_mapper()
-
-		return
 
 	def rdf_mapper(self):
 		# Map the JSON database to RDF
-
+	
 		# Load previous triples, if any
 		self.database_rdf.parse(self.database_path + "database.ttl", format='turtle')
 
+		# Set URIs
 		nisaba_vocab_uri = URIRef('http://purl.org/nisaba/vocab#')
 		nisaba_resource_uri = URIRef('http://purl.org/nisaba/')
 		nisaba_collection_uri = URIRef('http://purl.org/nisaba/collection/')
@@ -72,6 +102,7 @@ class database_maintenance:
 		nisaba_r = Namespace(nisaba_resource_uri)
 		nisaba_c = Namespace(nisaba_collection_uri)
 
+		# Go Through Cached Database and Update RDF Graph
 		for c,v in self.database.items():
 			collection_uri = nisaba_c[c]
 			self.database_rdf.add(( collection_uri, RDF.type, nisaba_v['CollectionEntry']))
@@ -139,97 +170,152 @@ class database_maintenance:
 								for a in v['annotations']:
 									self.database_rdf.add(( segment_uri, nisaba_v['hasAnnotation'], Literal(a) ))
 
-
 		self.database_rdf.bind('nisaba', nisaba_v)
 
-		# Save RDF version
+		############
+		# Save RDF #
+		############
+		
+		# Save RDF
 		with open(Path(self.database_path) / 'database.ttl', 'wb') as file:
 			file.write(self.database_rdf.serialize(format='turtle'))
 
+		# Save Date-Stamped Backup of RDF in Backups
 		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
 		with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
 			file.write(self.database_rdf.serialize(format='turtle'))
 
-	def set_annotation_parents(self,tree_name):
+	def annotation_parent_setter(self,tree_name):
+		# Ticks the Parents of Selected Annotations with the TreeView Widget 
+		# This is a Bug Fix to Prevent the Default 'Third State') of Parents Boxes
+	
+		# Create a List of All Checked Items
 		annotation_list = tree_name.get_checked()
+		
+		# For Every Item in the List
 		for annotation in annotation_list:
+			
+			# If that Item has a Parent and that Parent is not Already in the List
 			if tree_name.parent(annotation) != "" and tree_name.parent(annotation) not in annotation_list:
+			
+				# Add Parent Item to the List
 				annotation_list.append(tree_name.parent(annotation))
+		
+		# Return the Updated List of Annotations
 		return annotation_list
 
-	def save_entries(self, level):
-		# Save entries
+	def database_entry_saver(self, level):
+		# Saves Entries to Cached Database
+		
+		#############
+		# All Items #
+		#############
+		
+		# For Every Item
 		for entry in self.collection_entries:
+		
+			# Update the Database with the Item's Top-Level Entries
 			self.database[self.collection_index][entry[0]] = entry[1].get()
 
+		###################
+		# Mid-Level Items #
+		###################
+		
+		# If Saving an Mid-Level Item
 		if level == 'i':
 
-			self.database[self.collection_index]['items'][self.item_index]['annotations'] = self.set_annotation_parents(self.item_tree)
+			# Save the Annotation Tree to the Mid-Level
+			self.database[self.collection_index]['items'][self.item_index]['annotations'] = self.annotation_parent_setter(self.item_tree)
 
+			# If it is a Text, Save the Transcription
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
 				self.database[self.collection_index]['items'][self.item_index]['transcription'] = self.transcription_text.get("1.0",END)
 
+			# If it is an Image, Save the Filepath
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 				self.database[self.collection_index]['items'][self.item_index]['image_file'] = self.image_filename.get()
 
+				
+		###################################
+		# Mid-Level and Lower-Level Items #
+		###################################
+		
+		# If Saving a Mid or Lower-Level Item
 		if level == 'i' or level == 's':
+		
+			# Update the Database with the Item's Mid-Level Entries
 			for entry in self.item_entries:
 				self.database[self.collection_index]['items'][self.item_index][entry[0]] = entry[1].get()
-
+		
+		#####################
+		# Lower-Level Items #
+		#####################
+		
+		# If Saving a Lower-Level ITem
 		if level == 's':
 
-			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.set_annotation_parents(self.segment_tree)
+			# Save the Annotation Tree to the Lower Level
+			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.annotation_parent_setter(self.segment_tree)
 
+			# If it is a Text, Save the Word Segmenters
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['start'] = int(self.start_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['end'] = int(self.end_text.get())
 
+			# If it is an Image, Save the Image Percentages
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['top'] = int(self.top_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['bottom'] = int(self.bottom_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'] = int(self.right_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'] = int(self.left_text.get())
 
-			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.set_annotation_parents(self.segment_tree)		
-
+			# Update the Database with the Item's Lower-Level Entries
 			for entry in self.segment_entries:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]] = entry[1].get()			
 
-		self.save_database()
+		
+		#################
+		# Save Database #
+		#################
+		
+		# Save Cached Database to Disk
+		self.database_saver()
 
-	def load_database(self):
-
+	def database_loader(self):
+		# Loads a New (non-default) JSON Database
+		
+		# Delete Current Database Window
+		self.database_window.destroy()
+		
 		# Load Database
-		self.collection_selection_window.destroy()
 		file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
 		with open (file, 'r') as file:
 			loaddata = file.read()
 		self.database = json.loads(loaddata)
-		self.collection_selector()
+		
+		# Reload Database Window
+		self.database_window_displayer()
 
-	def save_taxonomy(self):
-		# Save Taxon Definitions
+	def taxonomy_saver(self):
+		# Saves Taxononmy Definitions
 
-		def iid_finder(dictionary):
+		def entry_retriever(database,key):
+			# Retrieves entries from Taxonomy Form
+			
+			database[key]['iid'] = self.taxonomy_iid_entry.get()
+			database[key]['name'] = self.taxonomy_annotation_entry.get()
+			database[key]['type'] = self.taxonomy_type_entry.get()
+			database[key]['definition'] = self.taxonomy_detail_entry.get()
 
-			for ckey,cvalue in dictionary.items():
-				if cvalue['iid'] == self.clicked_item:
-					cvalue['iid'] = self.taxonomy_iid_entry.get()
-					cvalue['name'] = self.taxonomy_annotation_entry.get()
-					cvalue['type'] = self.taxonomy_type_entry.get()
-					cvalue['definition'] = self.taxonomy_detail_entry.get()
-					break
-				else:
-					iid_finder(cvalue['children'])
-
-		iid_finder(self.taxonomy)
+		# Save All Entries to Cached Taxonomy Database
+		self.iid_iterator(self.taxonomy,self.clicked_item,entry_retriever)
+		
+		# Reload Taxonomy Window
 		self.taxonomy_viewer()
 
-		# Convert database to json and place in a variable
+		# Convert Database to JSON
 		savedata = json.dumps(self.taxonomy, indent=4)
 
-		# Save variable to 'most recent' file
+		# Save JSON to Disk
 		with open (Path(self.database_path) / "taxonomy.json", 'w') as file:
 			file.write(savedata)
-
-		return

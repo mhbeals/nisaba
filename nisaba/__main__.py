@@ -18,6 +18,7 @@ from tkinter import scrolledtext
 
 def main():
 
+	# Set assests path
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 
 	# Instantiate Database Viewer
@@ -26,6 +27,7 @@ def main():
 	metadata_window = metadata_display()
 
 	# Create Window
+	global root
 	root = Tk()
 	root.title("Nisaba")
 	root.minsize(400, 150)
@@ -37,7 +39,11 @@ def main():
 		root.iconbitmap(Path(assets_path) / 'icon.ico')
 	else:
 		logo = PhotoImage(file=Path(assets_path) / 'icon.gif')
+<<<<<<< HEAD
+		self.root.call('wm', 'iconphoto', self.root._w, logo)
+=======
 		root.call('wm', 'iconphoto', root._w, logo)
+>>>>>>> a4792820267d2e682b503e63599a6536473153d5
 
 	# Setup Menu Tab
 	root_window_title = Label(root, text="\nNisaba: Multi-Modal Annotations\n")
@@ -46,9 +52,8 @@ def main():
 
 	# Setup Menu Options
 	edit_metadata = Button(root,text='Users', command=metadata_window.database_metadata_viewer)
-	edit_database = Button(root,text='Database', command=database_window.collection_selector)
+	edit_database = Button(root,text='Database', command=database_window.database_window_displayer)
 	edit_vocabulary = Button(root,text='Taxonomy', command=taxonomy_window.taxonomy_viewer)
-
 
 	# Display Menu Options
 	edit_metadata.place(relx=0.5, rely=0.45, anchor=CENTER)

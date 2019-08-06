@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.12
+
++ Refactored Code
++ United all Database Windows
+
 ### v.0.2.11.1
 
 + Addressed Issue #13 regarding Linux Icon
@@ -55,12 +60,12 @@
 
 ### v.0.2.3
 
-+ Minor bug fix to segment annotation tree (Issue #5)
++ Minor bug fix to excerpt annotation tree (Issue #5)
 
 ### v.0.2.2
 
 + Streamlined windowed (single window open at any time)
-+ Changed add item from menu drop-down to buttons in item list
++ Changed add segment from menu drop-down to buttons in segment list
 
 ### v.0.2.1
 

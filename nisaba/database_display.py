@@ -10,21 +10,17 @@ import csv
 from pathlib import Path
 import PIL.Image
 import PIL.ImageTk
-from ttkwidgets import CheckboxTreeview
+import os
 
 # Import TKinter Libraries
 from tkinter import *
+from tkinter import ttk
 from tkinter.ttk import *
-#from tkinter import scrolledtext
-import os
+from ttkwidgets import CheckboxTreeview
 
 class database_display(database_maintenance):
-	assets_path_path = os.path.join(os.path.dirname(__file__), "assets/")
-	config_files_path = os.path.join(os.path.dirname(__file__), "config_files/")
-	raw_data_path = os.path.join(os.path.dirname(__file__), "raw_data/")
-	raw_data_images_path = raw_data_path + "images/"
 
-	def update_transcription(self):
+	def transcription_updater(self):
 
 		# Get Coordinate Information
 		start = int(self.start_text.get())
@@ -53,7 +49,8 @@ class database_display(database_maintenance):
 
 		# Display Textbox
 		self.transcription_text.grid(column = 0, row = 1, columnspan=8, sticky=NSEW, padx =10, pady = 10)
-	def update_cropped_image(self):
+		
+	def cropped_image_updater(self):
 
 			# Set image file
 			self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
@@ -114,52 +111,34 @@ class database_display(database_maintenance):
 												  image=self.segment_photoImg,
 												  anchor="center")
 
-	def refresh_item_list(self):
-		self.item_info.destroy()
-		self.display_item_info_window()
-	def refresh_segment_list(self,focus):
-		self.item_info.destroy()
-		self.display_item_info_window()
-
-		if focus == 's':
-			self.item_tab_control.select(self.item_tab3)
-
-		elif focus == 'a':
-			self.item_tab_control.select(self.item_tab2)
-
-		return;
-	def refresh_segment_info(self):
-		self.segment_info.destroy()
-		self.display_segment_info_window()
-		self.segment_tab_control.select(self.segment_tab2)
-
-	def import_question_csv(self,datafile):
+	def csv_importer(self,datafile):
 
 		questions = {}
 
 		# Populate dictionary with imported file
-		with open (Path(self.config_files_path) / datafile, 'r') as file:
+		with open (Path(self.config_path) / datafile, 'r') as file:
 			reader = csv.reader(file, delimiter='\t')
 			for line in reader:
 				questions[line[0]] = line[1]
 
 		return questions;
-	def import_bibliographic_fields(self,level):
+		
+	def bibliographical_field_importer(self,level):
 
 		# Set Collection-Level Questions
-		self.collection_questions = self.import_question_csv('collection_bibliographic_annotation.tsv')
+		self.collection_questions = self.csv_importer('collection_bibliographic_annotation.tsv')
 
 		# Set Item-Level Questions
 		if level == 'i' or level == 's':
-			self.item_questions  = self.import_question_csv('item_bibliographic_annotation.tsv')
+			self.item_questions  = self.csv_importer('item_bibliographic_annotation.tsv')
 
 		# Set Segment-Level Questions
 		if level == 's':
-			self.segment_questions  = self.import_question_csv('segment_bibliographic_annotation.tsv')
+			self.segment_questions  = self.csv_importer('segment_bibliographic_annotation.tsv')
 
 		return;
 
-	def make_entry_form(self,tab,questions,level):
+	def entry_form_maker(self,tab,questions,level):
 
 		entries = []
 
@@ -195,21 +174,20 @@ class database_display(database_maintenance):
 			entries.append((field, entry))
 
 		return entries
-	def make_bibliographic_form(self, tab, level):
+		
+	def bibliographic_form_maker(self, tab, level):
 
-		self.import_bibliographic_fields(level)
+		self.bibliographical_field_importer(level)
 
-		self.collection_entries = self.make_entry_form(tab,self.collection_questions,'c')
-
+		self.collection_entries = self.entry_form_maker(tab,self.collection_questions,'c')
+		
 		if level == 'i' or level == 's':
-			self.item_entries = self.make_entry_form(tab,self.item_questions,'i')
+			self.item_entries = self.entry_form_maker(tab,self.item_questions,'i')
 
 		if level == 's':
-			self.segment_entries = self.make_entry_form(tab,self.segment_questions,'s')
+			self.segment_entries = self.entry_form_maker(tab,self.segment_questions,'s')
 
-		return;
-
-	def make_annotations_tree(self,tree_name,level):
+	def annotation_tree_maker(self,tree_name,level):
 
 		# Create Tree Structure
 
@@ -265,9 +243,7 @@ class database_display(database_maintenance):
 		# Display Tree
 		tree_name.pack(anchor=NW)
 
-	def add_new_collection(self):
-
-		self.collection_selection_window.destroy()
+	def collection_adder(self):
 
 		i = -1
 		loop = TRUE
@@ -277,10 +253,10 @@ class database_display(database_maintenance):
 			loop = str(i) in self.database
 
 		self.database[str(i)]= {'dc:title': 'New Collection','items' : {}}
-		print (i)
 
-		self.collection_selector()
-	def add_new_item(self,type):
+		self.database_window_displayer()
+		
+	def item_adder(self,type):
 
 		i = -1
 		loop = TRUE
@@ -293,13 +269,11 @@ class database_display(database_maintenance):
 			self.database[self.collection_index]['items'][str(i)]= {'item_type': 'i','image_file': 'sample.jpg', 'segments' : {}}
 
 		elif type == 't':
-			self.database[self.collection_index]['items'][str(i)]= {'item_type': 't', 'segments' : {}}
+			self.database[self.collection_index]['items'][str(i)]= {'item_type': 't', 'transcription': '', 'segments' : {}}
 
-		self.display_collection_item_list()
+		self.collection_item_list_panel_displayer()
 
-		return
-	def add_new_segment(self):
-		self.item_info.destroy()
+	def segment_adder(self):
 
 		i = -1
 		loop = TRUE
@@ -315,24 +289,28 @@ class database_display(database_maintenance):
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'top':0,'right':50,'bottom':50,'left':0}
 
-		self.refresh_segment_list('s')
+		self.item_panel_displayer('s')
 
-	def display_segment_info_window(self):
+	def segment_panels_displayer(self):
 
-		#########################
-		# Set Up Segment Window #
-		#########################
+		##########################
+		# Set Up Segment Display #
+		##########################
 
+		# Delete Previous Panels and Menus
+		try:
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+			self.pane_three.destroy()
+		except (NameError, AttributeError):
+			pass			
+			
 		# Retitle Window
-		self.item_info.title("Segment: " + self.segment_value)
-
-		# Remove Items Window Tabs (Left / Pane 1)
-		self.pane_one.destroy()
-		self.pane_two.destroy()
+		self.database_window.title("Segment: " + self.segment_value)
 
 		# Setup Segment Window Panels
-		self.segment_pane_one = Frame(self.item_info)
-		self.segment_pane_two = Frame(self.item_info)
+		self.segment_pane_one = Frame(self.database_window)
+		self.segment_pane_two = Frame(self.database_window)
 		split = 0.5
 		self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
 		self.segment_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
@@ -364,11 +342,11 @@ class database_display(database_maintenance):
 			self.transcription_text = Text(self.segment_pane_two, wrap=WORD)
 
 			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, text='Refresh', command=self.update_transcription)
+			update_button = Button(self.segment_pane_two, text='Refresh', command=self.transcription_updater)
 			update_button.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
 
 			# Populate Text Box
-			self.update_transcription()
+			self.transcription_updater()
 
 		# If the Segment is an Image
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
@@ -408,10 +386,10 @@ class database_display(database_maintenance):
 			self.right_label.grid(column = 2, row = 2, sticky=NW)
 			self.right_text.grid(column = 3, row = 2, sticky=NW)
 
-			self.update_cropped_image()
+			self.cropped_image_updater()
 
 			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, text='Refresh', command=self.update_cropped_image)
+			update_button = Button(self.segment_pane_two, text='Refresh', command=self.cropped_image_updater)
 			update_button.grid(column = 4, row = 1, sticky=W, padx =5, pady = 5)
 
 		# Setup Segment Window Tabs (Left / Pane 1)
@@ -426,11 +404,11 @@ class database_display(database_maintenance):
 		self.segment_tab_control.add(self.segment_tab2, text='Annotations')
 		self.segment_tab_control.pack(expand=1, fill='both')
 
-		# Create "save" button
+		# Create "save", "reset" and "return" buttons
 		buttonFrame = ttk.Frame(self.segment_pane_one)
-		b1 = Button(self.segment_pane_one, text='Save Values', command=(lambda: self.save_entries('s')))
-		b2 = Button(self.segment_pane_one, text='Reset to Last Saved Values', command=self.refresh_segment_info)
-		b3 = Button(self.segment_pane_one, text='Return to Item View', command=self.refresh_item_list)
+		b1 = Button(self.segment_pane_one, text='Save Values', command=(lambda: self.database_entry_saver('s')))
+		b2 = Button(self.segment_pane_one, text='Reset to Last Saved Values', command=self.segment_panels_displayer)
+		b3 = Button(self.segment_pane_one, text='Return to Item View', command=(lambda: self.item_panel_displayer('m')))
 		buttonFrame.pack(anchor=NW)
 		b1.pack(side=LEFT, padx=5, pady=5)
 		b2.pack(side=LEFT, padx=5, pady=5)
@@ -441,24 +419,30 @@ class database_display(database_maintenance):
 		########################################
 
 		# Display bibliographic form and create entries database
-		self.make_bibliographic_form(self.segment_tab1, 's')
+		self.bibliographic_form_maker(self.segment_tab1, 's')
 
 		#################################
 		# Set up annotations tab (tab2) #
 		#################################
 
 		self.segment_tree=CheckboxTreeview(self.segment_tab2,height="26")
-		self.make_annotations_tree(self.segment_tree,'s')
-	def display_item_info_window(self):
-
-
-		# Delete Collections Window
-		self.collection_selection_window.destroy()
-
-		# Set up item window
-		self.item_info = Toplevel()
-		self.item_info.title("Item: " + self.item_value)
+		self.annotation_tree_maker(self.segment_tree,'s')
+		
+	def item_panel_displayer(self,focus):
+	
+		# Delete Previous Panels and Menus
 		try:
+<<<<<<< HEAD
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+			self.pane_three.destroy()
+		except (NameError, AttributeError):
+			pass			
+		
+		# Set up Item Display
+		self.database_window.title("Item: " + self.item_value)
+			
+=======
 			self.item_info.state('zoomed')
 		except (TclError):
 			pass
@@ -474,22 +458,23 @@ class database_display(database_maintenance):
 			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.item_info.call('wm', 'iconphoto', self.item_info._w, logo)
 
+>>>>>>> a4792820267d2e682b503e63599a6536473153d5
 		# Set Up Item Information Window Menu
-		menubar = Menu(self.item_info)
-		self.item_info.config(menu=menubar)
+		menubar = Menu(self.database_window)
+		self.database_window.config(menu=menubar)
 		fileMenu = Menu(menubar, tearoff=False)
-		menubar.add_command(label="Add New Segment", command=self.add_new_segment)
+		menubar.add_command(label="Add New Segment", command=self.segment_adder)
 
 		# Setup Item Window Panes
-		self.pane_one = Frame(self.item_info)
-		self.pane_two = Frame(self.item_info)
+		self.pane_one = Frame(self.database_window)
+		self.pane_two = Frame(self.database_window)
 		split = 0.5
 		self.pane_one.place(rely=0, relwidth=split, relheight=1)
 		self.pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
 
-		##############################################
-		# Setup Item Display Window (Right / Pane 2) #
-		##############################################
+		####################################
+		# Setup Item Display Panel (Right) #
+		####################################
 
 		# If the Item is Text
 		if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
@@ -549,9 +534,9 @@ class database_display(database_maintenance):
 			# Add Image to Canvas
 			imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
 
-		###########################################
-		# Setup Items Window Tabs (Left / Pane 1) #
-		###########################################
+		####################################
+		# Setup Item Metadata Panel (Left) #
+		####################################
 
 		# Set Up Tabs
 		self.item_tab_control = ttk.Notebook(self.pane_one)
@@ -565,11 +550,19 @@ class database_display(database_maintenance):
 		self.item_tab_control.add(self.item_tab3, text='Segments')
 		self.item_tab_control.pack(expand=1, fill=BOTH)
 
-		# Create "save" button for all tabs
+		# Set Focus
+		if focus == 'm':
+			self.item_tab_control.select(self.item_tab1)
+		if focus == 'a':
+			self.item_tab_control.select(self.item_tab2)
+		if focus == 's':
+			self.item_tab_control.select(self.item_tab3)
+		
+		# Create "save", "reset" and "return" buttons for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.b1 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.save_entries('i')))
-		self.b2 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.refresh_segment_list('a')))
-		self.b3 = Button(self.buttonFrame, text='Return to Collections List', command=self.collection_selector)
+		self.b1 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('i')))
+		self.b2 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.segment_list_refresher('a')))
+		self.b3 = Button(self.buttonFrame, text='Return to Collections List', command=self.database_window_displayer)
 		self.b1.pack(side=LEFT, padx=5, pady=5)
 		self.b2.pack(side=LEFT, padx=5, pady=5)
 		self.b3.pack(side=LEFT, padx=5, pady=5)
@@ -580,14 +573,14 @@ class database_display(database_maintenance):
 		########################################
 
 		# Display bibliographic form and create entries database
-		self.make_bibliographic_form(self.item_tab1, 'i')
+		self.bibliographic_form_maker(self.item_tab1, 'i')
 
 		##########################
 		# Set up annotations tab #
 		##########################
 
 		self.item_tree = CheckboxTreeview(self.item_tab2,height="26",)
-		self.make_annotations_tree(self.item_tree,'i')
+		self.annotation_tree_maker(self.item_tree,'i')
 
 		#######################
 		# Set Up Segments Tab #
@@ -628,9 +621,8 @@ class database_display(database_maintenance):
 
 			# Bind seleection to event
 			self.segments.bind('<Double-Button>', self.segment_informer)
-
-		return;
-	def display_collection_bibliographic_information(self):
+	
+	def collection_metadata_panel_displayer(self):
 
 		##########################################
 		# Set up Bibliographic Information Panel #
@@ -638,45 +630,40 @@ class database_display(database_maintenance):
 
 		# Delete Any Existing Information
 		try:
-			self.collection_pane_two.destroy()
+			self.pane_two.destroy()
 		except (NameError, AttributeError):
 			pass
 
-		# Setup Bibliographic Form Panel
-		self.collection_pane_two = ttk.Frame(self.collection_panel_control)
-		label_2 = Label(self.collection_pane_two, text = "Collection Bibliographic Information").pack(anchor="center", fill=X)
-		self.collection_panel_control.add(self.collection_pane_two)
-
+		self.pane_two = Frame(self.database_window)
+		self.pane_two.place(relx=.3, relwidth=.4, relheight=1)
+		
 		# Display bibliographic form and create entries database
-		self.make_bibliographic_form(self.collection_pane_two, 'c')
+		self.bibliographic_form_maker(self.pane_two, 'c')
 
 		# Create "save" button
-		b1 = Button(self.collection_pane_two, text='Save Values', command=(lambda: self.save_entries('c')))
+		b1 = Button(self.pane_two, text='Save Values', command=(lambda: self.database_entry_saver('c')))
 		b1.pack(anchor=NW, padx=5, pady=5)
 
-		return
-	def display_collection_item_list(self):
+	def collection_item_list_panel_displayer(self):
 		##############################
 		# Set up List of Items Panel #
 		##############################
 
-		# Delete Any Existing Item Lists
+		# Delete Any Existing Information
 		try:
-			self.collection_pane3.destroy()
+			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass
 
-		# Setup List of Items
-		self.collection_pane3 = ttk.Frame(self.collection_panel_control)
-		label_3 = Label(self.collection_pane3, text = "Items Available within this Collection").pack(anchor="center", fill=X)
-		self.collection_panel_control.add(self.collection_pane3)
+		self.pane_three = Frame(self.database_window)
+		self.pane_three.place(relx=.7, relwidth=.3, relheight=1)
 
 		# Setup scroll bar
-		scrollbar = Scrollbar(self.collection_pane3)
+		scrollbar = Scrollbar(self.pane_three)
 		scrollbar.pack(side=RIGHT,fill=Y)
 
 		# Setup listbox
-		items = Listbox(self.collection_pane3)
+		items = Listbox(self.pane_three)
 		items.pack(anchor=W, fill="both", expand=True)
 
 		# Populate listbox
@@ -709,9 +696,9 @@ class database_display(database_maintenance):
 		items.bind('<Double-Button>', self.item_informer)
 
 		# Create "save" button for all tabs
-		self.buttonFrame = ttk.Frame(self.collection_pane3)
-		self.b1 = Button(self.buttonFrame, text='Add New Text', command=(lambda t="t": self.add_new_item(t)))
-		self.b2 = Button(self.buttonFrame, text='Add New Image', command=(lambda t="i": self.add_new_item(t)))
+		self.buttonFrame = ttk.Frame(self.pane_three)
+		self.b1 = Button(self.buttonFrame, text='Add New Text', command=(lambda t="t": self.item_adder(t)))
+		self.b2 = Button(self.buttonFrame, text='Add New Image', command=(lambda t="i": self.item_adder(t)))
 		self.b1.pack(side=LEFT, padx=5, pady=5)
 		self.b2.pack(side=LEFT, padx=5, pady=5)
 		self.buttonFrame.pack(anchor=NW)
@@ -723,7 +710,8 @@ class database_display(database_maintenance):
 		self.segment_index = str(segment_event_data.curselection()[0])
 		self.segment_value = segment_event_data.get( int(self.item_index))
 
-		self.display_segment_info_window()
+		self.segment_panels_displayer()
+		
 	def item_informer(self, evt):
 
 	   # Capture Event Information
@@ -731,86 +719,104 @@ class database_display(database_maintenance):
 		self.item_index = str(item_event_data.curselection()[0])
 		self.item_value = item_event_data.get(int(self.item_index))
 
-		self.display_item_info_window()
-
-	def item_selector(self, evt):
+		self.item_panel_displayer('m')
+		
+	def collection_informer(self, evt):
 
 		# Capture Event Information
 		collection_event_data = evt.widget
 		self.collection_index = str(collection_event_data.curselection()[0])
 
 		# Display Collection Information Panels
-		self.display_collection_bibliographic_information()
-		self.display_collection_item_list()
-	def collection_selector(self):
-
-		# Delete Any Existing Item Windows
-		try:
-			self.item_info.destroy()
-		except (NameError, AttributeError):
-			pass
-
-		######################
-		# Collections Window #
-		######################
-
+		self.collection_metadata_panel_displayer()
+		self.collection_item_list_panel_displayer()
+		
+	def database_window_displayer(self):
+		# Display top-level window
+		
 		# Reload Taxonomy
 		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
 			loaddata = file.read()
-
 		self.taxonomy = json.loads(loaddata)
-
+		
+		##################
+		# Window Cleanup #
+		##################
+		
+		# Delete Previous Panels and Menus or Create New Window
+		try:
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+			self.pane_three.destroy()
+		except (NameError, AttributeError):
+			self.database_window = Toplevel()
+			
+		#####################
+		# Collection Window #
+		#####################
+		
 		# Setup Collections Window
+<<<<<<< HEAD
+		
+		self.database_window.title('Collections')
+		
+		# Set to Full Screen
+=======
 		self.collection_selection_window = Toplevel()
 		self.collection_selection_window.title('Collection Selection')
 
 		# Delete Any Existing Item Windows
+>>>>>>> a4792820267d2e682b503e63599a6536473153d5
 		try:
-			self.collection_selection_window.state('zoomed')
+			self.database_window.state('zoomed')
 		except (TclError):
-			pass
-			m = self.collection_selection_window.maxsize()
-			self.collection_selection_window.geometry('{}x{}+0+0'.format(*m))
+			m = self.database_window.maxsize()
+			self.database_window.geometry('{}x{}+0+0'.format(*m))
 
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
 		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
+<<<<<<< HEAD
+			self.database_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
+		else:
+			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
+			self.database_window.call('wm', 'iconphoto', self.database_window._w, logo)
+=======
 			self.collection_selection_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
 		else:
 			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.collection_selection_window.call('wm', 'iconphoto', self.collection_selection_window._w, logo)
+>>>>>>> a4792820267d2e682b503e63599a6536473153d5
 
 		# Setup Window Menu
-		menubar = Menu(self.collection_selection_window)
+		menubar = Menu(self.database_window)
 		addMenu = Menu(menubar, tearoff=False)
 		addItemMenu = Menu(addMenu, tearoff=False)
-		self.collection_selection_window.config(menu=menubar)
-		menubar.add_command(label="Load New Database", command=self.load_database)
+		self.database_window.config(menu=menubar)
+		menubar.add_command(label="Load New Database", command=self.database_loader)
 		menubar.add_cascade(label="Add", menu=addMenu)
-		addMenu.add_command(label="Collection", command=self.add_new_collection)
+		addMenu.add_command(label="Collection", command=self.collection_adder)
 
-		# Setup Paned Windows
-		self.collection_panel_control = ttk.Panedwindow(self.collection_selection_window, orient=HORIZONTAL)
-		self.collection_pane_one = ttk.Frame(self.collection_panel_control)
-		self.collection_panel_control.add(self.collection_pane_one)
+		# Setup Window Panes
+		self.pane_one = Frame(self.database_window)
+		self.pane_two = Frame(self.database_window)
+		self.pane_three = Frame(self.database_window)
+		split = 0.33
+		self.pane_one.place(rely=0, relwidth=.3, relheight=1)
+		self.pane_two.place(relx=.3, relwidth=.4, relheight=1)
+		self.pane_three.place(relx=.7, relwidth=.3, relheight=1)
 
-		# Set Panel Label
-		label_1 = Label(self.collection_pane_one, text = "Available Collections").pack(anchor="center", fill=X)
-
-		# Pack Panes into Frame
-		self.collection_panel_control.pack(expand=1, fill='both')
-
-		#####################################
-		# Set Up Collection Selection Panel #
-		#####################################
+		##############################
+		# Collection Selection Panel #
+		##############################
 
 		# Setup scroll bar
-		scrollbar = Scrollbar(self.collection_pane_one)
+		scrollbar = Scrollbar(self.pane_one)
 		scrollbar.pack(side=RIGHT,fill=Y, expand=True)
 
 		# Setup listbox
-		items = Listbox(self.collection_pane_one)
-		items.config(width = 50)
+		items = Listbox(self.pane_one)
+		items.config(width=1000)
 		items.pack(anchor=W, fill=BOTH, expand=True)
 
 		# Populate listbox
@@ -835,4 +841,4 @@ class database_display(database_maintenance):
 		scrollbar.config(command=items.yview)
 
 		# Bind selected item to event
-		items.bind('<Double-Button>', self.item_selector)
+		items.bind('<Double-Button>', self.collection_informer)

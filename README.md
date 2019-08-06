@@ -1,12 +1,11 @@
-# Nisaba 0.2.11.1
+# Nisaba 0.2.12
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.11.1
+### v.0.2.12
 
-+ Addressed Issue #13 regarding Linux Icon
-+ Added assets folder to hold images for programme
++ Refactored Code
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 
