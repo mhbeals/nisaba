@@ -1,6 +1,10 @@
 include requirements.txt
 include nisaba/config_files/*.tsv
+include nisaba/config_files/*.txt
 include nisaba/databases/*.json
 include nisaba/databases/*.ttl
 include nisaba/databases/backups/placeholder
+include nisaba/raw_data/*.jpg
+include nisaba/assets/*.gif
+include nisaba/assets/*.ico
 include nisaba/raw_data/*.jpg
