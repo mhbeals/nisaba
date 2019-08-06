@@ -3,9 +3,10 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.12
+### v.0.2.13
 
-+ Refactored Code
++ Fixed Merge Errors
++ Added Menu Icons
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

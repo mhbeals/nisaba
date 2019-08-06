@@ -432,33 +432,12 @@ class database_display(database_maintenance):
 	
 		# Delete Previous Panels and Menus
 		try:
-<<<<<<< HEAD
 			self.pane_one.destroy()
 			self.pane_two.destroy()
 			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass			
-		
-		# Set up Item Display
-		self.database_window.title("Item: " + self.item_value)
-			
-=======
-			self.item_info.state('zoomed')
-		except (TclError):
-			pass
-			m = self.item_info.maxsize()
-			self.item_info.geometry('{}x{}+0+0'.format(*m))
 
-
-		# Place Icon
-		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
-			self.item_info.iconbitmap(Path(self.assets_path) / 'icon.ico')
-		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
-			self.item_info.call('wm', 'iconphoto', self.item_info._w, logo)
-
->>>>>>> a4792820267d2e682b503e63599a6536473153d5
 		# Set Up Item Information Window Menu
 		menubar = Menu(self.database_window)
 		self.database_window.config(menu=menubar)
@@ -748,25 +727,19 @@ class database_display(database_maintenance):
 			self.pane_one.destroy()
 			self.pane_two.destroy()
 			self.pane_three.destroy()
+			self.database_window.destroy()
 		except (NameError, AttributeError):
-			self.database_window = Toplevel()
+			pass
 			
 		#####################
 		# Collection Window #
 		#####################
 		
-		# Setup Collections Window
-<<<<<<< HEAD
-		
+		# Setup Collections Window	
+		self.database_window = Toplevel()
 		self.database_window.title('Collections')
 		
 		# Set to Full Screen
-=======
-		self.collection_selection_window = Toplevel()
-		self.collection_selection_window.title('Collection Selection')
-
-		# Delete Any Existing Item Windows
->>>>>>> a4792820267d2e682b503e63599a6536473153d5
 		try:
 			self.database_window.state('zoomed')
 		except (TclError):
@@ -776,17 +749,10 @@ class database_display(database_maintenance):
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
 		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
-<<<<<<< HEAD
 			self.database_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
 		else:
 			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
 			self.database_window.call('wm', 'iconphoto', self.database_window._w, logo)
-=======
-			self.collection_selection_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
-		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
-			self.collection_selection_window.call('wm', 'iconphoto', self.collection_selection_window._w, logo)
->>>>>>> a4792820267d2e682b503e63599a6536473153d5
 
 		# Setup Window Menu
 		menubar = Menu(self.database_window)

@@ -180,6 +180,7 @@
 <http://purl.org/nisaba/collection/0/item/2/segment/0> a nisaba:SegmentEntry ;
     nisaba:bottom 50,
         100 ;
+    ns1:description "" ;
     nisaba:hasAnnotation "Anti-Positivism",
         "Empiricism",
         "Epistemology",

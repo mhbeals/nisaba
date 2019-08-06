@@ -15,6 +15,7 @@ class database_maintenance:
 	# Set Relative Paths
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
+	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
 	database_backup_path = database_path + "backups/"
 

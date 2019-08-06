@@ -27,7 +27,6 @@ def main():
 	metadata_window = metadata_display()
 
 	# Create Window
-	global root
 	root = Tk()
 	root.title("Nisaba")
 	root.minsize(400, 150)
@@ -39,26 +38,28 @@ def main():
 		root.iconbitmap(Path(assets_path) / 'icon.ico')
 	else:
 		logo = PhotoImage(file=Path(assets_path) / 'icon.gif')
-<<<<<<< HEAD
 		self.root.call('wm', 'iconphoto', self.root._w, logo)
-=======
-		root.call('wm', 'iconphoto', root._w, logo)
->>>>>>> a4792820267d2e682b503e63599a6536473153d5
 
 	# Setup Menu Tab
 	root_window_title = Label(root, text="\nNisaba: Multi-Modal Annotations\n")
 	root_window_title.config(font=("Times", 16))
 	root_window_title.place(relx=0.5, rely=0.2, anchor=CENTER)
 
+	# Add Icons to Options
+	# Icons made by Freepik(https://www.flaticon.com/authors/freepik) from https://www.flaticon.com/" CC-BY (http://creativecommons.org/licenses/by/3.0/)
+	user_logo=PhotoImage(file=Path(assets_path) / 'users.png')
+	database_logo=PhotoImage(file=Path(assets_path) / 'database.png')
+	taxonomy_logo=PhotoImage(file=Path(assets_path) / 'taxonomy.png')
+	
 	# Setup Menu Options
-	edit_metadata = Button(root,text='Users', command=metadata_window.database_metadata_viewer)
-	edit_database = Button(root,text='Database', command=database_window.database_window_displayer)
-	edit_vocabulary = Button(root,text='Taxonomy', command=taxonomy_window.taxonomy_viewer)
-
+	edit_metadata = Button(root,text='Users', image=user_logo, compound="top", command=metadata_window.database_metadata_viewer)
+	edit_database = Button(root,text='Database', image=database_logo, compound="top", command=database_window.database_window_displayer)
+	edit_vocabulary = Button(root,text='Taxonomy', image=taxonomy_logo, compound="top", command=taxonomy_window.taxonomy_viewer)
+	
 	# Display Menu Options
-	edit_metadata.place(relx=0.5, rely=0.45, anchor=CENTER)
-	edit_database.place(relx=0.5, rely=0.65, anchor=CENTER)
-	edit_vocabulary.place(relx=0.5, rely=0.85, anchor=CENTER)
+	edit_metadata.place(relx=0.3, rely=0.6, anchor=CENTER)
+	edit_database.place(relx=0.5, rely=0.6, anchor=CENTER)
+	edit_vocabulary.place(relx=0.7, rely=0.6, anchor=CENTER)
 
 	# Begin Main Loop
 	root.mainloop()

@@ -101,14 +101,16 @@
                             "Primary_Evidence",
                             "Evidence",
                             "Ontology"
-                        ]
+                        ],
+                        "dc:description": ""
                     }
                 },
                 "annotations": [
                     "Tertiary_Evidence",
                     "Evidence",
                     "Ontology"
-                ]
+                ],
+                "fabio:hasSequenceIdentifier": ""
             }
         },
         "fabio:hasShortTitle": "",

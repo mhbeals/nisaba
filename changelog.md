@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.13
+
++ Fixed Merge Errors
++ Added Menu Icons
+
 ### v.0.2.12
 
 + Refactored Code
