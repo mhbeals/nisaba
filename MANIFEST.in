@@ -7,4 +7,5 @@ include nisaba/databases/backups/placeholder
 include nisaba/raw_data/*.jpg
 include nisaba/assets/*.gif
 include nisaba/assets/*.ico
+include nisaba/assets/*.png
 include nisaba/raw_data/*.jpg
