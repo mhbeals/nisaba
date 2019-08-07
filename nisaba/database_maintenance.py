@@ -295,7 +295,7 @@ class database_maintenance:
 		self.database = json.loads(loaddata)
 		
 		# Reload Database Window
-		self.database_window_displayer()
+		self.database_frame_displayer(self.database_window)
 
 	def taxonomy_saver(self):
 		# Saves Taxononmy Definitions
@@ -312,7 +312,7 @@ class database_maintenance:
 		self.iid_iterator(self.taxonomy,self.clicked_item,entry_retriever)
 		
 		# Reload Taxonomy Window
-		self.taxonomy_viewer()
+		self.taxonomy_viewer(self.taxonomy_window)
 
 		# Convert Database to JSON
 		savedata = json.dumps(self.taxonomy, indent=4)

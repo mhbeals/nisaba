@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.14
+
++ Minor Bug Fixes
++ Single Window Interface
+
 ### v.0.2.13
 
 + Fixed Merge Errors

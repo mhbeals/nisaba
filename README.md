@@ -1,12 +1,12 @@
-# Nisaba 0.2.12
+# Nisaba 0.2.14
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.13
+### v.0.2.14
 
-+ Fixed Merge Errors
-+ Added Menu Icons
++ Minor Bug Fixes
++ Single Window Interface
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

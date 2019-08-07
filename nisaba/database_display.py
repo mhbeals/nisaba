@@ -254,7 +254,7 @@ class database_display(database_maintenance):
 
 		self.database[str(i)]= {'dc:title': 'New Collection','items' : {}}
 
-		self.database_window_displayer()
+		self.database_frame_displayer(self.database_window)
 		
 	def item_adder(self,type):
 
@@ -304,9 +304,6 @@ class database_display(database_maintenance):
 			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass			
-			
-		# Retitle Window
-		self.database_window.title("Segment: " + self.segment_value)
 
 		# Setup Segment Window Panels
 		self.segment_pane_one = Frame(self.database_window)
@@ -439,10 +436,7 @@ class database_display(database_maintenance):
 			pass			
 
 		# Set Up Item Information Window Menu
-		menubar = Menu(self.database_window)
-		self.database_window.config(menu=menubar)
-		fileMenu = Menu(menubar, tearoff=False)
-		menubar.add_command(label="Add New Segment", command=self.segment_adder)
+		#menubar.add_command(label="Add New Segment", command=self.segment_adder)
 
 		# Setup Item Window Panes
 		self.pane_one = Frame(self.database_window)
@@ -541,7 +535,7 @@ class database_display(database_maintenance):
 		self.buttonFrame = ttk.Frame(self.pane_one)
 		self.b1 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('i')))
 		self.b2 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.segment_list_refresher('a')))
-		self.b3 = Button(self.buttonFrame, text='Return to Collections List', command=self.database_window_displayer)
+		self.b3 = Button(self.buttonFrame, text='Return to Collections List', command=(lambda: self.database_frame_displayer(self.database_window)))
 		self.b1.pack(side=LEFT, padx=5, pady=5)
 		self.b2.pack(side=LEFT, padx=5, pady=5)
 		self.b3.pack(side=LEFT, padx=5, pady=5)
@@ -710,13 +704,8 @@ class database_display(database_maintenance):
 		self.collection_metadata_panel_displayer()
 		self.collection_item_list_panel_displayer()
 		
-	def database_window_displayer(self):
+	def database_frame_displayer(self,window):
 		# Display top-level window
-		
-		# Reload Taxonomy
-		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
-			loaddata = file.read()
-		self.taxonomy = json.loads(loaddata)
 		
 		##################
 		# Window Cleanup #
@@ -727,47 +716,17 @@ class database_display(database_maintenance):
 			self.pane_one.destroy()
 			self.pane_two.destroy()
 			self.pane_three.destroy()
-			self.database_window.destroy()
 		except (NameError, AttributeError):
 			pass
-			
-		#####################
-		# Collection Window #
-		#####################
-		
-		# Setup Collections Window	
-		self.database_window = Toplevel()
-		self.database_window.title('Collections')
-		
-		# Set to Full Screen
-		try:
-			self.database_window.state('zoomed')
-		except (TclError):
-			m = self.database_window.maxsize()
-			self.database_window.geometry('{}x{}+0+0'.format(*m))
-
-		# Place Icon
-		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
-			self.database_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
-		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
-			self.database_window.call('wm', 'iconphoto', self.database_window._w, logo)
 
 		# Setup Window Menu
-		menubar = Menu(self.database_window)
-		addMenu = Menu(menubar, tearoff=False)
-		addItemMenu = Menu(addMenu, tearoff=False)
-		self.database_window.config(menu=menubar)
-		menubar.add_command(label="Load New Database", command=self.database_loader)
-		menubar.add_cascade(label="Add", menu=addMenu)
-		addMenu.add_command(label="Collection", command=self.collection_adder)
+		#menubar.add_command(label="Load New Database", command=self.database_loader)
+		#addMenu.add_command(label="Collection", command=self.collection_adder)
 
 		# Setup Window Panes
 		self.pane_one = Frame(self.database_window)
 		self.pane_two = Frame(self.database_window)
 		self.pane_three = Frame(self.database_window)
-		split = 0.33
 		self.pane_one.place(rely=0, relwidth=.3, relheight=1)
 		self.pane_two.place(relx=.3, relwidth=.4, relheight=1)
 		self.pane_three.place(relx=.7, relwidth=.3, relheight=1)
@@ -808,3 +767,18 @@ class database_display(database_maintenance):
 
 		# Bind selected item to event
 		items.bind('<Double-Button>', self.collection_informer)
+
+		
+	def database_window_displayer(self,window):
+		# Setup Database Frame
+	
+		# Reload Taxonomy
+		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
+			loaddata = file.read()
+		self.taxonomy = json.loads(loaddata)
+		
+		# Set Name of Collections Frame	
+		self.database_window = window
+		
+		# Open Frame
+		self.database_frame_displayer(self.database_window)

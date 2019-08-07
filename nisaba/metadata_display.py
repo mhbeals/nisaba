@@ -65,7 +65,7 @@ class metadata_display(database_maintenance):
 			
 		# Create Metadata Frame	
 		self.metadata_frame = ttk.Frame(self.metadata_window)
-		self.metadata_frame.pack(anchor=NW)
+		self.metadata_frame.place(relx=.01, rely=.05)
 	
 		#################
 		# Load Metadata #
@@ -140,14 +140,16 @@ class metadata_display(database_maintenance):
 				
 	def user_loader(self):
 		# Creates Dropdown Menu of Possible Users
-	
+				
 		##################
 		# Window Cleanup #
 		##################
-
-		# Delete Any Existing Information
+		
+		# Delete Previous Panels and Menus or Create New Window
 		try:
-			self.selection_frame.destroy()
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass
 
@@ -156,7 +158,7 @@ class metadata_display(database_maintenance):
 		##############################		
 		
 		# Create User Dropdown Frame
-		self.selection_frame = ttk.Frame(self.metadata_window)
+		self.pane_one = ttk.Frame(self.metadata_window)
 
 		# Retrieve Existing User List
 		users = ['Choose a User','New User']
@@ -165,44 +167,16 @@ class metadata_display(database_maintenance):
 			users.append(key)
 
 		# Create Dropdown Menu
-		self.current_user = StringVar(self.selection_frame)
+		self.current_user = StringVar(self.pane_one)
 		self.current_user.set(users[0]) # default value
-		users_menu = OptionMenu(self.selection_frame, self.current_user, *users, command=self.database_metadata_entry_loader)
+		users_menu = OptionMenu(self.pane_one, self.current_user, *users, command=self.database_metadata_entry_loader)
 
 		# Display Selection Frame
-		self.selection_frame.pack(anchor=NW)
+		self.pane_one.place(relx=.01, rely=.01)
 		users_menu.pack(side=LEFT, padx=5, pady=5)
-
-		
-	def database_metadata_viewer(self):
-
-		# Delete Any Existing Information
-		try:
-			self.selection_frame.destroy()
-			self.metadata_frame.destroy()
-		except (NameError, AttributeError):
-			pass
-
-		###################
-		# Metadata Window #
-		###################
-		
-		# Setup Metadata Window
-		self.metadata_window = Toplevel()
-		self.metadata_window.title('Database Metadata')
-		self.metadata_window.geometry("450x325+195+0")
-
-		# Place Icon
-		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
-			self.metadata_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
-		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
-			self.metadata_window.call('wm', 'iconphoto', self.metadata_window._w, logo)
-		
-		#################
-		# User DropDown #
-		#################
-		
-		# Display DropDown Menu
+	
+	def database_metadata_viewer(self,window):
+	
+		self.metadata_window = window
+		self.metadata_window.pack_forget 
 		self.user_loader()

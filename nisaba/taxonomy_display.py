@@ -33,7 +33,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy[i]['children'] = {}
 
 		# Reload Taxonomy Viewer
-		self.taxonomy_viewer()
+		self.taxonomy_viewer(self.taxonomy_window)
 
 	def child_adder(self,database,key):
 		# Add a Taxon Child
@@ -56,7 +56,7 @@ class taxonomy_display(database_maintenance):
 		database[key]['children'][i]['children'] = {}
 
 		# Reload Taxonomy Viewer
-		self.taxonomy_viewer()
+		self.taxonomy_viewer(self.taxonomy_window)
 
 	def element_deleter(self,database,key):
 		# Delete a Taxon
@@ -65,7 +65,7 @@ class taxonomy_display(database_maintenance):
 		del database[key]
 		
 		# Reload Taxonomy Viewer
-		self.taxonomy_viewer()
+		self.taxonomy_viewer(self.taxonomy_window)
 
 	def entry_filler(self,database,key):
 		# Fill in entry boxes
@@ -83,26 +83,25 @@ class taxonomy_display(database_maintenance):
 		# Send Selected ID to Iterator
 		
 		# Get Selected ID from Click Event
-		self.clicked_segment = self.taxonomy_tree.identify('segment',event.x,event.y)
+		self.clicked_item = self.taxonomy_tree.identify('item',event.x,event.y)
 		
 		# Send to iid_iterator
-		self.iid_iterator(self.taxonomy,self.taxonomy_tree.identify('segment',event.x,event.y),self.entry_filler)
+		self.iid_iterator(self.taxonomy,self.taxonomy_tree.identify('item',event.x,event.y),self.entry_filler)
 
 	def display_editor(self):
 
 		# Delete Any Existing Information
 		try:
-			self.taxonomy_pane_two.destroy()
+			self.pane_two.destroy()
 		except (NameError, AttributeError):
 			pass
 
-		# Setup Taxonomy Window Panels (45/65 Split)
-		split = 0.45
-		self.taxonomy_pane_two = Frame(self.taxonomy_window)
-		self.taxonomy_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
+		# Setup Taxonomy Window Panels
+		self.pane_two = Frame(self.taxonomy_window)
+		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 
 		# Create ID Row
-		row = Frame(self.taxonomy_pane_two)
+		row = Frame(self.pane_two)
 		self.taxonomy_iid_label = Label(row, text="ID", anchor='w', width=10)
 		self.taxonomy_iid_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -110,7 +109,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_iid_entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		# Create Annotation Name Row
-		row = Frame(self.taxonomy_pane_two)
+		row = Frame(self.pane_two)
 		self.taxonomy_annotation_label = Label(row, text="Annotation", anchor='w', width=10)
 		self.taxonomy_annotation_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -118,7 +117,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_annotation_entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		# Create Annotation Type Row
-		row = Frame(self.taxonomy_pane_two)
+		row = Frame(self.pane_two)
 		self.taxonomy_type_label = Label(row, text="Type", anchor='w', width=10)
 		self.taxonomy_type_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -126,7 +125,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_type_entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		# Create Annotation Definition Row
-		row = Frame(self.taxonomy_pane_two)
+		row = Frame(self.pane_two)
 		self.taxonomy_detail_label = Label(row, text="Definition", anchor='w', width=10)
 		self.taxonomy_detail_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -134,7 +133,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_detail_entry.pack(side=RIGHT, expand=YES, fill=X)
 		
 		# Create Add/Save/Delete Button Set
-		row = Frame(self.taxonomy_pane_two)
+		row = Frame(self.pane_two)
 		self.add_button = Button(row, text='Add Child Taxon', command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.child_adder)))
 		self.add_button.pack(side=LEFT)
 		self.save_button = Button(row, text='Save', command=self.taxonomy_saver)
@@ -143,80 +142,58 @@ class taxonomy_display(database_maintenance):
 		self.delete_button.pack(side=LEFT)
 		row.pack()
 
-	def taxonomy_viewer(self):
+	def taxonomy_viewer(self,window):
 		# Displays the Taxonomy
-	
+		
 		##################
 		# Window Cleanup #
 		##################
 		
-		# Delete Any Existing Information
+		# Delete Previous Panels and Menus or Create New Window
 		try:
-			self.taxonomy_window.destroy()
-			#newRoot.destroy()
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass
-			
+	
 		###################
 		# Taxonomy Window #
 		###################
 
 		# Setup Taxonomy Window
-		self.taxonomy_window = Toplevel()
-		self.taxonomy_window.title('Taxonomy Development')
-		
-		# Place Icon
-		# "Writing" by IQON from the Noun Project
-		if (sys.platform.startswith('win') or sys.platform.startswith('darwin')):
-			self.taxonomy_window.iconbitmap(Path(self.assets_path) / 'icon.ico')
-		else:
-			logo = PhotoImage(file=Path(self.assets_path) / 'icon.gif')
-			self.taxonomy_window.call('wm', 'iconphoto', self.taxonomy_window._w, logo)
-			
-		# Set to Full Screen
-		try:
-			self.taxonomy_window.state('zoomed')
-		except (TclError):
-			pass
-			m = self.taxonomy_window.maxsize()
-			self.taxonomy_window.geometry('{}x{}+0+0'.format(*m))
+		self.taxonomy_window = window
 
 		# Determine Window Size / Screen Resolution 
 		window_width = self.taxonomy_window.winfo_screenwidth()
 		window_height = self.taxonomy_window.winfo_screenheight()
 
-		# Setup Taxonomy Window Panels (45/65 Split)
-		self.taxonomy_pane_one = Frame(self.taxonomy_window)
-		self.taxonomy_pane_two = Frame(self.taxonomy_window)
-		split = 0.45
-		self.taxonomy_pane_one.place(y=5, relwidth=split, relheight=1)
-		self.taxonomy_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
+		# Setup Taxonomy Window Panels
+		self.pane_one = Frame(self.taxonomy_window)
+		self.pane_two = Frame(self.taxonomy_window)
+		self.pane_one.place(x=-15, relwidth=.5, relheight=1)
+		self.pane_two.place(x=-15, relx=.5, relwidth=.5, relheight=1)
 
-		# Setup Window Menu
-		menubar = Menu(self.taxonomy_window)
-		addMenu = Menu(menubar, tearoff=False)
-		addItemMenu = Menu(addMenu, tearoff=False)
-		self.taxonomy_window.config(menu=menubar)
-		menubar.add_command(label="Add New Root", command=self.root_adder)
+		#menubar.add_command(label="Add New Root", command=self.root_adder)
 
 		############################################
 		# Set Up Annotation Selection (Tree) Panel #
 		############################################
-
+		
 		# Create Tree
-		self.taxonomy_tree = ttk.Treeview(self.taxonomy_pane_one,height=int(window_height/21),selectmode='browse')
+		self.taxonomy_tree = ttk.Treeview(self.pane_one,height=int(window_height/21),selectmode='browse')
 
 		# Create Tree Layout
 		self.taxonomy_tree["columns"]=("one","two","three")
 		self.taxonomy_tree.column("#0", minwidth=int(window_width/24*2.5), stretch=1)
 		self.taxonomy_tree.column("one", minwidth=int(window_width/24),  stretch=1)
-		self.taxonomy_tree.column("two", minwidth=int(window_width/4), stretch=1)
+		self.taxonomy_tree.column("two", minwidth=int(window_width/3.68), stretch=1)
 		self.taxonomy_tree.heading("#0",text="Annotation",anchor=W)
 		self.taxonomy_tree.heading("one", text="Type",anchor=W)
 		self.taxonomy_tree.heading("two", text="Detail",anchor=W)
 
 		# Create Roots
-		for segment,dictionary in self.taxonomy.items():
+		for item,dictionary in self.taxonomy.items():
 			top=self.taxonomy_tree.insert("", 1, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
 			def iterateAllKeys(child_dictionary,parent_branch):

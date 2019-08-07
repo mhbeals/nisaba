@@ -113,6 +113,7 @@
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
     ns1:description "Preface",
+        "Preface2",
         "Prefaces" ;
     nisaba:end 65 ;
     nisaba:hasAnnotation "Evidence",
