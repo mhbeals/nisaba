@@ -433,10 +433,7 @@ class database_display(database_maintenance):
 			self.pane_two.destroy()
 			self.pane_three.destroy()
 		except (NameError, AttributeError):
-			pass			
-
-		# Set Up Item Information Window Menu
-		#menubar.add_command(label="Add New Segment", command=self.segment_adder)
+			pass
 
 		# Setup Item Window Panes
 		self.pane_one = Frame(self.database_window)
@@ -533,12 +530,14 @@ class database_display(database_maintenance):
 		
 		# Create "save", "reset" and "return" buttons for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.b1 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('i')))
-		self.b2 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.segment_list_refresher('a')))
-		self.b3 = Button(self.buttonFrame, text='Return to Collections List', command=(lambda: self.database_frame_displayer(self.database_window)))
+		self.b1 = Button(self.buttonFrame,text='Add New Segment',command=self.segment_adder)
+		self.b2 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('i')))
+		self.b3 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.item_panel_displayer('m')))
+		self.b4 = Button(self.buttonFrame, text='Return to Collections List', command=(lambda: self.database_frame_displayer(self.database_window)))
 		self.b1.pack(side=LEFT, padx=5, pady=5)
 		self.b2.pack(side=LEFT, padx=5, pady=5)
 		self.b3.pack(side=LEFT, padx=5, pady=5)
+		self.b4.pack(side=LEFT, padx=5, pady=5)
 		self.buttonFrame.pack(anchor=NW)
 
 		########################################
@@ -721,7 +720,6 @@ class database_display(database_maintenance):
 
 		# Setup Window Menu
 		#menubar.add_command(label="Load New Database", command=self.database_loader)
-		#addMenu.add_command(label="Collection", command=self.collection_adder)
 
 		# Setup Window Panes
 		self.pane_one = Frame(self.database_window)
@@ -768,6 +766,10 @@ class database_display(database_maintenance):
 		# Bind selected item to event
 		items.bind('<Double-Button>', self.collection_informer)
 
+		# Add Collection Button
+		
+		add_collection_button = Button(self.pane_one,text='Add New Collection',command=self.collection_adder)
+		add_collection_button.pack(anchor=NW)
 		
 	def database_window_displayer(self,window):
 		# Setup Database Frame
