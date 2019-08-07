@@ -171,8 +171,8 @@ class taxonomy_display(database_maintenance):
 		# Setup Taxonomy Window Panels
 		self.pane_one = Frame(self.taxonomy_window)
 		self.pane_two = Frame(self.taxonomy_window)
-		self.pane_one.place(x=-15, relwidth=.5, relheight=1)
-		self.pane_two.place(x=-15, relx=.5, relwidth=.5, relheight=1)
+		self.pane_one.place(relwidth=.5, relheight=1)
+		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 
 		#menubar.add_command(label="Add New Root", command=self.root_adder)
 
