@@ -1,4 +1,4 @@
-# Nisaba 0.2.14
+# Nisaba 0.2.15
 A tool for multi-modal annotation
 
 ## Most Recent Update
@@ -13,7 +13,7 @@ A tool for multi-modal annotation
 
 ## Easy (PIP) Installation:
 
-*Nisaba* is now available through [PyPi](https://pypi.org/project/nisaba/). 
+*Nisaba* is now available through [PyPi](https://pypi.org/project/nisaba/).
 To install using pip, simply run the following command from your terminal:
 
 ```
@@ -56,5 +56,5 @@ python -m nisaba
 *Nisaba* was conceived by [M. H. Beals](https://github.com/mhbeals) (Loughborough University) and [Olivia Mitchell](https://www.lboro.ac.uk/departments/phir/staff/olivia-mitchell/) (Loughborough University) as part of her PhD project (2017-present).
 
 Initial development of the software (v.0.1.0) was undertaken by [M. H. Beals](https://github.com/mhbeals) in 2018-2019.
- 
+
 The project is now being developed by [M. H. Beals](https://github.com/mhbeals) and [Albert Meroño Peñuela](https://github.com/albertmeronyo) (Vrije Universiteit Amsterdam). If you would like to contribute, please contact [M. H. Beals](https://github.com/mhbeals) (or submit a pull request!)
