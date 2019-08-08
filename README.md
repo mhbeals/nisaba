@@ -3,10 +3,11 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.14
+### v.0.2.15
 
-+ Minor Bug Fixes
-+ Single Window Interface
++ Added Default User Setting
++ Provenance Tracking on Bibliographic Entries
++ Provenance Tracking on Transcriptions
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

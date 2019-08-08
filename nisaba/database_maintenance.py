@@ -216,7 +216,8 @@ class database_maintenance:
 		for entry in self.collection_entries:
 		
 			# Update the Database with the Item's Top-Level Entries
-			self.database[self.collection_index][entry[0]] = entry[1].get()
+			self.database[self.collection_index][entry[0]][0] = entry[1].get()
+			self.database[self.collection_index][entry[0]][1] = entry[2].get()
 
 		###################
 		# Mid-Level Items #
@@ -230,7 +231,8 @@ class database_maintenance:
 
 			# If it is a Text, Save the Transcription
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-				self.database[self.collection_index]['items'][self.item_index]['transcription'] = self.transcription_text.get("1.0",END)
+				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END)
+				self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
 
 			# If it is an Image, Save the Filepath
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
@@ -246,7 +248,9 @@ class database_maintenance:
 		
 			# Update the Database with the Item's Mid-Level Entries
 			for entry in self.item_entries:
-				self.database[self.collection_index]['items'][self.item_index][entry[0]] = entry[1].get()
+				self.database[self.collection_index]['items'][self.item_index][entry[0]][0] = entry[1].get()
+				self.database[self.collection_index]['items'][self.item_index][entry[0]][1] = entry[2].get()
+				
 		
 		#####################
 		# Lower-Level Items #
@@ -272,7 +276,8 @@ class database_maintenance:
 
 			# Update the Database with the Item's Lower-Level Entries
 			for entry in self.segment_entries:
-				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]] = entry[1].get()			
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0] = entry[1].get()		
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] = entry[2].get()				
 
 		
 		#################

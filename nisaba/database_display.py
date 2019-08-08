@@ -27,7 +27,7 @@ class database_display(database_maintenance):
 		end = int(self.end_text.get())
 
 		# Pull Transcription from self.database
-		self.transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'].split()
+		self.transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()
 
 		# Get Snippets
 		pre_transcription = ' '.join(self.transcription_words[start-20:start]) + " "
@@ -131,11 +131,10 @@ class database_display(database_maintenance):
 		# Set Item-Level Questions
 		if level == 'i' or level == 's':
 			self.item_questions  = self.csv_importer('item_bibliographic_annotation.tsv')
-
+			
 		# Set Segment-Level Questions
 		if level == 's':
 			self.segment_questions  = self.csv_importer('segment_bibliographic_annotation.tsv')
-
 		return;
 
 	def entry_form_maker(self,tab,questions,level):
@@ -144,39 +143,61 @@ class database_display(database_maintenance):
 
 		# Create Entry Form Elements
 		for field,question in questions.items():
-
+			
+			# Create Dropdown Menu
+			self.provenance_user = StringVar(tab)
+			
+			# Set initial value
+			self.provenance_user.set(self.default_user)
+		
 			# Create a row
 			row = Frame(tab)
 
 			# Create a label and text box
-			label = Label(row, text=question, anchor='w')
+			label = Label(row, text=question, anchor='w', width=25)
 			entry = Entry(row)
+			provenance =  OptionMenu(row, self.provenance_user, *self.users)
 
 			# Package Row
 			row.pack(side=TOP, fill=X, padx=5, pady=5)
+			provenance.pack(side=RIGHT)
 			label.pack(side=LEFT)
 			entry.pack(side=RIGHT, expand=YES, fill=X)
 
 			# Fill entry with database values (if available)
-
 			if level == 'c':
-				entry_text = self.database[self.collection_index].get(field,'')
+				entry_text = self.database[self.collection_index].get(field,'')[0]
+				if self.database[self.collection_index].get(field,'')[1] != '':
+					self.provenance_user.set(self.database[self.collection_index].get(field,'')[1])
 
-			if level == 'i' or level == 's':
-				entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')
+			if level == 'i':
+				entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')[0]
+				if self.database[self.collection_index]['items'][self.item_index].get(field,'')[1] != '':
+					self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index].get(field,'')[1])
 
 			if level == 's':
-				entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')
+				entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[0]
+				if self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1] != '':
+					self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1])
 
 			entry.insert(0,entry_text)
 
 			# Add field and value to save list
-			entries.append((field, entry))
+			entries.append((field, entry, self.provenance_user))
 
 		return entries
 		
 	def bibliographic_form_maker(self, tab, level):
 
+		# Retrieve Existing User List
+		self.users = ['']
+		self.default_user = ''
+
+		for key,value in self.database['users'].items():
+			self.users.append(key)
+			if value.get('default',0,) == 1:
+				self.default_user = key
+	
 		self.bibliographical_field_importer(level)
 
 		self.collection_entries = self.entry_form_maker(tab,self.collection_questions,'c')
@@ -284,7 +305,7 @@ class database_display(database_maintenance):
 
 
 		if  self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'].split())}
+			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split())}
 
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'top':0,'right':50,'bottom':50,'left':0}
@@ -451,7 +472,7 @@ class database_display(database_maintenance):
 
 			# Pull Transcription from Database
 			if 'transcription' in self.database[self.collection_index]['items'][self.item_index]:
-				transcription = self.database[self.collection_index]['items'][self.item_index]['transcription']
+				transcription = self.database[self.collection_index]['items'][self.item_index]['transcription'][0]
 			else:
 				transcription = ""
 
@@ -461,9 +482,26 @@ class database_display(database_maintenance):
 			# Insert transcription in text box
 			self.transcription_text.insert("1.0",transcription)
 			self.transcription_text.configure(font=(14))
-
-			# Display text box
+			
+			# Create Dropdown Menu
+			self.transcription_provenance_user = StringVar(self.pane_two)
+			
+			# Set initial value
+			self.transcription_provenance_user.set(self.default_user)
+			
+			# Create Provenance Box
+			self.transcription_provenance_row = Frame(self.pane_two)
+			self.transcription_provenance_label = Label(self.transcription_provenance_row, text="Transcriber: ")
+			self.transcription_provenance = OptionMenu(self.transcription_provenance_row, self.transcription_provenance_user, *self.users)
+			
+			if self.database[self.collection_index]['items'][self.item_index]['transcription'][1] != '':
+				self.transcription_provenance_user.set(self.database[self.collection_index]['items'][self.item_index]['transcription'][1])
+			
+			# Display text boxes
 			self.transcription_text.pack(padx=10,pady=10)
+			self.transcription_provenance_row.pack()
+			self.transcription_provenance_label.pack(side=LEFT)
+			self.transcription_provenance.pack(side=RIGHT)		
 
 		# If the Item is an Image
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
@@ -573,7 +611,7 @@ class database_display(database_maintenance):
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == "t":
 
 				# Obtain Snippet Transcription and Package for Display
-				transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'].split()
+				transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()
 				display_item = ' '.join(transcription_words[dictionary['start']:dictionary['start']+10])
 
 			# If the segment is an image
@@ -642,15 +680,15 @@ class database_display(database_maintenance):
 		for item_number,dictionary in self.database[self.collection_index]['items'].items():
 
 			# If the item has a title
-			if 'item_title' in self.database[self.collection_index]['items'][item_number]:
+			if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number]:
 				if 'dc:title' in self.database[self.collection_index]:
-					display_item = "{0}, part of the {1} Collection".format(str(dictionary['item_title']),str(self.database[self.collection_index]['dc:title']))
+					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][0]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index]['dc:title'][0]))
 				else:
-					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['dc:title']))
+					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['dc:title'][0]))
 
 			# If the item has no title
 			elif 'dc:title' in self.database[self.collection_index]:
-				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index]['dc:title']))
+				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index]['dc:title'][0]))
 
 			else:
 				display_item = "No title listed"
@@ -749,7 +787,7 @@ class database_display(database_maintenance):
 
 				# If the item has a title
 				if 'dc:title' in self.database[collection_number]:
-					display_item = str(dictionary['dc:title'])
+					display_item = str(dictionary['dc:title'][0])
 
 				else:
 					display_item = "No title listed"
@@ -774,10 +812,14 @@ class database_display(database_maintenance):
 	def database_window_displayer(self,window):
 		# Setup Database Frame
 	
-		# Reload Taxonomy
+		# Reload Databases
 		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
 			loaddata = file.read()
 		self.taxonomy = json.loads(loaddata)
+		
+		with open (Path(self.database_path) / "database.json", 'r') as file:
+			loaddata = file.read()
+		self.database = json.loads(loaddata)
 		
 		# Set Name of Collections Frame	
 		self.database_window = window

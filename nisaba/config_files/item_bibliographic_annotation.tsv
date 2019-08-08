@@ -1,1 +1,3 @@
-fabio:hasSequenceIdentifier	Page/Paragraph/Item Number
+fabio_type	Item Type:
+fabio:hasSequenceIdentifier	Number:
+fabio:pageRange	Page Range:

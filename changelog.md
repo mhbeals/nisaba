@@ -1,5 +1,11 @@
 # Change Log
 
+### v.0.2.15
+
++ Added Default User Setting
++ Provenance Tracking on Bibliographic Entries
++ Provenance Tracking on Transcriptions
+
 ### v.0.2.14
 
 + Minor Bug Fixes

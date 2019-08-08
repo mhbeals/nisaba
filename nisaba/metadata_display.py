@@ -13,6 +13,17 @@ from tkinter import messagebox
 
 class metadata_display(database_maintenance):
 
+	def default_user_setter(self,current_user):
+		# If this user has 'default' checked
+		if self.uid_default_user_var.get() == 1:
+			
+			# Set everyone to 0
+			for key,value in self.database['users'].items():
+				value['default'] = 0
+			
+			# Set this user to default (1)
+			self.database['users'][current_user]['default'] = 1
+
 	def user_deleter(self,current_user):
 		# Delete a User
 
@@ -31,11 +42,19 @@ class metadata_display(database_maintenance):
 		
 		# Update Current User
 		if current_user in self.database['users']:
+
+			self.default_user_setter(current_user)
+			
+			# Go through the rest of the entries and save the vaule
 			for entry in self.entries:
-					self.database['users'][current_user][entry[0]] = entry[1].get()
+				self.database['users'][current_user][entry[0]] = entry[1].get()
 					
 		else:
+		
+			# Create new entry in database
 			self.database['users'][current_user] = {}
+			
+			# Go through the entries and save the vaule
 			for entry in self.entries:
 					self.database['users'][current_user][entry[0]] = entry[1].get()
 		
@@ -87,21 +106,28 @@ class metadata_display(database_maintenance):
 		# Fill Metadata Form #
 		######################
 		
-		# Create User ID Entry Box - This Ensures a User ID if Omitted from Config File
+		# Create User ID Entry Box and Default User Check - This Ensures a User ID if Omitted from Config File
 		row = Frame(self.metadata_frame)
 		uid_label = Label(row, text="User ID: ", anchor='w', width=30)
-		uid_entry = Entry(row, width=50)
-		
+		uid_entry = Entry(row, width=50)		
+		self.uid_default_user_var = BooleanVar()
+		self.uid_default_user = Checkbutton(row, text="Default User", variable=self.uid_default_user_var)
+
 		# Display User ID Entry Box
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		uid_label.pack(side=LEFT)
-		uid_entry.pack(side=RIGHT, expand=YES, fill=X)
+		uid_entry.pack(side=LEFT, expand=YES, fill=X)
+		self.uid_default_user.pack(side=RIGHT, padx=5)
 		
 		# Fill User ID Entry Box
 		if self.current_user.get() == 'New User':
 			uid_entry.insert(0,'nid')
 		else:
 			uid_entry.insert(0,self.current_user.get())
+			
+			# Check Default Box
+			if self.database['users'][self.current_user.get()].get('default',0) == 1:
+				self.uid_default_user_var.set(1)
 		
 		# Create the Rest of the Entry Form Elements
 		for field,question in questions.items():

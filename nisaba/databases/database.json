@@ -7,9 +7,10 @@
             "schema:worksFor": "Loughborough University",
             "schema:memberOf": "Nisaba",
             "schema:email": "m.h.beals@lboro.ac.uk",
-            "foaf:homepage": "http://www.mhbeals.com"
+            "foaf:homepage": "http://www.mhbeals.com",
+            "default": 1
         },
-        "am": {
+        "amp": {
             "schema:givenName": "Albert",
             "schema:familyName": "Mero\u00f1o",
             "schema:sameAS": "https://orcid.org/0000-0003-4646-5842",
@@ -20,26 +21,89 @@
         }
     },
     "0": {
-        "dc:creator": "Herodotus",
-        "dc:title": "The Histories",
-        "fabio:hasShortTitle:": "Histories",
-        "prism:volume": "",
-        "fabio:hasVolumeCount": "",
-        "prism:edition": "",
-        "fabio:BookSeries": "Penguin Classics",
-        "fabio:hasSequenceIdentifier": "",
-        "fabio:hasPlaceOfPublication": "London",
-        "dc:publisher": "Penguin Books",
-        "dc:date": "440 BC",
-        "fabio:hasPageCount": "716",
-        "prism:isbn": "9780134449082",
-        "prism:doi": "",
-        "dc:language:": "en",
-        "fabio:Abstract": "",
+        "dc:creator": [
+            "Herodotus",
+            "mhb"
+        ],
+        "dc:title": [
+            "The Histories",
+            "mhb"
+        ],
+        "fabio:hasShortTitle": [
+            "Histories",
+            "mhb"
+        ],
+        "prism:volume": [
+            "",
+            "mhb"
+        ],
+        "fabio:hasVolumeCount": [
+            "",
+            "mhb"
+        ],
+        "prism:edition": [
+            "",
+            "mhb"
+        ],
+        "fabio:BookSeries": [
+            "Penguin Classics",
+            "mhb"
+        ],
+        "fabio:hasSequenceIdentifier": [
+            "",
+            "mhb"
+        ],
+        "fabio:hasPlaceOfPublication": [
+            "London",
+            "mhb"
+        ],
+        "dc:publisher": [
+            "Penguin Books",
+            "mhb"
+        ],
+        "dc:date": [
+            "440 BC",
+            "mhb"
+        ],
+        "fabio:hasPageCount": [
+            "716",
+            "mhb"
+        ],
+        "prism:isbn": [
+            "9780134449082",
+            "mhb"
+        ],
+        "prism:doi": [
+            "",
+            "mhb"
+        ],
+        "fabio:Abstract": [
+            "",
+            "mhb"
+        ],
+        "dc:language": [
+            "",
+            "mhb"
+        ],
         "items": {
             "0": {
                 "item_type": "t",
-                "transcription": "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n",
+                "fabio_type": [
+                    "Section",
+                    "mhb"
+                ],
+                "fabio:hasSequenceIdentifier": [
+                    "0",
+                    "mhb"
+                ],
+                "fabio:pageRange": [
+                    "",
+                    "mhb"
+                ],
+                "transcription": [
+                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n",
+                    "mhb"
+                ],
                 "segments": {
                     "0": {
                         "start": 0,
@@ -52,7 +116,10 @@
                             "Teleology_of_History",
                             "Teleology"
                         ],
-                        "dc:description": "Preface"
+                        "dc:description": [
+                            "",
+                            "mhb"
+                        ]
                     }
                 },
                 "annotations": [
@@ -61,12 +128,26 @@
                     "Memorial_Teleology_of_History",
                     "Teleology_of_History",
                     "Teleology"
-                ],
-                "fabio:hasSequenceIdentifier": "1"
+                ]
             },
             "1": {
                 "item_type": "t",
-                "transcription": "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\n",
+                "fabio_type": [
+                    "Section",
+                    "mhb"
+                ],
+                "fabio:hasSequenceIdentifier": [
+                    "1",
+                    "mhb"
+                ],
+                "fabio:pageRange": [
+                    "",
+                    "mhb"
+                ],
+                "transcription": [
+                    "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\n",
+                    "mhb"
+                ],
                 "segments": {
                     "0": {
                         "start": 0,
@@ -75,6 +156,10 @@
                             "Secondary_Evidence",
                             "Evidence",
                             "Ontology"
+                        ],
+                        "dc:description": [
+                            "",
+                            ""
                         ]
                     }
                 },
@@ -91,6 +176,18 @@
             "2": {
                 "item_type": "i",
                 "image_file": "sample.jpg",
+                "fabio_type": [
+                    "StillImage",
+                    ""
+                ],
+                "fabio:hasSequenceIdentifier": [
+                    "1",
+                    ""
+                ],
+                "fabio:pageRange": [
+                    "",
+                    ""
+                ],
                 "segments": {
                     "0": {
                         "top": 0,
@@ -102,18 +199,18 @@
                             "Evidence",
                             "Ontology"
                         ],
-                        "dc:description": ""
+                        "dc:description": [
+                            "",
+                            ""
+                        ]
                     }
                 },
                 "annotations": [
                     "Tertiary_Evidence",
                     "Evidence",
                     "Ontology"
-                ],
-                "fabio:hasSequenceIdentifier": ""
+                ]
             }
-        },
-        "fabio:hasShortTitle": "",
-        "dc:language": ""
+        }
     }
 }
