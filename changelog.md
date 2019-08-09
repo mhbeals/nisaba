@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.16.1
+
++ Minor bug fix on pip install (metadata_display.py)
+
 ### v.0.2.16
 
 + Improved Window Interface

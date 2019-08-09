@@ -1,14 +1,12 @@
-# Nisaba 0.2.16
+# Nisaba 0.2.16.1
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.16
+### v.0.2.16.1
 
-+ Improved Window Interface
-+ Added Date Stamping to Provenance Markers
-+ Attached Provenance Markers to records as a whole
++ Minor bug fix on pip install (metadata_display.py)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

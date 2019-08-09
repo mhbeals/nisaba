@@ -1,4 +1,9 @@
-from database_maintenance import *
+try:
+	# Used when executing with Python
+	from database_maintenance import *
+except ModuleNotFoundError:
+	# Used when calling as library
+	from nisaba.database_maintenance import *
 
 # Import External Libraries
 from pathlib import Path
