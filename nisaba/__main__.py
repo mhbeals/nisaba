@@ -31,7 +31,7 @@ def main():
 			except (NameError, AttributeError):
 				pass
 				
-			main_pane_viewer = Frame(main_window,relief=SUNKEN)
+			main_pane_viewer = ttk.Frame(main_window)
 			main_pane_viewer.place(relx=.1, relwidth=.9, relheight=1)
 			
 			if switch == 'm': 
@@ -85,8 +85,8 @@ def main():
 		window_height = main_window.winfo_screenheight()
 
 		# Setup Window Panels 
-		main_pane_menu = Frame(main_window, relief=SUNKEN)
-		main_pane_viewer = Frame(main_window,relief=SUNKEN)
+		main_pane_menu = ttk.Frame(main_window)
+		main_pane_viewer = ttk.Frame(main_window)
 		
 		# Setup Fixed Panels
 		main_pane_menu.place(relwidth=.1, relheight=1)

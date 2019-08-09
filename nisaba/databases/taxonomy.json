@@ -140,6 +140,13 @@
                                         "children": {}
                                     }
                                 }
+                            },
+                            "2": {
+                                "iid": "Memorial_Teleology_of_History_General",
+                                "name": "Memorial (General)",
+                                "type": "Abstract",
+                                "definition": "To encourage or support the remembrance of an event or process",
+                                "children": {}
                             }
                         }
                     }

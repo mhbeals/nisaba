@@ -1,5 +1,11 @@
 # Change Log
 
+### v.0.2.16
+
++ Improved Window Interface
++ Added Date Stamping to Provenance Markers
++ Attached Provenance Markers to records as a whole
+
 ### v.0.2.15
 
 + Added Default User Setting

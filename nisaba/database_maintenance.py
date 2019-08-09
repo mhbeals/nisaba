@@ -215,9 +215,30 @@ class database_maintenance:
 		# For Every Item
 		for entry in self.collection_entries:
 		
-			# Update the Database with the Item's Top-Level Entries
-			self.database[self.collection_index][entry[0]][0] = entry[1].get()
-			self.database[self.collection_index][entry[0]][1] = entry[2].get()
+			# Update the Record Editor Metadata
+			if self.provenance_collection_editor != self.database[self.collection_index]['schema:editor'][0]:
+				self.database[self.collection_index]['schema:editor'][0] = self.provenance_collection_editor.get()
+				self.database[self.collection_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				
+			try:
+				# Update the Database with the Item's Top-Level Entries
+				if entry[2].get() != self.database[self.collection_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index][entry[0]][0]:
+					self.database[self.collection_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+					
+			except(KeyError):
+				# Create the Database with the Item's Top-Level Entries
+				if entry[1].get() !='':
+					self.database[self.collection_index][entry[0]] = ["","",""]
+					self.database[self.collection_index][entry[0]][0] = entry[1].get()
+					self.database[self.collection_index][entry[0]][1] = entry[2].get()
+					self.database[self.collection_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+			else:	
+				self.database[self.collection_index][entry[0]][0] = entry[1].get()
+				self.database[self.collection_index][entry[0]][1] = entry[2].get()
+				self.database[self.collection_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				
+			self.database[self.collection_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+
 
 		###################
 		# Mid-Level Items #
@@ -226,17 +247,26 @@ class database_maintenance:
 		# If Saving an Mid-Level Item
 		if level == 'i':
 
+			# Update the Record Editor Metadata
+			if self.provenance_item_editor != self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0]:
+				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0] = self.provenance_item_editor.get()
+				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				
 			# Save the Annotation Tree to the Mid-Level
 			self.database[self.collection_index]['items'][self.item_index]['annotations'] = self.annotation_parent_setter(self.item_tree)
+			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is a Text, Save the Transcription
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END)
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
+				self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is an Image, Save the Filepath
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 				self.database[self.collection_index]['items'][self.item_index]['image_file'] = self.image_filename.get()
+				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 				
 		###################################
@@ -248,9 +278,24 @@ class database_maintenance:
 		
 			# Update the Database with the Item's Mid-Level Entries
 			for entry in self.item_entries:
-				self.database[self.collection_index]['items'][self.item_index][entry[0]][0] = entry[1].get()
-				self.database[self.collection_index]['items'][self.item_index][entry[0]][1] = entry[2].get()
-				
+				try:
+					# Update the Database with the Item's Top-Level Entries
+					if entry[2].get() != self.database[self.collection_index]['items'][self.item_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index]['items'][self.item_index][entry[0]][0]:
+						self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+						
+				except(KeyError):
+					# Create the Database with the Item's Top-Level Entries
+					if entry[1].get() !='':
+						self.database[self.collection_index]['items'][self.item_index][entry[0]] = ["","",""]
+						self.database[self.collection_index]['items'][self.item_index][entry[0]][0] = entry[1].get()
+						self.database[self.collection_index]['items'][self.item_index][entry[0]][1] = entry[2].get()
+						self.database[self.collection_index]['items'][self.item_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				else:	
+					self.database[self.collection_index]['items'][self.item_index][entry[0]][0] = entry[1].get()
+					self.database[self.collection_index]['items'][self.item_index][entry[0]][1] = entry[2].get()
+					self.database[self.collection_index]['items'][self.item_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+					
+				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 		
 		#####################
 		# Lower-Level Items #
@@ -258,14 +303,21 @@ class database_maintenance:
 		
 		# If Saving a Lower-Level ITem
 		if level == 's':
+		
+			# Update the Record Editor Metadata
+			if self.provenance_segment_editor != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0]:
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0] = self.provenance_segment_editor.get()
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# Save the Annotation Tree to the Lower Level
 			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.annotation_parent_setter(self.segment_tree)
+			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is a Text, Save the Word Segmenters
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['start'] = int(self.start_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['end'] = int(self.end_text.get())
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is an Image, Save the Image Percentages
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
@@ -273,12 +325,29 @@ class database_maintenance:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['bottom'] = int(self.bottom_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'] = int(self.right_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'] = int(self.left_text.get())
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# Update the Database with the Item's Lower-Level Entries
 			for entry in self.segment_entries:
-				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0] = entry[1].get()		
-				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] = entry[2].get()				
-
+			
+				try:
+					# Update the Database with the Item's Top-Level Entries
+					if entry[2].get() != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0]:
+						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+						
+				except(KeyError):
+					# Create the Database with the Item's Top-Level Entries
+					if entry[1].get() !='':
+						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]] = ["","",""]
+						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0] = entry[1].get()
+						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] = entry[2].get()
+						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				else:	
+					self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0] = entry[1].get()
+					self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] = entry[2].get()
+					self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+					
+				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 		
 		#################
 		# Save Database #

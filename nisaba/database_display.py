@@ -40,7 +40,7 @@ class database_display(database_maintenance):
 
 		# Clear Existing Text
 		self.transcription_text.insert(END,"...")
-		self.transcription_text.delete("1.0",END)
+		self.transcription_text.delete("0.0",END)
 
 		# Insert Snippet Text
 		self.transcription_text.insert(END,pre_transcription,('faded'))
@@ -151,7 +151,7 @@ class database_display(database_maintenance):
 			self.provenance_user.set(self.default_user)
 		
 			# Create a row
-			row = Frame(tab)
+			row = ttk.Frame(tab)
 
 			# Create a label and text box
 			label = Label(row, text=question, anchor='w', width=25)
@@ -166,19 +166,28 @@ class database_display(database_maintenance):
 
 			# Fill entry with database values (if available)
 			if level == 'c':
-				entry_text = self.database[self.collection_index].get(field,'')[0]
-				if self.database[self.collection_index].get(field,'')[1] != '':
-					self.provenance_user.set(self.database[self.collection_index].get(field,'')[1])
+				try:
+					entry_text = self.database[self.collection_index].get(field,'')[0]
+					if self.database[self.collection_index].get(field,'')[1] != '':
+						self.provenance_user.set(self.database[self.collection_index].get(field,'')[1])
+				except(IndexError):
+					entry_text = ''		
 
 			if level == 'i':
-				entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')[0]
-				if self.database[self.collection_index]['items'][self.item_index].get(field,'')[1] != '':
-					self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index].get(field,'')[1])
+				try:
+					entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')[0]
+					if self.database[self.collection_index]['items'][self.item_index].get(field,'')[1] != '':
+						self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index].get(field,'')[1])
+				except(IndexError):
+					entry_text = ''	
 
 			if level == 's':
-				entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[0]
-				if self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1] != '':
-					self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1])
+				try:
+					entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[0]
+					if self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1] != '':
+						self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1])
+				except(IndexError):
+					entry_text = ''	
 
 			entry.insert(0,entry_text)
 
@@ -188,15 +197,6 @@ class database_display(database_maintenance):
 		return entries
 		
 	def bibliographic_form_maker(self, tab, level):
-
-		# Retrieve Existing User List
-		self.users = ['']
-		self.default_user = ''
-
-		for key,value in self.database['users'].items():
-			self.users.append(key)
-			if value.get('default',0,) == 1:
-				self.default_user = key
 	
 		self.bibliographical_field_importer(level)
 
@@ -273,7 +273,7 @@ class database_display(database_maintenance):
 			i = i + 1
 			loop = str(i) in self.database
 
-		self.database[str(i)]= {'dc:title': 'New Collection','items' : {}}
+		self.database[str(i)]= {"schema:editor":["","",""],'items' : {}}
 
 		self.database_frame_displayer(self.database_window)
 		
@@ -287,10 +287,10 @@ class database_display(database_maintenance):
 			loop = str(i) in self.database[self.collection_index]['items']
 
 		if type == 'i':
-			self.database[self.collection_index]['items'][str(i)]= {'item_type': 'i','image_file': 'sample.jpg', 'segments' : {}}
+			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 'i','image_file': 'sample.jpg', 'segments' : {}}
 
 		elif type == 't':
-			self.database[self.collection_index]['items'][str(i)]= {'item_type': 't', 'transcription': '', 'segments' : {}}
+			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 't', 'transcription': ['','',''], 'segments' : {}}
 
 		self.collection_item_list_panel_displayer()
 
@@ -305,10 +305,10 @@ class database_display(database_maintenance):
 
 
 		if  self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split())}
+			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split())}
 
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {'top':0,'right':50,'bottom':50,'left':0}
+			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'top':0,'right':50,'bottom':50,'left':0}
 
 		self.item_panel_displayer('s')
 
@@ -327,8 +327,8 @@ class database_display(database_maintenance):
 			pass			
 
 		# Setup Segment Window Panels
-		self.segment_pane_one = Frame(self.database_window)
-		self.segment_pane_two = Frame(self.database_window)
+		self.segment_pane_one = ttk.Frame(self.database_window)
+		self.segment_pane_two = ttk.Frame(self.database_window)
 		split = 0.5
 		self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
 		self.segment_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
@@ -350,7 +350,7 @@ class database_display(database_maintenance):
 			self.start_text.insert(4,start)
 			self.end_text.insert(4,end)
 
-			# Pack Labels and Entry Boxes into Frame
+			# Pack Labels and Entry Boxes into ttk.Frame
 			start_label.grid(column = 1, row = 0, sticky=NW, padx =10, pady = 10)
 			self.start_text.grid(column = 2, row = 0, sticky=NW, padx =10, pady = 10)
 			end_label.grid(column = 4, row = 0, sticky=NW, padx =10, pady = 10)
@@ -394,7 +394,7 @@ class database_display(database_maintenance):
 			self.left_text.insert(4,left)
 			self.right_text.insert(4,right)
 
-			# Pack Labels and Entry Boxes into Frame
+			# Pack Labels and Entry Boxes into ttk.Frame
 			self.top_label.grid(column = 0, row = 1, sticky=NW)
 			self.top_text.grid(column = 1, row = 1, sticky=NW)
 			self.bottom_label.grid(column = 0, row = 2,sticky=NW)
@@ -414,12 +414,12 @@ class database_display(database_maintenance):
 
 		# Set Up Tabs
 		self.segment_tab_control = ttk.Notebook(self.segment_pane_one)
-		self.segment_tab1 = ttk.Frame(self.segment_tab_control)
-		self.segment_tab2 = ttk.Frame(self.segment_tab_control)
+		self.segment_tab_one = ttk.Frame(self.segment_tab_control)
+		self.segment_tab_two = ttk.Frame(self.segment_tab_control)
 
-		# Pack Tabs into Frame
-		self.segment_tab_control.add(self.segment_tab1, text='Bibliographic Information')
-		self.segment_tab_control.add(self.segment_tab2, text='Annotations')
+		# Pack Tabs into ttk.Frame
+		self.segment_tab_control.add(self.segment_tab_one, text='Bibliographic Information')
+		self.segment_tab_control.add(self.segment_tab_two, text='Annotations')
 		self.segment_tab_control.pack(expand=1, fill='both')
 
 		# Create "save", "reset" and "return" buttons
@@ -435,15 +435,43 @@ class database_display(database_maintenance):
 		########################################
 		# Set up bibliographic information tab #
 		########################################
+		
+		#####################
+		# Dislay Editor Box #
+		#####################
+		
+		# Create String Variable
+		self.provenance_segment_editor = StringVar(self.segment_tab_one)
+		
+		# Set initial value
+		if self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0] !='':
+			self.provenance_segment_editor.set(self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0])
+		else:
+			self.provenance_segment_editor.set(self.default_user)
+	
+		# Create a row
+		row = ttk.Frame(self.segment_tab_one)
+
+		# Create a labels and dropdown
+		label = Label(row, text="Record Creator", anchor='w', width=25)
+		provenance =  OptionMenu(row, self.provenance_segment_editor, *self.users)		
+		modified_date = '{}/{}/{}'.format(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2][6:8],self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2][4:6],self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2][:4])
+		last_modified_label = Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
+
+		# Package Row
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		label.pack(side=LEFT)
+		provenance.pack(side=LEFT)
+		last_modified_label.pack(side=RIGHT)
 
 		# Display bibliographic form and create entries database
-		self.bibliographic_form_maker(self.segment_tab1, 's')
+		self.bibliographic_form_maker(self.segment_tab_one, 's')
 
 		#################################
-		# Set up annotations tab (tab2) #
+		# Set up annotations tab (tab_two) #
 		#################################
 
-		self.segment_tree=CheckboxTreeview(self.segment_tab2,height="26")
+		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="26")
 		self.annotation_tree_maker(self.segment_tree,'s')
 		
 	def item_panel_displayer(self,focus):
@@ -457,8 +485,8 @@ class database_display(database_maintenance):
 			pass
 
 		# Setup Item Window Panes
-		self.pane_one = Frame(self.database_window)
-		self.pane_two = Frame(self.database_window)
+		self.pane_one = ttk.Frame(self.database_window)
+		self.pane_two = ttk.Frame(self.database_window)
 		split = 0.5
 		self.pane_one.place(rely=0, relwidth=split, relheight=1)
 		self.pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
@@ -490,7 +518,7 @@ class database_display(database_maintenance):
 			self.transcription_provenance_user.set(self.default_user)
 			
 			# Create Provenance Box
-			self.transcription_provenance_row = Frame(self.pane_two)
+			self.transcription_provenance_row = ttk.Frame(self.pane_two)
 			self.transcription_provenance_label = Label(self.transcription_provenance_row, text="Transcriber: ")
 			self.transcription_provenance = OptionMenu(self.transcription_provenance_row, self.transcription_provenance_user, *self.users)
 			
@@ -548,30 +576,30 @@ class database_display(database_maintenance):
 
 		# Set Up Tabs
 		self.item_tab_control = ttk.Notebook(self.pane_one)
-		self.item_tab1 = ttk.Frame(self.item_tab_control)
-		self.item_tab2 = ttk.Frame(self.item_tab_control)
-		self.item_tab3 = ttk.Frame(self.item_tab_control)
+		self.item_tab_one = ttk.Frame(self.item_tab_control)
+		self.item_tab_two = ttk.Frame(self.item_tab_control)
+		self.item_tab_three = ttk.Frame(self.item_tab_control)
 
-		# Pack Tabs into Frame
-		self.item_tab_control.add(self.item_tab1, text='Bibliographic Information')
-		self.item_tab_control.add(self.item_tab2, text='Annotations')
-		self.item_tab_control.add(self.item_tab3, text='Segments')
+		# Pack Tabs into ttk.Frame
+		self.item_tab_control.add(self.item_tab_one, text='Bibliographic Information')
+		self.item_tab_control.add(self.item_tab_two, text='Annotations')
+		self.item_tab_control.add(self.item_tab_three, text='Segments')
 		self.item_tab_control.pack(expand=1, fill=BOTH)
 
 		# Set Focus
 		if focus == 'm':
-			self.item_tab_control.select(self.item_tab1)
+			self.item_tab_control.select(self.item_tab_one)
 		if focus == 'a':
-			self.item_tab_control.select(self.item_tab2)
+			self.item_tab_control.select(self.item_tab_two)
 		if focus == 's':
-			self.item_tab_control.select(self.item_tab3)
+			self.item_tab_control.select(self.item_tab_three)
 		
 		# Create "save", "reset" and "return" buttons for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_one)
 		self.b1 = Button(self.buttonFrame,text='Add New Segment',command=self.segment_adder)
 		self.b2 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('i')))
 		self.b3 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.item_panel_displayer('m')))
-		self.b4 = Button(self.buttonFrame, text='Return to Collections List', command=(lambda: self.database_frame_displayer(self.database_window)))
+		self.b4 = Button(self.buttonFrame, text='Return to Collection View', command=(lambda: self.collection_informer('')))
 		self.b1.pack(side=LEFT, padx=5, pady=5)
 		self.b2.pack(side=LEFT, padx=5, pady=5)
 		self.b3.pack(side=LEFT, padx=5, pady=5)
@@ -582,14 +610,42 @@ class database_display(database_maintenance):
 		# Set up bibliographic information tab #
 		########################################
 
+		#####################
+		# Dislay Editor Box #
+		#####################
+			
+		# Create String Variable
+		self.provenance_item_editor = StringVar(self.item_tab_one)
+		
+		# Set initial value
+		if self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0] !='':
+			self.provenance_item_editor.set(self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0])
+		else:
+			self.provenance_item_editor.set(self.default_user)
+	
+		# Create a row
+		row = ttk.Frame(self.item_tab_one)
+
+		# Create a label and dropdown
+		label = Label(row, text="Record Creator", anchor='w', width=25)
+		provenance =  OptionMenu(row, self.provenance_item_editor, *self.users)
+		modified_date = '{}/{}/{}'.format(self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2][6:8],self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2][4:6],self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2][:4])
+		last_modified_label = Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
+
+		# Package Row
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		label.pack(side=LEFT)
+		provenance.pack(side=LEFT)
+		last_modified_label.pack(side=RIGHT)
+		
 		# Display bibliographic form and create entries database
-		self.bibliographic_form_maker(self.item_tab1, 'i')
+		self.bibliographic_form_maker(self.item_tab_one, 'i')
 
 		##########################
 		# Set up annotations tab #
 		##########################
 
-		self.item_tree = CheckboxTreeview(self.item_tab2,height="26",)
+		self.item_tree = CheckboxTreeview(self.item_tab_two,height="26",)
 		self.annotation_tree_maker(self.item_tree,'i')
 
 		#######################
@@ -597,11 +653,11 @@ class database_display(database_maintenance):
 		#######################
 
 		# Set up segment list scrollbar
-		self.scrollbar = Scrollbar(self.item_tab3)
+		self.scrollbar = Scrollbar(self.item_tab_three)
 		self.scrollbar.pack(side=RIGHT,fill=Y)
 
 		# Set Up segment listbox
-		self.segments = Listbox(self.item_tab3)
+		self.segments = Listbox(self.item_tab_three)
 		self.segments.pack(anchor=W, fill=BOTH, expand=True)
 
 		#Populate Segment List Box
@@ -622,7 +678,7 @@ class database_display(database_maintenance):
 
 			# Display the number and title
 			segment_number_str = str(int(segment_number)+1)
-			segment = segment_number_str + ". " + display_item
+			segment = " " + segment_number_str + ". " + display_item
 			self.segments.insert(END, segment)
 
 			# Bind scrollbar to listbox
@@ -640,19 +696,66 @@ class database_display(database_maintenance):
 
 		# Delete Any Existing Information
 		try:
-			self.pane_two.destroy()
+			self.pane_one.destroy()
 		except (NameError, AttributeError):
 			pass
 
-		self.pane_two = Frame(self.database_window)
-		self.pane_two.place(relx=.3, relwidth=.4, relheight=1)
+		self.pane_one = ttk.Frame(self.database_window)
+		self.pane_one.place(relwidth=.5, relheight=1)
+		item_metadata_frame = ttk.Frame(self.pane_one)
+		item_metadata_buttonFrame = ttk.Frame(self.pane_one)
+		item_metadata_frame.pack(side=TOP, expand=True, fill=X, anchor='nw')
+		item_metadata_buttonFrame.pack(side=BOTTOM, anchor='w')
+		
+		# Retrieve Existing User List
+		self.users = ['']
+		self.default_user = ''
+
+		for key,value in self.database['users'].items():
+			self.users.append(key)
+			if value.get('default',0,) == 1:
+				self.default_user = key
+		
+		#####################
+		# Dislay Editor Box #
+		#####################
+		
+		# Create String Variable
+		self.provenance_collection_editor = StringVar(item_metadata_frame)
+		
+		# Set initial value
+		if self.database[self.collection_index]['schema:editor'][0] !='':
+			self.provenance_collection_editor.set(self.database[self.collection_index]['schema:editor'][0])
+		else:
+			self.provenance_collection_editor.set(self.default_user)
+	
+		# Create a row
+		row = ttk.Frame(item_metadata_frame)
+
+		# Create a label and dropdown
+		label = Label(row, text="Record Creator", anchor='w', width=25)
+		provenance =  OptionMenu(row, self.provenance_collection_editor, *self.users)
+		modified_date = '{}/{}/{}'.format(self.database[self.collection_index]['schema:editor'][2][6:8],self.database[self.collection_index]['schema:editor'][2][4:6],self.database[self.collection_index]['schema:editor'][2][:4])
+		last_modified_label = Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
+		
+		# Package Row
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		label.pack(side=LEFT)
+		provenance.pack(side=LEFT)
+		last_modified_label.pack(side=RIGHT)
+			
+		###################
+		# Dislay Metadata #
+		###################
 		
 		# Display bibliographic form and create entries database
-		self.bibliographic_form_maker(self.pane_two, 'c')
+		self.bibliographic_form_maker(item_metadata_frame, 'c')
 
-		# Create "save" button
-		b1 = Button(self.pane_two, text='Save Values', command=(lambda: self.database_entry_saver('c')))
-		b1.pack(anchor=NW, padx=5, pady=5)
+		# Create "save" button for all tabs
+		save_item_button = Button(item_metadata_buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('c')))
+		collections_list_button = Button(item_metadata_buttonFrame, text='Return to Collections List', command=(lambda: self.database_frame_displayer(self.database_window)))
+		save_item_button.pack(side=LEFT, padx=5, pady=5)
+		collections_list_button.pack(side=LEFT, padx=5, pady=5)
 
 	def collection_item_list_panel_displayer(self):
 		##############################
@@ -661,19 +764,19 @@ class database_display(database_maintenance):
 
 		# Delete Any Existing Information
 		try:
-			self.pane_three.destroy()
+			self.pane_two.destroy()
 		except (NameError, AttributeError):
 			pass
 
-		self.pane_three = Frame(self.database_window)
-		self.pane_three.place(relx=.7, relwidth=.3, relheight=1)
+		self.pane_two = ttk.Frame(self.database_window)
+		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 
 		# Setup scroll bar
-		scrollbar = Scrollbar(self.pane_three)
+		scrollbar = Scrollbar(self.pane_two)
 		scrollbar.pack(side=RIGHT,fill=Y)
 
 		# Setup listbox
-		items = Listbox(self.pane_three)
+		items = Listbox(self.pane_two)
 		items.pack(anchor=W, fill="both", expand=True)
 
 		# Populate listbox
@@ -695,7 +798,7 @@ class database_display(database_maintenance):
 
 			# Display the item title and author
 			item_number_str = str(int(item_number)+1)
-			item = item_number_str  + ". " + display_item
+			item = " " + item_number_str  + ". " + display_item
 			items.insert(END, item)
 
 		# Bind scrollbar to listbox
@@ -706,7 +809,7 @@ class database_display(database_maintenance):
 		items.bind('<Double-Button>', self.item_informer)
 
 		# Create "save" button for all tabs
-		self.buttonFrame = ttk.Frame(self.pane_three)
+		self.buttonFrame = ttk.Frame(self.pane_two)
 		self.b1 = Button(self.buttonFrame, text='Add New Text', command=(lambda t="t": self.item_adder(t)))
 		self.b2 = Button(self.buttonFrame, text='Add New Image', command=(lambda t="i": self.item_adder(t)))
 		self.b1.pack(side=LEFT, padx=5, pady=5)
@@ -733,9 +836,11 @@ class database_display(database_maintenance):
 		
 	def collection_informer(self, evt):
 
-		# Capture Event Information
-		collection_event_data = evt.widget
-		self.collection_index = str(collection_event_data.curselection()[0])
+		try:
+			self.collection_event_data = evt.widget
+			self.collection_index = str(self.collection_event_data.curselection()[0])
+		except(AttributeError):	
+			pass
 
 		# Display Collection Information Panels
 		self.collection_metadata_panel_displayer()
@@ -760,12 +865,8 @@ class database_display(database_maintenance):
 		#menubar.add_command(label="Load New Database", command=self.database_loader)
 
 		# Setup Window Panes
-		self.pane_one = Frame(self.database_window)
-		self.pane_two = Frame(self.database_window)
-		self.pane_three = Frame(self.database_window)
-		self.pane_one.place(rely=0, relwidth=.3, relheight=1)
-		self.pane_two.place(relx=.3, relwidth=.4, relheight=1)
-		self.pane_three.place(relx=.7, relwidth=.3, relheight=1)
+		self.pane_one = ttk.Frame(self.database_window)
+		self.pane_one.place(rely=0, relwidth=1, relheight=1)
 
 		##############################
 		# Collection Selection Panel #
@@ -794,7 +895,7 @@ class database_display(database_maintenance):
 
 				# Display the item title and author
 				collection_number_str = str(int(collection_number)+1)
-				item = collection_number_str + ". " + display_item
+				item = " " + collection_number_str + ". " + display_item
 				items.insert(END, item)
 
 		# Bind scrollbar to listbox
@@ -810,7 +911,7 @@ class database_display(database_maintenance):
 		add_collection_button.pack(anchor=NW)
 		
 	def database_window_displayer(self,window):
-		# Setup Database Frame
+		# Setup Database ttk.Frame
 	
 		# Reload Databases
 		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
@@ -821,8 +922,8 @@ class database_display(database_maintenance):
 			loaddata = file.read()
 		self.database = json.loads(loaddata)
 		
-		# Set Name of Collections Frame	
+		# Set Name of Collections ttk.Frame	
 		self.database_window = window
 		
-		# Open Frame
+		# Open ttk.Frame
 		self.database_frame_displayer(self.database_window)

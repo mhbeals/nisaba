@@ -79,10 +79,10 @@ class metadata_display(database_maintenance):
 			pass
 			
 		##############################
-		# Create User Metadata Frame #
+		# Create User Metadata ttk.Frame #
 		##############################
 			
-		# Create Metadata Frame	
+		# Create Metadata ttk.Frame	
 		self.metadata_frame = ttk.Frame(self.metadata_window)
 		self.metadata_frame.place(relx=.01, rely=.05)
 	
@@ -107,7 +107,7 @@ class metadata_display(database_maintenance):
 		######################
 		
 		# Create User ID Entry Box and Default User Check - This Ensures a User ID if Omitted from Config File
-		row = Frame(self.metadata_frame)
+		row = ttk.Frame(self.metadata_frame)
 		uid_label = Label(row, text="User ID: ", anchor='w', width=30)
 		uid_entry = Entry(row, width=50)		
 		self.uid_default_user_var = BooleanVar()
@@ -133,7 +133,7 @@ class metadata_display(database_maintenance):
 		for field,question in questions.items():
 
 			# Create a Row
-			row = Frame(self.metadata_frame)
+			row = ttk.Frame(self.metadata_frame)
 
 			# Create a Label and Text Box
 			label = Label(row, text=question, anchor='w', width=30)
@@ -180,10 +180,10 @@ class metadata_display(database_maintenance):
 			pass
 
 		##############################
-		# Create User DropDown Frame #
+		# Create User DropDown ttk.Frame #
 		##############################		
 		
-		# Create User Dropdown Frame
+		# Create User Dropdown ttk.Frame
 		self.pane_one = ttk.Frame(self.metadata_window)
 
 		# Retrieve Existing User List
@@ -197,7 +197,7 @@ class metadata_display(database_maintenance):
 		self.current_user.set(users[0]) # default value
 		users_menu = OptionMenu(self.pane_one, self.current_user, *users, command=self.database_metadata_entry_loader)
 
-		# Display Selection Frame
+		# Display Selection ttk.Frame
 		self.pane_one.place(relx=.01, rely=.01)
 		users_menu.pack(side=LEFT, padx=5, pady=5)
 	

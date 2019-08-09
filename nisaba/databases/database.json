@@ -21,91 +21,126 @@
         }
     },
     "0": {
+        "schema:editor": [
+            "mhb",
+            "20190809_102647",
+            "20190809_095005"
+        ],
         "dc:creator": [
             "Herodotus",
-            "mhb"
+            "mhb",
+            "20190809_095005"
         ],
         "dc:title": [
             "The Histories",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "fabio:hasShortTitle": [
             "Histories",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "prism:volume": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_095005"
         ],
         "fabio:hasVolumeCount": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "prism:edition": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "fabio:hasSequenceIdentifier": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "dc:publisher": [
             "Penguin Books",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "dc:date": [
             "440 BC",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "fabio:hasPageCount": [
             "716",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "prism:isbn": [
             "9780134449082",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "prism:doi": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "fabio:Abstract": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "dc:language": [
             "",
-            "mhb"
+            "mhb",
+            "20190809_091057"
         ],
         "items": {
             "0": {
+                "schema:editor": [
+                    "mhb",
+                    "20190809_100905",
+                    "20190809_100905"
+                ],
                 "item_type": "t",
                 "fabio_type": [
                     "Section",
-                    "mhb"
+                    "mhb",
+                    "20190809_091057"
                 ],
                 "fabio:hasSequenceIdentifier": [
                     "0",
-                    "mhb"
+                    "mhb",
+                    "20190809_091057"
                 ],
                 "fabio:pageRange": [
                     "",
-                    "mhb"
+                    "mhb",
+                    "20190809_091057"
                 ],
                 "transcription": [
-                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n",
-                    "mhb"
+                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n",
+                    "mhb",
+                    "20190809_100905"
                 ],
                 "segments": {
                     "0": {
+                        "schema:editor": [
+                            "mhb",
+                            "20190809_095005",
+                            "20190809_095005"
+                        ],
                         "start": 0,
                         "end": 65,
                         "annotations": [
@@ -117,8 +152,9 @@
                             "Teleology"
                         ],
                         "dc:description": [
-                            "",
-                            "mhb"
+                            "Notes",
+                            "mhb",
+                            "20190809_095005"
                         ]
                     }
                 },
@@ -131,25 +167,39 @@
                 ]
             },
             "1": {
+                "schema:editor": [
+                    "mhb",
+                    "20190809_102647",
+                    "20190809_102647"
+                ],
                 "item_type": "t",
                 "fabio_type": [
                     "Section",
-                    "mhb"
+                    "mhb",
+                    "20190809_102647"
                 ],
                 "fabio:hasSequenceIdentifier": [
                     "1",
-                    "mhb"
+                    "mhb",
+                    ""
                 ],
                 "fabio:pageRange": [
                     "",
-                    "mhb"
+                    "mhb",
+                    ""
                 ],
                 "transcription": [
-                    "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\n",
-                    "mhb"
+                    "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\n\n\n",
+                    "mhb",
+                    "20190809_102647"
                 ],
                 "segments": {
                     "0": {
+                        "schema:editor": [
+                            "",
+                            "",
+                            ""
+                        ],
                         "start": 0,
                         "end": 17,
                         "annotations": [
@@ -174,6 +224,11 @@
                 ]
             },
             "2": {
+                "schema:editor": [
+                    "",
+                    "",
+                    ""
+                ],
                 "item_type": "i",
                 "image_file": "sample.jpg",
                 "fabio_type": [
@@ -190,6 +245,11 @@
                 ],
                 "segments": {
                     "0": {
+                        "schema:editor": [
+                            "",
+                            "",
+                            ""
+                        ],
                         "top": 0,
                         "right": 50,
                         "bottom": 100,
@@ -212,5 +272,110 @@
                 ]
             }
         }
+    },
+    "1": {
+        "schema:editor": [
+            "mhb",
+            "20190809_114502",
+            "20190809_114502"
+        ],
+        "items": {
+            "0": {
+                "schema:editor": [
+                    "mhb",
+                    "20190809_114448",
+                    "20190809_114502"
+                ],
+                "item_type": "t",
+                "transcription": [
+                    "Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\n\n",
+                    "mhb",
+                    "20190809_114448"
+                ],
+                "segments": {
+                    "0": {
+                        "schema:editor": [
+                            "mhb",
+                            "20190809_114502",
+                            "20190809_114502"
+                        ],
+                        "start": 0,
+                        "end": 52,
+                        "annotations": [
+                            "Memorial_Teleology_of_History_General",
+                            "Memorial_Teleology_of_History",
+                            "Teleology_of_History",
+                            "Teleology"
+                        ]
+                    }
+                },
+                "annotations": [],
+                "fabio_type": [
+                    "Section",
+                    "mhb",
+                    "20190809_114502"
+                ],
+                "fabio:hasSequenceIdentifier": [
+                    "1",
+                    "mhb",
+                    "20190809_114502"
+                ],
+                "fabio:pageRange": [
+                    "35",
+                    "mhb",
+                    "20190809_114502"
+                ]
+            }
+        },
+        "dc:creator": [
+            "Thucydides",
+            "mhb",
+            "20190809_114502"
+        ],
+        "dc:title": [
+            "History of the Peloponnesian War",
+            "mhb",
+            "20190809_114502"
+        ],
+        "fabio:hasShortTitle": [
+            "Peloponnesian War",
+            "mhb",
+            "20190809_114502"
+        ],
+        "fabio:BookSeries": [
+            "Penguin Classics",
+            "mhb",
+            "20190809_114502"
+        ],
+        "fabio:hasPlaceOfPublication": [
+            "London",
+            "mhb",
+            "20190809_114502"
+        ],
+        "dc:publisher": [
+            "Penguin Books",
+            "mhb",
+            "20190809_114502"
+        ],
+        "dc:date": [
+            "1972",
+            "mhb",
+            "20190809_114502"
+        ],
+        "fabio:hasPageCount": [
+            "468",
+            "mhb",
+            "20190809_114502"
+        ],
+        "prism:isbn": [
+            "97800140440393",
+            "mhb",
+            "20190809_114502"
+        ],
+        "dc:language": [
+            "en",
+            "mhb",
+            "20190809_114502"
+        ]
     }
 }

@@ -97,11 +97,11 @@ class taxonomy_display(database_maintenance):
 			pass
 
 		# Setup Taxonomy Window Panels
-		self.pane_two = Frame(self.taxonomy_window)
+		self.pane_two = ttk.Frame(self.taxonomy_window)
 		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 
 		# Create ID Row
-		row = Frame(self.pane_two)
+		row = ttk.Frame(self.pane_two)
 		self.taxonomy_iid_label = Label(row, text="ID", anchor='w', width=10)
 		self.taxonomy_iid_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -109,7 +109,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_iid_entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		# Create Annotation Name Row
-		row = Frame(self.pane_two)
+		row = ttk.Frame(self.pane_two)
 		self.taxonomy_annotation_label = Label(row, text="Annotation", anchor='w', width=10)
 		self.taxonomy_annotation_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -117,7 +117,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_annotation_entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		# Create Annotation Type Row
-		row = Frame(self.pane_two)
+		row = ttk.Frame(self.pane_two)
 		self.taxonomy_type_label = Label(row, text="Type", anchor='w', width=10)
 		self.taxonomy_type_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -125,7 +125,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_type_entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		# Create Annotation Definition Row
-		row = Frame(self.pane_two)
+		row = ttk.Frame(self.pane_two)
 		self.taxonomy_detail_label = Label(row, text="Definition", anchor='w', width=10)
 		self.taxonomy_detail_entry = Entry(row)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -133,7 +133,7 @@ class taxonomy_display(database_maintenance):
 		self.taxonomy_detail_entry.pack(side=RIGHT, expand=YES, fill=X)
 		
 		# Create Add/Save/Delete Button Set
-		row = Frame(self.pane_two)
+		row = ttk.Frame(self.pane_two)
 		self.add_button = Button(row, text='Add Child Taxon', command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.child_adder)))
 		self.add_button.pack(side=LEFT)
 		self.save_button = Button(row, text='Save', command=self.taxonomy_saver)
@@ -169,8 +169,8 @@ class taxonomy_display(database_maintenance):
 		window_height = self.taxonomy_window.winfo_screenheight()
 
 		# Setup Taxonomy Window Panels
-		self.pane_one = Frame(self.taxonomy_window)
-		self.pane_two = Frame(self.taxonomy_window)
+		self.pane_one = ttk.Frame(self.taxonomy_window)
+		self.pane_two = ttk.Frame(self.taxonomy_window)
 		self.pane_one.place(relwidth=.5, relheight=1)
 		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 

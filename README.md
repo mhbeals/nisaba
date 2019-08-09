@@ -1,13 +1,13 @@
-# Nisaba 0.2.14
+# Nisaba 0.2.16
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.15
+### v.0.2.16
 
-+ Added Default User Setting
-+ Provenance Tracking on Bibliographic Entries
-+ Provenance Tracking on Transcriptions
++ Improved Window Interface
++ Added Date Stamping to Provenance Markers
++ Attached Provenance Markers to records as a whole
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 
