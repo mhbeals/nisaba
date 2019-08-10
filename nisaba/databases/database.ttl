@@ -34,6 +34,7 @@
         "Explanatory-Descriptive_Teleology_of_History",
         "Explanatory_Teleology_of_History",
         "Memorial-Justice-Hero_Teleology_of_History",
+        "Memorial-Justice-Victim_Teleology_of_History",
         "Memorial-Justice_Teleology_of_History",
         "Memorial_Teleology_of_History",
         "Ontology",
@@ -41,7 +42,27 @@
         "Post-Positivism",
         "Primary_Evidence",
         "Teleology",
-        "Teleology_of_History" ;
+        "Teleology_of_History",
+        "['Anti-Positivism', 'amp', '20190810_100908']",
+        "['Empiricism', 'amp', '20190810_100908']",
+        "['Epistemology', 'amp', '20190810_100908']",
+        "['Memorial-Justice-Hero_Teleology_of_History', '', '']",
+        "['Memorial-Justice-Hero_Teleology_of_History', 'mhb', '20190810_095313']",
+        "['Memorial-Justice-Hero_Teleology_of_History', 'mhb', '20190810_095421']",
+        "['Memorial-Justice_Teleology_of_History', '', '']",
+        "['Memorial-Justice_Teleology_of_History', 'mhb', '20190810_095313']",
+        "['Memorial-Justice_Teleology_of_History', 'mhb', '20190810_095421']",
+        "['Memorial_Teleology_of_History', '', '']",
+        "['Memorial_Teleology_of_History', 'mhb', '20190810_095313']",
+        "['Memorial_Teleology_of_History', 'mhb', '20190810_095421']",
+        "['Positivism', 'amp', '20190810_100908']",
+        "['Post-Positivism', 'amp', '20190810_100908']",
+        "['Teleology', '', '']",
+        "['Teleology', 'mhb', '20190810_095313']",
+        "['Teleology', 'mhb', '20190810_095421']",
+        "['Teleology_of_History', '', '']",
+        "['Teleology_of_History', 'mhb', '20190810_095313']",
+        "['Teleology_of_History', 'mhb', '20190810_095421']" ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/0/segment/0>,
         <http://purl.org/nisaba/collection/0/item/0/segment/1> ;
     nisaba:item_author "Herodotus" ;
@@ -124,7 +145,12 @@
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n', 'mhb', '20190809_090841']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n', 'mhb', '20190809_094830']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n', 'mhb', '20190809_100729']",
-        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n', 'mhb', '20190809_100905']" .
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n', 'mhb', '20190809_100905']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_092716']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_095005']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_095313']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_100908']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_100928']" .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
     ns1:description "",
@@ -147,7 +173,23 @@
         "Ontology",
         "Secondary_Evidence",
         "Teleology",
-        "Teleology_of_History" ;
+        "Teleology_of_History",
+        "['Anti-Positivism', 'amp', '20190810_100427']",
+        "['Empiricism', 'amp', '20190810_100427']",
+        "['Epistemology', 'amp', '20190810_100427']",
+        "['Memorial-Justice-Hero_Teleology_of_History', '', '']",
+        "['Memorial-Justice-Hero_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Memorial-Justice-Victim_Teleology_of_History', '', '']",
+        "['Memorial-Justice_Teleology_of_History', '', '']",
+        "['Memorial-Justice_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Memorial_Teleology_of_History', '', '']",
+        "['Memorial_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Positivism', 'amp', '20190810_100427']",
+        "['Post-Positivism', 'amp', '20190810_100427']",
+        "['Teleology', '', '']",
+        "['Teleology', 'mhb', '20190810_095517']",
+        "['Teleology_of_History', '', '']",
+        "['Teleology_of_History', 'mhb', '20190810_095517']" ;
     nisaba:segment_notes "",
         "Preface" ;
     nisaba:start 0 .
@@ -164,7 +206,21 @@
         "Ontology",
         "Teleology",
         "Teleology_of_History",
-        "Tertiary_Evidence" ;
+        "Tertiary_Evidence",
+        "['Evidence', '', '']",
+        "['Evidence', 'mhb', '20190810_095517']",
+        "['Explanatory-Descriptive_Teleology_of_History', '', '']",
+        "['Explanatory-Descriptive_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Explanatory_Teleology_of_History', '', '']",
+        "['Explanatory_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Ontology', '', '']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Teleology', '', '']",
+        "['Teleology', 'mhb', '20190810_095517']",
+        "['Teleology_of_History', '', '']",
+        "['Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Tertiary_Evidence', '', '']",
+        "['Tertiary_Evidence', 'mhb', '20190810_095517']" ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/1/segment/0> ;
     nisaba:item_author "Herodotus" ;
     nisaba:item_date "" ;
@@ -189,7 +245,13 @@
     nisaba:hasAnnotation "Evidence",
         "Ontology",
         "Secondary_Evidence",
-        "Tertiary_Evidence" ;
+        "Tertiary_Evidence",
+        "['Evidence', '', '']",
+        "['Evidence', 'mhb', '20190810_095517']",
+        "['Ontology', '', '']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Secondary_Evidence', '', '']",
+        "['Secondary_Evidence', 'mhb', '20190810_095517']" ;
     nisaba:start 0 .
 
 <http://purl.org/nisaba/collection/0/item/2> a nisaba:ItemEntry ;
@@ -197,7 +259,13 @@
         "Ontology",
         "Primary_Evidence",
         "Secondary_Evidence",
-        "Tertiary_Evidence" ;
+        "Tertiary_Evidence",
+        "['Evidence', '', '']",
+        "['Evidence', 'mhb', '20190810_095517']",
+        "['Ontology', '', '']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Tertiary_Evidence', '', '']",
+        "['Tertiary_Evidence', 'mhb', '20190810_095517']" ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/2/segment/0> ;
     nisaba:image_file "sample.jpg" ;
     nisaba:item_author "" ;
@@ -218,7 +286,13 @@
         "Evidence",
         "Ontology",
         "Post-Positivism",
-        "Primary_Evidence" ;
+        "Primary_Evidence",
+        "['Evidence', '', '']",
+        "['Evidence', 'mhb', '20190810_095517']",
+        "['Ontology', '', '']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Primary_Evidence', '', '']",
+        "['Primary_Evidence', 'mhb', '20190810_095517']" ;
     nisaba:left 0 ;
     nisaba:right 50 ;
     nisaba:top 0 .
@@ -227,11 +301,16 @@
     nisaba:item_type "t" .
 
 <http://purl.org/nisaba/collection/1/item/0> a nisaba:ItemEntry ;
+    nisaba:hasAnnotation "['Memorial_Teleology_of_History', 'mhb', '20190810_095807']",
+        "['Memorial_Teleology_of_History_General', 'mhb', '20190810_095807']",
+        "['Teleology', 'mhb', '20190810_095807']",
+        "['Teleology_of_History', 'mhb', '20190810_095807']" ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/1/item/0/segment/0> ;
     nisaba:item_type "t" ;
     nisaba:transcription "['Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\\n', 'mhb']",
+        "['Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\\n\\n', 'mhb', '20190809_114437']",
         "['Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\\n\\n', 'mhb', '20190809_114448']",
-        "['Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\\n\\n', 'mhb', '20190809_114437']" .
+        "['Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\\n\\n\\n', 'mhb', '20190810_095807']" .
 
 <http://purl.org/nisaba/collection/1/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 52 ;
@@ -245,6 +324,14 @@
         "Memorial_Teleology_of_History",
         "Memorial_Teleology_of_History_General",
         "Teleology",
-        "Teleology_of_History" ;
+        "Teleology_of_History",
+        "['Memorial_Teleology_of_History', '', '']",
+        "['Memorial_Teleology_of_History', 'mhb', '20190810_095726']",
+        "['Memorial_Teleology_of_History_General', '', '']",
+        "['Memorial_Teleology_of_History_General', 'mhb', '20190810_095726']",
+        "['Teleology', '', '']",
+        "['Teleology', 'mhb', '20190810_095726']",
+        "['Teleology_of_History', '', '']",
+        "['Teleology_of_History', 'mhb', '20190810_095726']" ;
     nisaba:start 0 .
 

@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.17
+
++ Affixes annotation user / datestamp to annotations in items and segments
+
 ### v.0.2.16.1
 
 + Minor bug fix on pip install (metadata_display.py)

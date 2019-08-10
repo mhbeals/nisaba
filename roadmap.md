@@ -12,7 +12,7 @@
 + **Integrated metadata for the database [v.0.2.9]**
 + **Integrated metadata for individual bibliographic fields [v.0.2.15]**
 + **Integrated metadata for individual records [v.0.2.16]**
-+ Integrated metadata for individual annotations
++ **Integrated metadata for individual annotations** [v.0.2.17]**
 + Integrated metadata for individual free-text notes
 
 ## Database Support
@@ -28,4 +28,5 @@
 + Save annotation data using LOC subject headings (JSON/RDF)
 + Allow ontology customisation (RDF)
 + Save all data as TEI boilerplate compatible file (XML)
++ Save all data as Human-Readable Markdown Collection (MD)
 

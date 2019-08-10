@@ -1,12 +1,12 @@
-# Nisaba 0.2.16.1
+# Nisaba 0.2.17
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.16.1
+### v.0.2.17
 
-+ Minor bug fix on pip install (metadata_display.py)
++ Affixes annotation user / datestamp to annotations in items and segments
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

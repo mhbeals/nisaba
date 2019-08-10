@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 # The nisaba version
-nisaba_version = "0.2.16.1"
+nisaba_version = "0.2.17"
 
 # This call to setup() does all the work
 setup(

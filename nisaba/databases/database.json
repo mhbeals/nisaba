@@ -17,154 +17,163 @@
             "schema:worksFor": "Vrije Universiteit Amsterdam",
             "schema:memberOf": "Nisaba",
             "schema:email": "albert.merono@vu.nk",
-            "foaf:homepage": "https://www.albertmeronyo.org/"
+            "foaf:homepage": "https://www.albertmeronyo.org/",
+            "default": 0
         }
     },
     "0": {
         "schema:editor": [
             "mhb",
-            "20190809_102647",
-            "20190809_095005"
+            "20190810_100928",
+            "20190810_100928"
         ],
         "dc:creator": [
             "Herodotus",
             "mhb",
-            "20190809_095005"
+            "20190810_100928"
         ],
         "dc:title": [
             "The Histories",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "fabio:hasShortTitle": [
             "Histories",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "prism:volume": [
             "",
             "mhb",
-            "20190809_095005"
+            "20190810_100928"
         ],
         "fabio:hasVolumeCount": [
             "",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "prism:edition": [
             "",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "fabio:hasSequenceIdentifier": [
             "",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "dc:date": [
             "440 BC",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "fabio:hasPageCount": [
             "716",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "prism:isbn": [
             "9780134449082",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "prism:doi": [
             "",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "fabio:Abstract": [
             "",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "dc:language": [
             "",
             "mhb",
-            "20190809_091057"
+            "20190810_100928"
         ],
         "items": {
             "0": {
                 "schema:editor": [
                     "mhb",
-                    "20190809_100905",
-                    "20190809_100905"
+                    "20190810_100928",
+                    "20190810_100928"
                 ],
                 "item_type": "t",
                 "fabio_type": [
                     "Section",
                     "mhb",
-                    "20190809_091057"
+                    "20190810_100928"
                 ],
                 "fabio:hasSequenceIdentifier": [
                     "0",
                     "mhb",
-                    "20190809_091057"
+                    "20190810_100928"
                 ],
                 "fabio:pageRange": [
                     "",
                     "mhb",
-                    "20190809_091057"
+                    "20190810_100928"
                 ],
                 "transcription": [
-                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n",
+                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n\n\n\n\n",
                     "mhb",
-                    "20190809_100905"
+                    "20190810_100928"
                 ],
                 "segments": {
                     "0": {
                         "schema:editor": [
                             "mhb",
-                            "20190809_095005",
-                            "20190809_095005"
+                            "20190810_100447",
+                            "20190810_100447"
                         ],
                         "start": 0,
                         "end": 65,
                         "annotations": [
-                            "Memorial-Justice-Hero_Teleology_of_History",
-                            "Memorial-Justice-Victim_Teleology_of_History",
-                            "Memorial-Justice_Teleology_of_History",
-                            "Memorial_Teleology_of_History",
-                            "Teleology_of_History",
-                            "Teleology"
-                        ],
-                        "dc:description": [
-                            "Notes",
-                            "mhb",
-                            "20190809_095005"
+                            [
+                                "Memorial-Justice-Hero_Teleology_of_History",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Memorial-Justice_Teleology_of_History",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Memorial_Teleology_of_History",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Teleology_of_History",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Teleology",
+                                "mhb",
+                                "20190810_095517"
+                            ]
                         ]
                     }
                 },
-                "annotations": [
-                    "Memorial-Justice-Hero_Teleology_of_History",
-                    "Memorial-Justice_Teleology_of_History",
-                    "Memorial_Teleology_of_History",
-                    "Teleology_of_History",
-                    "Teleology"
-                ]
+                "annotations": []
             },
             "1": {
                 "schema:editor": [
@@ -203,9 +212,21 @@
                         "start": 0,
                         "end": 17,
                         "annotations": [
-                            "Secondary_Evidence",
-                            "Evidence",
-                            "Ontology"
+                            [
+                                "Secondary_Evidence",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Evidence",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Ontology",
+                                "mhb",
+                                "20190810_095517"
+                            ]
                         ],
                         "dc:description": [
                             "",
@@ -214,13 +235,41 @@
                     }
                 },
                 "annotations": [
-                    "Explanatory-Descriptive_Teleology_of_History",
-                    "Tertiary_Evidence",
-                    "Explanatory_Teleology_of_History",
-                    "Evidence",
-                    "Teleology_of_History",
-                    "Ontology",
-                    "Teleology"
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ]
                 ]
             },
             "2": {
@@ -255,9 +304,21 @@
                         "bottom": 100,
                         "left": 0,
                         "annotations": [
-                            "Primary_Evidence",
-                            "Evidence",
-                            "Ontology"
+                            [
+                                "Primary_Evidence",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Evidence",
+                                "mhb",
+                                "20190810_095517"
+                            ],
+                            [
+                                "Ontology",
+                                "mhb",
+                                "20190810_095517"
+                            ]
                         ],
                         "dc:description": [
                             "",
@@ -266,9 +327,21 @@
                     }
                 },
                 "annotations": [
-                    "Tertiary_Evidence",
-                    "Evidence",
-                    "Ontology"
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ]
                 ]
             }
         }
@@ -276,106 +349,143 @@
     "1": {
         "schema:editor": [
             "mhb",
-            "20190809_114502",
-            "20190809_114502"
+            "20190810_095807",
+            "20190810_095807"
         ],
         "items": {
             "0": {
                 "schema:editor": [
                     "mhb",
-                    "20190809_114448",
-                    "20190809_114502"
+                    "20190810_095807",
+                    "20190810_095807"
                 ],
                 "item_type": "t",
                 "transcription": [
-                    "Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\n\n",
+                    "Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\n\n\n",
                     "mhb",
-                    "20190809_114448"
+                    "20190810_095807"
                 ],
                 "segments": {
                     "0": {
                         "schema:editor": [
                             "mhb",
-                            "20190809_114502",
-                            "20190809_114502"
+                            "20190810_095726",
+                            "20190810_095726"
                         ],
                         "start": 0,
                         "end": 52,
                         "annotations": [
-                            "Memorial_Teleology_of_History_General",
-                            "Memorial_Teleology_of_History",
-                            "Teleology_of_History",
-                            "Teleology"
+                            [
+                                "Memorial_Teleology_of_History_General",
+                                "mhb",
+                                "20190810_095726"
+                            ],
+                            [
+                                "Memorial_Teleology_of_History",
+                                "mhb",
+                                "20190810_095726"
+                            ],
+                            [
+                                "Teleology_of_History",
+                                "mhb",
+                                "20190810_095726"
+                            ],
+                            [
+                                "Teleology",
+                                "mhb",
+                                "20190810_095726"
+                            ]
                         ]
                     }
                 },
-                "annotations": [],
+                "annotations": [
+                    [
+                        "Memorial_Teleology_of_History_General",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Memorial_Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095807"
+                    ]
+                ],
                 "fabio_type": [
                     "Section",
                     "mhb",
-                    "20190809_114502"
+                    "20190810_095807"
                 ],
                 "fabio:hasSequenceIdentifier": [
                     "1",
                     "mhb",
-                    "20190809_114502"
+                    "20190810_095807"
                 ],
                 "fabio:pageRange": [
                     "35",
                     "mhb",
-                    "20190809_114502"
+                    "20190810_095807"
                 ]
             }
         },
         "dc:creator": [
             "Thucydides",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "dc:title": [
             "History of the Peloponnesian War",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "fabio:hasShortTitle": [
             "Peloponnesian War",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "dc:date": [
             "1972",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "fabio:hasPageCount": [
             "468",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "prism:isbn": [
             "97800140440393",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ],
         "dc:language": [
             "en",
             "mhb",
-            "20190809_114502"
+            "20190810_095807"
         ]
     }
 }

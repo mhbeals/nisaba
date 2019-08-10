@@ -251,15 +251,15 @@ class database_display(database_maintenance):
 
 			if 'annotations' in self.database[self.collection_index]['items'][self.item_index]:
 				for annotation in self.database[self.collection_index]['items'][self.item_index]['annotations']:
-					tree_name.change_state(tree_name.parent(annotation),"checked")
-					tree_name.change_state(annotation,"checked")
+					tree_name.change_state(tree_name.parent(annotation[0]),"checked")
+					tree_name.change_state(annotation[0],"checked")
 
 		elif level == 's':
 
 			if 'annotations' in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]:
 				for annotation in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations']:
-					tree_name.change_state(tree_name.parent(annotation),"checked")
-					tree_name.change_state(annotation,"checked")
+					tree_name.change_state(tree_name.parent(annotation[0]),"checked")
+					tree_name.change_state(annotation[0],"checked")
 
 		# Display Tree
 		tree_name.pack(anchor=NW)
@@ -436,9 +436,9 @@ class database_display(database_maintenance):
 		# Set up bibliographic information tab #
 		########################################
 		
-		#####################
-		# Dislay Editor Box #
-		#####################
+		################################
+		# Dislay Editor Box for Record #
+		################################
 		
 		# Create String Variable
 		self.provenance_segment_editor = StringVar(self.segment_tab_one)
@@ -467,10 +467,33 @@ class database_display(database_maintenance):
 		# Display bibliographic form and create entries database
 		self.bibliographic_form_maker(self.segment_tab_one, 's')
 
-		#################################
-		# Set up annotations tab (tab_two) #
-		#################################
+		##########################
+		# Set up Annotations Tab #
+		##########################
 
+		##############################
+		# Dislay Editor Box for Tree #
+		##############################
+		
+		# Create String Variable
+		self.segment_annotation_editor = StringVar(self.segment_tab_two)
+		
+		# Set initial value
+		self.segment_annotation_editor.set(self.default_user)
+	
+		# Create a row
+		row = ttk.Frame(self.segment_tab_two)
+
+		# Create a labels and dropdown
+		label = Label(row, text="Current Annotator", anchor='w', width=25)
+		provenance =  OptionMenu(row, self.segment_annotation_editor, *self.users)
+
+		# Package Row
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		label.pack(side=LEFT)
+		provenance.pack(side=LEFT)
+		
+		# Create Tree
 		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="26")
 		self.annotation_tree_maker(self.segment_tree,'s')
 		
@@ -607,12 +630,12 @@ class database_display(database_maintenance):
 		self.buttonFrame.pack(anchor=NW)
 
 		########################################
-		# Set up bibliographic information tab #
+		# Set up Bibliographic Information Tab #
 		########################################
 
-		#####################
-		# Dislay Editor Box #
-		#####################
+		################################
+		# Dislay Editor Box for Record #
+		################################
 			
 		# Create String Variable
 		self.provenance_item_editor = StringVar(self.item_tab_one)
@@ -642,9 +665,32 @@ class database_display(database_maintenance):
 		self.bibliographic_form_maker(self.item_tab_one, 'i')
 
 		##########################
-		# Set up annotations tab #
+		# Set up Annotations Tab #
 		##########################
 
+		###############################
+		# Dislay Editor Box  for Tree #
+		###############################
+		
+		# Create String Variable
+		self.item_annotation_editor = StringVar(self.item_tab_two)
+		
+		# Set initial value
+		self.item_annotation_editor.set(self.default_user)
+	
+		# Create a row
+		row = ttk.Frame(self.item_tab_two)
+
+		# Create a labels and dropdown
+		label = Label(row, text="Current Annotator", anchor='w', width=25)
+		provenance =  OptionMenu(row, self.item_annotation_editor, *self.users)
+
+		# Package Row
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		label.pack(side=LEFT)
+		provenance.pack(side=LEFT)
+		
+		# Create Tree
 		self.item_tree = CheckboxTreeview(self.item_tab_two,height="26",)
 		self.annotation_tree_maker(self.item_tree,'i')
 

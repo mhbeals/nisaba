@@ -185,11 +185,25 @@ class database_maintenance:
 		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
 		with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
 			file.write(self.database_rdf.serialize(format='turtle'))
-
+	
+	def annotation_provenance_setter (self,annotation_list,level):
+		# Adds provenance data to each cache annotation as a list [annotation,user,datetime]
+	
+		# Create Provenanced Annotation List
+		listed_annotation_list = []
+		for annotation in annotation_list:
+			if level == 'i':
+				listed_annotation_list.append([annotation,self.item_annotation_editor.get(),datetime.datetime.now().strftime('%Y%m%d_%H%M%S')])
+			elif level == 's':
+				listed_annotation_list.append([annotation,self.segment_annotation_editor.get(),datetime.datetime.now().strftime('%Y%m%d_%H%M%S')])
+		
+		# Return Provenanced Annotation List
+		return listed_annotation_list
+	
 	def annotation_parent_setter(self,tree_name):
 		# Ticks the Parents of Selected Annotations with the TreeView Widget 
 		# This is a Bug Fix to Prevent the Default 'Third State') of Parents Boxes
-	
+		
 		# Create a List of All Checked Items
 		annotation_list = tree_name.get_checked()
 		
@@ -205,6 +219,32 @@ class database_maintenance:
 		# Return the Updated List of Annotations
 		return annotation_list
 
+	def annotation_list_updater(self,cache_annotations,saved_annotations):
+		# Checks the cache annotations against the saved ones and merges the list (deleting any annotations no longer in cache but keeping old dates/users for exisiting ones)
+	
+		new_annotations = []
+						
+		# For every annotation in the current annotation list
+		for cache_annotation in cache_annotations:
+			
+			found = False
+			
+			# Go through every annotation in the saved/disk annotation list
+			for saved_annotation in saved_annotations:
+				
+				# If the annotation is the same
+				if cache_annotation[0] == saved_annotation[0]:
+					
+						# keep it as it is and mark as found
+						new_annotations.append(saved_annotation)
+						found = True
+				
+			# If you never found the annotation, add it from the cached version
+			if found == False:
+				new_annotations.append(cache_annotation)
+				
+		return new_annotations
+		
 	def database_entry_saver(self, level):
 		# Saves Entries to Cached Database
 		
@@ -253,7 +293,8 @@ class database_maintenance:
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				
 			# Save the Annotation Tree to the Mid-Level
-			self.database[self.collection_index]['items'][self.item_index]['annotations'] = self.annotation_parent_setter(self.item_tree)
+			cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.item_tree),level),self.database[self.collection_index]['items'][self.item_index]['annotations'])
+			self.database[self.collection_index]['items'][self.item_index]['annotations'] = cache_annotations
 			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is a Text, Save the Transcription
@@ -310,8 +351,8 @@ class database_maintenance:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# Save the Annotation Tree to the Lower Level
-			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = self.annotation_parent_setter(self.segment_tree)
-			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+			cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.segment_tree),level),self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'])
+			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = cache_annotations
 
 			# If it is a Text, Save the Word Segmenters
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
