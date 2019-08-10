@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.18
+
++ Add Icons and Tool Tips to Buttons
+
 ### v.0.2.17
 
 + Affixes annotation user / datestamp to annotations in items and segments

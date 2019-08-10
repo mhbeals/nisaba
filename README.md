@@ -1,12 +1,12 @@
-# Nisaba 0.2.17
+# Nisaba 0.2.18
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.17
+### v.0.2.18
 
-+ Affixes annotation user / datestamp to annotations in items and segments
++ Add Icons and Tool Tips to Buttons
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

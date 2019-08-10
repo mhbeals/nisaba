@@ -62,7 +62,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.17')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.18')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
@@ -93,7 +93,7 @@ def main():
 		main_pane_viewer.place(relx=.1, relwidth=.9, relheight=1)
 		
 		# Add Icons to Options
-		# Icons made by Freepik(https://www.flaticon.com/authors/freepik) from https://www.flaticon.com/" CC-BY (http://creativecommons.org/licenses/by/3.0/)
+		# Left Menu Icons made by Freepik (https://www.flaticon.com/authors/freepik) from https://www.flaticon.com/ CC-BY (http://creativecommons.org/licenses/by/3.0/)
 		user_logo=PhotoImage(file=Path(assets_path) / 'users.png')
 		database_logo=PhotoImage(file=Path(assets_path) / 'database.png')
 		taxonomy_logo=PhotoImage(file=Path(assets_path) / 'taxonomy.png')

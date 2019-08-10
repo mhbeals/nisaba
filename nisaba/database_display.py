@@ -11,12 +11,15 @@ from pathlib import Path
 import PIL.Image
 import PIL.ImageTk
 import os
+from tooltip import *
 
 # Import TKinter Libraries
 from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import *
 from ttkwidgets import CheckboxTreeview
+
+
 
 class database_display(database_maintenance):
 
@@ -291,6 +294,9 @@ class database_display(database_maintenance):
 
 		elif type == 't':
 			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 't', 'transcription': ['','',''], 'segments' : {}}
+			
+		else:
+			pass
 
 		self.collection_item_list_panel_displayer()
 
@@ -346,21 +352,28 @@ class database_display(database_maintenance):
 			end_label = Label(self.segment_pane_two, text="Ending Word")
 			self.end_text = Entry(self.segment_pane_two)
 
+			# Increase Font Size
+			self.start_text.configure(font=(14))
+			start_label.configure(font=(14))
+			self.end_text.configure(font=(14))
+			end_label.configure(font=(14))
+			
 			# Fill Entry Boxes
 			self.start_text.insert(4,start)
 			self.end_text.insert(4,end)
 
 			# Pack Labels and Entry Boxes into ttk.Frame
-			start_label.grid(column = 1, row = 0, sticky=NW, padx =10, pady = 10)
-			self.start_text.grid(column = 2, row = 0, sticky=NW, padx =10, pady = 10)
-			end_label.grid(column = 4, row = 0, sticky=NW, padx =10, pady = 10)
-			self.end_text.grid(column = 5, row = 0, sticky=NW, padx =10, pady = 10)
+			start_label.grid(column = 1, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
+			self.start_text.grid(column = 2, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
+			end_label.grid(column = 4, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
+			self.end_text.grid(column = 5, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
 
 			# Create Text Box
 			self.transcription_text = Text(self.segment_pane_two, wrap=WORD)
 
 			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, text='Refresh', command=self.transcription_updater)
+			update_button = Button(self.segment_pane_two, image=self.refresh_icon, command=self.transcription_updater)
+			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
 			update_button.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
 
 			# Populate Text Box
@@ -395,21 +408,24 @@ class database_display(database_maintenance):
 			self.right_text.insert(4,right)
 
 			# Pack Labels and Entry Boxes into ttk.Frame
-			self.top_label.grid(column = 0, row = 1, sticky=NW)
-			self.top_text.grid(column = 1, row = 1, sticky=NW)
-			self.bottom_label.grid(column = 0, row = 2,sticky=NW)
-			self.bottom_text.grid(column = 1, row = 2, sticky=NW)
-			self.left_label.grid(column = 2, row = 1, sticky=NW)
-			self.left_text.grid(column = 3, row = 1, sticky=NW)
-			self.right_label.grid(column = 2, row = 2, sticky=NW)
-			self.right_text.grid(column = 3, row = 2, sticky=NW)
+			self.top_label.grid(column = 0, row = 1, sticky=NE)
+			self.top_text.grid(column = 1, row = 1, sticky=NE)
+			self.bottom_label.grid(column = 0, row = 2,sticky=NE)
+			self.bottom_text.grid(column = 1, row = 2, sticky=NE)
+			self.left_label.grid(column = 2, row = 1, sticky=NE)
+			self.left_text.grid(column = 3, row = 1, sticky=NE)
+			self.right_label.grid(column = 2, row = 2, sticky=NE)
+			self.right_text.grid(column = 3, row = 2, sticky=NE)
 
 			self.cropped_image_updater()
 
 			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, text='Refresh', command=self.cropped_image_updater)
-			update_button.grid(column = 4, row = 1, sticky=W, padx =5, pady = 5)
+			update_button = Button(self.segment_pane_two, image=self.refresh_icon, command=self.cropped_image_updater)
+			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
+			update_button.grid(column = 4, row = 1, rowspan=2, sticky=W, padx =5, pady = 5)
+			
 
+			
 		# Setup Segment Window Tabs (Left / Pane 1)
 
 		# Set Up Tabs
@@ -424,13 +440,16 @@ class database_display(database_maintenance):
 
 		# Create "save", "reset" and "return" buttons
 		buttonFrame = ttk.Frame(self.segment_pane_one)
-		b1 = Button(self.segment_pane_one, text='Save Values', command=(lambda: self.database_entry_saver('s')))
-		b2 = Button(self.segment_pane_one, text='Reset to Last Saved Values', command=self.segment_panels_displayer)
-		b3 = Button(self.segment_pane_one, text='Return to Item View', command=(lambda: self.item_panel_displayer('m')))
+		save_button = Button(self.segment_pane_one, image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
+		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
+		refresh_button = Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
+		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
+		return_button = Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panel_displayer('m')))
+		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
 		buttonFrame.pack(anchor=NW)
-		b1.pack(side=LEFT, padx=5, pady=5)
-		b2.pack(side=LEFT, padx=5, pady=5)
-		b3.pack(side=LEFT, padx=5, pady=5)
+		save_button.pack(side=LEFT, padx=5, pady=5)
+		refresh_button.pack(side=LEFT, padx=5, pady=5)
+		return_button.pack(side=LEFT, padx=5, pady=5)
 
 		########################################
 		# Set up bibliographic information tab #
@@ -619,14 +638,18 @@ class database_display(database_maintenance):
 		
 		# Create "save", "reset" and "return" buttons for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.b1 = Button(self.buttonFrame,text='Add New Segment',command=self.segment_adder)
-		self.b2 = Button(self.buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('i')))
-		self.b3 = Button(self.buttonFrame, text='Reset to Last Saved Values', command=(lambda: self.item_panel_displayer('m')))
-		self.b4 = Button(self.buttonFrame, text='Return to Collection View', command=(lambda: self.collection_informer('')))
-		self.b1.pack(side=LEFT, padx=5, pady=5)
-		self.b2.pack(side=LEFT, padx=5, pady=5)
-		self.b3.pack(side=LEFT, padx=5, pady=5)
-		self.b4.pack(side=LEFT, padx=5, pady=5)
+		self.add_button = Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
+		add_button_tt = ToolTip(self.add_button, "Add Segment",delay=0.01)
+		self.save_button = Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
+		save_button_tt = ToolTip(self.save_button, "Save Item",delay=0.01)
+		self.refresh_button = Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panel_displayer('m')))
+		refresh_button_tt = ToolTip(self.refresh_button, "Reload Item",delay=0.01)
+		self.return_button = Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
+		return_button_tt = ToolTip(self.return_button, "Return to Collections View",delay=0.01)
+		self.add_button.pack(side=LEFT, padx=5, pady=5)
+		self.save_button.pack(side=LEFT, padx=5, pady=5)
+		self.refresh_button.pack(side=LEFT, padx=5, pady=5)
+		self.return_button.pack(side=LEFT, padx=5, pady=5)
 		self.buttonFrame.pack(anchor=NW)
 
 		########################################
@@ -798,8 +821,10 @@ class database_display(database_maintenance):
 		self.bibliographic_form_maker(item_metadata_frame, 'c')
 
 		# Create "save" button for all tabs
-		save_item_button = Button(item_metadata_buttonFrame, text='Save Values', command=(lambda: self.database_entry_saver('c')))
-		collections_list_button = Button(item_metadata_buttonFrame, text='Return to Collections List', command=(lambda: self.database_frame_displayer(self.database_window)))
+		save_item_button = Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
+		save_item_button_tt = ToolTip(save_item_button, "Save Collection",delay=0.01)
+		collections_list_button = Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_frame_displayer(self.database_window)))
+		collections_list_button_tt = ToolTip(collections_list_button, "Return to Collections List",delay=0.01)
 		save_item_button.pack(side=LEFT, padx=5, pady=5)
 		collections_list_button.pack(side=LEFT, padx=5, pady=5)
 
@@ -856,10 +881,18 @@ class database_display(database_maintenance):
 
 		# Create "save" button for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_two)
-		self.b1 = Button(self.buttonFrame, text='Add New Text', command=(lambda t="t": self.item_adder(t)))
-		self.b2 = Button(self.buttonFrame, text='Add New Image', command=(lambda t="i": self.item_adder(t)))
-		self.b1.pack(side=LEFT, padx=5, pady=5)
-		self.b2.pack(side=LEFT, padx=5, pady=5)
+		self.add_text_button = Button(self.buttonFrame, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
+		add_item_button_tt = ToolTip(self.add_text_button, "Add Text Item",delay=0.01)
+		self.add_image_button = Button(self.buttonFrame, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
+		add_image_button_tt = ToolTip(self.add_image_button, "Add Image Item",delay=0.01)
+		self.add_audio_button = Button(self.buttonFrame, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
+		add_audio_button_tt = ToolTip(self.add_audio_button, "Add Audio Item",delay=0.01)
+		self.add_audiovisual_button = Button(self.buttonFrame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
+		add_audiovisual_button_tt = ToolTip(self.add_audiovisual_button, "Add Audio-Visual Item",delay=0.01)
+		self.add_text_button.pack(side=LEFT, padx=5, pady=5)
+		self.add_image_button.pack(side=LEFT, padx=5, pady=5)
+		self.add_audio_button.pack(side=LEFT, padx=5, pady=5)
+		self.add_audiovisual_button.pack(side=LEFT, padx=5, pady=5)
 		self.buttonFrame.pack(anchor=NW)
 
 	def segment_informer(self, evt):
@@ -952,12 +985,23 @@ class database_display(database_maintenance):
 		items.bind('<Double-Button>', self.collection_informer)
 
 		# Add Collection Button
-		
-		add_collection_button = Button(self.pane_one,text='Add New Collection',command=self.collection_adder)
-		add_collection_button.pack(anchor=NW)
+		self.add_collection_button = Button(self.pane_one,image=self.add_icon,command=self.collection_adder)
+		add_collection_tt = ToolTip(self.add_collection_button, "Add Collection",delay=0.01)
+		self.add_collection_button.pack(anchor=NW)
 		
 	def database_window_displayer(self,window):
 		# Setup Database ttk.Frame
+	
+		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
+		self.up_level_icon=PhotoImage(file=Path(self.assets_path) / 'uplevel.png')
+		self.add_icon=PhotoImage(file=Path(self.assets_path) / 'add.png')
+		self.delete_icon=PhotoImage(file=Path(self.assets_path) / 'delete.png')
+		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
+		self.refresh_icon=PhotoImage(file=Path(self.assets_path) / 'refresh.png')
+		self.text_icon=PhotoImage(file=Path(self.assets_path) / 'text.png')
+		self.image_icon=PhotoImage(file=Path(self.assets_path) / 'image.png')
+		self.audio_icon=PhotoImage(file=Path(self.assets_path) / 'audio.png')
+		self.audiovisual_icon=PhotoImage(file=Path(self.assets_path) / 'audiovisual.png')
 	
 		# Reload Databases
 		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
