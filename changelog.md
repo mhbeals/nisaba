@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.19
+
++ Added Delete Buttons to All Levels (Issue #4)
+
 ### v.0.2.18
 
 + Add Icons and Tool Tips to Buttons

@@ -24,6 +24,20 @@
 <http://purl.org/nisaba/collection/1> a nisaba:CollectionEntry ;
     nisaba:hasItem <http://purl.org/nisaba/collection/1/item/0> .
 
+<http://purl.org/nisaba/collection/2> a nisaba:CollectionEntry .
+
+<http://purl.org/nisaba/collection/3> a nisaba:CollectionEntry .
+
+<http://purl.org/nisaba/collection/4> a nisaba:CollectionEntry .
+
+<http://purl.org/nisaba/collection/5> a nisaba:CollectionEntry .
+
+<http://purl.org/nisaba/collection/6> a nisaba:CollectionEntry .
+
+<http://purl.org/nisaba/collection/7> a nisaba:CollectionEntry .
+
+<http://purl.org/nisaba/collection/8> a nisaba:CollectionEntry .
+
 <http://purl.org/nisaba/collection/users> a nisaba:CollectionEntry .
 
 <http://purl.org/nisaba/collection/0/item/0> a nisaba:ItemEntry ;
