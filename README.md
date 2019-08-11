@@ -1,12 +1,12 @@
-# Nisaba 0.2.19
+# Nisaba 0.2.19.1
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.19
+### v.0.2.19.1
 
-+ Added Delete Buttons to All Levels (Issue #4)
++ Bug Fix to Renumberer
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

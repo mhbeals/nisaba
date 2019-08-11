@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.19.1
+
++ Bug Fix to Renumberer
+
 ### v.0.2.19
 
 + Added Delete Buttons to All Levels (Issue #4)

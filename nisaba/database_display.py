@@ -281,6 +281,8 @@ class database_display(database_maintenance):
 				if str(i+1) in database:
 					database[str(i)] = database[str(i+1)]
 					del database[str(i+1)]
+				else:
+					break
 	
 	def delete_unit(self,database,key,level):
 	
