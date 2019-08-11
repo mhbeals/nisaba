@@ -322,10 +322,10 @@ class database_display(database_maintenance):
 			loop = str(i) in self.database[self.collection_index]['items']
 
 		if type == 'i':
-			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 'i','image_file': 'sample.jpg', 'segments' : {}}
+			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 'i','annotations':[],'image_file': 'sample.jpg', 'segments' : {}}
 
 		elif type == 't':
-			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 't', 'transcription': ['','',''], 'segments' : {}}
+			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 't', 'annotations':[],'transcription': ['','',''], 'segments' : {}}
 			
 		else:
 			pass
@@ -343,10 +343,10 @@ class database_display(database_maintenance):
 
 
 		if  self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split())}
+			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),'annotations':[]}
 
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'top':0,'right':50,'bottom':50,'left':0}
+			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'top':0,'right':50,'bottom':50,'left':0,'annotations':[]}
 
 		self.item_panel_displayer('s')
 

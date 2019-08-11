@@ -49,7 +49,11 @@ class database_maintenance:
 		#######################
 		
 		# Load Taxonomy
+		
+		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
+			loaddata = file.read()
 		self.taxonomy = json.loads(loaddata)
+		
 
 	def iid_iterator(self,database,iid,function_call):
 		# Search through Database for a Specific Branch or Child

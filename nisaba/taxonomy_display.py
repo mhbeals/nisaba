@@ -56,6 +56,9 @@ class taxonomy_display(database_maintenance):
 		database[key]['children'][i]['definition'] = "New Item"
 		database[key]['children'][i]['children'] = {}
 
+		# Save to disk
+		self.taxonomy_saver()
+		
 		# Reload Taxonomy Viewer
 		self.taxonomy_viewer(self.taxonomy_window)
 
@@ -167,7 +170,7 @@ class taxonomy_display(database_maintenance):
 			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass
-	
+		
 		###################
 		# Taxonomy Window #
 		###################

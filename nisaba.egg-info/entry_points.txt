@@ -1,0 +1,3 @@
+[console_scripts]
+nisaba = nisaba.__main__:main
+

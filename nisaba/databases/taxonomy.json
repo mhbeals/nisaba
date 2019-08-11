@@ -2,34 +2,34 @@
     "0": {
         "iid": "Epistemology",
         "name": "Epistemology",
-        "type": "Discipline",
+        "type": "",
         "definition": "The theory of knowledge, especially with regard to its methods, validity, and scope, and the distinction between justified belief and opinion",
         "children": {
             "0": {
                 "iid": "Positivism",
                 "name": "Positivism",
-                "type": "Abstract",
+                "type": "Epistemology",
                 "definition": "On their being definite, knowable truths or facts, which are verifiable",
                 "children": {}
             },
             "1": {
                 "iid": "Empiricism",
                 "name": "Empiricism",
-                "type": "Abstract",
+                "type": "Epistemology",
                 "definition": "Wherein truth is defined probabilistically based on sensory (or sensory derived) evidence",
                 "children": {}
             },
             "2": {
                 "iid": "Anti-Positivism",
                 "name": "Anti-Positivism",
-                "type": "Abstract",
+                "type": "Epistemology",
                 "definition": "Wherein definite truth is unknowable and all definitions are considered constructed by the definer",
                 "children": {}
             },
             "3": {
                 "iid": "Post-Positivism",
                 "name": "Post-Positivism",
-                "type": "Abstract",
+                "type": "Epistemology",
                 "definition": "On their being definite, knowable truths or facts, which are considered true until falsified",
                 "children": {}
             }
@@ -38,33 +38,33 @@
     "1": {
         "iid": "Ontology",
         "name": "Ontology",
-        "type": "Discipline",
+        "type": "",
         "definition": "On the set of concepts and categories in a subject area or domain that shows their properties and the relations between them.",
         "children": {
             "0": {
                 "iid": "Evidence",
                 "name": "Evidence",
-                "type": "Abstract",
+                "type": "Ontology",
                 "definition": "On those catagories relating to the raw materials upon which conclusions are made",
                 "children": {
                     "0": {
                         "iid": "Primary_Evidence",
                         "name": "Primary Evidence",
-                        "type": "Abstract",
+                        "type": "Evidence",
                         "definition": "On those materials deemed immediately connected with the phenomena they describe",
                         "children": {}
                     },
                     "1": {
                         "iid": "Secondary_Evidence",
                         "name": "Secondary Evidence",
-                        "type": "Abstract",
+                        "type": "Evidence",
                         "definition": "On those materials deemed to be analysis or critical comment, based upon primary material",
                         "children": {}
                     },
                     "2": {
                         "iid": "Tertiary_Evidence",
                         "name": "Tertiary Evidence",
-                        "type": "Abstract",
+                        "type": "Evidence",
                         "definition": "On those materials deemed to be meta-analysis or narrative forming, based upon primary and secondmary material",
                         "children": {}
                     }
@@ -75,32 +75,32 @@
     "2": {
         "iid": "Teleology",
         "name": "Teleology",
-        "type": "Discipline",
+        "type": "",
         "definition": "On the explanation of phenomena in terms of the purpose they serve rather than of the cause by which they arise.",
         "children": {
             "0": {
                 "iid": "Teleology_of_History",
                 "name": "History",
-                "type": "Abstract",
+                "type": "Discipline",
                 "definition": "On the purpose of the study of history",
                 "children": {
                     "0": {
                         "iid": "Explanatory_Teleology_of_History",
                         "name": "Explanatory",
-                        "type": "Abstract",
+                        "type": "Teleology",
                         "definition": "To explain the causes or circumstance of an event or process",
                         "children": {
                             "0": {
                                 "iid": "Explanatory-Descriptive_Teleology_of_History",
                                 "name": "Descriptive",
-                                "type": "Abstract",
+                                "type": "Teleology",
                                 "definition": "To recreate or simulate past events 'as they really were'",
                                 "children": {}
                             },
                             "1": {
                                 "iid": "Explanatory-Predictive_Teleology_of_History",
                                 "name": "Predicitive",
-                                "type": "Abstract",
+                                "type": "Teleology",
                                 "definition": "To use history as a means of developing models for predicting events or processes in the future",
                                 "children": {}
                             }
@@ -109,33 +109,33 @@
                     "1": {
                         "iid": "Memorial_Teleology_of_History",
                         "name": "Memorial",
-                        "type": "Abstract",
+                        "type": "Teleology",
                         "definition": "To encourage or support the remembrance of an event or process",
                         "children": {
                             "0": {
                                 "iid": "Memorial-Allusory_Teleology_of_History",
                                 "name": "Allusion",
-                                "type": "Abstract",
+                                "type": "Teleology",
                                 "definition": "To use history as a common cultural touchstone in order to illustrate wider truths",
                                 "children": {}
                             },
                             "1": {
                                 "iid": "Memorial-Justice_Teleology_of_History",
                                 "name": "Justice",
-                                "type": "Abstract",
+                                "type": "Teleology",
                                 "definition": "To use history as a form of honouring specific individuals or groups",
                                 "children": {
                                     "0": {
                                         "iid": "Memorial-Justice-Hero_Teleology_of_History",
                                         "name": "Heroes",
-                                        "type": "Abstract",
+                                        "type": "Teleology",
                                         "definition": "To use history to honour or make exemplars of heroes of an event or process",
                                         "children": {}
                                     },
                                     "1": {
                                         "iid": "Memorial-Justice-Victim_Teleology_of_History",
                                         "name": "Victims",
-                                        "type": "Abstract",
+                                        "type": "Teleology",
                                         "definition": "To use history to honour or otherwise remember victims of an event or process",
                                         "children": {}
                                     }
@@ -144,7 +144,7 @@
                             "2": {
                                 "iid": "Memorial_Teleology_of_History_General",
                                 "name": "Memorial (General)",
-                                "type": "Abstract",
+                                "type": "Teleology",
                                 "definition": "To encourage or support the remembrance of an event or process",
                                 "children": {}
                             }
@@ -157,22 +157,66 @@
     "3": {
         "iid": "Methodology",
         "name": "Methodology",
-        "type": "Discipline",
+        "type": "",
         "definition": "The methods by which History is practiced",
         "children": {
             "0": {
                 "iid": "Oral_History_Methodology",
                 "name": "Oral History",
-                "type": "Abstract",
+                "type": "Methodology",
                 "definition": "The use of interviews with people having personal knowledge of past events",
                 "children": {}
             },
             "1": {
                 "iid": "Close_Reading",
                 "name": "Close Reading",
-                "type": "Abstract",
+                "type": "Methodology",
                 "definition": "The meticulous reading of a text for vocabulary choices, internal structures, and external references",
                 "children": {}
+            },
+            "2": {
+                "iid": "Interpretive_Frameworks",
+                "name": "Interpretive Frameworks",
+                "type": "",
+                "definition": "Methodological approaches that focus on a particular set of evidences or questions",
+                "children": {
+                    "0": {
+                        "iid": "Historical_Materialism",
+                        "name": "Historical Materialism",
+                        "type": "Methodology",
+                        "definition": "A framework which focuses on the material conditions of the past as well as productive roles and relations",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Feminist_Historiography",
+                        "name": "Feminist Historiography",
+                        "type": "Methodology",
+                        "definition": "A framework which focuses on gender (biological or social) identity and relations in the past",
+                        "children": {}
+                    }
+                }
+            },
+            "3": {
+                "iid": "Theoretical_Frameworks",
+                "name": "Theoretical Frameworks",
+                "type": "",
+                "definition": "Theories that attempt to explains why the research problem under study exists",
+                "children": {
+                    "0": {
+                        "iid": "Realism_IR_Theory",
+                        "name": "Realism (IR)",
+                        "type": "Theory",
+                        "definition": "A theory which declares states to be the actors in an anarchic system based on self-interest",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Liberalism_IR_Theory",
+                        "name": "Liberalism (IR)",
+                        "type": "Theory",
+                        "definition": "A theory which accepts multiple types of actors in a system that can include mutually benefitial cooperation",
+                        "children": {}
+                    }
+                }
             }
         }
     }
