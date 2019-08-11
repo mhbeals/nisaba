@@ -1,12 +1,12 @@
-# Nisaba 0.2.19.1
+# Nisaba 0.2.19.2
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.19.1
+### v.0.2.19.2
 
-+ Bug Fix to Renumberer
++ Bug Fix to Tool Tip for pip installation
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

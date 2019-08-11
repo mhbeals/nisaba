@@ -1,9 +1,11 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from tooltip import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.tooltip import *
 
 # Import External Libraries
 import csv
@@ -11,7 +13,6 @@ from pathlib import Path
 import PIL.Image
 import PIL.ImageTk
 import os
-from tooltip import *
 
 # Import TKinter Libraries
 from tkinter import *

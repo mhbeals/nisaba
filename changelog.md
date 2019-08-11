@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.19.2
+
++ Bug Fix to Tool Tip for pip installation
+
 ### v.0.2.19.1
 
 + Bug Fix to Renumberer
