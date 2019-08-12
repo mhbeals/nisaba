@@ -24,116 +24,116 @@
     "0": {
         "schema:editor": [
             "mhb",
-            "20190810_100928",
-            "20190810_100928"
+            "20190812_134849",
+            "20190812_134849"
         ],
         "dc:creator": [
             "Herodotus",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "dc:title": [
             "The Histories",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:hasShortTitle": [
             "Histories",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "prism:volume": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:hasVolumeCount": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "prism:edition": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:hasSequenceIdentifier": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "dc:date": [
             "440 BC",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:hasPageCount": [
             "716",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "prism:isbn": [
             "9780134449082",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "prism:doi": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "fabio:Abstract": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "dc:language": [
             "",
             "mhb",
-            "20190810_100928"
+            "20190812_134849"
         ],
         "items": {
             "0": {
                 "schema:editor": [
                     "mhb",
-                    "20190810_100928",
-                    "20190810_100928"
+                    "20190812_134849",
+                    "20190812_134849"
                 ],
                 "item_type": "t",
                 "fabio_type": [
                     "Section",
                     "mhb",
-                    "20190810_100928"
+                    "20190812_134849"
                 ],
                 "fabio:hasSequenceIdentifier": [
                     "0",
                     "mhb",
-                    "20190810_100928"
+                    "20190812_134849"
                 ],
                 "fabio:pageRange": [
                     "",
                     "mhb",
-                    "20190810_100928"
+                    "20190812_134849"
                 ],
                 "transcription": [
-                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n\n\n\n\n",
+                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n\n\n\n\n\n",
                     "mhb",
-                    "20190810_100928"
+                    "20190812_134849"
                 ],
                 "segments": {
                     "0": {

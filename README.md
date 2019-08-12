@@ -4,9 +4,9 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.20
+### v.0.2.21
 
-+ Add Configuration Screen (Issue #14)
++ Bug Fix to Configuration Screen
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

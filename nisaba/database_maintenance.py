@@ -5,6 +5,7 @@ from pathlib import Path
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, Literal
 import urllib.parse
 import os
+import csv
 
 # Import tkinter Libraries
 from tkinter import END
@@ -17,22 +18,34 @@ class database_maintenance:
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
 	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
-	database_backup_path = database_path + "backups/"
+	database_backup_path = database_path + "backups/" 
 
 	def __init__(self):
 		# Initialise programme with stored databases
+		
+		self.defaults = []
+
+		# Populate dictionary with imported file
+		with open (Path(self.config_path) / 'defaults.txt', 'r') as file:
+			reader = csv.reader(file,delimiter='\n')
+			for line in reader:
+				self.defaults.append(line[0])
+				
+		self.current_database = self.defaults[0]
+		self.current_taxonomy = self.defaults[1]
+		self.taxonomy_level_defaults = [self.defaults[1],self.defaults[2],self.defaults[3]]
 
 		#################
 		# JSON Database #
 		#################
 		
 		# Load JSON database
-		with open (Path(self.database_path) / "database.json", 'r') as file:
+		with open (Path(self.current_database), 'r') as file:
 			loaddata = file.read()
 		
 		# Import JSON into a Dictionary
 		self.database = json.loads(loaddata)
-
+		
 		################
 		# RDF Database #
 		################
@@ -50,7 +63,7 @@ class database_maintenance:
 		
 		# Load Taxonomy
 		
-		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
+		with open (Path(self.current_taxonomy), 'r') as file:
 			loaddata = file.read()
 		self.taxonomy = json.loads(loaddata)
 		
@@ -82,7 +95,7 @@ class database_maintenance:
 		savedata = json.dumps(self.database, indent=4)
 
 		# Save JSON to disk
-		with open (Path(self.database_path) / 'database.json', 'w') as file:
+		with open (Path(self.current_database), 'w') as file:
 			file.write(savedata)
 			
 		# Save Date-Stamped Backup of Database to Backups
@@ -418,8 +431,6 @@ class database_maintenance:
 		elif type == 'Collection': self.taxonomy_level_defaults[0]=Path(file)
 		elif type == 'Item': self.taxonomy_level_defaults[1]=Path(file)
 		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
-		
-		print(self.taxonomy_level_defaults)
 		
 		function_call()
 

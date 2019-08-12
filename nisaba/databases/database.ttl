@@ -19,7 +19,10 @@
     nisaba:hasItem <http://purl.org/nisaba/collection/0/item/0>,
         <http://purl.org/nisaba/collection/0/item/1>,
         <http://purl.org/nisaba/collection/0/item/2>,
-        <http://purl.org/nisaba/collection/0/item/3> .
+        <http://purl.org/nisaba/collection/0/item/3>,
+        <http://purl.org/nisaba/collection/0/item/4>,
+        <http://purl.org/nisaba/collection/0/item/5>,
+        <http://purl.org/nisaba/collection/0/item/6> .
 
 <http://purl.org/nisaba/collection/1> a nisaba:CollectionEntry ;
     nisaba:hasItem <http://purl.org/nisaba/collection/1/item/0>,
@@ -165,7 +168,9 @@
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_095005']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_095313']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_100908']",
-        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_100928']" .
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190810_100928']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190812_134836']",
+        "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n', 'mhb', '20190812_134849']" .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
     ns1:description "",
@@ -313,7 +318,20 @@
     nisaba:top 0 .
 
 <http://purl.org/nisaba/collection/0/item/3> a nisaba:ItemEntry ;
-    nisaba:item_type "t" .
+    nisaba:item_type "t" ;
+    nisaba:transcription "['\\n', 'mhb', '20190812_140343']" .
+
+<http://purl.org/nisaba/collection/0/item/4> a nisaba:ItemEntry ;
+    nisaba:item_type "t" ;
+    nisaba:transcription "['', '', '']" .
+
+<http://purl.org/nisaba/collection/0/item/5> a nisaba:ItemEntry ;
+    nisaba:item_type "t" ;
+    nisaba:transcription "['', '', '']" .
+
+<http://purl.org/nisaba/collection/0/item/6> a nisaba:ItemEntry ;
+    nisaba:item_type "t" ;
+    nisaba:transcription "['', '', '']" .
 
 <http://purl.org/nisaba/collection/1/item/0> a nisaba:ItemEntry ;
     nisaba:hasAnnotation "['Memorial_Teleology_of_History', 'mhb', '20190810_095807']",

@@ -32,18 +32,6 @@ class configuration_display(database_maintenance):
 		self.database['users'][self.current_user.get()]['default'] = 1
 
 		self.database_saver()
-
-	def configuration_defaults_loader(self):
-
-		defaults = []
-
-		# Populate dictionary with imported file
-		with open (Path(self.config_path) / 'defaults.txt', 'r') as file:
-			reader = csv.reader(file,delimiter='\n')
-			for line in reader:
-				defaults.append(line[0])
-
-		return defaults;
 	
 	def configuration_defaults_saver(self):
 	
@@ -76,6 +64,7 @@ class configuration_display(database_maintenance):
 			loaddata = file.read()
 			
 		return loaddata
+		
 	def edit_user_frame_displayer(self):
 		##################
 		# Window Cleanup #
@@ -214,7 +203,8 @@ class configuration_display(database_maintenance):
 		# Creates Dropdown Menu of Possible Users
 		
 		# Retrieve Existing User List
-		users = [self.current_user.get()]
+		users = []
+		self.current_user = StringVar(self.configuration_window)
 
 		for key,value in self.database['users'].items():
 			users.append(key)
@@ -257,12 +247,6 @@ class configuration_display(database_maintenance):
 		# Create Configuration Frame #
 		##############################		
 		
-		# Load Defaults 
-		self.defaults = self.configuration_defaults_loader()
-		self.current_database = self.defaults[0]
-		self.current_user = StringVar(self.configuration_window)
-		self.taxonomy_level_defaults = [self.defaults[1],self.defaults[2],self.defaults[3]]
-		
 		# Load default database
 		with open (Path(self.current_database), 'r') as file:
 			self.database = json.loads(file.read())
@@ -291,4 +275,5 @@ class configuration_display(database_maintenance):
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 		self.configuration_window = window
 		self.configuration_window.pack_forget 
+		
 		self.default_database_loader()

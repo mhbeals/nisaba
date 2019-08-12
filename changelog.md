@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.20.1
+
++ Bug Fix to Configuration Screen
+
 ### v.0.2.20
 
 + Add Configuration Screen (Issue #14)

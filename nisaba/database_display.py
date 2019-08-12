@@ -1058,11 +1058,11 @@ class database_display(database_maintenance):
 		self.audiovisual_icon=PhotoImage(file=Path(self.assets_path) / 'audiovisual.png')
 	
 		# Reload Databases
-		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
+		with open (Path(self.current_taxonomy), 'r') as file:
 			loaddata = file.read()
 		self.taxonomy = json.loads(loaddata)
 		
-		with open (Path(self.database_path) / "database.json", 'r') as file:
+		with open (Path(self.current_database), 'r') as file:
 			loaddata = file.read()
 		self.database = json.loads(loaddata)
 		
