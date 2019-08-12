@@ -404,7 +404,7 @@ class database_display(database_maintenance):
 			self.transcription_text = Text(self.segment_pane_two, wrap=WORD)
 
 			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, image=self.refresh_icon, command=self.transcription_updater)
+			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.transcription_updater)
 			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
 			update_button.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
 
@@ -452,7 +452,7 @@ class database_display(database_maintenance):
 			self.cropped_image_updater()
 
 			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, image=self.refresh_icon, command=self.cropped_image_updater)
+			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.cropped_image_updater)
 			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
 			update_button.grid(column = 4, row = 1, rowspan=2, sticky=W, padx =5, pady = 5)
 			
@@ -472,17 +472,17 @@ class database_display(database_maintenance):
 
 		# Create "save", "reset" and "return" buttons
 		buttonFrame = ttk.Frame(self.segment_pane_one)
-		save_button = Button(self.segment_pane_one, image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
+		save_button = ttk.Button(self.segment_pane_one, image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
 		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
-		refresh_button = Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
+		refresh_button = ttk.Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
 		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
-		return_button = Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panel_displayer('m')))
+		return_button = ttk.Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panel_displayer('m')))
 		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
 		
 		buttonFrame.pack(anchor=NW)
-		return_button.pack(side=LEFT, padx=5, pady=5)
-		save_button.pack(side=LEFT, padx=5, pady=5)
-		refresh_button.pack(side=LEFT, padx=5, pady=5)
+		return_button.pack(side=LEFT)
+		save_button.pack(side=LEFT)
+		refresh_button.pack(side=LEFT)
 
 
 		########################################
@@ -672,22 +672,22 @@ class database_display(database_maintenance):
 		
 		# Create buttons for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.add_button = Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
+		self.add_button = ttk.Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Segment",delay=0.01)
-		self.delete_segment_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
+		self.delete_segment_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
 		delete_segment_tt = ToolTip(self.delete_segment_button, "Delete Selected Segment",delay=0.01)
-		self.save_button = Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
+		self.save_button = ttk.Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
 		save_button_tt = ToolTip(self.save_button, "Save Item",delay=0.01)
-		self.refresh_button = Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panel_displayer('m')))
+		self.refresh_button = ttk.Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panel_displayer('m')))
 		refresh_button_tt = ToolTip(self.refresh_button, "Reload Item",delay=0.01)
-		self.return_button = Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
+		self.return_button = ttk.Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
 		return_button_tt = ToolTip(self.return_button, "Return to Item View",delay=0.01)
 		
-		self.return_button.pack(side=LEFT, padx=5, pady=5)
-		self.save_button.pack(side=LEFT, padx=5, pady=5)
-		self.refresh_button.pack(side=LEFT, padx=5, pady=5)
-		self.add_button.pack(side=LEFT, padx=5, pady=5)
-		self.delete_segment_button.pack(side=LEFT, padx=5, pady=5)
+		self.return_button.pack(side=LEFT)
+		self.save_button.pack(side=LEFT)
+		self.refresh_button.pack(side=LEFT)
+		self.add_button.pack(side=LEFT)
+		self.delete_segment_button.pack(side=LEFT)
 		
 		
 		self.buttonFrame.pack(anchor=NW)
@@ -861,14 +861,14 @@ class database_display(database_maintenance):
 		self.bibliographic_form_maker(item_metadata_frame, 'c')
 
 		# Create "save" button for all tabs
-		save_item_button = Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
+		save_item_button = ttk.Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
 		save_item_button_tt = ToolTip(save_item_button, "Save Collection",delay=0.01)
 		
-		collections_list_button = Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_frame_displayer(self.database_window)))
+		collections_list_button = ttk.Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_frame_displayer(self.database_window)))
 		collections_list_button_tt = ToolTip(collections_list_button, "Return to Collections List",delay=0.01)
 		
-		collections_list_button.pack(side=LEFT, padx=5, pady=5)
-		save_item_button.pack(side=LEFT, padx=5, pady=5)
+		collections_list_button.pack(side=LEFT)
+		save_item_button.pack(side=LEFT)
 		
 		
 	def collection_item_list_panel_displayer(self):
@@ -925,21 +925,21 @@ class database_display(database_maintenance):
 		# Create "save" button for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_two)
 		
-		self.add_text_button = Button(self.buttonFrame, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
+		self.add_text_button = ttk.Button(self.buttonFrame, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
 		add_item_button_tt = ToolTip(self.add_text_button, "Add Text Item",delay=0.01)
-		self.add_image_button = Button(self.buttonFrame, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
+		self.add_image_button = ttk.Button(self.buttonFrame, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
 		add_image_button_tt = ToolTip(self.add_image_button, "Add Image Item",delay=0.01)
-		self.add_audio_button = Button(self.buttonFrame, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
+		self.add_audio_button = ttk.Button(self.buttonFrame, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
 		add_audio_button_tt = ToolTip(self.add_audio_button, "Add Audio Item",delay=0.01)
-		self.add_audiovisual_button = Button(self.buttonFrame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
+		self.add_audiovisual_button = ttk.Button(self.buttonFrame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
 		add_audiovisual_button_tt = ToolTip(self.add_audiovisual_button, "Add Audio-Visual Item",delay=0.01)
-		self.delete_item_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
+		self.delete_item_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
 		delete_item_tt = ToolTip(self.delete_item_button, "Delete Selected Item",delay=0.01)
 		
-		self.add_text_button.pack(side=LEFT, padx=5, pady=5)
-		self.add_image_button.pack(side=LEFT, padx=5, pady=5)
-		self.add_audio_button.pack(side=LEFT, padx=5, pady=5)
-		self.add_audiovisual_button.pack(side=LEFT, padx=5, pady=5)
+		self.add_text_button.pack(side=LEFT)
+		self.add_image_button.pack(side=LEFT)
+		self.add_audio_button.pack(side=LEFT)
+		self.add_audiovisual_button.pack(side=LEFT)
 		self.delete_item_button.pack(side=RIGHT, padx=5, pady=5)
 		
 		self.buttonFrame.pack(anchor=NW)
@@ -1035,9 +1035,9 @@ class database_display(database_maintenance):
 
 		# Add/Delete Collection Buttons
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.add_collection_button = Button(self.buttonFrame,image=self.add_icon,command=self.collection_adder)
+		self.add_collection_button = ttk.Button(self.buttonFrame,image=self.add_icon,command=self.collection_adder)
 		add_collection_tt = ToolTip(self.add_collection_button, "Add Collection",delay=0.01)
-		self.delete_collection_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database,str(items.curselection()[0]),'c')))
+		self.delete_collection_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database,str(items.curselection()[0]),'c')))
 		delete_collection_tt = ToolTip(self.delete_collection_button, "Delete Selected Collection",delay=0.01)
 		self.buttonFrame.pack(anchor=W)
 		self.add_collection_button.pack(side=LEFT)

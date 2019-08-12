@@ -1,9 +1,11 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from tooltip import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.tooltip import *
 
 # Import External Libraries
 from pathlib import Path
@@ -18,17 +20,6 @@ from tkinter import messagebox
 
 class metadata_display(database_maintenance):
 
-	def default_user_setter(self,current_user):
-		# If this user has 'default' checked
-		if self.uid_default_user_var.get() == 1:
-			
-			# Set everyone to 0
-			for key,value in self.database['users'].items():
-				value['default'] = 0
-			
-			# Set this user to default (1)
-			self.database['users'][current_user]['default'] = 1
-
 	def user_deleter(self,current_user):
 		# Delete a User
 
@@ -38,17 +29,15 @@ class metadata_display(database_maintenance):
 		# Save Cached Database to Disk
 		self.database_saver()
 		
-		# Clear Metadata Window and Reload Data 
-		self.metadata_frame.destroy()
-		self.user_loader()
+		# Clear Metadata Window
+		self.metadata_window.destroy()
+
 		
 	def metadata_entry_saver(self,current_user):
 		# Save a User's Metadata
 		
 		# Update Current User
 		if current_user in self.database['users']:
-
-			self.default_user_setter(current_user)
 			
 			# Go through the rest of the entries and save the vaule
 			for entry in self.entries:
@@ -62,13 +51,15 @@ class metadata_display(database_maintenance):
 			# Go through the entries and save the vaule
 			for entry in self.entries:
 					self.database['users'][current_user][entry[0]] = entry[1].get()
+					
+			self.database['users'][current_user]['default'] = 0
 		
 		# Save Cached Database to Disk
 		self.database_saver()
 		
-		# Clear Metadata Window and Reload Data 
-		self.metadata_frame.destroy()
-		self.user_loader()
+		# Clear Metadata Window
+		self.metadata_window.destroy()
+
 		
 	def database_metadata_entry_loader(self,event):	
 		# Loads Metadata on Selected User
@@ -115,24 +106,17 @@ class metadata_display(database_maintenance):
 		row = ttk.Frame(self.metadata_frame)
 		uid_label = Label(row, text="User ID: ", anchor='w', width=30)
 		uid_entry = Entry(row, width=50)		
-		self.uid_default_user_var = BooleanVar()
-		self.uid_default_user = Checkbutton(row, text="Default User", variable=self.uid_default_user_var)
 
 		# Display User ID Entry Box
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		uid_label.pack(side=LEFT)
 		uid_entry.pack(side=LEFT, expand=YES, fill=X)
-		self.uid_default_user.pack(side=RIGHT, padx=5)
-		
+	
 		# Fill User ID Entry Box
 		if self.current_user.get() == 'New User':
 			uid_entry.insert(0,'nid')
 		else:
 			uid_entry.insert(0,self.current_user.get())
-			
-			# Check Default Box
-			if self.database['users'][self.current_user.get()].get('default',0) == 1:
-				self.uid_default_user_var.set(1)
 		
 		# Create the Rest of the Entry Form Elements
 		for field,question in questions.items():
@@ -161,8 +145,10 @@ class metadata_display(database_maintenance):
 			
 		# Create Save and Delete Buttons	
 		self.buttonFrame = ttk.Frame(self.metadata_frame)
-		self.save_button = Button(self.buttonFrame, text='Save Values', command=(lambda: self.metadata_entry_saver(uid_entry.get())))
-		self.delete_button = Button(self.buttonFrame, text='Delete User', command=(lambda: self.user_deleter(uid_entry.get())))
+		self.save_button = ttk.Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.metadata_entry_saver(uid_entry.get())))
+		save_button_tt = ToolTip(self.save_button, "Save User",delay=0.01)
+		self.delete_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.user_deleter(uid_entry.get())))
+		delete_button_tt = ToolTip(self.delete_button, "Delete User",delay=0.01)
 		
 		# Display Save and Delete Buttons
 		self.buttonFrame.pack(anchor=NW)
@@ -207,6 +193,10 @@ class metadata_display(database_maintenance):
 		users_menu.pack(side=LEFT, padx=5, pady=5)
 	
 	def database_metadata_viewer(self,window):
+	
+		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
+		self.delete_icon=PhotoImage(file=Path(self.assets_path) / 'delete.png')
+		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 	
 		self.metadata_window = window
 		self.metadata_window.pack_forget 

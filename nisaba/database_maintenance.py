@@ -401,20 +401,27 @@ class database_maintenance:
 		# Save Cached Database to Disk
 		self.database_saver()
 
-	def database_loader(self):
+	def database_loader(self,type,function_call):
 		# Loads a New (non-default) JSON Database
-		
-		# Delete Current Database Window
-		self.database_window.destroy()
 		
 		# Load Database
 		file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
-		with open (file, 'r') as file:
-			loaddata = file.read()
-		self.database = json.loads(loaddata)
 		
-		# Reload Database Window
-		self.database_frame_displayer(self.database_window)
+		if type == 'd': 
+		
+			self.current_database = Path(file)
+			
+			with open (file, 'r') as file:
+				loaddata = file.read()
+			self.database = json.loads(loaddata)
+			
+		elif type == 'Collection': self.taxonomy_level_defaults[0]=Path(file)
+		elif type == 'Item': self.taxonomy_level_defaults[1]=Path(file)
+		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
+		
+		print(self.taxonomy_level_defaults)
+		
+		function_call()
 
 	def taxonomy_saver(self):
 		# Saves Taxononmy Definitions

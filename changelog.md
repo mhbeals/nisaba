@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.20
+
++ Add Configuration Screen (Issue #14)
+
 ### v.0.2.19.3
 
 + Bug Fix to Item and Taxonomy Saves

@@ -1,12 +1,12 @@
-# Nisaba 0.2.19.3
+# Nisaba 0.2.20
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.19.3
+### v.0.2.20
 
-+ Bug Fix to Item and Taxonomy Saves
++ Add Configuration Screen (Issue #14)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 
