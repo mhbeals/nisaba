@@ -181,8 +181,8 @@
                 "definition": "Methodological approaches that focus on a particular set of evidences or questions",
                 "children": {
                     "0": {
-                        "iid": "Historical_Materialism",
-                        "name": "Historical Materialism",
+                        "iid": "Material_Historicism",
+                        "name": "Material Historicism",
                         "type": "Methodology",
                         "definition": "A framework which focuses on the material conditions of the past as well as productive roles and relations",
                         "children": {}

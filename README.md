@@ -1,12 +1,13 @@
-# Nisaba 0.2.20
+# Nisaba 0.2.20.2
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.21
+### v.0.2.20.2
 
-+ Bug Fix to Configuration Screen
++ Bug Fix to Configuration Database Loading
++ Added customizable title namespace, collection type, and item type variables (Issue #14)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

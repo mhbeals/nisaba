@@ -35,13 +35,16 @@ def main():
 			main_pane_viewer.place(relx=.1, relwidth=.9, relheight=1)
 			
 			if switch == 'd': 
+				database_window = database_display()				
 				database_window.database_window_displayer(main_pane_viewer)
 			elif switch == 't': 
+				taxonomy_window = taxonomy_display()
 				taxonomy_window.taxonomy_viewer(main_pane_viewer)
 			elif switch == 's':
 				comingsoon = Label(main_pane_viewer, text="Coming Soon")
 				comingsoon.place(relx=.5,rely=.5)
 			elif switch == 'c':
+				configuration_window = configuration_display()
 				configuration_window.configuration_viewer(main_pane_viewer) 
 		
 		#######################
@@ -50,11 +53,6 @@ def main():
 		
 		# Set assest path
 		assets_path = os.path.join(os.path.dirname(__file__), "assets/")
-
-		# Instantiate Database Viewers
-		database_window = database_display()
-		taxonomy_window = taxonomy_display()
-		configuration_window = configuration_display()
 	
 		################
 		# Setup Window #
@@ -62,7 +60,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.20.1')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.20.2')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project

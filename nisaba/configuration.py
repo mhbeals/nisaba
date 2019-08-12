@@ -128,7 +128,7 @@ class configuration_display(database_maintenance):
 	def configurations_loader(self):
 		
 		self.configurations_frame = ttk.Frame(self.pane_one)
-		default_parameters = ["Collection Type Namespace","Collection 'Title' Field","Item Type Namespace", "Item 'Title' Field","Segment Type Namespace","Segment 'Title' Field"]
+		default_parameters = ["Collection Type Namespace","Collection 'Title' Field","Item Type Namespace"]
 		default_values = self.defaults[4:]
 		button_parameters = ["Default LOD Prefixes","Collection-Level Questions","Item-Level Questions","Segment-Level Questions"]
 		self.parameter_entries = []
@@ -205,29 +205,34 @@ class configuration_display(database_maintenance):
 		# Retrieve Existing User List
 		users = []
 		self.current_user = StringVar(self.configuration_window)
-
-		for key,value in self.database['users'].items():
-			users.append(key)
-			if  value['default'] == 1:
-				self.current_user.set(key)
-			
-		# Create Default User Row
-		row = ttk.Frame(self.pane_one)
-		row.pack(side=TOP, fill=X, padx=5, pady=5)
-		label = Label(row, text="Default User: ", anchor='w', width=30)
-		label.pack(side=LEFT)
-		edit_button = ttk.Button(row, text="Edit Users", command=self.edit_user_frame_displayer)
-		refresh_button = ttk.Button(row, text="Refresh Users", command=self.default_database_loader)
-		edit_button.pack(side=RIGHT)
-		refresh_button.pack(side=RIGHT)
-			
-		# Create Dropdown Menu
-		users_menu = OptionMenu(row, self.current_user, *users)
-
-		# Display Selection ttk.Frame
-		users_menu.pack(anchor=W)
 		
-		self.default_taxonomy_loader()
+		try:
+			for key,value in self.database['users'].items():
+				users.append(key)
+				if  value['default'] == 1:
+					self.current_user.set(key)
+		except(KeyError):
+			label = ttk.Label(self.pane_one,text="Invalid Database File")
+			label.pack()
+		
+		else:
+			# Create Default User Row
+			row = ttk.Frame(self.pane_one)
+			row.pack(side=TOP, fill=X, padx=5, pady=5)
+			label = Label(row, text="Default User: ", anchor='w', width=30)
+			label.pack(side=LEFT)
+			edit_button = ttk.Button(row, text="Edit Users", command=self.edit_user_frame_displayer)
+			refresh_button = ttk.Button(row, text="Refresh Users", command=self.default_database_loader)
+			edit_button.pack(side=RIGHT)
+			refresh_button.pack(side=RIGHT)
+				
+			# Create Dropdown Menu
+			users_menu = OptionMenu(row, self.current_user, *users)
+
+			# Display Selection ttk.Frame
+			users_menu.pack(anchor=W)
+			
+			self.default_taxonomy_loader()
 		
 	def default_database_loader(self):
 	

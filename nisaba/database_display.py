@@ -898,14 +898,14 @@ class database_display(database_maintenance):
 
 			# If the item has a title
 			if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number]:
-				if 'dc:title' in self.database[self.collection_index]:
-					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][0]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index]['dc:title'][0]))
+				if self.collections_title_namespace in self.database[self.collection_index]:
+					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][0]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index][self.collections_title_namespace][0]))
 				else:
-					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['dc:title'][0]))
+					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index][self.collections_title_namespace][0]))
 
 			# If the item has no title
-			elif 'dc:title' in self.database[self.collection_index]:
-				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index]['dc:title'][0]))
+			elif self.collections_title_namespace in self.database[self.collection_index]:
+				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index][self.collections_title_namespace][0]))
 
 			else:
 				display_item = "No title listed"
@@ -989,9 +989,6 @@ class database_display(database_maintenance):
 		except (NameError, AttributeError):
 			pass
 
-		# Setup Window Menu
-		#menubar.add_command(label="Load New Database", command=self.database_loader)
-
 		# Setup Window Panes
 		self.pane_one = ttk.Frame(self.database_window)
 		self.pane_one.place(rely=0, relwidth=1, relheight=1)
@@ -1014,9 +1011,9 @@ class database_display(database_maintenance):
 
 			if collection_number != 'users':
 
-				# If the item has a title
-				if 'dc:title' in self.database[collection_number]:
-					display_item = str(dictionary['dc:title'][0])
+				# If the collection has a title
+				if self.collections_title_namespace in self.database[collection_number]:
+					display_item = str(dictionary[self.collections_title_namespace][0])
 
 				else:
 					display_item = "No title listed"
@@ -1046,6 +1043,17 @@ class database_display(database_maintenance):
 	def database_window_displayer(self,window):
 		# Setup Database ttk.Frame
 	
+		##################
+		# Window Cleanup #
+		##################
+		
+		# Delete Previous Panels and Menus or Create New Window
+		try:
+			self.database_window.destroy()
+		except (NameError, AttributeError):
+			pass
+
+
 		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
 		self.up_level_icon=PhotoImage(file=Path(self.assets_path) / 'uplevel.png')
 		self.add_icon=PhotoImage(file=Path(self.assets_path) / 'add.png')
@@ -1056,15 +1064,15 @@ class database_display(database_maintenance):
 		self.image_icon=PhotoImage(file=Path(self.assets_path) / 'image.png')
 		self.audio_icon=PhotoImage(file=Path(self.assets_path) / 'audio.png')
 		self.audiovisual_icon=PhotoImage(file=Path(self.assets_path) / 'audiovisual.png')
-	
-		# Reload Databases
-		with open (Path(self.current_taxonomy), 'r') as file:
-			loaddata = file.read()
-		self.taxonomy = json.loads(loaddata)
+
+		# This is a prefix to put before the filename of the collection type, derived from the filename question config. For example 'book.tsv' with a namespace of 'fabio' would be 'fabio:book'
+		self.collections_type_namespace = self.defaults[4]
 		
-		with open (Path(self.current_database), 'r') as file:
-			loaddata = file.read()
-		self.database = json.loads(loaddata)
+		# This the field that is pulled in the listboxes for collections
+		self.collections_title_namespace = self.defaults[5]		
+		
+		# This is a prefix to put before the filename of the type type, derived from a drop down in the item screen. For example 'page' with a namespace of 'fabio' would be 'fabio:page'
+		self.item_type_namespace = self.defaults[6]
 		
 		# Set Name of Collections ttk.Frame	
 		self.database_window = window

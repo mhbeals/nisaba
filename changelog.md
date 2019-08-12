@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.20.2
+
++ Bug Fix to Configuration Database Loading
++ Added customizable title namespace, collection type, and item type variables (Issue #14)
+
 ### v.0.2.20.1
 
 + Bug Fix to Configuration Screen
