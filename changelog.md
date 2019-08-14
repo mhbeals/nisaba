@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.20.3
+
++ Added "Default Sample" Configurations, Databases and Taxonomies 
++ Moved saved configuration to non-pulled/pushed location
+
 ### v.0.2.20.2
 
 + Bug Fix to Configuration Database Loading

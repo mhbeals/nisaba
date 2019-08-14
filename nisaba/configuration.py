@@ -48,7 +48,7 @@ class configuration_display(database_maintenance):
 		for parameter_set in self.parameter_entries:
 			savedata = savedata + parameter_set[1].get() + "\n"
 		
-		with open (Path(self.config_path) / 'defaults.txt', 'w') as file:
+		with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'w') as file:
 			file.write(savedata)
 	
 	def configuration_file_saver(self,file):
@@ -251,10 +251,6 @@ class configuration_display(database_maintenance):
 		##############################
 		# Create Configuration Frame #
 		##############################		
-		
-		# Load default database
-		with open (Path(self.current_database), 'r') as file:
-			self.database = json.loads(file.read())
 		
 		# Create Configuration Frame
 		self.pane_one = ttk.Frame(self.configuration_window)

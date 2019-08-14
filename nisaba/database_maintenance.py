@@ -16,6 +16,7 @@ class database_maintenance:
 	# Set Relative Paths
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
+	user_config_path = os.path.join(os.path.dirname(__file__), "config_files/user_defined")
 	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
 	database_backup_path = database_path + "backups/" 
@@ -26,12 +27,19 @@ class database_maintenance:
 		self.defaults = []
 
 		# Populate dictionary with imported file
-		with open (Path(self.config_path) / 'defaults.txt', 'r') as file:
-			reader = csv.reader(file,delimiter='\n')
-			for line in reader:
-				self.defaults.append(line[0])
-				
-		self.current_database = self.defaults[0]
+		try: 
+			with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'r') as file:
+				reader = csv.reader(file,delimiter='\n')
+				for line in reader:
+					self.defaults.append(line[0])
+		except(FileNotFoundError):
+		
+			with open (Path(self.config_path) / 'sample_defaults.txt', 'r') as file:
+				reader = csv.reader(file,delimiter='\n')
+				for line in reader:
+					self.defaults.append(line[0])
+					
+		self.current_database = self.defaults[0]	
 		self.current_taxonomy = self.defaults[1]
 		self.taxonomy_level_defaults = [self.defaults[1],self.defaults[2],self.defaults[3]]
 
@@ -40,9 +48,15 @@ class database_maintenance:
 		#################
 		
 		# Load JSON database
-		with open (Path(self.current_database), 'r') as file:
-			loaddata = file.read()
 		
+		try:
+			with open (Path(self.current_database), 'r') as file:
+				loaddata = file.read()
+		except(FileNotFoundError):
+			self.current_database = Path(self.database_path) / 'sample_database.json'
+			with open (Path(self.current_database), 'r') as file:
+				loaddata = file.read()
+			
 		# Import JSON into a Dictionary
 		self.database = json.loads(loaddata)
 		
@@ -53,20 +67,23 @@ class database_maintenance:
 		# Create a Blank Graph
 		self.database_rdf = Graph()
 		
-		# Load RDF database
-		with open (Path(self.database_path) / "taxonomy.json", 'r') as file:
-			loaddata = file.read()
-			
 		#######################
 		# Annotation Taxonomy #
 		#######################
 		
 		# Load Taxonomy
 		
-		with open (Path(self.current_taxonomy), 'r') as file:
-			loaddata = file.read()
-		self.taxonomy = json.loads(loaddata)
-		
+		try:
+			with open (Path(self.current_taxonomy), 'r') as file:
+				loaddata = file.read()
+		except(FileNotFoundError):
+			self.current_taxonomy = Path(self.database_path) / 'sample_taxonomy.json'
+			self.taxonomy_level_defaults = [self.current_taxonomy,self.current_taxonomy,self.current_taxonomy]
+			with open (Path(self.current_taxonomy), 'r') as file:
+				loaddata = file.read()
+				
+			self.taxonomy = json.loads(loaddata)
+			
 
 	def iid_iterator(self,database,iid,function_call):
 		# Search through Database for a Specific Branch or Child
@@ -110,7 +127,7 @@ class database_maintenance:
 		# Map the JSON database to RDF
 	
 		# Load previous triples, if any
-		self.database_rdf.parse(self.database_path + "database.ttl", format='turtle')
+		self.database_rdf.parse(self.database_path + "sample_database.ttl", format='turtle')
 
 		# Set URIs
 		nisaba_vocab_uri = URIRef('http://purl.org/nisaba/vocab#')
@@ -195,7 +212,7 @@ class database_maintenance:
 		############
 		
 		# Save RDF
-		with open(Path(self.database_path) / 'database.ttl', 'wb') as file:
+		with open(Path(self.database_path) / 'sample_database.ttl', 'wb') as file:
 			file.write(self.database_rdf.serialize(format='turtle'))
 
 		# Save Date-Stamped Backup of RDF in Backups

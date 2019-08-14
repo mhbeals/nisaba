@@ -6,3 +6,4 @@ include/
 lib/
 nisaba/databases/backups/*.ttl
 nisaba/databases/backups/*.json
+nisaba/config_files/user_defined/*

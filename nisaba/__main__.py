@@ -60,7 +60,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.20.2')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.20.3')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
