@@ -1,5 +1,10 @@
 # Change Log
 
+### v.0.2.21
+
++ Created "Image Not Found Error"
++ Minor Bug Fixes to Display Key Errors
+
 ### v.0.2.20.3
 
 + Added "Default Sample" Configurations, Databases and Taxonomies 

@@ -82,7 +82,7 @@ class database_maintenance:
 			with open (Path(self.current_taxonomy), 'r') as file:
 				loaddata = file.read()
 				
-			self.taxonomy = json.loads(loaddata)
+		self.taxonomy = json.loads(loaddata)
 			
 
 	def iid_iterator(self,database,iid,function_call):

@@ -1,13 +1,13 @@
-# Nisaba 0.2.20.3
+# Nisaba 0.2.21
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.20.3
+### v.0.2.21
 
-+ Added "Default Sample" Configurations, Databases and Taxonomies 
-+ Moved saved configuration to non-pulled/pushed location
++ Created "Image Not Found Error"
++ Minor Bug Fixes to Display Key Errors
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

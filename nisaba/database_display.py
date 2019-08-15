@@ -624,27 +624,31 @@ class database_display(database_maintenance):
 			# Set image file
 			filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
 
-			# Load Image
-			image = PIL.Image.open(filename)
+			try:
+				# Load Image
+				image = PIL.Image.open(filename)
+			except(FileNotFoundError):
+				label = ttk.Label(self.pane_two, text="Image Not Found")
+				label.grid(column=3,row=2)
+			else:
+				# Find Image Size
+				[imageSizeWidth, imageSizeHeight] = image.size
 
-			# Find Image Size
-			[imageSizeWidth, imageSizeHeight] = image.size
+				# Resize Image to Fit Canvas
+				sizeRatio = 600 / imageSizeWidth
+				newImageSizeWidth = int(imageSizeWidth*sizeRatio)
+				newImageSizeHeight = int(imageSizeHeight*sizeRatio)
+				image = image.resize((newImageSizeWidth, newImageSizeHeight), PIL.Image.ANTIALIAS)
 
-			# Resize Image to Fit Canvas
-			sizeRatio = 600 / imageSizeWidth
-			newImageSizeWidth = int(imageSizeWidth*sizeRatio)
-			newImageSizeHeight = int(imageSizeHeight*sizeRatio)
-			image = image.resize((newImageSizeWidth, newImageSizeHeight), PIL.Image.ANTIALIAS)
+				# Prepare Image for Insertion
+				self.photoImg = PIL.ImageTk.PhotoImage(image)
 
-			# Prepare Image for Insertion
-			self.photoImg = PIL.ImageTk.PhotoImage(image)
+				# Display Image Canvas
+				imageCanvas = Canvas(self.pane_two, width=newImageSizeWidth+10, height=newImageSizeHeight+10, bg="black")
+				imageCanvas.grid(column = 0, row = 1, columnspan=5)
 
-			# Display Image Canvas
-			imageCanvas = Canvas(self.pane_two, width=newImageSizeWidth+10, height=newImageSizeHeight+10, bg="black")
-			imageCanvas.grid(column = 0, row = 1, columnspan=5)
-
-			# Add Image to Canvas
-			imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
+				# Add Image to Canvas
+				imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
 
 		####################################
 		# Setup Item Metadata Panel (Left) #
@@ -897,7 +901,7 @@ class database_display(database_maintenance):
 		for item_number,dictionary in self.database[self.collection_index]['items'].items():
 
 			# If the item has a title
-			if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number]:
+			if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number] and 'fabio:type' in self.database[self.collection_index]['items'][item_number]:
 				if self.collections_title_namespace in self.database[self.collection_index]:
 					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][0]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index][self.collections_title_namespace][0]))
 				else:
