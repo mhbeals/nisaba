@@ -264,9 +264,11 @@ class configuration_display(database_maintenance):
 		entry = Entry(row)
 		entry.insert(0,self.current_database)
 		button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader('d',self.default_database_loader)))
+		new_button = ttk.Button(row, text="New", command=self.database_creator)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		label.pack(side=LEFT)
 		button.pack(side=RIGHT)
+		new_button.pack(side=RIGHT)
 		entry.pack(side=RIGHT, expand=YES, fill=X)
 		
 		self.user_loader()

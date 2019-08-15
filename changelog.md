@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.22
+
++ Added Create New Database Function in Config Menu
+
 ### v.0.2.21
 
 + Created "Image Not Found Error"

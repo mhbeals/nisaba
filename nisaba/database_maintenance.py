@@ -10,6 +10,7 @@ import csv
 # Import tkinter Libraries
 from tkinter import END
 from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import asksaveasfile
 
 class database_maintenance:
 
@@ -105,6 +106,18 @@ class database_maintenance:
 				# Run Recursively
 				self.iid_iterator(value['children'],iid,function_call)
 
+	def database_creator(self):
+		# Create new database
+
+		file = asksaveasfile(mode='w', defaultextension=".json")
+		if file is None:
+			return
+
+		data = '{"users":{"nid":{"schema:givenName":"New","schema:familyName":"User","schema:sameAS":"","schema:worksFor":"","schema:memberOf":"","schema:email":"","foaf:homepage":"","default":1}},"0":{"schema:editor":["","",""],"dc:title":["New Collection","",""],"items":{},"dc:creator":["","",""]}}'
+			
+		file.write(data)
+		file.close()
+		
 	def database_saver(self):
 		# Save Cached Database to Disk
 	
