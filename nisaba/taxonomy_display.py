@@ -1,15 +1,16 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from tooltip import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.tooltip import *
 
 # Import TKinter Libraries
 from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import *
-from tooltip import *
 
 class taxonomy_display(database_maintenance):
 
@@ -20,7 +21,7 @@ class taxonomy_display(database_maintenance):
 		i = -1
 		loop = TRUE
 
-		
+
 		while loop:
 			i = i + 1
 			loop = str(i) in self.taxonomy
@@ -58,7 +59,7 @@ class taxonomy_display(database_maintenance):
 
 		# Save to disk
 		self.taxonomy_saver()
-		
+
 		# Reload Taxonomy Viewer
 		self.taxonomy_viewer(self.taxonomy_window)
 
@@ -67,16 +68,16 @@ class taxonomy_display(database_maintenance):
 
 		# Delete Current Key
 		del database[key]
-		
+
 		# Reload Taxonomy Viewer
 		self.taxonomy_viewer(self.taxonomy_window)
 
 	def entry_filler(self,database,key):
 		# Fill in entry boxes
 
-		# Reload Display Editor 
+		# Reload Display Editor
 		self.display_editor()
-		
+
 		# Fill in the Entries with Selected Item
 		self.taxonomy_iid_entry.insert(0,database[key]['iid'])
 		self.taxonomy_annotation_entry.insert(0,database[key]['name'])
@@ -85,10 +86,10 @@ class taxonomy_display(database_maintenance):
 
 	def tree_item_informer(self,event):
 		# Send Selected ID to Iterator
-		
+
 		# Get Selected ID from Click Event
 		self.clicked_item = self.taxonomy_tree.identify('item',event.x,event.y)
-		
+
 		# Send to iid_iterator
 		self.iid_iterator(self.taxonomy,self.taxonomy_tree.identify('item',event.x,event.y),self.entry_filler)
 
@@ -135,7 +136,7 @@ class taxonomy_display(database_maintenance):
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		self.taxonomy_detail_label.pack(side=LEFT)
 		self.taxonomy_detail_entry.pack(side=RIGHT, expand=YES, fill=X)
-		
+
 		# Create Add/Save/Delete Button Set
 		row = ttk.Frame(self.pane_two)
 		self.add_button = ttk.Button(row, image=self.add_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.child_adder)))
@@ -151,18 +152,18 @@ class taxonomy_display(database_maintenance):
 
 	def taxonomy_viewer(self,window):
 		# Displays the Taxonomy
-		
+
 		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
 		self.up_level_icon=PhotoImage(file=Path(self.assets_path) / 'uplevel.png')
 		self.add_icon=PhotoImage(file=Path(self.assets_path) / 'add.png')
 		self.delete_icon=PhotoImage(file=Path(self.assets_path) / 'delete.png')
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 		self.refresh_icon=PhotoImage(file=Path(self.assets_path) / 'refresh.png')
-		
+
 		##################
 		# Window Cleanup #
 		##################
-		
+
 		# Delete Previous Panels and Menus or Create New Window
 		try:
 			self.pane_one.destroy()
@@ -170,7 +171,7 @@ class taxonomy_display(database_maintenance):
 			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass
-		
+
 		###################
 		# Taxonomy Window #
 		###################
@@ -178,7 +179,7 @@ class taxonomy_display(database_maintenance):
 		# Setup Taxonomy Window
 		self.taxonomy_window = window
 
-		# Determine Window Size / Screen Resolution 
+		# Determine Window Size / Screen Resolution
 		window_width = self.taxonomy_window.winfo_screenwidth()
 		window_height = self.taxonomy_window.winfo_screenheight()
 
@@ -193,7 +194,7 @@ class taxonomy_display(database_maintenance):
 		############################################
 		# Set Up Annotation Selection (Tree) Panel #
 		############################################
-		
+
 		# Create Tree
 		self.taxonomy_tree = ttk.Treeview(self.pane_one,height=int(window_height/21),selectmode='browse')
 
@@ -212,7 +213,7 @@ class taxonomy_display(database_maintenance):
 
 			def iterateAllKeys(child_dictionary,parent_branch):
 			# Recursive Function to Go Through an Unknown Number of Layers
-			
+
 				# Create Lambda Dictionary
 				x, d = -1, {}
 
