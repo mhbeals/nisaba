@@ -8,11 +8,11 @@ except ModuleNotFoundError:
 	from nisaba.tooltip import *
 
 # Import External Libraries
-import csv
 from pathlib import Path
 import PIL.Image
 import PIL.ImageTk
 import os
+import yaml
 
 # Import TKinter Libraries
 from tkinter import *
@@ -115,102 +115,174 @@ class database_display(database_maintenance):
 												  image=self.segment_photoImg,
 												  anchor="center")
 
-	def csv_importer(self,datafile):
-
-		questions = {}
-
-		# Populate dictionary with imported file
-		with open (Path(self.config_path) / datafile, 'r') as file:
-			reader = csv.reader(file, delimiter='\t')
-			for line in reader:
-				questions[line[0]] = line[1]
-
-		return questions;
+	def entry_entries_displayer(self,tab,level):
 		
-	def bibliographical_field_importer(self,level):
-
-		# Set Collection-Level Questions
-		self.collection_questions = self.csv_importer('collection_bibliographic_annotation.tsv')
-
-		# Set Item-Level Questions
-		if level == 'i' or level == 's':
-			self.item_questions  = self.csv_importer('item_bibliographic_annotation.tsv')
-			
-		# Set Segment-Level Questions
-		if level == 's':
-			self.segment_questions  = self.csv_importer('segment_bibliographic_annotation.tsv')
-		return;
-
-	def entry_form_maker(self,tab,questions,level):
-
 		entries = []
-
+		
+		if level == "c": questions = self.collection_questions		
+		if level == "i": questions = self.item_questions
+		if level == "s": questions = self.segment_questions	
+		
 		# Create Entry Form Elements
 		for field,question in questions.items():
-			
-			# Create Dropdown Menu
-			self.provenance_user = StringVar(tab)
-			
-			# Set initial value
-			self.provenance_user.set(self.default_user)
 		
-			# Create a row
-			row = ttk.Frame(tab)
+			if field != "fabio_type":
+			
+				# Create Dropdown Menu
+				self.provenance_user = StringVar(tab)
+				
+				# Set initial value
+				self.provenance_user.set(self.default_user)
+			
+				# Create a row
+				row = ttk.Frame(tab)
 
-			# Create a label and text box
-			label = Label(row, text=question, anchor='w', width=25)
-			entry = Entry(row)
-			provenance =  OptionMenu(row, self.provenance_user, *self.users)
+				# Create a label and text box
+				label = Label(row, text=question, anchor='w', width=25)
+				entry = Entry(row)
+				provenance =  OptionMenu(row, self.provenance_user, *self.users)
 
-			# Package Row
-			row.pack(side=TOP, fill=X, padx=5, pady=5)
-			provenance.pack(side=RIGHT)
-			label.pack(side=LEFT)
-			entry.pack(side=RIGHT, expand=YES, fill=X)
+				# Package Row
+				row.pack(side=TOP, fill=X, padx=5, pady=5)
+				provenance.pack(side=RIGHT)
+				label.pack(side=LEFT)
+				entry.pack(side=RIGHT, expand=YES, fill=X)
 
-			# Fill entry with database values (if available)
-			if level == 'c':
-				try:
-					entry_text = self.database[self.collection_index].get(field,'')[0]
-					if self.database[self.collection_index].get(field,'')[1] != '':
-						self.provenance_user.set(self.database[self.collection_index].get(field,'')[1])
-				except(IndexError):
-					entry_text = ''		
+				# Fill entry with database values (if available)
+				if level == 'c':
+					try:
+						entry_text = self.database[self.collection_index].get(field,'')[0]
+						if self.database[self.collection_index].get(field,'')[1] != '':
+							self.provenance_user.set(self.database[self.collection_index].get(field,'')[1])
+					except(IndexError):
+						entry_text = ''		
 
-			if level == 'i':
-				try:
-					entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')[0]
-					if self.database[self.collection_index]['items'][self.item_index].get(field,'')[1] != '':
-						self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index].get(field,'')[1])
-				except(IndexError):
-					entry_text = ''	
+				if level == 'i':
+					try:
+						entry_text = self.database[self.collection_index]['items'][self.item_index].get(field,'')[0]
+						if self.database[self.collection_index]['items'][self.item_index].get(field,'')[1] != '':
+							self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index].get(field,'')[1])
+					except(IndexError):
+						entry_text = ''	
 
-			if level == 's':
-				try:
-					entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[0]
-					if self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1] != '':
-						self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1])
-				except(IndexError):
-					entry_text = ''	
+				if level == 's':
+					try:
+						entry_text = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[0]
+						if self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1] != '':
+							self.provenance_user.set(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index].get(field,'')[1])
+					except(IndexError):
+						entry_text = ''	
 
-			entry.insert(0,entry_text)
+				entry.insert(0,entry_text)
 
-			# Add field and value to save list
-			entries.append((field, entry, self.provenance_user))
+				# Add field and value to save list
+				entries.append((field, entry, self.provenance_user))
 
-		return entries
+		# Save Entries to Level
+		if level == "c": self.collection_entries = entries	
+		if level == "i": self.item_entries = entries
+		if level == "s": self.segment_entries = entries
+		
+	def entry_form_maker(self):
+		
+		self.entry_entries_displayer(self.collection_entry_form,'c')
+	
+		if self.current_level == 'i' or self.current_level == 's': self.entry_entries_displayer(self.item_entry_form,'i')
+
+		if self.current_level == 's': self.entry_entries_displayer(self.item_entry_form,'s')		
+
+	def yaml_importer(self,event):
+		
+		# Cleanup Exisiting Information
+		try:
+			self.entry_form.destroy()
+		
+		except(NameError,AttributeError):
+			pass
+		
+		# Create Frames
+		self.entry_form = ttk.Frame(self.current_tab)
+		self.collection_entry_form = ttk.Frame(self.entry_form)
+		self.item_entry_form = ttk.Frame(self.entry_form)
+		self.segment_entry_form = ttk.Frame(self.entry_form)
+		
+		# Display Frames
+		self.entry_form.pack(side=TOP, fill=X)
+		self.collection_entry_form.pack(fill=X)
+		self.item_entry_form.pack(fill=X)
+		self.segment_entry_form.pack(fill=X)
+				
+		# Load Collection Metadata Questions
+		datafile = self.default_collection_type.get() + '.yaml'
+		
+		with open (Path(self.metadata_path) / 'collections' / datafile, 'r') as collectionfile:
+			self.collection_questions = yaml.safe_load(collectionfile)
+		
+		# Load Item Metadata Questions
+		if self.current_level == 'i' or self.current_level == 's':
+
+			datafile = self.default_item_type.get() + '.yaml'
+			
+			with open (Path(self.metadata_path) /'items' / datafile, 'r') as itemfile:
+				self.item_questions = yaml.safe_load(itemfile)	  
+		
+		# Load Segment Metadata Questions
+		if self.current_level == "s": 
+			datafile = self.default_segment_type.get() + '.yaml'
+			with open (Path(self.metadata_path) /'segments' / datafile, 'r') as file:
+				self.segment_questions = yaml.safe_load(file)
+			
+		# Print Metadata Set Based on Level
+		self.entry_form_maker()
 		
 	def bibliographic_form_maker(self, tab, level):
-	
-		self.bibliographical_field_importer(level)
-
-		self.collection_entries = self.entry_form_maker(tab,self.collection_questions,'c')
 		
-		if level == 'i' or level == 's':
-			self.item_entries = self.entry_form_maker(tab,self.item_questions,'i')
-
-		if level == 's':
-			self.segment_entries = self.entry_form_maker(tab,self.segment_questions,'s')
+		self.current_tab = tab
+		self.current_level = level
+	
+		# Populate Collection Types
+		try:
+			if level == 'c': self.types = [self.database[self.collection_index]['fabio_type'][len(self.collections_type_namespace):]]
+			if level == 'i': self.types = [self.database[self.collection_index]['items'][self.item_index]['fabio_type'][len(self.item_type_namespace):]]
+			if level == 's': self.types = ['Standard']
+		except(KeyError):
+			self.types = ['Standard']
+					
+		# Create Types Drop Down Menu
+		row = ttk.Frame(tab)
+		
+		def type_populator():
+			# Looks up all available type YAML files
+			for root, dirs, files in os.walk(Path(self.config_path) / "standard_metadata" / self.directory):
+				for file in files:
+					if file.endswith(".yaml"):
+						self.types.append(os.path.splitext(file)[0])
+		
+		# Set Options
+		if level == "c": 
+			self.directory = "collections"
+			self.default_collection_type = StringVar(tab)
+			type_populator()
+			file_type_option = ttk.OptionMenu(row, self.default_collection_type, *self.types, command=self.yaml_importer)
+				
+		elif level == "i": 
+			self.directory = "items"
+			self.default_item_type = StringVar(tab)
+			type_populator()
+			file_type_option = ttk.OptionMenu(row, self.default_item_type, *self.types, command=self.yaml_importer)
+				
+		elif level == "s": 
+			self.directory = "segments"
+			self.default_segment_type = StringVar(tab)
+			type_populator()
+			file_type_option = ttk.OptionMenu(row, self.default_segment_type, *self.types, command=self.yaml_importer)
+		
+		# Display Drop Down
+		file_type_option.pack(side=LEFT)
+		row.pack(side=TOP, fill=X, padx=5, pady=5)	
+		
+		# Load Saved or Default Type
+		self.yaml_importer('')
 
 	def annotation_tree_maker(self,tree_name,level):
 
@@ -901,14 +973,18 @@ class database_display(database_maintenance):
 		for item_number,dictionary in self.database[self.collection_index]['items'].items():
 
 			# If the item has a title
-			if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number] and 'fabio:type' in self.database[self.collection_index]['items'][item_number]:
+			if self.item_title_namespace in self.database[self.collection_index]['items'][item_number]:
+				display_item = dictionary[self.item_title_namespace][0]
+				
+			# If the item has descriptive parts
+			elif 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number]:
 				if self.collections_title_namespace in self.database[self.collection_index]:
-					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][0]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index][self.collections_title_namespace][0]))
+					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index][self.collections_title_namespace][0]))
 				else:
-					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index][self.collections_title_namespace][0]))
+					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['items'][item_number]['fabio_type'][len(self.item_type_namespace):]))
 
 			# If the item has no title
-			elif self.collections_title_namespace in self.database[self.collection_index]:
+			elif self.item_title_namespace in self.database[self.collection_index]['items'][item_number]:
 				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index][self.collections_title_namespace][0]))
 
 			else:
@@ -1077,6 +1153,9 @@ class database_display(database_maintenance):
 		
 		# This is a prefix to put before the filename of the type type, derived from a drop down in the item screen. For example 'page' with a namespace of 'fabio' would be 'fabio:page'
 		self.item_type_namespace = self.defaults[6]
+		
+		# This the field that is pulled in the listboxes for items
+		self.item_title_namespace = self.defaults[7]
 		
 		# Set Name of Collections ttk.Frame	
 		self.database_window = window

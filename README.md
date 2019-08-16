@@ -1,12 +1,12 @@
-# Nisaba 0.2.22
+# Nisaba 0.2.23
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.22
+### v.0.2.23
 
-+ Added Create New Database Function in Config Menu
++ Added Type (Bibiolographical information) Drop Drops in Database and Config Questions (Issue #2)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

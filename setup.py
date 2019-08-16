@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 # The nisaba version
-nisaba_version = "0.2.22"
+nisaba_version = "0.2.23"
 
 # This call to setup() does all the work
 setup(
@@ -30,7 +30,7 @@ setup(
 	py_modules=["nisaba"],
 	packages=["nisaba"],
 	include_package_data=True,
-	install_requires=["isodate", "Pillow", "pyparsing", "rdflib", "six", "ttkwidgets"],
+	install_requires=["isodate", "Pillow", "pyparsing", "rdflib", "six", "ttkwidgets","pyyaml"],
 	entry_points={
 		"console_scripts": [
 			"nisaba=nisaba.__main__:main",

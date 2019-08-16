@@ -12,7 +12,7 @@ except ModuleNotFoundError:
 # Import External Libraries
 from pathlib import Path
 import csv
-
+import yaml
 # Import TKinter Libraries
 from tkinter import *
 from tkinter import ttk
@@ -89,6 +89,14 @@ class configuration_display(database_maintenance):
 		
 		# Create User Frame
 		metadata_window.database_metadata_viewer(self.pane_two)
+		
+	def yaml_loader(self,filename):
+	
+		with open(Path(self.config_path) / filename, 'r') as stream:
+			try:
+				return yaml.safe_load(stream)
+			except yaml.YAMLError as exc:
+				pass
 	
 	def configuration_textbox_frame_loader(self,filename):
 		
@@ -128,7 +136,7 @@ class configuration_display(database_maintenance):
 	def configurations_loader(self):
 		
 		self.configurations_frame = ttk.Frame(self.pane_one)
-		default_parameters = ["Collection Type Namespace","Collection 'Title' Field","Item Type Namespace"]
+		default_parameters = ["Collection Type Namespace","Collection 'Title' Field","Item Type Namespace","Item 'Title' Field"]
 		default_values = self.defaults[4:]
 		button_parameters = ["Default LOD Prefixes","Collection-Level Questions","Item-Level Questions","Segment-Level Questions"]
 		self.parameter_entries = []
@@ -152,9 +160,9 @@ class configuration_display(database_maintenance):
 			row = ttk.Frame(self.pane_one)
 			label = Label(row, text=parameter, anchor='w', width=30)
 			if parameter == "Default LOD Prefixes": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader('prefixes.txt')))
-			if parameter == "Collection-Level Questions": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader('collection_bibliographic_annotation.tsv')))
-			if parameter == "Item-Level Questions": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader('item_bibliographic_annotation.tsv')))
-			if parameter == "Segment-Level Questions": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader('segment_bibliographic_annotation.tsv')))
+			if parameter == "Collection-Level Questions": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader(str(Path(self.metadata_path) / 'collections' / 'Standard.yaml'))))
+			if parameter == "Item-Level Questions": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader(str(Path(self.metadata_path) / 'items' / 'Standard.yaml'))))
+			if parameter == "Segment-Level Questions": button = ttk.Button(row, text="Set",command=(lambda: self.configuration_textbox_frame_loader(str(Path(self.metadata_path) / 'segments' / 'Standard.yaml'))))
 			row.pack(side=TOP, fill=X, padx=5, pady=5)
 			label.pack(side=LEFT)
 			button.pack(side=LEFT)

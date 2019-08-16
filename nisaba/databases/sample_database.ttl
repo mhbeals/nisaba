@@ -45,7 +45,8 @@
 <http://purl.org/nisaba/collection/10> a nisaba:CollectionEntry ;
     nisaba:collection_holder "The Alkazi Collection of Photography website" ;
     nisaba:collection_title "The Alkazi Collection of Photography" ;
-    nisaba:hasItem <http://purl.org/nisaba/collection/10/item/0> .
+    nisaba:hasItem <http://purl.org/nisaba/collection/10/item/0>,
+        <http://purl.org/nisaba/collection/10/item/1> .
 
 <http://purl.org/nisaba/collection/11> a nisaba:CollectionEntry ;
     nisaba:collection_author "" ;
@@ -145,7 +146,9 @@
         <http://purl.org/nisaba/collection/7/item/1>,
         <http://purl.org/nisaba/collection/7/item/2>,
         <http://purl.org/nisaba/collection/7/item/3>,
-        <http://purl.org/nisaba/collection/7/item/4> .
+        <http://purl.org/nisaba/collection/7/item/4>,
+        <http://purl.org/nisaba/collection/7/item/5>,
+        <http://purl.org/nisaba/collection/7/item/6> .
 
 <http://purl.org/nisaba/collection/8> a nisaba:CollectionEntry ;
     nisaba:collection_author "James Waterhouse" ;
@@ -294,6 +297,10 @@
 \r\r\r\r\r
 """,
         "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy\" in an admirable speech, excellently delivered. She said that she placed\\n', '', '']",
+        "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy\" in an admirable speech, excellently delivered. She said that she placed\\n\\n', 'om', '20190815_154632']",
+        "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy\" in an admirable speech, excellently delivered. She said that she placed\\n\\n\\n', 'om', '20190815_154930']",
+        "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy\" in an admirable speech, excellently delivered. She said that she placed\\n\\n\\n\\n', 'om', '20190816_120943']",
+        "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy\" in an admirable speech, excellently delivered. She said that she placed\\n\\n\\n\\n', 'om', '20190816_121010']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.', '']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n', 'amp']",
         "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n', 'mhb']",
@@ -323,7 +330,8 @@
         "['', 'mhb', '20190809_091242']",
         "['', 'mhb']",
         "['Notes', 'mhb', '20190809_095005']" ;
-    nisaba:end 46,
+    nisaba:end 38,
+        46,
         65 ;
     nisaba:hasAnnotation "Evidence",
         "Memorial-Justice-Hero_Teleology_of_History",
@@ -355,10 +363,12 @@
     nisaba:start 0 .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/1> a nisaba:SegmentEntry ;
-    nisaba:end 106,
+    nisaba:end 61,
+        106,
         298 ;
     nisaba:segment_notes "" ;
-    nisaba:start 45,
+    nisaba:start 38,
+        45,
         65 .
 
 <http://purl.org/nisaba/collection/0/item/1> a nisaba:ItemEntry ;
@@ -691,71 +701,130 @@
 
 <http://purl.org/nisaba/collection/10/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/10/item/0/segment/0> ;
-    nisaba:image_file "Begum 13.jpg" ;
+    nisaba:image_file "Begum 12.jpg",
+        "Begum 13.jpg" ;
     nisaba:item_author "Bourne and Shepherd" ;
     nisaba:item_date "1911" ;
     nisaba:item_title "Begum of Bhopal at the Delhi Durbar" ;
     nisaba:item_type "i" .
 
 <http://purl.org/nisaba/collection/10/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:bottom 79 ;
-    nisaba:left 50 ;
+    nisaba:bottom 64,
+        79 ;
+    nisaba:left 20,
+        50 ;
     nisaba:right 69 ;
-    nisaba:top 15 .
+    nisaba:top 15,
+        20 .
 
-<http://purl.org/nisaba/collection/11/item/0> a nisaba:ItemEntry ;
-    nisaba:hasSegment <http://purl.org/nisaba/collection/11/item/0/segment/0> ;
-    nisaba:image_file "Begum 12.jpg" ;
-    nisaba:item_author "Norah Grant" ;
-    nisaba:item_date "1911" ;
-    nisaba:item_document_number "RCIN 403695" ;
-    nisaba:item_title "Sultan Kaikhusrau Jahan, Begum of Bhopal" ;
-    nisaba:item_type "i" .
-
-<http://purl.org/nisaba/collection/11/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:bottom 64 ;
-    nisaba:left 20 ;
-    nisaba:right 69 ;
-    nisaba:top 20 .
-
-<http://purl.org/nisaba/collection/11/item/1> a nisaba:ItemEntry ;
-    nisaba:hasSegment <http://purl.org/nisaba/collection/11/item/1/segment/0>,
-        <http://purl.org/nisaba/collection/11/item/1/segment/1> ;
+<http://purl.org/nisaba/collection/10/item/1> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/10/item/1/segment/0>,
+        <http://purl.org/nisaba/collection/10/item/1/segment/1> ;
     nisaba:image_file "Begum 14.jpg" ;
-    nisaba:item_author "Sydney Prior Hall" ;
-    nisaba:item_date "1876" ;
-    nisaba:item_title "The reception of the Begum of Bhopal" ;
     nisaba:item_type "i" .
 
-<http://purl.org/nisaba/collection/11/item/1/segment/0> a nisaba:SegmentEntry ;
+<http://purl.org/nisaba/collection/10/item/1/segment/0> a nisaba:SegmentEntry ;
     nisaba:bottom 69 ;
     nisaba:left 50 ;
     nisaba:right 69 ;
     nisaba:top 35 .
 
-<http://purl.org/nisaba/collection/11/item/1/segment/1> a nisaba:SegmentEntry ;
+<http://purl.org/nisaba/collection/10/item/1/segment/1> a nisaba:SegmentEntry ;
     nisaba:bottom 49 ;
     nisaba:left 20 ;
     nisaba:right 54 ;
     nisaba:top 30 .
 
+<http://purl.org/nisaba/collection/11/item/0> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/11/item/0/segment/0>,
+        <http://purl.org/nisaba/collection/11/item/0/segment/1> ;
+    nisaba:image_file "Begum 12.jpg" ;
+    nisaba:item_author "Norah Grant" ;
+    nisaba:item_date "1911" ;
+    nisaba:item_document_number "RCIN 403695" ;
+    nisaba:item_title "Sultan Kaikhusrau Jahan, Begum of Bhopal" ;
+    nisaba:item_type "i",
+        "t" ;
+    nisaba:transcription "[\"Only one woman has taken an active part in the Durbar at Dehli if we set aside the mother of the infant ruler of Bharatpur, who brought the prince in her arms to take his part in the proceedings. Throughout all India is only one reigning princess, the Begum of Bhopal, who laid a gold casket at the Viceroy's feet, and talked freely with Lady Curzon and the Duchess of Conaught when she came before the people to pay homage to the Emperor. Her Highness who has on many occasions shown that sex is no disqualification in an Indian ruler, presides over a State of rather less than 7,000 miles in extent, with a population, chiefly Hindooes, of a million; and she is commander-in-chief of a force of 803 cavalry infantry, and 69 guns. Inside her own kingdom she is endc:titled to a salute of 21 guns, and outside to 19.\\n\", 'om', '20190816_124143']" .
+
+<http://purl.org/nisaba/collection/11/item/0/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 64 ;
+    nisaba:end 83 ;
+    nisaba:left 20 ;
+    nisaba:right 69 ;
+    nisaba:start 39 ;
+    nisaba:top 20 .
+
+<http://purl.org/nisaba/collection/11/item/0/segment/1> a nisaba:SegmentEntry ;
+    nisaba:end 151 ;
+    nisaba:start 83 .
+
+<http://purl.org/nisaba/collection/11/item/1> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/11/item/1/segment/0>,
+        <http://purl.org/nisaba/collection/11/item/1/segment/1>,
+        <http://purl.org/nisaba/collection/11/item/1/segment/2> ;
+    nisaba:image_file "Begum 14.jpg" ;
+    nisaba:item_author "Sydney Prior Hall" ;
+    nisaba:item_date "1876" ;
+    nisaba:item_title "The reception of the Begum of Bhopal" ;
+    nisaba:item_type "i",
+        "t" ;
+    nisaba:transcription "[\"Next year will see the diamond jubilee of female rule in Bhopal. The Nawab who died in 1844 was succeeded by his widow, who in turn succeeded by her daughter, and there can be no break in the female rule for at least another reign, as the daughter of the Begum is the recognized heir-apparent. The beginning of the woman's kingdom is involved in mystery; it was founded by an officer who, on the death of his emperor, carved a slice out of his dominions and called it Bhopal. The officer made himself Nawab, and at this moment his descendant is doing homage before Lord Curzon as the only ruling princess in India. St. James' Gazette.\\n\", 'om', '20190816_124151']" .
+
+<http://purl.org/nisaba/collection/11/item/1/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 69 ;
+    nisaba:end 55 ;
+    nisaba:left 50 ;
+    nisaba:right 69 ;
+    nisaba:start 0 ;
+    nisaba:top 35 .
+
+<http://purl.org/nisaba/collection/11/item/1/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 49 ;
+    nisaba:end 89 ;
+    nisaba:left 20 ;
+    nisaba:right 54 ;
+    nisaba:start 55 ;
+    nisaba:top 30 .
+
+<http://purl.org/nisaba/collection/11/item/1/segment/2> a nisaba:SegmentEntry ;
+    nisaba:end 113 ;
+    nisaba:start 89 .
+
 <http://purl.org/nisaba/collection/12/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/12/item/0/segment/0>,
-        <http://purl.org/nisaba/collection/12/item/0/segment/1> ;
+        <http://purl.org/nisaba/collection/12/item/0/segment/1>,
+        <http://purl.org/nisaba/collection/12/item/0/segment/2>,
+        <http://purl.org/nisaba/collection/12/item/0/segment/3> ;
     nisaba:item_date "29/1/1903" ;
     nisaba:item_page_number "3" ;
     nisaba:item_title "The Begum of Bhopal" ;
     nisaba:item_type "t" ;
     nisaba:transcription "Only one woman has taken an active part in the Durbar at Dehli if we set aside the mother of the infant ruler of Bharatpur, who brought the prince in her arms to take his part in the proceedings. Throughout all India is only one reigning princess, the Begum of Bhopal, who laid a gold casket at the Viceroy's feet, and talked freely with Lady Curzon and the Duchess of Conaught when she came before the people to pay homage to the Emperor. Her Highness who has on many occasions shown that sex is no disqualification in an Indian ruler, presides over a State of rather less than 7,000 miles in extent, with a population, chiefly Hindooes, of a million; and she is commander-in-chief of a force of 803 cavalry infantry, and 69 guns. Inside her own kingdom she is enitem_titled to a salute of 21 guns, and outside to 19.",
-        "[\"Only one woman has taken an active part in the Durbar at Dehli if we set aside the mother of the infant ruler of Bharatpur, who brought the prince in her arms to take his part in the proceedings. Throughout all India is only one reigning princess, the Begum of Bhopal, who laid a gold casket at the Viceroy's feet, and talked freely with Lady Curzon and the Duchess of Conaught when she came before the people to pay homage to the Emperor. Her Highness who has on many occasions shown that sex is no disqualification in an Indian ruler, presides over a State of rather less than 7,000 miles in extent, with a population, chiefly Hindooes, of a million; and she is commander-in-chief of a force of 803 cavalry infantry, and 69 guns. Inside her own kingdom she is endc:titled to a salute of 21 guns, and outside to 19.\", '', '']" .
+        "[\"Only one woman has taken an active part in the Durbar at Dehli if we set aside the mother of the infant ruler of Bharatpur, who brought the prince in her arms to take his part in the proceedings. Throughout all India is only one reigning princess, the Begum of Bhopal, who laid a gold casket at the Viceroy's feet, and talked freely with Lady Curzon and the Duchess of Conaught when she came before the people to pay homage to the Emperor. Her Highness who has on many occasions shown that sex is no disqualification in an Indian ruler, presides over a State of rather less than 7,000 miles in extent, with a population, chiefly Hindooes, of a million; and she is commander-in-chief of a force of 803 cavalry infantry, and 69 guns. Inside her own kingdom she is endc:titled to a salute of 21 guns, and outside to 19.\", '', '']",
+        "[\"Only one woman has taken an active part in the Durbar at Dehli if we set aside the mother of the infant ruler of Bharatpur, who brought the prince in her arms to take his part in the proceedings. Throughout all India is only one reigning princess, the Begum of Bhopal, who laid a gold casket at the Viceroy's feet, and talked freely with Lady Curzon and the Duchess of Conaught when she came before the people to pay homage to the Emperor. Her Highness who has on many occasions shown that sex is no disqualification in an Indian ruler, presides over a State of rather less than 7,000 miles in extent, with a population, chiefly Hindooes, of a million; and she is commander-in-chief of a force of 803 cavalry infantry, and 69 guns. Inside her own kingdom she is endc:titled to a salute of 21 guns, and outside to 19.\\n\", 'om', '20190816_124140']",
+        "[\"Only one woman has taken an active part in the Durbar at Dehli if we set aside the mother of the infant ruler of Bharatpur, who brought the prince in her arms to take his part in the proceedings. Throughout all India is only one reigning princess, the Begum of Bhopal, who laid a gold casket at the Viceroy's feet, and talked freely with Lady Curzon and the Duchess of Conaught when she came before the people to pay homage to the Emperor. Her Highness who has on many occasions shown that sex is no disqualification in an Indian ruler, presides over a State of rather less than 7,000 miles in extent, with a population, chiefly Hindooes, of a million; and she is commander-in-chief of a force of 803 cavalry infantry, and 69 guns. Inside her own kingdom she is endc:titled to a salute of 21 guns, and outside to 19.\\n\", 'om', '20190816_124143']",
+        "['The last Indian mall informed as of the death of the Begum of Bhopal, the only lady member of the Order of the Star of India, except, of course, her Majesty the Queen. Our Portrait represents her Highness in a dress worn on public occasions. The two men sitting with her were her Ministers. The one on the right, in the white dress, is Kian Ram, the Under Minister, and a Hindoo; and the one on the left is Jumal-oo Deen,the Prime Minister, and a Mussulman. The town of Bhopal is in Central India, between Saugor and Indore, on the Bombay road, and nearly equidistant from both places about 109 miles. The population is chiefly Mussulman; but a great number of Hindoos live in the town and are treated in all respects as well as the Musaulmans. The late ruler of the Bhopal State, her Highness the Nawab Secunder Begum, was daughter of the late Nawab Nuzzer Mahomed Khan. She married her cousin, the late Jehan gir Mahomed Khan. After his death she succeeded him, with the consent of the British authorities, and proved one of the wisest and most able rulers of the country. The reigning family at Bhopal have always been attached to the British; and when the mutiny broke out she remained firm in her attachment to the English cause in spite of the wishes and entreaties of her intimate friends and relations and the threats of her Mussulman adherents. She stood alone in our favour at that trying time, and had the wisdom and foresight to know that in the end we must be the conquerors. Whatever assistance she could give us, she gave willingly. In 1860, after, the country was settled, the late-Lord Canning assembled all the chiefs of Central India at Jubbulpoor, and in open durbar there praised the Begum for the noble way in which she had stood out in our favour, and at the same time informed her that he had been empowered to give her a grant of land worth about a ]ac of rupees a year. The Begum was greatly affected on this occasion, and with tears of joy in her eyes stood up and tanked his Lordship for the great honour she had received. On her way back from Jubbulpoor, as she was crossing the noble iron suspension-bridge over the Baas, eleven miles from Saugor (built by a former Commissioner of Saugor, from iron made on the spot, from the ore found in the neighbourhood, with ordinary native tools, and by unskilled workmen and at a place where no foundries exist), she said, \"Of what use is it to fight against people who can build a bridge like this?\"\\n', 'om', '20190816_124120']" .
 
 <http://purl.org/nisaba/collection/12/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:end 83 ;
-    nisaba:start 39 .
+    nisaba:end 33,
+        83 ;
+    nisaba:start 0,
+        39 .
 
 <http://purl.org/nisaba/collection/12/item/0/segment/1> a nisaba:SegmentEntry ;
-    nisaba:end 151 ;
-    nisaba:start 83 .
+    nisaba:end 151,
+        279 ;
+    nisaba:start 83,
+        195 .
+
+<http://purl.org/nisaba/collection/12/item/0/segment/2> a nisaba:SegmentEntry ;
+    nisaba:end 375 ;
+    nisaba:start 279 .
+
+<http://purl.org/nisaba/collection/12/item/0/segment/3> a nisaba:SegmentEntry ;
+    nisaba:end 450 ;
+    nisaba:start 375 .
 
 <http://purl.org/nisaba/collection/12/item/1> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/12/item/1/segment/0>,
@@ -766,7 +835,9 @@
     nisaba:item_title "The Begum of Bhopal" ;
     nisaba:item_type "t" ;
     nisaba:transcription "Next year will see the diamond jubilee of female rule in Bhopal. The Nawab who died in 1844 was succeeded by his widow, who in turn succeeded by her daughter, and there can be no break in the female rule for at least another reign, as the daughter of the Begum is the recognized heir-apparent. The beginning of the woman's kingdom is involved in mystery; it was founded by an officer who, on the death of his emperor, carved a slice out of his dominions and called it Bhopal. The officer made himself Nawab, and at this moment his descendant is doing homage before Lord Curzon as the only ruling princess in India. St. James' Gazette.",
-        "[\"Next year will see the diamond jubilee of female rule in Bhopal. The Nawab who died in 1844 was succeeded by his widow, who in turn succeeded by her daughter, and there can be no break in the female rule for at least another reign, as the daughter of the Begum is the recognized heir-apparent. The beginning of the woman's kingdom is involved in mystery; it was founded by an officer who, on the death of his emperor, carved a slice out of his dominions and called it Bhopal. The officer made himself Nawab, and at this moment his descendant is doing homage before Lord Curzon as the only ruling princess in India. St. James' Gazette.\", '', '']" .
+        "[\"Next year will see the diamond jubilee of female rule in Bhopal. The Nawab who died in 1844 was succeeded by his widow, who in turn succeeded by her daughter, and there can be no break in the female rule for at least another reign, as the daughter of the Begum is the recognized heir-apparent. The beginning of the woman's kingdom is involved in mystery; it was founded by an officer who, on the death of his emperor, carved a slice out of his dominions and called it Bhopal. The officer made himself Nawab, and at this moment his descendant is doing homage before Lord Curzon as the only ruling princess in India. St. James' Gazette.\", '', '']",
+        "[\"Next year will see the diamond jubilee of female rule in Bhopal. The Nawab who died in 1844 was succeeded by his widow, who in turn succeeded by her daughter, and there can be no break in the female rule for at least another reign, as the daughter of the Begum is the recognized heir-apparent. The beginning of the woman's kingdom is involved in mystery; it was founded by an officer who, on the death of his emperor, carved a slice out of his dominions and called it Bhopal. The officer made himself Nawab, and at this moment his descendant is doing homage before Lord Curzon as the only ruling princess in India. St. James' Gazette.\\n\", 'om', '20190816_124149']",
+        "[\"Next year will see the diamond jubilee of female rule in Bhopal. The Nawab who died in 1844 was succeeded by his widow, who in turn succeeded by her daughter, and there can be no break in the female rule for at least another reign, as the daughter of the Begum is the recognized heir-apparent. The beginning of the woman's kingdom is involved in mystery; it was founded by an officer who, on the death of his emperor, carved a slice out of his dominions and called it Bhopal. The officer made himself Nawab, and at this moment his descendant is doing homage before Lord Curzon as the only ruling princess in India. St. James' Gazette.\\n\", 'om', '20190816_124151']" .
 
 <http://purl.org/nisaba/collection/12/item/1/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 55 ;
@@ -784,7 +855,10 @@
     nisaba:hasSegment <http://purl.org/nisaba/collection/13/item/0/segment/0>,
         <http://purl.org/nisaba/collection/13/item/0/segment/1>,
         <http://purl.org/nisaba/collection/13/item/0/segment/2>,
-        <http://purl.org/nisaba/collection/13/item/0/segment/3> ;
+        <http://purl.org/nisaba/collection/13/item/0/segment/3>,
+        <http://purl.org/nisaba/collection/13/item/0/segment/4>,
+        <http://purl.org/nisaba/collection/13/item/0/segment/5>,
+        <http://purl.org/nisaba/collection/13/item/0/segment/6> ;
     nisaba:item_author "" ;
     nisaba:item_date "12/12/1868" ;
     nisaba:item_document_number "" ;
@@ -792,23 +866,45 @@
     nisaba:item_title "The Late Begum of Bhopal" ;
     nisaba:item_type "t" ;
     nisaba:transcription "The last Indian mall informed as of the death of the Begum of Bhopal, the only lady member of the Order of the Star of India, except, of course, her Majesty the Queen. Our Portrait represents her Highness in a dress worn on public occasions. The two men sitting with her were her Ministers. The one on the right, in the white dress, is Kian Ram, the Under Minister, and a Hindoo; and the one on the left is Jumal-oo Deen,the Prime Minister, and a Mussulman. The town of Bhopal is in Central India, between Saugor and Indore, on the Bombay road, and nearly equidistant from both places about 109 miles. The population is chiefly Mussulman; but a great number of Hindoos live in the town and are treated in all respects as well as the Musaulmans. The late ruler of the Bhopal State, her Highness the Nawab Secunder Begum, was daughter of the late Nawab Nuzzer Mahomed Khan. She married her cousin, the late Jehan gir Mahomed Khan. After his death she succeeded him, with the consent of the British authorities, and proved one of the wisest and most able rulers of the country. The reigning family at Bhopal have always been attached to the British; and when the mutiny broke out she remained firm in her attachment to the English cause in spite of the wishes and entreaties of her intimate friends and relations and the threats of her Mussulman adherents. She stood alone in our favour at that trying time, and had the wisdom and foresight to know that in the end we must be the conquerors. Whatever assistance she could give us, she gave willingly. In 1860, after, the country was settled, the late-Lord Canning assembled all the chiefs of Central India at Jubbulpoor, and in open durbar there praised the Begum for the noble way in which she had stood out in our favour, and at the same time informed her that he had been empowered to give her a grant of land worth about a ]ac of rupees a year. The Begum was greatly affected on this occasion, and with tears of joy in her eyes stood up and tanked his Lordship for the great honour she had received. On her way back from Jubbulpoor, as she was crossing the noble iron suspension-bridge over the Baas, eleven miles from Saugor (built by a former Commissioner of Saugor, from iron made on the spot, from the ore found in the neighbourhood, with ordinary native tools, and by unskilled workmen and at a place where no foundries exist), she said, \"Of what use is it to fight against people who can build a bridge like this?\"",
-        "['The last Indian mall informed as of the death of the Begum of Bhopal, the only lady member of the Order of the Star of India, except, of course, her Majesty the Queen. Our Portrait represents her Highness in a dress worn on public occasions. The two men sitting with her were her Ministers. The one on the right, in the white dress, is Kian Ram, the Under Minister, and a Hindoo; and the one on the left is Jumal-oo Deen,the Prime Minister, and a Mussulman. The town of Bhopal is in Central India, between Saugor and Indore, on the Bombay road, and nearly equidistant from both places about 109 miles. The population is chiefly Mussulman; but a great number of Hindoos live in the town and are treated in all respects as well as the Musaulmans. The late ruler of the Bhopal State, her Highness the Nawab Secunder Begum, was daughter of the late Nawab Nuzzer Mahomed Khan. She married her cousin, the late Jehan gir Mahomed Khan. After his death she succeeded him, with the consent of the British authorities, and proved one of the wisest and most able rulers of the country. The reigning family at Bhopal have always been attached to the British; and when the mutiny broke out she remained firm in her attachment to the English cause in spite of the wishes and entreaties of her intimate friends and relations and the threats of her Mussulman adherents. She stood alone in our favour at that trying time, and had the wisdom and foresight to know that in the end we must be the conquerors. Whatever assistance she could give us, she gave willingly. In 1860, after, the country was settled, the late-Lord Canning assembled all the chiefs of Central India at Jubbulpoor, and in open durbar there praised the Begum for the noble way in which she had stood out in our favour, and at the same time informed her that he had been empowered to give her a grant of land worth about a ]ac of rupees a year. The Begum was greatly affected on this occasion, and with tears of joy in her eyes stood up and tanked his Lordship for the great honour she had received. On her way back from Jubbulpoor, as she was crossing the noble iron suspension-bridge over the Baas, eleven miles from Saugor (built by a former Commissioner of Saugor, from iron made on the spot, from the ore found in the neighbourhood, with ordinary native tools, and by unskilled workmen and at a place where no foundries exist), she said, \"Of what use is it to fight against people who can build a bridge like this?\"', '', '']" .
+        "['Let the scoffers and deriders who have no faith in the administrative capacity of the gentle sex (says the New York Tribune) read the story of the Begum of Bhopal and vail their abashed faces. Bhopal is a small and obscure State of Central India, and the Princess, its ruler, buzzes about it like a bee in a bonnet. She indulges in no fashionable laziness at the Capital, nor does she permit the existence of any Ring government; on the contrary, she makes tours of inspection through her domains and metes out punishment and affords redress with her own tinted hands. Under her unfaltering eye the grocers of Bhopal have an exceedingly hard time; their weights and measures are tested, and, if they prove defective, the Government destroys them and kindly provides new ones, and Messieurs the grocers pay for them. She exercises stern discipline in all other matters of morals; she has nearly paid off a national debt of 700,000 rupees; and she contemplates the building of a railroad. Imagining her to be one of the princess\\'s attendants, I advancedindifferently to meet the young girl; but with a gesture full of dignity she stopped me, raying, \"I am Shah Jehan! \"I paused a moment in amazement, and bowed profoundly; and my astonishment may be conceived on finding myself suddenly in the presence of the Princess whom I imagined to be still strictly confined to her harem. Nevertheless, recovering somewhat from my surprise, I addressed my compliments of condolence to her, telling her how during the short time that I had known Prince Oumra Doula I had learned to esteem and even to like him. Without attempting to feign the slightest emotion, the young Princess put a stop to my praises, saying, with a slight shrug of the shoulders, the simple word \"Kismet! \"(It was written). Then, motioning me to seat myself near her on one of the sofas, she said abruptly to me, \"Do you come from Paris ? \"and I was compelled, without taking breath, to give a description of Paris, its monuments and the manners of its inhabitants. I could not get over my bewilderment, and was almost shocked at this utter want of feeling, when the Begum Secunder arrived. She could not help smiling on remarking my astonishment, and, having seated herself beside us, said to me \"I mourn for Oumra Doula because I lose in him a faithful friend and counsellor. But why should my daughter mourn ? Does the prisoner regret his gaoler? \"Strange words these from the lips of\\nWith reference to this description by M. L. Rousselet, as translated by Colonel Buckle, a word or two may be said. In the first place, we do not understand what M. Rousselet means when he says that he pressed the Begum\\'s hands \"in Asiatic fashion. \"When Orientals press hands, they press them very much as Europeans do. The \"blind of fine straw \"we presume to be a tattie \"of thin reeds or rushes. \"Purdah \"of course means \"curtain ; \"but it does not \"cut off \"women from the society of their fellow-creatures. It only partially cuts them off from the society of the male sex. Any English lady can walk behind the thickest purdah; and many purdah/nasheen women prefer their comparative seclusion, just as nuns do theirs. They say, \"We can see, yet are not seen; and we have none of the trouble and vexation you have who mingle with the rough and noisy world. \"there is little wonder that there was widespread consternation at the death of Prince Oumra Doula. an Asiatic. They are, indeed, the condemnation of the worn-out custom of the sequestration of women, which Mussulmnen persist - in keeping up, in spite of the constant progress of civilisation among them. With reference to this description by M. L. Rousselet, as translated by Colonel Buckle, a word or two may be said. In the first place, we do not understand what M. Rousselet means when he says that he pressed the Begum\\'s hands \"in Asiatic fashion. \"When Orientals press hands, they press them very much as Europeans do. The \"blind of fine straw \"we presume to be a tattie \"of thin reeds or rushes. \"Purdah \"of course means \"curtain ; \"but it does not \"cut off \"women from the society of their fellow-creatures. It only partially cuts them off from the society of the male sex. Any English lady can walk behind the thickest purdah; and many purdah/nasheen women prefer their comparative seclusion, just as nuns do theirs. They say, \"We can see, yet are not seen; and we have none of the trouble and vexation you have who mingle with the rough and noisy world. \"there is little wonder that there was widespread consternation at the death of Prince Oumra Doula. \\n', 'om', '20190815_093006']",
+        "['The last Indian mall informed as of the death of the Begum of Bhopal, the only lady member of the Order of the Star of India, except, of course, her Majesty the Queen. Our Portrait represents her Highness in a dress worn on public occasions. The two men sitting with her were her Ministers. The one on the right, in the white dress, is Kian Ram, the Under Minister, and a Hindoo; and the one on the left is Jumal-oo Deen,the Prime Minister, and a Mussulman. The town of Bhopal is in Central India, between Saugor and Indore, on the Bombay road, and nearly equidistant from both places about 109 miles. The population is chiefly Mussulman; but a great number of Hindoos live in the town and are treated in all respects as well as the Musaulmans. The late ruler of the Bhopal State, her Highness the Nawab Secunder Begum, was daughter of the late Nawab Nuzzer Mahomed Khan. She married her cousin, the late Jehan gir Mahomed Khan. After his death she succeeded him, with the consent of the British authorities, and proved one of the wisest and most able rulers of the country. The reigning family at Bhopal have always been attached to the British; and when the mutiny broke out she remained firm in her attachment to the English cause in spite of the wishes and entreaties of her intimate friends and relations and the threats of her Mussulman adherents. She stood alone in our favour at that trying time, and had the wisdom and foresight to know that in the end we must be the conquerors. Whatever assistance she could give us, she gave willingly. In 1860, after, the country was settled, the late-Lord Canning assembled all the chiefs of Central India at Jubbulpoor, and in open durbar there praised the Begum for the noble way in which she had stood out in our favour, and at the same time informed her that he had been empowered to give her a grant of land worth about a ]ac of rupees a year. The Begum was greatly affected on this occasion, and with tears of joy in her eyes stood up and tanked his Lordship for the great honour she had received. On her way back from Jubbulpoor, as she was crossing the noble iron suspension-bridge over the Baas, eleven miles from Saugor (built by a former Commissioner of Saugor, from iron made on the spot, from the ore found in the neighbourhood, with ordinary native tools, and by unskilled workmen and at a place where no foundries exist), she said, \"Of what use is it to fight against people who can build a bridge like this?\"', '', '']",
+        "['The last Indian mall informed as of the death of the Begum of Bhopal, the only lady member of the Order of the Star of India, except, of course, her Majesty the Queen. Our Portrait represents her Highness in a dress worn on public occasions. The two men sitting with her were her Ministers. The one on the right, in the white dress, is Kian Ram, the Under Minister, and a Hindoo; and the one on the left is Jumal-oo Deen,the Prime Minister, and a Mussulman. The town of Bhopal is in Central India, between Saugor and Indore, on the Bombay road, and nearly equidistant from both places about 109 miles. The population is chiefly Mussulman; but a great number of Hindoos live in the town and are treated in all respects as well as the Musaulmans. The late ruler of the Bhopal State, her Highness the Nawab Secunder Begum, was daughter of the late Nawab Nuzzer Mahomed Khan. She married her cousin, the late Jehan gir Mahomed Khan. After his death she succeeded him, with the consent of the British authorities, and proved one of the wisest and most able rulers of the country. The reigning family at Bhopal have always been attached to the British; and when the mutiny broke out she remained firm in her attachment to the English cause in spite of the wishes and entreaties of her intimate friends and relations and the threats of her Mussulman adherents. She stood alone in our favour at that trying time, and had the wisdom and foresight to know that in the end we must be the conquerors. Whatever assistance she could give us, she gave willingly. In 1860, after, the country was settled, the late-Lord Canning assembled all the chiefs of Central India at Jubbulpoor, and in open durbar there praised the Begum for the noble way in which she had stood out in our favour, and at the same time informed her that he had been empowered to give her a grant of land worth about a ]ac of rupees a year. The Begum was greatly affected on this occasion, and with tears of joy in her eyes stood up and tanked his Lordship for the great honour she had received. On her way back from Jubbulpoor, as she was crossing the noble iron suspension-bridge over the Baas, eleven miles from Saugor (built by a former Commissioner of Saugor, from iron made on the spot, from the ore found in the neighbourhood, with ordinary native tools, and by unskilled workmen and at a place where no foundries exist), she said, \"Of what use is it to fight against people who can build a bridge like this?\"\\n', 'om', '20190816_124117']",
+        "['The last Indian mall informed as of the death of the Begum of Bhopal, the only lady member of the Order of the Star of India, except, of course, her Majesty the Queen. Our Portrait represents her Highness in a dress worn on public occasions. The two men sitting with her were her Ministers. The one on the right, in the white dress, is Kian Ram, the Under Minister, and a Hindoo; and the one on the left is Jumal-oo Deen,the Prime Minister, and a Mussulman. The town of Bhopal is in Central India, between Saugor and Indore, on the Bombay road, and nearly equidistant from both places about 109 miles. The population is chiefly Mussulman; but a great number of Hindoos live in the town and are treated in all respects as well as the Musaulmans. The late ruler of the Bhopal State, her Highness the Nawab Secunder Begum, was daughter of the late Nawab Nuzzer Mahomed Khan. She married her cousin, the late Jehan gir Mahomed Khan. After his death she succeeded him, with the consent of the British authorities, and proved one of the wisest and most able rulers of the country. The reigning family at Bhopal have always been attached to the British; and when the mutiny broke out she remained firm in her attachment to the English cause in spite of the wishes and entreaties of her intimate friends and relations and the threats of her Mussulman adherents. She stood alone in our favour at that trying time, and had the wisdom and foresight to know that in the end we must be the conquerors. Whatever assistance she could give us, she gave willingly. In 1860, after, the country was settled, the late-Lord Canning assembled all the chiefs of Central India at Jubbulpoor, and in open durbar there praised the Begum for the noble way in which she had stood out in our favour, and at the same time informed her that he had been empowered to give her a grant of land worth about a ]ac of rupees a year. The Begum was greatly affected on this occasion, and with tears of joy in her eyes stood up and tanked his Lordship for the great honour she had received. On her way back from Jubbulpoor, as she was crossing the noble iron suspension-bridge over the Baas, eleven miles from Saugor (built by a former Commissioner of Saugor, from iron made on the spot, from the ore found in the neighbourhood, with ordinary native tools, and by unskilled workmen and at a place where no foundries exist), she said, \"Of what use is it to fight against people who can build a bridge like this?\"\\n', 'om', '20190816_124120']" .
 
 <http://purl.org/nisaba/collection/13/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:end 33 ;
+    nisaba:end 33,
+        35 ;
     nisaba:start 0 .
 
 <http://purl.org/nisaba/collection/13/item/0/segment/1> a nisaba:SegmentEntry ;
-    nisaba:end 279 ;
-    nisaba:start 195 .
+    nisaba:end 101,
+        279 ;
+    nisaba:start 35,
+        195 .
 
 <http://purl.org/nisaba/collection/13/item/0/segment/2> a nisaba:SegmentEntry ;
-    nisaba:end 375 ;
-    nisaba:start 279 .
+    nisaba:end 170,
+        375 ;
+    nisaba:start 141,
+        279 .
 
 <http://purl.org/nisaba/collection/13/item/0/segment/3> a nisaba:SegmentEntry ;
-    nisaba:end 450 ;
-    nisaba:start 375 .
+    nisaba:end 237,
+        450 ;
+    nisaba:start 170,
+        375 .
+
+<http://purl.org/nisaba/collection/13/item/0/segment/4> a nisaba:SegmentEntry ;
+    nisaba:end 351 ;
+    nisaba:start 306 .
+
+<http://purl.org/nisaba/collection/13/item/0/segment/5> a nisaba:SegmentEntry ;
+    nisaba:end 419 ;
+    nisaba:start 373 .
+
+<http://purl.org/nisaba/collection/13/item/0/segment/6> a nisaba:SegmentEntry ;
+    nisaba:end 757 ;
+    nisaba:start 703 .
 
 <http://purl.org/nisaba/collection/14/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/14/item/0/segment/0>,
@@ -819,7 +915,8 @@
         <http://purl.org/nisaba/collection/14/item/0/segment/5>,
         <http://purl.org/nisaba/collection/14/item/0/segment/6> ;
     nisaba:item_type "t" ;
-    nisaba:transcription "['Let the scoffers and deriders who have no faith in the administrative capacity of the gentle sex (says the New York Tribune) read the story of the Begum of Bhopal and vail their abashed faces. Bhopal is a small and obscure State of Central India, and the Princess, its ruler, buzzes about it like a bee in a bonnet. She indulges in no fashionable laziness at the Capital, nor does she permit the existence of any Ring government; on the contrary, she makes tours of inspection through her domains and metes out punishment and affords redress with her own tinted hands. Under her unfaltering eye the grocers of Bhopal have an exceedingly hard time; their weights and measures are tested, and, if they prove defective, the Government destroys them and kindly provides new ones, and Messieurs the grocers pay for them. She exercises stern discipline in all other matters of morals; she has nearly paid off a national debt of 700,000 rupees; and she contemplates the building of a railroad. Imagining her to be one of the princess\\'s attendants, I advancedindifferently to meet the young girl; but with a gesture full of dignity she stopped me, raying, \"I am Shah Jehan! \"I paused a moment in amazement, and bowed profoundly; and my astonishment may be conceived on finding myself suddenly in the presence of the Princess whom I imagined to be still strictly confined to her harem. Nevertheless, recovering somewhat from my surprise, I addressed my compliments of condolence to her, telling her how during the short time that I had known Prince Oumra Doula I had learned to esteem and even to like him. Without attempting to feign the slightest emotion, the young Princess put a stop to my praises, saying, with a slight shrug of the shoulders, the simple word \"Kismet! \"(It was written). Then, motioning me to seat myself near her on one of the sofas, she said abruptly to me, \"Do you come from Paris ? \"and I was compelled, without taking breath, to give a description of Paris, its monuments and the manners of its inhabitants. I could not get over my bewilderment, and was almost shocked at this utter want of feeling, when the Begum Secunder arrived. She could not help smiling on remarking my astonishment, and, having seated herself beside us, said to me \"I mourn for Oumra Doula because I lose in him a faithful friend and counsellor. But why should my daughter mourn ? Does the prisoner regret his gaoler? \"Strange words these from the lips of\\nWith reference to this description by M. L. Rousselet, as translated by Colonel Buckle, a word or two may be said. In the first place, we do not understand what M. Rousselet means when he says that he pressed the Begum\\'s hands \"in Asiatic fashion. \"When Orientals press hands, they press them very much as Europeans do. The \"blind of fine straw \"we presume to be a tattie \"of thin reeds or rushes. \"Purdah \"of course means \"curtain ; \"but it does not \"cut off \"women from the society of their fellow-creatures. It only partially cuts them off from the society of the male sex. Any English lady can walk behind the thickest purdah; and many purdah/nasheen women prefer their comparative seclusion, just as nuns do theirs. They say, \"We can see, yet are not seen; and we have none of the trouble and vexation you have who mingle with the rough and noisy world. \"there is little wonder that there was widespread consternation at the death of Prince Oumra Doula. an Asiatic. They are, indeed, the condemnation of the worn-out custom of the sequestration of women, which Mussulmnen persist - in keeping up, in spite of the constant progress of civilisation among them. With reference to this description by M. L. Rousselet, as translated by Colonel Buckle, a word or two may be said. In the first place, we do not understand what M. Rousselet means when he says that he pressed the Begum\\'s hands \"in Asiatic fashion. \"When Orientals press hands, they press them very much as Europeans do. The \"blind of fine straw \"we presume to be a tattie \"of thin reeds or rushes. \"Purdah \"of course means \"curtain ; \"but it does not \"cut off \"women from the society of their fellow-creatures. It only partially cuts them off from the society of the male sex. Any English lady can walk behind the thickest purdah; and many purdah/nasheen women prefer their comparative seclusion, just as nuns do theirs. They say, \"We can see, yet are not seen; and we have none of the trouble and vexation you have who mingle with the rough and noisy world. \"there is little wonder that there was widespread consternation at the death of Prince Oumra Doula. \\n', 'om', '20190815_093006']" .
+    nisaba:transcription "['Let the scoffers and deriders who have no faith in the administrative capacity of the gentle sex (says the New York Tribune) read the story of the Begum of Bhopal and vail their abashed faces. Bhopal is a small and obscure State of Central India, and the Princess, its ruler, buzzes about it like a bee in a bonnet. She indulges in no fashionable laziness at the Capital, nor does she permit the existence of any Ring government; on the contrary, she makes tours of inspection through her domains and metes out punishment and affords redress with her own tinted hands. Under her unfaltering eye the grocers of Bhopal have an exceedingly hard time; their weights and measures are tested, and, if they prove defective, the Government destroys them and kindly provides new ones, and Messieurs the grocers pay for them. She exercises stern discipline in all other matters of morals; she has nearly paid off a national debt of 700,000 rupees; and she contemplates the building of a railroad. Imagining her to be one of the princess\\'s attendants, I advancedindifferently to meet the young girl; but with a gesture full of dignity she stopped me, raying, \"I am Shah Jehan! \"I paused a moment in amazement, and bowed profoundly; and my astonishment may be conceived on finding myself suddenly in the presence of the Princess whom I imagined to be still strictly confined to her harem. Nevertheless, recovering somewhat from my surprise, I addressed my compliments of condolence to her, telling her how during the short time that I had known Prince Oumra Doula I had learned to esteem and even to like him. Without attempting to feign the slightest emotion, the young Princess put a stop to my praises, saying, with a slight shrug of the shoulders, the simple word \"Kismet! \"(It was written). Then, motioning me to seat myself near her on one of the sofas, she said abruptly to me, \"Do you come from Paris ? \"and I was compelled, without taking breath, to give a description of Paris, its monuments and the manners of its inhabitants. I could not get over my bewilderment, and was almost shocked at this utter want of feeling, when the Begum Secunder arrived. She could not help smiling on remarking my astonishment, and, having seated herself beside us, said to me \"I mourn for Oumra Doula because I lose in him a faithful friend and counsellor. But why should my daughter mourn ? Does the prisoner regret his gaoler? \"Strange words these from the lips of\\nWith reference to this description by M. L. Rousselet, as translated by Colonel Buckle, a word or two may be said. In the first place, we do not understand what M. Rousselet means when he says that he pressed the Begum\\'s hands \"in Asiatic fashion. \"When Orientals press hands, they press them very much as Europeans do. The \"blind of fine straw \"we presume to be a tattie \"of thin reeds or rushes. \"Purdah \"of course means \"curtain ; \"but it does not \"cut off \"women from the society of their fellow-creatures. It only partially cuts them off from the society of the male sex. Any English lady can walk behind the thickest purdah; and many purdah/nasheen women prefer their comparative seclusion, just as nuns do theirs. They say, \"We can see, yet are not seen; and we have none of the trouble and vexation you have who mingle with the rough and noisy world. \"there is little wonder that there was widespread consternation at the death of Prince Oumra Doula. an Asiatic. They are, indeed, the condemnation of the worn-out custom of the sequestration of women, which Mussulmnen persist - in keeping up, in spite of the constant progress of civilisation among them. With reference to this description by M. L. Rousselet, as translated by Colonel Buckle, a word or two may be said. In the first place, we do not understand what M. Rousselet means when he says that he pressed the Begum\\'s hands \"in Asiatic fashion. \"When Orientals press hands, they press them very much as Europeans do. The \"blind of fine straw \"we presume to be a tattie \"of thin reeds or rushes. \"Purdah \"of course means \"curtain ; \"but it does not \"cut off \"women from the society of their fellow-creatures. It only partially cuts them off from the society of the male sex. Any English lady can walk behind the thickest purdah; and many purdah/nasheen women prefer their comparative seclusion, just as nuns do theirs. They say, \"We can see, yet are not seen; and we have none of the trouble and vexation you have who mingle with the rough and noisy world. \"there is little wonder that there was widespread consternation at the death of Prince Oumra Doula. \\n', 'om', '20190815_093006']",
+        "['with all the ceremony and care to which her rank as a princess and a purdah (wife) lady entitled her. Accompanied by her son, Prince Sahin-Szada, three ladies of her court and nineteen attendants she made a swift decent from the boat into a saloon carriage which had been drawn up directly opposite to the gangway. Nothing but a fleeting glimpse of Oriental silk wraps and veils of white and green was to be seen, not even the captain of the vessal being allowed near the gangway. Sultana Jehan, the Begum of Bhopal, has many claims to be regarded as a unique figure among Oriental rulers. She is the only woman to rule in a Mohammedan country and she is the third woman of her line to do so, having succeeded her mother in 1910, and besides she is very brightly educated and an able administrator of Bhopal, a State in the centre of India founded in the seventeenth century by her ancestor Dost Mohammed Khan. The rulers of this State have always been friendly to England from the day when a treaty of dependence was signed between the ruler and the British Government in 1818, and later in 1872, when Shah Jahan the Begum of Bhopal, received the Grand Cross of the Star of India, to present day which sees the Princess of Bhopal leaving her native land for the distant England in her wish to attend the coronation of the King Emperor. In this she has shown her spirit of independent activity, for the neighbour the Nizam of Hydrabad has never crossed the water. Sultan Jehan takes the most active part in government of Bhopal. Her interest in education and especially the education of the women of her native country, is very great, but besides this she supervises the work of the various Government departments and acts as judge in all appeals. Eight years ago when Lord Curzon was crowned Viceroy of India, the Princess Than insisted upon being present and presenting to the Viceroy a jewelled casket containing an address assuring the British Government not only of the fidelity off her country but of that of the whole of the Mohammedan population of India, for, she said, faithfulness and obedience to the ruler are both strictly ordained by the Mohammedan religion. Two East Indian women of note are the Shah Jehan Begum, the ruler of Bhopal and Miss Soonderbai Powar, who has devoted her life to the suppression of the opium traffic. Her highness the begum is noted for her loyalty to England, for which she has been decorated by Queen Victoria. She is very small, scarcely taller than a well grown child of ten. She is about fifty years of age, and her bright face is a true index of her intelligence. She is well educated and is pronounced by Sir Lepel Griffin the most remarkable princess in India. She is said to be particularly appreciated of a good joke, but in spite of her love of the \\\\u201clighter things of life,\\\\u201d she is a wise ruler, and under her administration many improvements have been inaugurated, road have been laid out, fine buildings erected, hospitals founded and just laws enacted. The begum, although her subjects are Hindoo, is a devout Mohammedan. Miss Soonderbai Powar is the daughter of converted Hindoos of high caste, who only embraced Christianity late in life. She is very religious herself, and fifteen years of service as a missionary have enabled her to observe the abject misery of many families addicted to the use of opium. She is now engaged in a vigorous crusade against the baneful narcotic, and is sanguine that she will succeed in entirely suppressing the trade in India. \\n', 'om', '20190816_125309']" .
 
 <http://purl.org/nisaba/collection/14/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 35 ;
@@ -835,7 +932,8 @@
 
 <http://purl.org/nisaba/collection/14/item/0/segment/3> a nisaba:SegmentEntry ;
     nisaba:end 237 ;
-    nisaba:start 171 .
+    nisaba:start 170,
+        171 .
 
 <http://purl.org/nisaba/collection/14/item/0/segment/4> a nisaba:SegmentEntry ;
     nisaba:end 306,
@@ -851,6 +949,7 @@
     nisaba:end 471,
         757 ;
     nisaba:start 419,
+        703,
         705 .
 
 <http://purl.org/nisaba/collection/14/item/1> a nisaba:ItemEntry ;
@@ -865,7 +964,8 @@
     nisaba:item_page_number "5" ;
     nisaba:item_type "t" ;
     nisaba:transcription "The coronation visit of that remarkable Indian chief, her Highness the Begum of Bhopal, is directly due to the encouragement of King George, who was greatly interested in her during his Indian tour as Prince of Wales. When the Begum was presented to His Majesty, at the Indore Durbar, he conferred on her the insignia of the grand commander of the Indian Empire, and she was the first woman in India' to receive that honour. On that occasion the Begum appeared before King George, with her face entirely hidden behind a burka of a light blue material, while her head was crowned in gold, and her small figure draped in a deeper shade of blue— a costume which she is' expected to wear at the coronation ceremony. This interesting woman is, in a number of ways, unique among her sex. Bhopal is the only State in the world where the ruler must always be a woman. ",
-        "[\"The coronation visit\\xa0of\\xa0that remarkable Indian chief, her Highness the\\xa0Begum\\xa0of Bhopal,\\xa0is directly due to the encouragement\\xa0of\\xa0King George, who was greatly interested in her during his Indian tour as Prince of Wales. When the\\xa0Begum was presented to His Majesty, at the Indore Durbar, he conferred on her the insignia\\xa0of\\xa0the grand commander\\xa0of\\xa0the Indian Empire, and she was the first woman in India' to receive that honour. On that occasion the\\xa0Begum\\xa0appeared before King George, with her face entirely hidden behind a burka\\xa0of a light blue material, while her head was crowned in gold, and her small figure draped in a deeper shade of blue— a costume which she is' expected to wear at the coronation ceremony. This interesting woman is, in a number\\xa0of\\xa0ways, unique among her sex. Bhopal\\xa0is the only State in the world where the ruler must always be a woman. \", '', '']" .
+        "[\"The coronation visit\\xa0of\\xa0that remarkable Indian chief, her Highness the\\xa0Begum\\xa0of Bhopal,\\xa0is directly due to the encouragement\\xa0of\\xa0King George, who was greatly interested in her during his Indian tour as Prince of Wales. When the\\xa0Begum was presented to His Majesty, at the Indore Durbar, he conferred on her the insignia\\xa0of\\xa0the grand commander\\xa0of\\xa0the Indian Empire, and she was the first woman in India' to receive that honour. On that occasion the\\xa0Begum\\xa0appeared before King George, with her face entirely hidden behind a burka\\xa0of a light blue material, while her head was crowned in gold, and her small figure draped in a deeper shade of blue— a costume which she is' expected to wear at the coronation ceremony. This interesting woman is, in a number\\xa0of\\xa0ways, unique among her sex. Bhopal\\xa0is the only State in the world where the ruler must always be a woman. \", '', '']",
+        "[\"The coronation visit\\xa0of\\xa0that remarkable Indian chief, her Highness the\\xa0Begum\\xa0of Bhopal,\\xa0is directly due to the encouragement\\xa0of\\xa0King George, who was greatly interested in her during his Indian tour as Prince of Wales. When the\\xa0Begum was presented to His Majesty, at the Indore Durbar, he conferred on her the insignia\\xa0of\\xa0the grand commander\\xa0of\\xa0the Indian Empire, and she was the first woman in India' to receive that honour. On that occasion the\\xa0Begum\\xa0appeared before King George, with her face entirely hidden behind a burka\\xa0of a light blue material, while her head was crowned in gold, and her small figure draped in a deeper shade of blue— a costume which she is' expected to wear at the coronation ceremony. This interesting woman is, in a number\\xa0of\\xa0ways, unique among her sex. Bhopal\\xa0is the only State in the world where the ruler must always be a woman. \\n\", 'om', '20190816_122248']" .
 
 <http://purl.org/nisaba/collection/2/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 75 ;
@@ -902,7 +1002,8 @@
     nisaba:item_title "Indian Princess Hides Her Face. The Begum of Bhopal in Paris with Servants, En Route To London" ;
     nisaba:item_type "t" ;
     nisaba:transcription "Paris, May 1.- A mysterious Indian princess is captivating the fancy of Parisians. She is the Begum of Bhopal, whose face has never been seen except by her immediate family and attendants. She journeyed hither to attend the coronation of her overlord, King George, and is the first of the hordes of wealthy guests expected by the eager shopkeepers to throng Europe this year, drawn by the great English celebration. While awaiting the preparation in London the begum and an army of maids are lodged in eighteen rooms of a Paris hostelry. Many have called to pay their respects, but none has been received. Not even the hotel employes are able to gossip about the begum, for none enters her apartments. All the food for the princess’s table was brought from India and is prepared privately by the princess’s own chef. Even the water for cooking and drinking, it is said, was brought in bottles from Bhopal’s sacred springs. ",
-        "['Paris, May 1.- A mysterious Indian princess is captivating the fancy of Parisians. She is the Begum of Bhopal, whose face has never been seen except by her immediate family and attendants. She journeyed hither to attend the coronation of her overlord, King George, and is the first of the hordes of wealthy guests expected by the eager shopkeepers to throng Europe this year, drawn by the great English celebration. While awaiting the preparation in London the begum and an army of maids are lodged in eighteen rooms of a Paris hostelry. Many have called to pay their respects, but none has been received. Not even the hotel employes are able to gossip about the begum, for none enters her apartments. All the food for the princess’s table was brought from India and is prepared privately by the princess’s own chef. Even the water for cooking and drinking, it is said, was brought in bottles from Bhopal’s sacred springs. ', '', '']" .
+        "['Paris, May 1.- A mysterious Indian princess is captivating the fancy of Parisians. She is the Begum of Bhopal, whose face has never been seen except by her immediate family and attendants. She journeyed hither to attend the coronation of her overlord, King George, and is the first of the hordes of wealthy guests expected by the eager shopkeepers to throng Europe this year, drawn by the great English celebration. While awaiting the preparation in London the begum and an army of maids are lodged in eighteen rooms of a Paris hostelry. Many have called to pay their respects, but none has been received. Not even the hotel employes are able to gossip about the begum, for none enters her apartments. All the food for the princess’s table was brought from India and is prepared privately by the princess’s own chef. Even the water for cooking and drinking, it is said, was brought in bottles from Bhopal’s sacred springs. ', '', '']",
+        "['Paris, May 1.- A mysterious Indian princess is captivating the fancy of Parisians. She is the Begum of Bhopal, whose face has never been seen except by her immediate family and attendants. She journeyed hither to attend the coronation of her overlord, King George, and is the first of the hordes of wealthy guests expected by the eager shopkeepers to throng Europe this year, drawn by the great English celebration. While awaiting the preparation in London the begum and an army of maids are lodged in eighteen rooms of a Paris hostelry. Many have called to pay their respects, but none has been received. Not even the hotel employes are able to gossip about the begum, for none enters her apartments. All the food for the princess’s table was brought from India and is prepared privately by the princess’s own chef. Even the water for cooking and drinking, it is said, was brought in bottles from Bhopal’s sacred springs. \\n', 'om', '20190816_123304']" .
 
 <http://purl.org/nisaba/collection/3/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 32 ;
@@ -1005,7 +1106,8 @@
     nisaba:item_title "The Begum of Bhopal" ;
     nisaba:item_type "t" ;
     nisaba:transcription "Let me describe her appearance. She is very short and stout. This is common to many native ladies. I do not think that in all my intercourse with native women I have met with half a dozen who were above five feet high, while by far the greater number, especially of the higher classes, and very short. This, as well as the tendency to obesity so prevalent among them, doubtless is due in great part to the secluded and inactive lives they lead. She had small, bright, piercing black eyes, and a rather dark muddy complexion. Her teeth were very black, and we noticed what seemed to be a large swelling on the cheek, which during our visit moved occasionally from one side to the other. It must have been some preparation of tobacco and other things, possibly opium, which is largely used by the Mohammedans, male and female. This greatly disfigured her face, which however was not ill-natured looking. ",
-        "['Let me describe her appearance. She is very short and stout. This is common to many native ladies. I do not think that in all my intercourse with native women I have met with half a dozen who were above five feet high, while by far the greater number, especially of the higher classes, and very short. This, as well as the tendency to obesity so prevalent among them, doubtless is due in great part to the secluded and inactive lives they lead. She had small, bright, piercing black eyes, and a rather dark muddy complexion. Her teeth were very black, and we noticed what seemed to be a large swelling on the cheek, which during our visit moved occasionally from one side to the other. It must have been some preparation of tobacco and other things, possibly opium, which is largely used by the Mohammedans, male and female. This greatly disfigured her face, which however was not ill-natured looking. ', '', '']" .
+        "['Let me describe her appearance. She is very short and stout. This is common to many native ladies. I do not think that in all my intercourse with native women I have met with half a dozen who were above five feet high, while by far the greater number, especially of the higher classes, and very short. This, as well as the tendency to obesity so prevalent among them, doubtless is due in great part to the secluded and inactive lives they lead. She had small, bright, piercing black eyes, and a rather dark muddy complexion. Her teeth were very black, and we noticed what seemed to be a large swelling on the cheek, which during our visit moved occasionally from one side to the other. It must have been some preparation of tobacco and other things, possibly opium, which is largely used by the Mohammedans, male and female. This greatly disfigured her face, which however was not ill-natured looking. ', '', '']",
+        "['Let me describe her appearance. She is very short and stout. This is common to many native ladies. I do not think that in all my intercourse with native women I have met with half a dozen who were above five feet high, while by far the greater number, especially of the higher classes, and very short. This, as well as the tendency to obesity so prevalent among them, doubtless is due in great part to the secluded and inactive lives they lead. She had small, bright, piercing black eyes, and a rather dark muddy complexion. Her teeth were very black, and we noticed what seemed to be a large swelling on the cheek, which during our visit moved occasionally from one side to the other. It must have been some preparation of tobacco and other things, possibly opium, which is largely used by the Mohammedans, male and female. This greatly disfigured her face, which however was not ill-natured looking. \\n', 'om', '20190816_123356']" .
 
 <http://purl.org/nisaba/collection/4/item/4/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 83 ;
@@ -1090,7 +1192,8 @@
     nisaba:item_title "Lord Elgin's Tour of India. State Visit to Bhopal. A Mohammedan Begum" ;
     nisaba:item_type "t" ;
     nisaba:transcription "The state visit of the Viceroy and the Countess of Elgin to Bhopal waes an event of unusual interest, for the loyal and prosperous principality has long been ruled by a succession of Mohammedan Begums or feudatory queens. The State is a remnant of the Empire of the great Aurangzeb (whose tomb is not far off), and contains the famous Buddhist monuments of Bhilsa, a reproduction of the finest of which, the Sanchi gateway, is in Edinburgh Museum. Unlike her more famous mother, who used to go unveiled, the present Sultan Jahan Begum received their Excellencies dressed in a shape-less dark green gown, from two holes in the hood of which her eyes looked forth ; her hands were covered with white thread gloves, and on one finger was a magnificent ring. The old Vizier, Imtian Ali, who has virtually ruled the State for years, stood beside his little Sovereign lady. W",
-        "['The state visit of the Viceroy and the Countess of Elgin to Bhopal waes an event of unusual interest, for the loyal and prosperous principality has long been ruled by a succession of Mohammedan Begums or feudatory queens. The State is a remnant of the Empire of the great Aurangzeb (whose tomb is not far off), and contains the famous Buddhist monuments of Bhilsa, a reproduction of the finest of which, the Sanchi gateway, is in Edinburgh Museum. Unlike her more famous mother, who used to go unveiled, the present Sultan Jahan Begum received their Excellencies dressed in a shape-less dark green gown, from two holes in the hood of which her eyes looked forth ; her hands were covered with white thread gloves, and on one finger was a magnificent ring. The old Vizier, Imtian Ali, who has virtually ruled the State for years, stood beside his little Sovereign lady. W', '', '']" .
+        "['The state visit of the Viceroy and the Countess of Elgin to Bhopal waes an event of unusual interest, for the loyal and prosperous principality has long been ruled by a succession of Mohammedan Begums or feudatory queens. The State is a remnant of the Empire of the great Aurangzeb (whose tomb is not far off), and contains the famous Buddhist monuments of Bhilsa, a reproduction of the finest of which, the Sanchi gateway, is in Edinburgh Museum. Unlike her more famous mother, who used to go unveiled, the present Sultan Jahan Begum received their Excellencies dressed in a shape-less dark green gown, from two holes in the hood of which her eyes looked forth ; her hands were covered with white thread gloves, and on one finger was a magnificent ring. The old Vizier, Imtian Ali, who has virtually ruled the State for years, stood beside his little Sovereign lady. W', '', '']",
+        "['The state visit of the Viceroy and the Countess of Elgin to Bhopal waes an event of unusual interest, for the loyal and prosperous principality has long been ruled by a succession of Mohammedan Begums or feudatory queens. The State is a remnant of the Empire of the great Aurangzeb (whose tomb is not far off), and contains the famous Buddhist monuments of Bhilsa, a reproduction of the finest of which, the Sanchi gateway, is in Edinburgh Museum. Unlike her more famous mother, who used to go unveiled, the present Sultan Jahan Begum received their Excellencies dressed in a shape-less dark green gown, from two holes in the hood of which her eyes looked forth ; her hands were covered with white thread gloves, and on one finger was a magnificent ring. The old Vizier, Imtian Ali, who has virtually ruled the State for years, stood beside his little Sovereign lady. W\\n', 'om', '20190816_123445']" .
 
 <http://purl.org/nisaba/collection/5/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 38 ;
@@ -1109,7 +1212,8 @@
         <http://purl.org/nisaba/collection/5/item/1/segment/1> ;
     nisaba:item_type "t" ;
     nisaba:transcription "While the Governor-General reviewed the Bhopal Imperial Service Lancers, in dark green and yellow uniforms with green and white lance pennons, Lady Elgin spent the morning in the Lansdowne Maternity Hospital, conducted by Mias Niebel, M.D., the doctor in charge. The Begum herself bears the whole expense; the cut-patients number some twenty thousand a year, and the number of in-patients goes on increasing. It is in such facts Unit the Queen-Empress is personally interested, as regularly reported to Her Majesty. At the inevitable banquet in the evening the hooded Begum proposed the toast of their Excellencies' health in a clear voice, and referred to Lord Elgin's father. Her ",
-        "[\"While the Governor-General reviewed the Bhopal Imperial Service Lancers, in dark green and yellow uniforms with green and white lance pennons, Lady Elgin spent the morning in the Lansdowne Maternity Hospital, conducted by Mias Niebel, M.D., the doctor in charge. The Begum herself bears the whole expense; the cut-patients number some twenty thousand a year, and the number of in-patients goes on increasing. It is in such facts Unit the Queen-Empress is personally interested, as regularly reported to Her Majesty. At the inevitable banquet in the evening the hooded Begum proposed the toast of their Excellencies' health in a clear voice, and referred to Lord Elgin's father. Her \", '', '']" .
+        "[\"While the Governor-General reviewed the Bhopal Imperial Service Lancers, in dark green and yellow uniforms with green and white lance pennons, Lady Elgin spent the morning in the Lansdowne Maternity Hospital, conducted by Mias Niebel, M.D., the doctor in charge. The Begum herself bears the whole expense; the cut-patients number some twenty thousand a year, and the number of in-patients goes on increasing. It is in such facts Unit the Queen-Empress is personally interested, as regularly reported to Her Majesty. At the inevitable banquet in the evening the hooded Begum proposed the toast of their Excellencies' health in a clear voice, and referred to Lord Elgin's father. Her \", '', '']",
+        "[\"While the Governor-General reviewed the Bhopal Imperial Service Lancers, in dark green and yellow uniforms with green and white lance pennons, Lady Elgin spent the morning in the Lansdowne Maternity Hospital, conducted by Mias Niebel, M.D., the doctor in charge. The Begum herself bears the whole expense; the cut-patients number some twenty thousand a year, and the number of in-patients goes on increasing. It is in such facts Unit the Queen-Empress is personally interested, as regularly reported to Her Majesty. At the inevitable banquet in the evening the hooded Begum proposed the toast of their Excellencies' health in a clear voice, and referred to Lord Elgin's father. Her \\n\", 'om', '20190816_123511']" .
 
 <http://purl.org/nisaba/collection/5/item/1/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 80 ;
@@ -1123,7 +1227,8 @@
     nisaba:hasSegment <http://purl.org/nisaba/collection/5/item/2/segment/0> ;
     nisaba:item_type "t" ;
     nisaba:transcription "Her Highness requested that her troops might henceforth be named \"The Imperial Victoria Lancers,\"and expressed sorrow that, her new Bhopal-Ujjain Railway was not ready to convey her guests to the ruins of the old capital of Vikramaditya, whose name marks the principal Hindu era, 57 B.C. Lord Elgin and his party, on leaving Central India, for Poona, spent some time among the cave temples and monoliths of Ellora, the finest in India, close to the Duke of Wellington's first great battlefield of Assaye.",
-        "['Her Highness requested that her troops might henceforth be named \"The Imperial Victoria Lancers,\"and expressed sorrow that, her new Bhopal-Ujjain Railway was not ready to convey her guests to the ruins of the old capital of Vikramaditya, whose name marks the principal Hindu era, 57 B.C. Lord Elgin and his party, on leaving Central India, for Poona, spent some time among the cave temples and monoliths of Ellora, the finest in India, close to the Duke of Wellington\\'s first great battlefield of Assaye.', '', '']" .
+        "['Her Highness requested that her troops might henceforth be named \"The Imperial Victoria Lancers,\"and expressed sorrow that, her new Bhopal-Ujjain Railway was not ready to convey her guests to the ruins of the old capital of Vikramaditya, whose name marks the principal Hindu era, 57 B.C. Lord Elgin and his party, on leaving Central India, for Poona, spent some time among the cave temples and monoliths of Ellora, the finest in India, close to the Duke of Wellington\\'s first great battlefield of Assaye.', '', '']",
+        "['Her Highness requested that her troops might henceforth be named \"The Imperial Victoria Lancers,\"and expressed sorrow that, her new Bhopal-Ujjain Railway was not ready to convey her guests to the ruins of the old capital of Vikramaditya, whose name marks the principal Hindu era, 57 B.C. Lord Elgin and his party, on leaving Central India, for Poona, spent some time among the cave temples and monoliths of Ellora, the finest in India, close to the Duke of Wellington\\'s first great battlefield of Assaye.\\n', 'om', '20190816_123518']" .
 
 <http://purl.org/nisaba/collection/5/item/2/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 15 ;
@@ -1202,7 +1307,8 @@
     nisaba:item_title "Veiled Ruler from India. Begum of Bhopal and her suite in England " ;
     nisaba:item_type "t" ;
     nisaba:transcription "The Begum of Bhopal, a rich, veiled Indian Princess, is now in England for the Coronation says a London paper of May 14. Her visit has many elements of mystery about it. For one thing this wealthy princess never appears in public without a heavy veil that prevents observers from seeing what manner of woman she is who rules over nearly a million people and 7000 square miles of territory. The princess has taken Patterson House, Nutfield, near Redhill, where she has already become known as a very early riser. She is in the habit of strolling about the lawns before the rest of the world is awake.",
-        "['The Begum of Bhopal, a rich, veiled Indian Princess, is now in England for the Coronation says a London paper\\xa0of\\xa0May 14. Her visit has many elements\\xa0of\\xa0mystery about it. For one thing this wealthy princess never appears in public without a heavy veil that prevents observers from seeing what manner\\xa0of\\xa0woman she is who rules over nearly a million people and 7000 square miles\\xa0of\\xa0territory. The princess has taken Patterson House, Nutfield, near Redhill, where she has already become known as a very early riser. She is in the habit\\xa0of\\xa0strolling about the lawns before the rest\\xa0of\\xa0the world is awake.', '', '']" .
+        "['The Begum of Bhopal, a rich, veiled Indian Princess, is now in England for the Coronation says a London paper\\xa0of\\xa0May 14. Her visit has many elements\\xa0of\\xa0mystery about it. For one thing this wealthy princess never appears in public without a heavy veil that prevents observers from seeing what manner\\xa0of\\xa0woman she is who rules over nearly a million people and 7000 square miles\\xa0of\\xa0territory. The princess has taken Patterson House, Nutfield, near Redhill, where she has already become known as a very early riser. She is in the habit\\xa0of\\xa0strolling about the lawns before the rest\\xa0of\\xa0the world is awake.', '', '']",
+        "['The Begum of Bhopal, a rich, veiled Indian Princess, is now in England for the Coronation says a London paper\\xa0of\\xa0May 14. Her visit has many elements\\xa0of\\xa0mystery about it. For one thing this wealthy princess never appears in public without a heavy veil that prevents observers from seeing what manner\\xa0of\\xa0woman she is who rules over nearly a million people and 7000 square miles\\xa0of\\xa0territory. The princess has taken Patterson House, Nutfield, near Redhill, where she has already become known as a very early riser. She is in the habit\\xa0of\\xa0strolling about the lawns before the rest\\xa0of\\xa0the world is awake.\\n', 'om', '20190816_123541']" .
 
 <http://purl.org/nisaba/collection/6/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 70 ;
@@ -1217,7 +1323,8 @@
         <http://purl.org/nisaba/collection/6/item/1/segment/1> ;
     nisaba:item_type "t" ;
     nisaba:transcription "She has brought over with her from India a large suite, which includes priests, a physician, an astrologer, and a cook. It is part of the priest’s activities to attend the killing of chickens for the princess's consumption. Her jewels and jewel embedded ornaments and other utensils have been placed in the care of a bank. No fewer than 150 packages were needed to bring over the special dresses and foods. The Begum was received by the King on Tuesday night, and was afterwards a conspicuous figure at the Court. She wore a robe made in one piece. In the veil over her head and face are two eye holes. She spent Tuesday night after the Court at a London hotel, where she was waited on at meals by the maids, as it is her custom never to appear before a man unveiled. Waiters were, therefore, banished from her presence.",
-        "[\"She has brought over with her from India a large suite, which includes priests, a physician, an astrologer, and a cook. It is part of the priest’s activities to attend the killing\\xa0of\\xa0chickens for the princess's consumption. Her jewels and jewel embedded ornaments and other utensils have been placed in the care\\xa0of\\xa0a bank. No fewer than 150 packages were needed to bring over the special dresses and foods. The\\xa0Begum\\xa0was received by the King on Tuesday night, and was afterwards a conspicuous figure at the Court. She wore a robe made in one piece. In the veil over her head and face are two eye holes. She spent Tuesday night after the Court at a London hotel, where she was waited on at meals by the maids, as it is her custom never to appear before a man unveiled. Waiters were, therefore, banished from her presence.\", '', '']" .
+        "[\"She has brought over with her from India a large suite, which includes priests, a physician, an astrologer, and a cook. It is part of the priest’s activities to attend the killing\\xa0of\\xa0chickens for the princess's consumption. Her jewels and jewel embedded ornaments and other utensils have been placed in the care\\xa0of\\xa0a bank. No fewer than 150 packages were needed to bring over the special dresses and foods. The\\xa0Begum\\xa0was received by the King on Tuesday night, and was afterwards a conspicuous figure at the Court. She wore a robe made in one piece. In the veil over her head and face are two eye holes. She spent Tuesday night after the Court at a London hotel, where she was waited on at meals by the maids, as it is her custom never to appear before a man unveiled. Waiters were, therefore, banished from her presence.\", '', '']",
+        "[\"She has brought over with her from India a large suite, which includes priests, a physician, an astrologer, and a cook. It is part of the priest’s activities to attend the killing\\xa0of\\xa0chickens for the princess's consumption. Her jewels and jewel embedded ornaments and other utensils have been placed in the care\\xa0of\\xa0a bank. No fewer than 150 packages were needed to bring over the special dresses and foods. The\\xa0Begum\\xa0was received by the King on Tuesday night, and was afterwards a conspicuous figure at the Court. She wore a robe made in one piece. In the veil over her head and face are two eye holes. She spent Tuesday night after the Court at a London hotel, where she was waited on at meals by the maids, as it is her custom never to appear before a man unveiled. Waiters were, therefore, banished from her presence.\\n\", 'om', '20190816_123817']" .
 
 <http://purl.org/nisaba/collection/6/item/1/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 38 ;
@@ -1231,7 +1338,8 @@
     nisaba:hasSegment <http://purl.org/nisaba/collection/6/item/2/segment/0> ;
     nisaba:item_type "t" ;
     nisaba:transcription "Her physician Mrs Barnes, an MD. of Edinburgh. On Wednesday, the Begum paid a visit to Queen Alexandra at Marlborough House. She also visited the Earl and Countess of Minto, and later went to the Water Colour Exhibition in Pall Mall. The Begum motored back to Patterson Court in the evening.",
-        "['Her physician Mrs Barnes, an MD. of\\xa0Edinburgh. On Wednesday, the\\xa0Begum\\xa0paid a visit to Queen Alexandra at Marlborough House. She also visited the Earl and Countess\\xa0of\\xa0Minto, and later went to the Water Colour Exhibition in Pall Mall. The Begum motored back to Patterson Court in the evening.', '', '']" .
+        "['Her physician Mrs Barnes, an MD. of\\xa0Edinburgh. On Wednesday, the\\xa0Begum\\xa0paid a visit to Queen Alexandra at Marlborough House. She also visited the Earl and Countess\\xa0of\\xa0Minto, and later went to the Water Colour Exhibition in Pall Mall. The Begum motored back to Patterson Court in the evening.', '', '']",
+        "['Her physician Mrs Barnes, an MD. of\\xa0Edinburgh. On Wednesday, the\\xa0Begum\\xa0paid a visit to Queen Alexandra at Marlborough House. She also visited the Earl and Countess\\xa0of\\xa0Minto, and later went to the Water Colour Exhibition in Pall Mall. The Begum motored back to Patterson Court in the evening.\\n', 'om', '20190816_123829']" .
 
 <http://purl.org/nisaba/collection/6/item/2/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 41 ;
@@ -1240,113 +1348,221 @@
 <http://purl.org/nisaba/collection/7/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/0/segment/0>,
         <http://purl.org/nisaba/collection/7/item/0/segment/1> ;
+    nisaba:image_file "Begum 1.jpg" ;
     nisaba:item_author "" ;
     nisaba:item_date "4/8/1911" ;
     nisaba:item_document_number "" ;
     nisaba:item_page_number "" ;
     nisaba:item_title "Begum of Bhopal. Only Woman Ruler of Islam visits London" ;
-    nisaba:item_type "t" ;
+    nisaba:item_type "i",
+        "t" ;
     nisaba:transcription "['with all the ceremony and care to which her rank as a princess and a purdah (wife) lady entitled her. Accompanied by her son, Prince Sahin-Szada, three ladies of her court and nineteen attendants she made a swift decent from the boat into a saloon carriage which had been drawn up directly opposite to the gangway. Nothing but a fleeting glimpse of Oriental silk wraps and veils of white and green was to be seen, not even the captain of the vessal being allowed near the gangway. \\n', '', '']",
         """with all the ceremony and care to which her rank as a princess and a purdah (wife) lady entitled her. Accompanied by her son, Prince Sahin-Szada, three ladies of her court and nineteen attendants she made a swift decent from the boat into a saloon carriage which had been drawn up directly opposite to the gangway. Nothing but a fleeting glimpse of Oriental silk wraps and veils of white and green was to be seen, not even the captain of the vessal being allowed near the gangway. 
 """ .
 
 <http://purl.org/nisaba/collection/7/item/0/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 59 ;
     nisaba:end 46 ;
-    nisaba:start 0 .
+    nisaba:left 40 ;
+    nisaba:right 59 ;
+    nisaba:start 0 ;
+    nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/7/item/0/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 99 ;
     nisaba:end 113 ;
-    nisaba:start 46 .
+    nisaba:left 0 ;
+    nisaba:right 39 ;
+    nisaba:start 46 ;
+    nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/7/item/1> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/1/segment/0>,
         <http://purl.org/nisaba/collection/7/item/1/segment/1> ;
-    nisaba:item_type "t" ;
+    nisaba:image_file "Begum 2.jpg" ;
+    nisaba:item_type "i",
+        "t" ;
     nisaba:transcription "Sultana Jehan, the Begum of Bhopal, has many claims to be regarded as a unique figure among Oriental rulers. She is the only woman to rule in a Mohammedan country and she is the third woman of her line to do so, having succeeded her mother in 1910, and besides she is very brightly educated and an able administrator of Bhopal, a State in the centre of India founded in the seventeenth century by her ancestor Dost Mohammed Khan. The rulers of this State have always been friendly to England from the day when a treaty of dependence was signed between the ruler and the British Government in 1818, and later in 1872, when Shah Jahan the Begum of Bhopal, received the Grand Cross of the Star of India, to present day which sees the Princess of Bhopal leaving her native land for the distant England in her wish to attend the coronation of the King Emperor. In this she has shown her spirit of independent activity, for the neighbour the Nizam of Hydrabad has never crossed the water. ",
         "['Sultana Jehan, the Begum of Bhopal, has many claims to be regarded as a unique figure among Oriental rulers. She is the only woman to rule in a Mohammedan country and she is the third woman of her line to do so, having succeeded her mother in 1910, and besides she is very brightly educated and an able administrator of Bhopal, a State in the centre of India founded in the seventeenth century by her ancestor Dost Mohammed Khan. The rulers of this State have always been friendly to England from the day when a treaty of dependence was signed between the ruler and the British Government in 1818, and later in 1872, when Shah Jahan the Begum of Bhopal, received the Grand Cross of the Star of India, to present day which sees the Princess of Bhopal leaving her native land for the distant England in her wish to attend the coronation of the King Emperor. In this she has shown her spirit of independent activity, for the neighbour the Nizam of Hydrabad has never crossed the water. ', '', '']" .
 
 <http://purl.org/nisaba/collection/7/item/1/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 59 ;
     nisaba:end 79 ;
-    nisaba:start 0 .
+    nisaba:left 60 ;
+    nisaba:right 89 ;
+    nisaba:start 0 ;
+    nisaba:top 0 .
 
 <http://purl.org/nisaba/collection/7/item/1/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 59 ;
     nisaba:end 156 ;
-    nisaba:start 79 .
+    nisaba:left 40 ;
+    nisaba:right 69 ;
+    nisaba:start 79 ;
+    nisaba:top 10 .
 
 <http://purl.org/nisaba/collection/7/item/2> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/2/segment/0>,
         <http://purl.org/nisaba/collection/7/item/2/segment/1> ;
-    nisaba:item_type "t" ;
+    nisaba:image_file "Begum 3.jpg" ;
+    nisaba:item_type "i",
+        "t" ;
     nisaba:transcription "Sultan Jehan takes the most active part in government of Bhopal. Her interest in education and especially the education of the women of her native country, is very great, but besides this she supervises the work of the various Government departments and acts as judge in all appeals. Eight years ago when Lord Curzon was crowned Viceroy of India, the Princess Than insisted upon being present and presenting to the Viceroy a jewelled casket containing an address assuring the British Government not only of the fidelity off her country but of that of the whole of the Mohammedan population of India, for, she said, “faithfulness and obedience to the ruler are both strictly ordained by the Mohammedan religion.”",
         "['Sultan Jehan takes the most active part in government of Bhopal. Her interest in education and especially the education of the women of her native country, is very great, but besides this she supervises the work of the various Government departments and acts as judge in all appeals. Eight years ago when Lord Curzon was crowned Viceroy of India, the Princess Than insisted upon being present and presenting to the Viceroy a jewelled casket containing an address assuring the British Government not only of the fidelity off her country but of that of the whole of the Mohammedan population of India, for, she said, “faithfulness and obedience to the ruler are both strictly ordained by the Mohammedan religion.”', '', '']" .
 
 <http://purl.org/nisaba/collection/7/item/2/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 49 ;
     nisaba:end 48 ;
-    nisaba:start 0 .
+    nisaba:left 20 ;
+    nisaba:right 49 ;
+    nisaba:start 0 ;
+    nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/7/item/2/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 59 ;
     nisaba:end 121 ;
-    nisaba:start 48 .
+    nisaba:left 50 ;
+    nisaba:right 79 ;
+    nisaba:start 48 ;
+    nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/7/item/3> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/3/segment/0>,
         <http://purl.org/nisaba/collection/7/item/3/segment/1> ;
-    nisaba:item_type "t" ;
+    nisaba:image_file "Begum 4.jpg" ;
+    nisaba:item_type "i",
+        "t" ;
     nisaba:transcription "Two East Indian women of note are the Shah Jehan Begum, the ruler of Bhopal and Miss Soonderbai Powar, who has devoted her life to the suppression of the opium traffic. Her highness the begum is noted for her loyalty to England, for which she has been decorated by Queen Victoria. She is very small, scarcely taller than a well grown child of ten. She is about fifty years of age, and her bright face is a true index of her intelligence. She is well educated and is pronounced by Sir Lepel Griffin the most remarkable princess in India. She is said to be particularly appreciated of a good joke, but in spite of her love of the “lighter things of life,” she is a wise ruler, and under her administration many improvements have been inaugurated, road have been laid out, fine buildings erected, hospitals founded and just laws enacted. The begum, although her subjects are Hindoo, is a devout Mohammedan. M",
         "['Two East Indian women of note are the Shah Jehan Begum, the ruler of Bhopal and Miss Soonderbai Powar, who has devoted her life to the suppression of the opium traffic. Her highness the begum is noted for her loyalty to England, for which she has been decorated by Queen Victoria. She is very small, scarcely taller than a well grown child of ten. She is about fifty years of age, and her bright face is a true index of her intelligence. She is well educated and is pronounced by Sir Lepel Griffin the most remarkable princess in India. She is said to be particularly appreciated of a good joke, but in spite of her love of the “lighter things of life,” she is a wise ruler, and under her administration many improvements have been inaugurated, road have been laid out, fine buildings erected, hospitals founded and just laws enacted. The begum, although her subjects are Hindoo, is a devout Mohammedan. M', '', '']" .
 
 <http://purl.org/nisaba/collection/7/item/3/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 49 ;
     nisaba:end 82 ;
-    nisaba:start 31 .
+    nisaba:left 20 ;
+    nisaba:right 59 ;
+    nisaba:start 31 ;
+    nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/7/item/3/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 99 ;
     nisaba:end 161 ;
-    nisaba:start 83 .
+    nisaba:left 20 ;
+    nisaba:right 59 ;
+    nisaba:start 83 ;
+    nisaba:top 60 .
 
 <http://purl.org/nisaba/collection/7/item/4> a nisaba:ItemEntry ;
-    nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/4/segment/0> ;
-    nisaba:item_type "t" ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/4/segment/0>,
+        <http://purl.org/nisaba/collection/7/item/4/segment/1>,
+        <http://purl.org/nisaba/collection/7/item/4/segment/2> ;
+    nisaba:image_file "Begum 5.jpg" ;
+    nisaba:item_type "i",
+        "t" ;
     nisaba:transcription "Miss Soonderbai Powar is the daughter of converted Hindoos of high caste, who only embraced Christianity late in life. She is very religious herself, and fifteen years of service as a missionary have enabled her to observe the abject misery of many families addicted to the use of opium. She is now engaged in a vigorous crusade against the baneful narcotic, and is sanguine that she will succeed in entirely suppressing the trade in India. ",
         "['Miss Soonderbai Powar is the daughter of converted Hindoos of high caste, who only embraced Christianity late in life. She is very religious herself, and fifteen years of service as a missionary have enabled her to observe the abject misery of many families addicted to the use of opium. She is now engaged in a vigorous crusade against the baneful narcotic, and is sanguine that she will succeed in entirely suppressing the trade in India. ', '', '']" .
 
 <http://purl.org/nisaba/collection/7/item/4/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 49 ;
     nisaba:end 81 ;
-    nisaba:start 0 .
+    nisaba:left 50 ;
+    nisaba:right 79 ;
+    nisaba:start 0 ;
+    nisaba:top 15 .
+
+<http://purl.org/nisaba/collection/7/item/4/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 49 ;
+    nisaba:left 20 ;
+    nisaba:right 49 ;
+    nisaba:top 20 .
+
+<http://purl.org/nisaba/collection/7/item/4/segment/2> a nisaba:SegmentEntry ;
+    nisaba:bottom 29 ;
+    nisaba:left 10 ;
+    nisaba:right 79 ;
+    nisaba:top 0 .
+
+<http://purl.org/nisaba/collection/7/item/5> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/5/segment/0>,
+        <http://purl.org/nisaba/collection/7/item/5/segment/1> ;
+    nisaba:image_file "Begum 6.jpg" ;
+    nisaba:item_type "i" .
+
+<http://purl.org/nisaba/collection/7/item/5/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 89 ;
+    nisaba:left 15 ;
+    nisaba:right 29 ;
+    nisaba:top 20 .
+
+<http://purl.org/nisaba/collection/7/item/5/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 79 ;
+    nisaba:left 30 ;
+    nisaba:right 69 ;
+    nisaba:top 30 .
+
+<http://purl.org/nisaba/collection/7/item/6> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/7/item/6/segment/0>,
+        <http://purl.org/nisaba/collection/7/item/6/segment/1> ;
+    nisaba:image_file "Begum 7.jpg" ;
+    nisaba:item_type "i" .
+
+<http://purl.org/nisaba/collection/7/item/6/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 79 ;
+    nisaba:left 10 ;
+    nisaba:right 39 ;
+    nisaba:top 15 .
+
+<http://purl.org/nisaba/collection/7/item/6/segment/1> a nisaba:SegmentEntry ;
+    nisaba:bottom 79 ;
+    nisaba:left 60 ;
+    nisaba:right 99 ;
+    nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/8/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/8/item/0/segment/0>,
         <http://purl.org/nisaba/collection/8/item/0/segment/1> ;
-    nisaba:image_file "Begum 1.jpg" ;
+    nisaba:image_file "Begum 1.jpg",
+        "Begum 8.jpg" ;
     nisaba:item_author "James Waterhouse" ;
     nisaba:item_date "1862" ;
     nisaba:item_title "Begum of Bhopal and her Ministers" ;
     nisaba:item_type "i" .
 
 <http://purl.org/nisaba/collection/8/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:bottom 59 ;
-    nisaba:left 40 ;
-    nisaba:right 59 ;
+    nisaba:bottom 49,
+        59 ;
+    nisaba:left 10,
+        40 ;
+    nisaba:right 24,
+        59 ;
     nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/8/item/0/segment/1> a nisaba:SegmentEntry ;
-    nisaba:bottom 99 ;
-    nisaba:left 0 ;
-    nisaba:right 39 ;
-    nisaba:top 20 .
+    nisaba:bottom 44,
+        99 ;
+    nisaba:left 0,
+        30 ;
+    nisaba:right 39,
+        69 ;
+    nisaba:top 0,
+        20 .
 
 <http://purl.org/nisaba/collection/8/item/1> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/8/item/1/segment/0>,
         <http://purl.org/nisaba/collection/8/item/1/segment/1> ;
-    nisaba:image_file "Begum 2.jpg" ;
+    nisaba:image_file "Begum 2.jpg",
+        "Begum 9.jpg" ;
     nisaba:item_author "James Waterhouse" ;
     nisaba:item_title "Bibi Doolan, Shah Jahan Begum and Secunder Begum in marriage costume" ;
     nisaba:item_type "i" .
 
 <http://purl.org/nisaba/collection/8/item/1/segment/0> a nisaba:SegmentEntry ;
     nisaba:bottom 59 ;
-    nisaba:left 60 ;
-    nisaba:right 89 ;
-    nisaba:top 0 .
+    nisaba:left 30,
+        60 ;
+    nisaba:right 59,
+        89 ;
+    nisaba:top 0,
+        25 .
 
 <http://purl.org/nisaba/collection/8/item/1/segment/1> a nisaba:SegmentEntry ;
     nisaba:bottom 59 ;
@@ -1357,7 +1573,8 @@
 <http://purl.org/nisaba/collection/8/item/2> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/8/item/2/segment/0>,
         <http://purl.org/nisaba/collection/8/item/2/segment/1> ;
-    nisaba:image_file "Begum 3.jpg" ;
+    nisaba:image_file "Begum 10.jpg",
+        "Begum 3.jpg" ;
     nisaba:item_author "James Waterhouse" ;
     nisaba:item_date "1862" ;
     nisaba:item_title "Secunder Begum and Shah Jehan Begum in Mahratta costume" ;
@@ -1365,30 +1582,40 @@
 
 <http://purl.org/nisaba/collection/8/item/2/segment/0> a nisaba:SegmentEntry ;
     nisaba:bottom 49 ;
-    nisaba:left 20 ;
-    nisaba:right 49 ;
+    nisaba:left 15,
+        20 ;
+    nisaba:right 49,
+        59 ;
     nisaba:top 20 .
 
 <http://purl.org/nisaba/collection/8/item/2/segment/1> a nisaba:SegmentEntry ;
     nisaba:bottom 59 ;
-    nisaba:left 50 ;
-    nisaba:right 79 ;
-    nisaba:top 20 .
+    nisaba:left 0,
+        50 ;
+    nisaba:right 29,
+        79 ;
+    nisaba:top 0,
+        20 .
 
 <http://purl.org/nisaba/collection/8/item/3> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/8/item/3/segment/0>,
         <http://purl.org/nisaba/collection/8/item/3/segment/1> ;
-    nisaba:image_file "Begum 4.jpg" ;
+    nisaba:image_file "Begum 11.jpg",
+        "Begum 4.jpg" ;
     nisaba:item_author "James Waterhouse" ;
     nisaba:item_date "1862" ;
     nisaba:item_title "Sultan Jehan Begum, grand-daughter of Secunder Begum" ;
     nisaba:item_type "i" .
 
 <http://purl.org/nisaba/collection/8/item/3/segment/0> a nisaba:SegmentEntry ;
-    nisaba:bottom 49 ;
-    nisaba:left 20 ;
-    nisaba:right 59 ;
-    nisaba:top 20 .
+    nisaba:bottom 49,
+        59 ;
+    nisaba:left 20,
+        30 ;
+    nisaba:right 59,
+        69 ;
+    nisaba:top 15,
+        20 .
 
 <http://purl.org/nisaba/collection/8/item/3/segment/1> a nisaba:SegmentEntry ;
     nisaba:bottom 99 ;
@@ -1469,7 +1696,8 @@
 <http://purl.org/nisaba/collection/9/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/9/item/0/segment/0>,
         <http://purl.org/nisaba/collection/9/item/0/segment/1> ;
-    nisaba:image_file "Begum 8.jpg" ;
+    nisaba:image_file "Begum 13.jpg",
+        "Begum 8.jpg" ;
     nisaba:item_author "Bourne and Shepherd" ;
     nisaba:item_date "1877" ;
     nisaba:item_document_number "Photo 99(39)" ;
@@ -1477,10 +1705,14 @@
     nisaba:item_type "i" .
 
 <http://purl.org/nisaba/collection/9/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:bottom 49 ;
-    nisaba:left 10 ;
-    nisaba:right 24 ;
-    nisaba:top 20 .
+    nisaba:bottom 49,
+        79 ;
+    nisaba:left 10,
+        50 ;
+    nisaba:right 24,
+        69 ;
+    nisaba:top 15,
+        20 .
 
 <http://purl.org/nisaba/collection/9/item/0/segment/1> a nisaba:SegmentEntry ;
     nisaba:bottom 44 ;

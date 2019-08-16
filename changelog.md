@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.23
+
++ Added Type (Bibiolographical information) Drop Drops in Database and Config Questions
+
 ### v.0.2.22
 
 + Added Create New Database Function in Config Menu

@@ -18,6 +18,7 @@ class database_maintenance:
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
 	user_config_path = os.path.join(os.path.dirname(__file__), "config_files/user_defined")
+	metadata_path = os.path.join(os.path.dirname(__file__), "config_files/standard_metadata") 
 	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
 	database_backup_path = database_path + "backups/" 
@@ -270,7 +271,25 @@ class database_maintenance:
 		# Checks the cache annotations against the saved ones and merges the list (deleting any annotations no longer in cache but keeping old dates/users for exisiting ones)
 	
 		new_annotations = []
-						
+				
+		for cache_annotation in cache_annotations:
+			
+			found = False
+			
+			# Go through every annotation in the saved/disk annotation list
+			for saved_annotation in saved_annotations:
+				
+				# If the annotation is the same
+				if cache_annotation[0] == saved_annotation[0]:
+					
+						# keep it as it is and mark as found
+						new_annotations.append(saved_annotation)
+						found = True
+				
+			# If you never found the annotation, add it from the cached version
+			if found == False:
+				new_annotations.append(cache_annotation)
+		
 		# For every annotation in the current annotation list
 		for cache_annotation in cache_annotations:
 			
@@ -299,6 +318,9 @@ class database_maintenance:
 		# All Items #
 		#############
 		
+		# Update the collection bibliography type
+		self.database[self.collection_index]['fabio_type'] = self.collections_type_namespace + self.default_collection_type.get()
+		
 		# For Every Item
 		for entry in self.collection_entries:
 		
@@ -306,7 +328,7 @@ class database_maintenance:
 			if self.provenance_collection_editor != self.database[self.collection_index]['schema:editor'][0]:
 				self.database[self.collection_index]['schema:editor'][0] = self.provenance_collection_editor.get()
 				self.database[self.collection_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-				
+						
 			try:
 				# Update the Database with the Item's Top-Level Entries
 				if entry[2].get() != self.database[self.collection_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index][entry[0]][0]:
@@ -325,14 +347,18 @@ class database_maintenance:
 				self.database[self.collection_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				
 			self.database[self.collection_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-
-
+			
+		
+		
 		###################
 		# Mid-Level Items #
 		###################
 		
 		# If Saving an Mid-Level Item
 		if level == 'i':
+		
+			# Update the item bibliography type
+			self.database[self.collection_index]['items'][self.item_index]['fabio_type'] = self.item_type_namespace + self.default_item_type.get()
 
 			# Update the Record Editor Metadata
 			if self.provenance_item_editor != self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0]:
@@ -340,7 +366,11 @@ class database_maintenance:
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				
 			# Save the Annotation Tree to the Mid-Level
-			cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.item_tree),level),self.database[self.collection_index]['items'][self.item_index]['annotations'])
+			try:
+				cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.item_tree),level),self.database[self.collection_index]['items'][self.item_index]['annotations'])
+			except(KeyError):
+				cache_annotations = []
+				
 			self.database[self.collection_index]['items'][self.item_index]['annotations'] = cache_annotations
 			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -363,7 +393,6 @@ class database_maintenance:
 		
 		# If Saving a Mid or Lower-Level Item
 		if level == 'i' or level == 's':
-		
 			# Update the Database with the Item's Mid-Level Entries
 			for entry in self.item_entries:
 				try:
@@ -392,13 +421,19 @@ class database_maintenance:
 		# If Saving a Lower-Level ITem
 		if level == 's':
 		
+			# Update the segment bibliography type
+			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['fabio_type'] = self.default_segment_type.get()
+		
 			# Update the Record Editor Metadata
 			if self.provenance_segment_editor != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0]:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0] = self.provenance_segment_editor.get()
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# Save the Annotation Tree to the Lower Level
-			cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.segment_tree),level),self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'])
+			try:
+				cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.segment_tree),level),self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'])
+			except(KeyError):
+				cache_annotations = []
 			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations'] = cache_annotations
 
 			# If it is a Text, Save the Word Segmenters
