@@ -80,7 +80,8 @@
     nisaba:collection_holder_reference_original "" ;
     nisaba:collection_place_of_publication "" ;
     nisaba:collection_title "The Penny Illustrated Paper" ;
-    nisaba:hasItem <http://purl.org/nisaba/collection/13/item/0> .
+    nisaba:hasItem <http://purl.org/nisaba/collection/13/item/0>,
+        <http://purl.org/nisaba/collection/13/item/1> .
 
 <http://purl.org/nisaba/collection/14> a nisaba:CollectionEntry ;
     nisaba:hasItem <http://purl.org/nisaba/collection/14/item/0>,
@@ -1126,6 +1127,23 @@
 <http://purl.org/nisaba/collection/13/item/0/segment/6> a nisaba:SegmentEntry ;
     nisaba:end 757 ;
     nisaba:start 703 .
+
+<http://purl.org/nisaba/collection/13/item/1> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/13/item/1/segment/0> ;
+    nisaba:image_file "sample.jpg" ;
+    nisaba:item_type "i" .
+
+<http://purl.org/nisaba/collection/13/item/1/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 49,
+        50,
+        100 ;
+    nisaba:left 0,
+        30 ;
+    nisaba:right 41,
+        50,
+        100 ;
+    nisaba:top 0,
+        29 .
 
 <http://purl.org/nisaba/collection/14/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/14/item/0/segment/0>,

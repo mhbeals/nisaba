@@ -57,6 +57,18 @@ class database_display(cache_maintenance):
 		# Display Textbox
 		self.transcription_text.grid(column = 0, row = 1, columnspan=10, sticky=NSEW, padx =10, pady = 10)
 		
+	def image_resetter(self):
+	
+		self.top_text.delete(0,END)
+		self.bottom_text.delete(0,END)
+		self.left_text.delete(0,END)
+		self.right_text.delete(0,END)
+		self.top_text.insert(0,0)
+		self.bottom_text.insert(0,100)
+		self.left_text.insert(0,0)
+		self.right_text.insert(0,100)
+		self.cropped_image_updater()
+	
 	def cropped_image_updater(self):
 
 			# Set image file
@@ -68,9 +80,8 @@ class database_display(cache_maintenance):
 			# Find Image Size
 			[self.segment_imageSizeWidth, self.segment_imageSizeHeight] = self.segment_image.size
 			self.segment_image_original_ratio = self.segment_imageSizeHeight / self.segment_imageSizeWidth
-
+			
 			# Pull Updated Coordinates
-
 			self.top = int(self.top_text.get())
 			self.bottom = int(self.bottom_text.get())
 			self.left = int(self.left_text.get())
@@ -117,7 +128,47 @@ class database_display(cache_maintenance):
 												  self.segment_newImageSizeHeight/2+6,
 												  image=self.segment_photoImg,
 												  anchor="center")
+												  
+			def onmouse(event):
+				self.sx = event.x
+				self.sy = event.y
 
+				self.rect = self.segment_imageCanvas.create_rectangle(self.sx,self.sy,self.sx,self.sy, outline="yellow")
+					
+			def mousemove(event):
+				self.ex = event.x
+				self.ey = event.y
+				
+				self.segment_imageCanvas.coords(self.rect, self.sx,self.sy,self.ex,self.ey)
+					
+			def offmouse(event):
+				
+				self.segment_imageCanvas.delete(self.rect)				
+				self.top_text.delete(0,END)
+				self.bottom_text.delete(0,END)
+				self.left_text.delete(0,END)
+				self.right_text.delete(0,END)
+				
+				if self.sx < self.ex:
+					self.left_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
+					self.right_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
+				else:
+					self.left_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
+					self.right_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
+					
+				if self.sy < self.ey:
+					self.top_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
+					self.bottom_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
+				else:
+					self.top_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
+					self.bottom_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
+				
+				self.cropped_image_updater()
+
+			self.segment_imageCanvas.bind('<Button-1>',onmouse)
+			self.segment_imageCanvas.bind('<B1-Motion>',mousemove)
+			self.segment_imageCanvas.bind('<ButtonRelease>',offmouse)
+			
 	def entry_entries_displayer(self,tab,level):
 		
 		entries = []
@@ -483,8 +534,8 @@ class database_display(cache_maintenance):
 			self.cropped_image_updater()
 
 			# Create and Pack Update Button
-			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.cropped_image_updater)
-			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
+			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.image_resetter)
+			update_button_tt = ToolTip(update_button, "Reload Full Image",delay=0.01)
 			update_button.grid(column = 4, row = 1, rowspan=2, sticky=W, padx =5, pady = 5)
 			
 		# Setup Segment Window Tabs (Left / Pane 1)

@@ -1,12 +1,12 @@
-# Nisaba 0.2.24
+# Nisaba 0.2.25
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.24
+### v.0.2.25
 
-+ Allowed mouse selection and button fine tuning of text segmenting (Issue #8)
++ Allowed mouse selection for image segmenting (Issue #8)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 
