@@ -14,6 +14,10 @@ from tkinter.filedialog import asksaveasfile
 
 class database_maintenance:
 
+	##############################
+	#       Initialisation       #
+	##############################
+
 	# Set Relative Paths
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
@@ -26,9 +30,10 @@ class database_maintenance:
 	def __init__(self):
 		# Initialise programme with stored databases
 		
+		# Create Defaults Variable
 		self.defaults = []
 
-		# Populate dictionary with imported file
+		# Populate Defaults with imported file
 		try: 
 			with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'r') as file:
 				reader = csv.reader(file,delimiter='\n')
@@ -40,7 +45,8 @@ class database_maintenance:
 				reader = csv.reader(file,delimiter='\n')
 				for line in reader:
 					self.defaults.append(line[0])
-					
+		
+		# Set Current Database and Taxonomies
 		self.current_database = self.defaults[0]	
 		self.current_taxonomy = self.defaults[1]
 		self.taxonomy_level_defaults = [self.defaults[1],self.defaults[2],self.defaults[3]]
@@ -50,7 +56,6 @@ class database_maintenance:
 		#################
 		
 		# Load JSON database
-		
 		try:
 			with open (Path(self.current_database), 'r') as file:
 				loaddata = file.read()
@@ -74,7 +79,6 @@ class database_maintenance:
 		#######################
 		
 		# Load Taxonomy
-		
 		try:
 			with open (Path(self.current_taxonomy), 'r') as file:
 				loaddata = file.read()
@@ -85,155 +89,11 @@ class database_maintenance:
 				loaddata = file.read()
 				
 		self.taxonomy = json.loads(loaddata)
+
+	##############################
+	#   Reformatting Functions   #
+	##############################	
 			
-
-	def iid_iterator(self,database,iid,function_call):
-		# Search through Database for a Specific Branch or Child
-		# Works on Any # - IID,Children - # Database
-	
-		# Go Through Database Items
-		for key,value in database.items():
-		
-			# Check for Passed-Through IID
-			if value['iid'] == iid:
-			
-				# Call Passed-Through Function
-				function_call(database,key)
-				break
-			
-			# If Not Found
-			else:
-			
-				# Run Recursively
-				self.iid_iterator(value['children'],iid,function_call)
-
-	def database_creator(self):
-		# Create new database
-
-		file = asksaveasfile(mode='w', defaultextension=".json")
-		if file is None:
-			return
-
-		data = '{"users":{"nid":{"schema:givenName":"New","schema:familyName":"User","schema:sameAS":"","schema:worksFor":"","schema:memberOf":"","schema:email":"","foaf:homepage":"","default":1}},"0":{"schema:editor":["","",""],"dc:title":["New Collection","",""],"items":{},"dc:creator":["","",""]}}'
-			
-		file.write(data)
-		file.close()
-		
-	def database_saver(self):
-		# Save Cached Database to Disk
-	
-		# Convert Database to JSON
-		savedata = json.dumps(self.database, indent=4)
-
-		# Save JSON to disk
-		with open (Path(self.current_database), 'w') as file:
-			file.write(savedata)
-			
-		# Save Date-Stamped Backup of Database to Backups
-		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
-		with open (Path(self.database_backup_path) / backup_filename, 'w') as file:
-			file.write(savedata)
-
-		# Map the saved JSON into RDF
-		self.rdf_mapper()
-
-	def rdf_mapper(self):
-		# Map the JSON database to RDF
-	
-		# Load previous triples, if any
-		self.database_rdf.parse(self.database_path + "sample_database.ttl", format='turtle')
-
-		# Set URIs
-		nisaba_vocab_uri = URIRef('http://purl.org/nisaba/vocab#')
-		nisaba_resource_uri = URIRef('http://purl.org/nisaba/')
-		nisaba_collection_uri = URIRef('http://purl.org/nisaba/collection/')
-		nisaba_v = Namespace(nisaba_vocab_uri)
-		nisaba_r = Namespace(nisaba_resource_uri)
-		nisaba_c = Namespace(nisaba_collection_uri)
-
-		# Go Through Cached Database and Update RDF Graph
-		for c,v in self.database.items():
-			collection_uri = nisaba_c[c]
-			self.database_rdf.add(( collection_uri, RDF.type, nisaba_v['CollectionEntry']))
-			if 'collection_title' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_title'], Literal(v['collection_title']) ))
-			if 'collection_date' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_date'], Literal(v['collection_date']) ))
-			if 'collection_holder' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder'], Literal(v['collection_holder']) ))
-			if 'collection_holder_reference' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder_reference'], Literal(v['collection_holder_reference']) ))
-			if 'collection_holder_original' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder_original'], Literal(v['collection_holder_original']) ))
-			if 'collection_holder_reference_original' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder_reference_original'], Literal(v['collection_holder_reference_original']) ))
-			if 'collection_place_of_publication' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_place_of_publication'], Literal(v['collection_place_of_publication']) ))
-			if 'collection_author' in v:
-				self.database_rdf.add(( collection_uri, nisaba_v['collection_author'], Literal(v['collection_author']) ))
-
-			if 'items' in self.database[c]:
-				for i,v in self.database[c]['items'].items():
-					item_uri = URIRef(nisaba_c[c] + '/item/' + i)
-					self.database_rdf.add(( collection_uri, nisaba_v['hasItem'], item_uri ))
-					self.database_rdf.add(( item_uri, RDF.type, nisaba_v['ItemEntry']))
-					if 'item_type' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['item_type'], Literal(v['item_type']) ))
-					if 'item_title' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['item_title'], Literal(v['item_title']) ))
-					if 'image_file' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['image_file'], Literal(v['image_file']) ))
-					if 'item_author' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['item_author'], Literal(v['item_author']) ))
-					if 'item_date' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['item_date'], Literal(v['item_date']) ))
-					if 'item_page_number' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['item_page_number'], Literal(v['item_page_number']) ))
-					if 'item_document_number' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['item_document_number'], Literal(v['item_document_number']) ))
-					if 'transcription' in v:
-						self.database_rdf.add(( item_uri, nisaba_v['transcription'], Literal(v['transcription']) ))
-					if 'annotations' in v:
-						for a in v['annotations']:
-							self.database_rdf.add(( item_uri, nisaba_v['hasAnnotation'], Literal(a) ))
-					if 'segments' in v:
-						for s,v in self.database[c]['items'][i]['segments'].items():
-							segment_uri = URIRef(item_uri + '/segment/' + s)
-							self.database_rdf.add(( item_uri, nisaba_v['hasSegment'], segment_uri ))
-							self.database_rdf.add(( segment_uri, RDF.type, nisaba_v['SegmentEntry']))
-							if 'start' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['start'], Literal(v['start']) ))
-							if 'end' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['end'], Literal(v['end']) ))
-							if 'top' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['top'], Literal(v['top']) ))
-							if 'bottom' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['bottom'], Literal(v['bottom']) ))
-							if 'left' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['left'], Literal(v['left']) ))
-							if 'right' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['right'], Literal(v['right']) ))
-							if 'dc:description' in v:
-								self.database_rdf.add(( segment_uri, nisaba_v['dc:description'], Literal(v['dc:description']) ))
-							if 'annotations' in v:
-								for a in v['annotations']:
-									self.database_rdf.add(( segment_uri, nisaba_v['hasAnnotation'], Literal(a) ))
-
-		self.database_rdf.bind('nisaba', nisaba_v)
-
-		############
-		# Save RDF #
-		############
-		
-		# Save RDF
-		with open(Path(self.database_path) / 'sample_database.ttl', 'wb') as file:
-			file.write(self.database_rdf.serialize(format='turtle'))
-
-		# Save Date-Stamped Backup of RDF in Backups
-		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
-		with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
-			file.write(self.database_rdf.serialize(format='turtle'))
-	
 	def annotation_provenance_setter (self,annotation_list,level):
 		# Adds provenance data to each cache annotation as a list [annotation,user,datetime]
 	
@@ -309,8 +169,37 @@ class database_maintenance:
 			if found == False:
 				new_annotations.append(cache_annotation)
 				
-		return new_annotations
+		return new_annotations			
 		
+	##############################
+	#      Saving Functions      #
+	##############################		
+
+	def configuration_file_saver(self,file):
+
+		with open (Path(self.config_path) / file, 'w') as file:
+			file.write(self.configuration_textbox.get("1.0",END))
+
+		self.pane_two.destroy()
+	
+	def configuration_defaults_saver(self):
+
+		# Save default user
+		self.default_user_setter()
+
+		# Save default paths
+		savedata = str(self.current_database) + "\n"
+
+		# Save default taxonomies
+		savedata = savedata + str(self.taxonomy_level_defaults[0]) + "\n" + str(self.taxonomy_level_defaults[1]) + "\n" + str(self.taxonomy_level_defaults[2]) + "\n"
+
+		# Save default namespaces
+		for parameter_set in self.parameter_entries:
+			savedata = savedata + parameter_set[1].get() + "\n"
+
+		with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'w') as file:
+			file.write(savedata)
+	
 	def database_entry_saver(self, level):
 		# Saves Entries to Cached Database
 		
@@ -347,8 +236,6 @@ class database_maintenance:
 				self.database[self.collection_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				
 			self.database[self.collection_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			
-		
 		
 		###################
 		# Mid-Level Items #
@@ -479,26 +366,6 @@ class database_maintenance:
 		# Save Cached Database to Disk
 		self.database_saver()
 
-	def database_loader(self,type,function_call):
-		# Loads a New (non-default) JSON Database
-		
-		# Load Database
-		file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
-		
-		if type == 'd': 
-		
-			self.current_database = Path(file)
-			
-			with open (file, 'r') as file:
-				loaddata = file.read()
-			self.database = json.loads(loaddata)
-			
-		elif type == 'Collection': self.taxonomy_level_defaults[0]=Path(file)
-		elif type == 'Item': self.taxonomy_level_defaults[1]=Path(file)
-		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
-		
-		function_call()
-
 	def taxonomy_saver(self):
 		# Saves Taxononmy Definitions
 
@@ -522,3 +389,173 @@ class database_maintenance:
 		# Save JSON to Disk
 		with open (Path(self.database_path) / "taxonomy.json", 'w') as file:
 			file.write(savedata)
+
+	def database_saver(self):
+		# Save Cached Database to Disk
+	
+		# Convert Database to JSON
+		savedata = json.dumps(self.database, indent=4)
+
+		# Save JSON to disk
+		with open (Path(self.current_database), 'w') as file:
+			file.write(savedata)
+			
+		# Save Date-Stamped Backup of Database to Backups
+		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
+		with open (Path(self.database_backup_path) / backup_filename, 'w') as file:
+			file.write(savedata)
+
+		# Map the saved JSON into RDF
+		self.rdf_mapper()
+
+	##############################
+	#     Loading Functions      #
+	##############################	
+
+	def configuration_file_loader(self,file):
+
+		with open (Path(self.config_path) / file, 'r') as file:
+			loaddata = file.read()
+
+		return loaddata
+	
+	def database_loader(self,type,function_call):
+		# Loads a New (non-default) JSON Database
+		
+		# Load Database
+		file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
+		
+		if type == 'd': 
+		
+			self.current_database = Path(file)
+			
+			with open (file, 'r') as file:
+				loaddata = file.read()
+			self.database = json.loads(loaddata)
+			
+		elif type == 'Collection': self.taxonomy_level_defaults[0]=Path(file)
+		elif type == 'Item': self.taxonomy_level_defaults[1]=Path(file)
+		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
+		
+		function_call()
+
+	def database_creator(self):
+		# Create new database
+
+		file = asksaveasfile(mode='w', defaultextension=".json")
+		if file is None:
+			return
+
+		data = '{"users":{"nid":{"schema:givenName":"New","schema:familyName":"User","schema:sameAS":"","schema:worksFor":"","schema:memberOf":"","schema:email":"","foaf:homepage":"","default":1}},"0":{"schema:editor":["","",""],"dc:title":["New Collection","",""],"items":{},"dc:creator":["","",""]}}'
+			
+		file.write(data)
+		file.close()
+			
+	##############################
+	#   Linked Data Functions    #
+	##############################	
+	
+	def rdf_mapper(self):
+		# Map the JSON database to RDF
+	
+		# Load previous triples, if any
+		self.database_rdf.parse(self.database_path + "sample_database.ttl", format='turtle')
+
+		# Set URIs
+		nisaba_vocab_uri = URIRef('http://purl.org/nisaba/vocab#')
+		nisaba_resource_uri = URIRef('http://purl.org/nisaba/')
+		nisaba_collection_uri = URIRef('http://purl.org/nisaba/collection/')
+		nisaba_v = Namespace(nisaba_vocab_uri)
+		nisaba_r = Namespace(nisaba_resource_uri)
+		nisaba_c = Namespace(nisaba_collection_uri)
+
+		# Go Through Cached Database and Update RDF Graph
+		for c,v in self.database.items():
+			collection_uri = nisaba_c[c]
+			self.database_rdf.add(( collection_uri, RDF.type, nisaba_v['CollectionEntry']))
+			if 'collection_title' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_title'], Literal(v['collection_title']) ))
+			if 'collection_date' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_date'], Literal(v['collection_date']) ))
+			if 'collection_holder' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder'], Literal(v['collection_holder']) ))
+			if 'collection_holder_reference' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder_reference'], Literal(v['collection_holder_reference']) ))
+			if 'collection_holder_original' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder_original'], Literal(v['collection_holder_original']) ))
+			if 'collection_holder_reference_original' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_holder_reference_original'], Literal(v['collection_holder_reference_original']) ))
+			if 'collection_place_of_publication' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_place_of_publication'], Literal(v['collection_place_of_publication']) ))
+			if 'collection_author' in v:
+				self.database_rdf.add(( collection_uri, nisaba_v['collection_author'], Literal(v['collection_author']) ))
+
+			if 'items' in self.database[c]:
+				for i,v in self.database[c]['items'].items():
+					item_uri = URIRef(nisaba_c[c] + '/item/' + i)
+					self.database_rdf.add(( collection_uri, nisaba_v['hasItem'], item_uri ))
+					self.database_rdf.add(( item_uri, RDF.type, nisaba_v['ItemEntry']))
+					if 'item_type' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['item_type'], Literal(v['item_type']) ))
+					if 'item_title' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['item_title'], Literal(v['item_title']) ))
+					if 'image_file' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['image_file'], Literal(v['image_file']) ))
+					if 'item_author' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['item_author'], Literal(v['item_author']) ))
+					if 'item_date' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['item_date'], Literal(v['item_date']) ))
+					if 'item_page_number' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['item_page_number'], Literal(v['item_page_number']) ))
+					if 'item_document_number' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['item_document_number'], Literal(v['item_document_number']) ))
+					if 'transcription' in v:
+						self.database_rdf.add(( item_uri, nisaba_v['transcription'], Literal(v['transcription']) ))
+					if 'annotations' in v:
+						for a in v['annotations']:
+							self.database_rdf.add(( item_uri, nisaba_v['hasAnnotation'], Literal(a) ))
+					if 'segments' in v:
+						for s,v in self.database[c]['items'][i]['segments'].items():
+							segment_uri = URIRef(item_uri + '/segment/' + s)
+							self.database_rdf.add(( item_uri, nisaba_v['hasSegment'], segment_uri ))
+							self.database_rdf.add(( segment_uri, RDF.type, nisaba_v['SegmentEntry']))
+							if 'start' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['start'], Literal(v['start']) ))
+							if 'end' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['end'], Literal(v['end']) ))
+							if 'top' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['top'], Literal(v['top']) ))
+							if 'bottom' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['bottom'], Literal(v['bottom']) ))
+							if 'left' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['left'], Literal(v['left']) ))
+							if 'right' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['right'], Literal(v['right']) ))
+							if 'dc:description' in v:
+								self.database_rdf.add(( segment_uri, nisaba_v['dc:description'], Literal(v['dc:description']) ))
+							if 'annotations' in v:
+								for a in v['annotations']:
+									self.database_rdf.add(( segment_uri, nisaba_v['hasAnnotation'], Literal(a) ))
+
+		self.database_rdf.bind('nisaba', nisaba_v)
+
+		############
+		# Save RDF #
+		############
+		
+		# Save RDF
+		with open(Path(self.database_path) / 'sample_database.ttl', 'wb') as file:
+			file.write(self.database_rdf.serialize(format='turtle'))
+
+		# Save Date-Stamped Backup of RDF in Backups
+		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
+		with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
+			file.write(self.database_rdf.serialize(format='turtle'))
+
+
+			
+
+
+
+
+

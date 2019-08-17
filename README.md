@@ -1,12 +1,12 @@
-# Nisaba 0.2.23
+# Nisaba 0.2.24
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.23
+### v.0.2.24
 
-+ Added Type (Bibiolographical information) Drop Drops in Database and Config Questions (Issue #2)
++ Allowed mouse selection and button fine tuning of text segmenting (Issue #8)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

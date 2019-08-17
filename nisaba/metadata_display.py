@@ -1,10 +1,12 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from cache_maintenance import *
 	from tooltip import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.cache_maintenance import *
 	from nisaba.tooltip import *
 
 # Import External Libraries
@@ -18,48 +20,7 @@ from tkinter.ttk import *
 from tkinter import scrolledtext
 from tkinter import messagebox
 
-class metadata_display(database_maintenance):
-
-	def user_deleter(self,current_user):
-		# Delete a User
-
-		# Delete User from Cached Database
-		del self.database['users'][current_user]
-		
-		# Save Cached Database to Disk
-		self.database_saver()
-		
-		# Clear Metadata Window
-		self.metadata_window.destroy()
-
-		
-	def metadata_entry_saver(self,current_user):
-		# Save a User's Metadata
-		
-		# Update Current User
-		if current_user in self.database['users']:
-			
-			# Go through the rest of the entries and save the vaule
-			for entry in self.entries:
-				self.database['users'][current_user][entry[0]] = entry[1].get()
-					
-		else:
-		
-			# Create new entry in database
-			self.database['users'][current_user] = {}
-			
-			# Go through the entries and save the vaule
-			for entry in self.entries:
-					self.database['users'][current_user][entry[0]] = entry[1].get()
-					
-			self.database['users'][current_user]['default'] = 0
-		
-		# Save Cached Database to Disk
-		self.database_saver()
-		
-		# Clear Metadata Window
-		self.metadata_window.destroy()
-
+class metadata_display(cache_maintenance):
 		
 	def database_metadata_entry_loader(self,event):	
 		# Loads Metadata on Selected User
@@ -75,7 +36,7 @@ class metadata_display(database_maintenance):
 			pass
 			
 		##############################
-		# Create User Metadata ttk.Frame #
+		# Create User Metadata Frame #
 		##############################
 			
 		# Create Metadata ttk.Frame	
@@ -155,7 +116,7 @@ class metadata_display(database_maintenance):
 		self.save_button.pack(side=LEFT, padx=5, pady=5)
 		self.delete_button.pack(side=LEFT, padx=5, pady=5)
 				
-	def user_loader(self):
+	def user_dropdown_creator(self):
 		# Creates Dropdown Menu of Possible Users
 				
 		##################
@@ -200,4 +161,4 @@ class metadata_display(database_maintenance):
 	
 		self.metadata_window = window
 		self.metadata_window.pack_forget 
-		self.user_loader()
+		self.user_dropdown_creator()

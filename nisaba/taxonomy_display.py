@@ -1,10 +1,12 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from cache_maintenance import *
 	from tooltip import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.cache_maintenance import *
 	from nisaba.tooltip import *
 
 # Import TKinter Libraries
@@ -12,65 +14,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import *
 
-class taxonomy_display(database_maintenance):
-
-	def root_adder(self):
-		# Add a Taxon Root
-
-		# Set Loop Variables
-		i = -1
-		loop = TRUE
-
-
-		while loop:
-			i = i + 1
-			loop = str(i) in self.taxonomy
-
-		# Create new Root with Default Fields
-		self.taxonomy[i] = {}
-		self.taxonomy[i]['iid'] = "New_Root"
-		self.taxonomy[i]['name'] = "New Root"
-		self.taxonomy[i]['type'] = "New Root"
-		self.taxonomy[i]['definition'] = "New Root"
-		self.taxonomy[i]['children'] = {}
-
-		# Reload Taxonomy Viewer
-		self.taxonomy_viewer(self.taxonomy_window)
-
-	def child_adder(self,database,key):
-		# Add a Taxon Child
-
-		# Set Loop Variables
-		i = -1
-		loop = TRUE
-
-		# Ascend Numerically until First Missing Number
-		while loop:
-			i = i + 1
-			loop = str(i) in database[key]['children']
-
-		# Create New Child with Default Fields
-		database[key]['children'][i] = {}
-		database[key]['children'][i]['iid'] = "New_Item"
-		database[key]['children'][i]['name'] = "New Item"
-		database[key]['children'][i]['type'] = "New Item"
-		database[key]['children'][i]['definition'] = "New Item"
-		database[key]['children'][i]['children'] = {}
-
-		# Save to disk
-		self.taxonomy_saver()
-
-		# Reload Taxonomy Viewer
-		self.taxonomy_viewer(self.taxonomy_window)
-
-	def element_deleter(self,database,key):
-		# Delete a Taxon
-
-		# Delete Current Key
-		del database[key]
-
-		# Reload Taxonomy Viewer
-		self.taxonomy_viewer(self.taxonomy_window)
+class taxonomy_display(cache_maintenance):
 
 	def entry_filler(self,database,key):
 		# Fill in entry boxes

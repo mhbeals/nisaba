@@ -1,10 +1,12 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from cache_maintenance import *
 	from tooltip import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.cache_maintenance import *
 	from nisaba.tooltip import *
 
 # Import External Libraries
@@ -20,21 +22,22 @@ from tkinter import ttk
 from tkinter.ttk import *
 from ttkwidgets import CheckboxTreeview
 
+class database_display(cache_maintenance):
 
+	def transcription_updater(self,start,end):
 
-class database_display(database_maintenance):
-
-	def transcription_updater(self):
-
-		# Get Coordinate Information
-		start = int(self.start_text.get())
-		end = int(self.end_text.get())
-
+		self.start_text.delete(0,END)
+		self.end_text.delete(0,END)
+		self.start_text.insert(0,start)
+		self.end_text.insert(0,end)
+	
 		# Pull Transcription from self.database
 		self.transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()
-
+		
 		# Get Snippets
-		pre_transcription = ' '.join(self.transcription_words[start-20:start]) + " "
+		pre_start = start-20 if start > 20 else 0
+		
+		pre_transcription = ' '.join(self.transcription_words[pre_start:start]) + " "
 		transcription = ' '.join(self.transcription_words[start:end]) + " "
 		post_transcription = ' '.join(self.transcription_words[end:end+20])
 
@@ -47,12 +50,12 @@ class database_display(database_maintenance):
 		self.transcription_text.delete("0.0",END)
 
 		# Insert Snippet Text
-		self.transcription_text.insert(END,pre_transcription,('faded'))
+		self.transcription_text.insert("0.0",pre_transcription[1:],('faded'))
 		self.transcription_text.insert(END,transcription,('normal'))
 		self.transcription_text.insert(END,post_transcription, ('faded'))
 
 		# Display Textbox
-		self.transcription_text.grid(column = 0, row = 1, columnspan=8, sticky=NSEW, padx =10, pady = 10)
+		self.transcription_text.grid(column = 0, row = 1, columnspan=10, sticky=NSEW, padx =10, pady = 10)
 		
 	def cropped_image_updater(self):
 
@@ -278,6 +281,8 @@ class database_display(database_maintenance):
 			file_type_option = ttk.OptionMenu(row, self.default_segment_type, *self.types, command=self.yaml_importer)
 		
 		# Display Drop Down
+		type_label = Label(row, text="Type:", width = 25)
+		type_label.pack(side=LEFT)
 		file_type_option.pack(side=LEFT)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)	
 		
@@ -340,88 +345,6 @@ class database_display(database_maintenance):
 		# Display Tree
 		tree_name.pack(anchor=NW)
 
-	def database_renumberer(self,database):
-	
-		if len(database) != 0:
-			i = 0
-		else:
-			i = 1
-		
-		while i < len(database)+1:
-			if str(i) in database:
-				i = i + 1
-			else:
-				if str(i+1) in database:
-					database[str(i)] = database[str(i+1)]
-					del database[str(i+1)]
-				else:
-					break
-	
-	def delete_unit(self,database,key,level):
-	
-		del database[key]
-		
-		if level == 'c':
-			self.database_renumberer(database)
-			self.database_frame_displayer(self.database_window)
-		
-		elif level == 'i':
-			self.collection_item_list_panel_displayer()
-		
-		elif level == 's':
-			self.item_panel_displayer('s')
-		
-	def collection_adder(self):
-
-		i = -1
-		loop = TRUE
-
-		while loop == TRUE:
-			i = i + 1
-			loop = str(i) in self.database
-
-		self.database[str(i)]= {"schema:editor":["","",""],'items' : {}}
-
-		self.database_frame_displayer(self.database_window)
-		
-	def item_adder(self,type):
-
-		i = -1
-		loop = TRUE
-
-		while loop == TRUE:
-			i = i + 1
-			loop = str(i) in self.database[self.collection_index]['items']
-
-		if type == 'i':
-			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 'i','annotations':[],'image_file': 'sample.jpg', 'segments' : {}}
-
-		elif type == 't':
-			self.database[self.collection_index]['items'][str(i)]= {"schema:editor":["","",""],'item_type': 't', 'annotations':[],'transcription': ['','',''], 'segments' : {}}
-			
-		else:
-			pass
-
-		self.collection_item_list_panel_displayer()
-
-	def segment_adder(self):
-
-		i = -1
-		loop = TRUE
-
-		while loop == TRUE:
-			i = i + 1
-			loop = str(i) in self.database[self.collection_index]['items'][self.item_index]['segments']
-
-
-		if  self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'start':0,'end':len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),'annotations':[]}
-
-		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
-			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'top':0,'right':50,'bottom':50,'left':0,'annotations':[]}
-
-		self.item_panel_displayer('s')
-
 	def segment_panels_displayer(self):
 
 		##########################
@@ -445,7 +368,7 @@ class database_display(database_maintenance):
 
 		# If the Segment is Text
 		if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-
+		
 			# Pull segmentation data
 			start = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['start']
 			end = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['end']
@@ -471,17 +394,53 @@ class database_display(database_maintenance):
 			self.start_text.grid(column = 2, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
 			end_label.grid(column = 4, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
 			self.end_text.grid(column = 5, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
+			
+			def incrementer(box,increment):
+				new_value = int(box.get()) + increment
+				new_value = 0 if new_value < 0 else new_value
+				box.delete(0,END)
+				box.insert(0,new_value)
+				self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))
+			
+			# Create and Back Incrementors	
+			start_increment_frame = ttk.Frame(self.segment_pane_two)
+			start_plus_button = ttk.Button(start_increment_frame, image=self.plus_icon, command=(lambda:incrementer(self.start_text,1)))
+			start_minus_button = ttk.Button(start_increment_frame, image=self.minus_icon, command=(lambda:incrementer(self.start_text,-1)))
+			start_plus_button.pack(side=TOP)
+			start_minus_button.pack(side=BOTTOM)
+			start_increment_frame.grid(column = 3, row = 0, sticky=W, padx =10, pady = 10)
+			
+			end_increment_frame = ttk.Frame(self.segment_pane_two)
+			end_plus_button = ttk.Button(end_increment_frame, image=self.plus_icon, command=(lambda:incrementer(self.end_text,1)))
+			end_minus_button = ttk.Button(end_increment_frame, image=self.minus_icon, command=(lambda:incrementer(self.end_text,-1)))
+			end_plus_button.pack(side=TOP)
+			end_minus_button.pack(side=BOTTOM)
+			end_increment_frame.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
 
 			# Create Text Box
 			self.transcription_text = Text(self.segment_pane_two, wrap=WORD)
+			
+			# Create Segmentation Binder
+			def text_selector(event):
+				
+				try:
+					selection_index = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].find(self.transcription_text.selection_get())
+				except(TclError):
+					pass
+				else:
+					pre_selection_length = self.database[self.collection_index]['items'][self.item_index]['transcription'][0][:selection_index].count(' ')
+					selection_length = pre_selection_length + self.transcription_text.selection_get().count(' ')+1
+					self.transcription_updater(pre_selection_length,selection_length)
+					
+			self.transcription_text.bind('<ButtonRelease>', text_selector)
 
 			# Create and Pack Update Button
-			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.transcription_updater)
-			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
-			update_button.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
+			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=(lambda: self.transcription_updater(0,len(self.transcription_words))))
+			update_button_tt = ToolTip(update_button, "Reload Full Text",delay=0.01)
+			update_button.grid(column = 8, row = 0, sticky=W, padx =10, pady = 10)
 
 			# Populate Text Box
-			self.transcription_updater()
+			self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))
 
 		# If the Segment is an Image
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
@@ -527,8 +486,6 @@ class database_display(database_maintenance):
 			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.cropped_image_updater)
 			update_button_tt = ToolTip(update_button, "Refresh Segment",delay=0.01)
 			update_button.grid(column = 4, row = 1, rowspan=2, sticky=W, padx =5, pady = 5)
-			
-
 			
 		# Setup Segment Window Tabs (Left / Pane 1)
 
@@ -750,7 +707,7 @@ class database_display(database_maintenance):
 		self.buttonFrame = ttk.Frame(self.pane_one)
 		self.add_button = ttk.Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Segment",delay=0.01)
-		self.delete_segment_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
+		self.delete_segment_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
 		delete_segment_tt = ToolTip(self.delete_segment_button, "Delete Selected Segment",delay=0.01)
 		self.save_button = ttk.Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
 		save_button_tt = ToolTip(self.save_button, "Save Item",delay=0.01)
@@ -945,8 +902,7 @@ class database_display(database_maintenance):
 		
 		collections_list_button.pack(side=LEFT)
 		save_item_button.pack(side=LEFT)
-		
-		
+				
 	def collection_item_list_panel_displayer(self):
 		##############################
 		# Set up List of Items Panel #
@@ -977,15 +933,16 @@ class database_display(database_maintenance):
 				display_item = dictionary[self.item_title_namespace][0]
 				
 			# If the item has descriptive parts
-			elif 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number]:
+			elif 'fabio_type' in self.database[self.collection_index]['items'][item_number]:
 				if self.collections_title_namespace in self.database[self.collection_index]:
-					display_item = "{0} {1} of the {2}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(self.database[self.collection_index][self.collections_title_namespace][0]))
+					if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number] and dictionary['fabio:hasSequenceIdentifier'][0] != '':
+						display_item = "{0} on page {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]))
+					elif 'fabio:pageRange' in self.database[self.collection_index]['items'][item_number]:
+						display_item = "{0} on pages {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:pageRange'][0]))
+					else:
+						display_item = "{0} of the {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(self.database[self.collection_index][self.collections_title_namespace][0]))
 				else:
 					display_item = "{0}, part of an unknown Collection".format(str(self.database[self.collection_index]['items'][item_number]['fabio_type'][len(self.item_type_namespace):]))
-
-			# If the item has no title
-			elif self.item_title_namespace in self.database[self.collection_index]['items'][item_number]:
-				display_item = "An Unknown Part of the {0} Collection".format(str(self.database[self.collection_index][self.collections_title_namespace][0]))
 
 			else:
 				display_item = "No title listed"
@@ -1013,7 +970,7 @@ class database_display(database_maintenance):
 		add_audio_button_tt = ToolTip(self.add_audio_button, "Add Audio Item",delay=0.01)
 		self.add_audiovisual_button = ttk.Button(self.buttonFrame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
 		add_audiovisual_button_tt = ToolTip(self.add_audiovisual_button, "Add Audio-Visual Item",delay=0.01)
-		self.delete_item_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
+		self.delete_item_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
 		delete_item_tt = ToolTip(self.delete_item_button, "Delete Selected Item",delay=0.01)
 		
 		self.add_text_button.pack(side=LEFT)
@@ -1114,7 +1071,7 @@ class database_display(database_maintenance):
 		self.buttonFrame = ttk.Frame(self.pane_one)
 		self.add_collection_button = ttk.Button(self.buttonFrame,image=self.add_icon,command=self.collection_adder)
 		add_collection_tt = ToolTip(self.add_collection_button, "Add Collection",delay=0.01)
-		self.delete_collection_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.delete_unit(self.database,str(items.curselection()[0]),'c')))
+		self.delete_collection_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database,str(items.curselection()[0]),'c')))
 		delete_collection_tt = ToolTip(self.delete_collection_button, "Delete Selected Collection",delay=0.01)
 		self.buttonFrame.pack(anchor=W)
 		self.add_collection_button.pack(side=LEFT)
@@ -1138,6 +1095,8 @@ class database_display(database_maintenance):
 		self.up_level_icon=PhotoImage(file=Path(self.assets_path) / 'uplevel.png')
 		self.add_icon=PhotoImage(file=Path(self.assets_path) / 'add.png')
 		self.delete_icon=PhotoImage(file=Path(self.assets_path) / 'delete.png')
+		self.plus_icon=PhotoImage(file=Path(self.assets_path) / 'plus.png')
+		self.minus_icon=PhotoImage(file=Path(self.assets_path) / 'minus.png')		
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 		self.refresh_icon=PhotoImage(file=Path(self.assets_path) / 'refresh.png')
 		self.text_icon=PhotoImage(file=Path(self.assets_path) / 'text.png')

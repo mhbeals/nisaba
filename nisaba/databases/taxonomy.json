@@ -1,0 +1,1323 @@
+{
+    "0": {
+        "iid": "Character_Traits",
+        "name": "Character Traits",
+        "type": "Abstract",
+        "definition": "Characteristics and Items Associated with Personality or Intrinsic Traits",
+        "children": {
+            "0": {
+                "iid": "Violent",
+                "name": "Violent",
+                "type": "Abstract",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "New_Item",
+                        "name": "New Item",
+                        "type": "New Item",
+                        "definition": "New Item",
+                        "children": {}
+                    }
+                }
+            },
+            "1": {
+                "iid": "Tyrannical",
+                "name": "Tyrannical",
+                "type": "Abstract",
+                "definition": "",
+                "children": {}
+            },
+            "2": {
+                "iid": "Athletic",
+                "name": "Athletic",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Hunting",
+                        "name": "Hunting",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Horseback_Riding",
+                        "name": "Horseback Riding",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "3": {
+                "iid": "Sexual_Character_Traits",
+                "name": "Sexual Character Traits",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Virginal",
+                        "name": "Virginal",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Chaste",
+                        "name": "Chaste",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Promiscuous",
+                        "name": "Promiscuous",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "4": {
+                "iid": "Exotic",
+                "name": "Exotic",
+                "type": "",
+                "definition": "",
+                "children": {}
+            },
+            "5": {
+                "iid": "Power_Role",
+                "name": "Power Role",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Victim",
+                        "name": "Victim",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Subject_of_Protection",
+                        "name": "Subject of Protection",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2:": {
+                        "iid": "Veiled",
+                        "name": "Veiled",
+                        "type": "Concrete",
+                        "definition": "Veiled to be Hidden/Unseen",
+                        "children": {}
+                    }
+                }
+            },
+            "6": {
+                "iid": "Family_Role",
+                "name": "Family Role",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Mother",
+                        "name": "Mother",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Daughter",
+                        "name": "Daughter",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Son",
+                        "name": "Son",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "3": {
+                        "iid": "Father",
+                        "name": "Father",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "7": {
+                "iid": "Social_Role",
+                "name": "Social Role",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Friend",
+                        "name": "Friend",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "1": {
+        "iid": "Clothing",
+        "name": "Clothing",
+        "type": "Concrete",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Trousers",
+                "name": "Trousers",
+                "type": "",
+                "definition": "",
+                "children": {}
+            },
+            "1": {
+                "iid": "Uniform",
+                "name": "Uniform",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Military_Uniform",
+                        "name": "Military Uniform",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "2": {
+                "iid": "Footwear",
+                "name": "Footwear",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Slippers",
+                        "name": "Slippers",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Barefoot",
+                        "name": "Barefoot",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "3": {
+                "iid": "Headgear",
+                "name": "Headgear",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Turban",
+                        "name": "Turban",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Veil",
+                        "name": "Veil",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "4": {
+                "iid": "Dress",
+                "name": "Dress",
+                "type": "",
+                "definition": "Full body coverings without segmented legs",
+                "children": {
+                    "0": {
+                        "iid": "European-Style_Dress",
+                        "name": "European-Style Dress",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Sari",
+                        "name": "Sari",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "5": {
+                "iid": "Jewellery",
+                "name": "Jewellery",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Facial_Jewellery",
+                        "name": "Facial Jewellery",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "2": {
+        "iid": "Historical_Periods",
+        "name": "Historical Periods",
+        "type": "Abstract",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Period",
+                "name": "Period",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Colonial",
+                        "name": "Colonial",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Victorian",
+                        "name": "Victorian",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Edwardian",
+                        "name": "Edwardian",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "1": {
+                "iid": "Event",
+                "name": "Event",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Delhi_Durbar",
+                        "name": "Delhi Durbar",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Durbar_1877",
+                                "name": "1877",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Durbar_1903",
+                                "name": "1903",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Durbar_1911",
+                                "name": "1911",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "1": {
+                        "iid": "Coronation",
+                        "name": "Coronation",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Coronation_1911",
+                                "name": "1911",
+                                "type": "",
+                                "definition": "Coronation of King George V",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "2": {
+                        "iid": "Mutiny",
+                        "name": "Mutiny",
+                        "type": "",
+                        "definition": "Indian Rebellion of 1857",
+                        "children": {}
+                    },
+                    "3": {
+                        "iid": "Royal_Visit",
+                        "name": "RoyalVisit",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Royal_Visit_1876",
+                                "name": "Prince of Wales Tour 1876-77",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Royal_Visit_1905",
+                                "name": "Prince of Wales Tour 1905-06",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Royal_Visit_1911",
+                                "name": "Durbar Tour 1911-12",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "3": {
+        "iid": "People",
+        "name": "People",
+        "type": "",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Titles",
+                "name": "Titles",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Prince_of_Wales",
+                        "name": "Prince of Wales",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Head_of_State_of_Great_Britain_and_Ireland",
+                        "name": "King or Queen of Great Britain and Ireland",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Viceroy_of_India",
+                        "name": "Viceroy of India",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "3": {
+                        "iid": "Begum_of_Bhopal",
+                        "name": "Begum of Bhopal",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "1": {
+                "iid": "Individual",
+                "name": "Individual",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Edward_VII",
+                        "name": "Edward VII",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "George_V",
+                        "name": "George V",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Victoria",
+                        "name": "Victoria",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "3": {
+                        "iid": "Lord_Curzon",
+                        "name": "Lord Curzon",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "4": {
+                        "iid": "Sikander_Begum",
+                        "name": "Sikander Begum",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "5": {
+                        "iid": "Shah_Jahan",
+                        "name": "Shah Jahan",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "6": {
+                        "iid": "Sultan_Jahan",
+                        "name": "Sultan Jahan",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "4": {
+        "iid": "Loyalty",
+        "name": "Loyalty",
+        "type": "",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Modernisation",
+                "name": "Modernisation",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Industrial_Expansion",
+                        "name": "Industrial Expansion",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Railways",
+                                "name": "Railways",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Bridges",
+                                "name": "Bridges",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "1": {
+                        "iid": "Reform",
+                        "name": "Reform",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Education",
+                                "name": "Education",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Women",
+                                "name": "Women",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Charity",
+                                "name": "Charity",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "1": {
+                "iid": "Connection_to_British",
+                "name": "Connection to British",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Military_Alliance",
+                        "name": "Military Alliance",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Indian_Mutiny_Loyalty",
+                                "name": "Indian Mutiny Loyalty",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "1": {
+                        "iid": "Meetings_with_British",
+                        "name": "Meetings with British",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Meetings_with_Royal_Family",
+                                "name": "Meetings with Royal Family",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Meetings_with_Viceroy",
+                                "name": "Meetings with Viceroy",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Invitation_to_Home",
+                                "name": "Invitation to Home",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "2": {
+                        "iid": "Attendance_of_British_Events",
+                        "name": "Attendance of British Events",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Coronation_attendance",
+                                "name": "Coronation attendance",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Delhi_Durbar_attendance",
+                                "name": "Delhi Durbar attendance",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Banquets",
+                                "name": "Banquets",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "3": {
+                        "iid": "Visits_to_Britain",
+                        "name": "Visits to Britain",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "4": {
+                        "iid": "Friendships",
+                        "name": "Friendships",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "5": {
+                        "iid": "Appropriation_of_British_Customs",
+                        "name": "Appropriation of British Customs",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Western_Dress",
+                                "name": "Western Dress",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Attendance_at_British_Schools",
+                                "name": "Attendance at British Schools",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Interest_in_British_Customs",
+                                "name": "Interest in British Customs",
+                                "type": "",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Collecting_British_Cars",
+                                        "name": "Collecting British Cars",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "3": {
+                                "iid": "English_Speaking",
+                                "name": "English Speaking",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "4": {
+                                "iid": "British_Activities",
+                                "name": "British Activities",
+                                "type": "",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Taking_tea",
+                                        "name": "Taking tea",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Playing_Tennis",
+                                        "name": "Playing Tennis",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "5": {
+        "iid": "Race",
+        "name": "Race",
+        "type": "",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Race_Personality_Traits",
+                "name": "Race_Personality Traits",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Loyal",
+                        "name": "Loyal",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Mild",
+                        "name": "Mild",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Fair",
+                        "name": "Fair",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "3": {
+                        "iid": "Peaceful",
+                        "name": "Peaceful",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "4": {
+                        "iid": "Industrious",
+                        "name": "Industrious",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "5": {
+                        "iid": "Brave",
+                        "name": "Brave",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "6": {
+                        "iid": "Good-humoured",
+                        "name": "Good-humoured",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "7": {
+                        "iid": "Race_Violent",
+                        "name": "Violent (Racial)",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "8": {
+                        "iid": "Untrustworthy",
+                        "name": "Untrustworthy",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "9": {
+                        "iid": "Disgusting",
+                        "name": "Disgusting",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "10": {
+                        "iid": "Liar",
+                        "name": "Liar",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "11": {
+                        "iid": "Ignorant",
+                        "name": "Ignorant",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "12": {
+                        "iid": "Greedy",
+                        "name": "Greedy",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "13": {
+                        "iid": "Primitive",
+                        "name": "Primitive",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "14": {
+                        "iid": "Idle",
+                        "name": "Idle",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "15": {
+                        "iid": "Unintelligent",
+                        "name": "Unintelligent",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "16": {
+                        "iid": "Drunken",
+                        "name": "Drunken",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "17": {
+                        "iid": "Dirty",
+                        "name": "Dirty",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "18": {
+                        "iid": "Unchaste",
+                        "name": "Unchaste",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "19": {
+                        "iid": "Witchlike",
+                        "name": "Witchlike",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "20": {
+                        "iid": "Warlike",
+                        "name": "Warlike",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "21": {
+                        "iid": "Blood-Thirsty",
+                        "name": "Blood-Thirsty",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "22": {
+                        "iid": "Secretive",
+                        "name": "Secretive",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            },
+            "1": {
+                "iid": "Race_Physical_Characteristics",
+                "name": "Race Physical Characteristics",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Height",
+                        "name": "Height",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Small",
+                                "name": "Small",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "1": {
+                        "iid": "Facial_Features",
+                        "name": "Facial Features",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Eyes",
+                                "name": "Eyes",
+                                "type": "",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Grey_Eyes",
+                                        "name": "Grey Eyes",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Dark_eyes",
+                                        "name": "Dark eyes",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    },
+                                    "2": {
+                                        "iid": "Narrow_Eyes",
+                                        "name": "Narrow Eyes",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Hair",
+                                "name": "Hair",
+                                "type": "",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Black_Hair",
+                                        "name": "Black Hair",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "2": {
+                                "iid": "Flat_faced",
+                                "name": "Flat faced",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "3": {
+                                "iid": "Prognathous_jaw",
+                                "name": "Prognathous jaw",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "4": {
+                                "iid": "Thick_Lips",
+                                "name": "Thick Lips",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "5": {
+                                "iid": "Broad_Forehead",
+                                "name": "Broad Forehead",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "6": {
+                                "iid": "Facial_Hair",
+                                "name": "Facial Hair",
+                                "type": "",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Beard",
+                                        "name": "Beard",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Moustache",
+                                        "name": "Moustache",
+                                        "type": "",
+                                        "definition": "",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "2": {
+                        "iid": "Body",
+                        "name": "Body",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Muscular",
+                                "name": "Muscular",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Strong",
+                                "name": "Strong",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "3": {
+                        "iid": "Skin",
+                        "name": "Skin",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Dark",
+                                "name": "Dark",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Light",
+                                "name": "Light",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Yellow",
+                                "name": "Yellow",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "6": {
+        "iid": "Religion",
+        "name": "Religion",
+        "type": "",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Hinduism",
+                "name": "Hinduism",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Hinduism_Customs",
+                        "name": "Customs",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Hinduism_Bathing",
+                                "name": "Bathing",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Hinduism_Meditation",
+                                "name": "Meditation",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Hinduism_Prayer",
+                                "name": "Prayer",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "3": {
+                                "iid": "Hinduism_Vegetarianism",
+                                "name": "Vegetarianism",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "4": {
+                                "iid": "Hinduism_Image_Workship",
+                                "name": "Image Workship",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "1": {
+                "iid": "Islam",
+                "name": "Islam",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Islam_Customs",
+                        "name": "Customs",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Islam_Pilgrimage",
+                                "name": "Pilgrimage",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Islam_Purday",
+                                "name": "Purday",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "2": {
+                                "iid": "Islam_Prayer",
+                                "name": "Prayer",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "3": {
+                                "iid": "Islam_Halal",
+                                "name": "Halal",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "4": {
+                                "iid": "Islam_Sobriety",
+                                "name": "Sobriety",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "2": {
+                "iid": "Christianity",
+                "name": "Christianity",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Christianity_Superiority",
+                        "name": "Superiority",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Christianity_Martyrdom",
+                        "name": "Martyrdom",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Christianity_Enlightened",
+                        "name": "Enlightened",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "7": {
+        "iid": "Aesthetic  ",
+        "name": "Aesthetic ",
+        "type": "",
+        "definition": "",
+        "children": {
+            "0": {
+                "iid": "Genre",
+                "name": "Genre",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Historical_Painting",
+                        "name": "Historical Painting",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Genre_Painting",
+                        "name": "Genre Paintings",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Portrait",
+                        "name": "Portrait",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Double_Portrait",
+                                "name": "Double Portrait",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Group",
+                                "name": "Group",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "1": {
+                "iid": "Medium",
+                "name": "Medium",
+                "type": "",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Photograph",
+                        "name": "Photograph",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Painting",
+                        "name": "Painting",
+                        "type": "",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Watercolour",
+                                "name": "Watercolour",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Oil",
+                                "name": "Oil",
+                                "type": "",
+                                "definition": "",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "2": {
+                        "iid": "Drawing",
+                        "name": "Drawing",
+                        "type": "",
+                        "definition": "",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    }
+}

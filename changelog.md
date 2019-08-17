@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.24
+
++ Allowed mouse selection and button fine tuning of text segmenting (Issue #8)
+
 ### v.0.2.23
 
 + Added Type (Bibiolographical information) Drop Drops in Database and Config Questions

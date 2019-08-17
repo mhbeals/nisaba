@@ -33,38 +33,6 @@ class configuration_display(database_maintenance):
 
 		self.database_saver()
 
-	def configuration_defaults_saver(self):
-
-		# Save default user
-		self.default_user_setter()
-
-		# Save default paths
-		savedata = str(self.current_database) + "\n"
-
-		# Save default taxonomies
-		savedata = savedata + str(self.taxonomy_level_defaults[0]) + "\n" + str(self.taxonomy_level_defaults[1]) + "\n" + str(self.taxonomy_level_defaults[2]) + "\n"
-
-		# Save default namespaces
-		for parameter_set in self.parameter_entries:
-			savedata = savedata + parameter_set[1].get() + "\n"
-
-		with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'w') as file:
-			file.write(savedata)
-
-	def configuration_file_saver(self,file):
-
-		with open (Path(self.config_path) / file, 'w') as file:
-			file.write(self.configuration_textbox.get("1.0",END))
-
-		self.pane_two.destroy()
-
-	def configuration_file_loader(self,file):
-
-		with open (Path(self.config_path) / file, 'r') as file:
-			loaddata = file.read()
-
-		return loaddata
-
 	def edit_user_frame_displayer(self):
 		##################
 		# Window Cleanup #
@@ -89,14 +57,6 @@ class configuration_display(database_maintenance):
 
 		# Create User Frame
 		metadata_window.database_metadata_viewer(self.pane_two)
-
-	def yaml_loader(self,filename):
-
-		with open(Path(self.config_path) / filename, 'r') as stream:
-			try:
-				return yaml.safe_load(stream)
-			except yaml.YAMLError as exc:
-				pass
 
 	def configuration_textbox_frame_loader(self,filename):
 
@@ -174,8 +134,9 @@ class configuration_display(database_maintenance):
 		self.configurations_frame.pack()
 		self.button_frame.pack(anchor=NW)
 
-	def default_taxonomy_loader(self):
-
+	def default_taxonomy_frame_creator(self):
+	# Creates Fields for Default Taxonomies
+	
 		# Create Taxonomy Loader Frame
 		self.taxonomy_loader_frame = ttk.Frame(self.pane_one)
 		self.taxonomy_loader_frame.pack(side=TOP, fill=X)
@@ -207,8 +168,8 @@ class configuration_display(database_maintenance):
 
 		self.configurations_loader()
 
-	def user_loader(self):
-		# Creates Dropdown Menu of Possible Users
+	def user_dropdown_creator(self):
+	# Creates Dropdown Menu of Possible Users
 
 		# Retrieve Existing User List
 		users = []
@@ -240,7 +201,7 @@ class configuration_display(database_maintenance):
 			# Display Selection ttk.Frame
 			users_menu.pack(anchor=W)
 
-			self.default_taxonomy_loader()
+			self.default_taxonomy_frame_creator()
 
 	def default_database_loader(self):
 
@@ -279,7 +240,7 @@ class configuration_display(database_maintenance):
 		new_button.pack(side=RIGHT)
 		entry.pack(side=RIGHT, expand=YES, fill=X)
 
-		self.user_loader()
+		self.user_dropdown_creator()
 
 	def configuration_viewer(self,window):
 
