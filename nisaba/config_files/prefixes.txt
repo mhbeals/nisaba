@@ -9,3 +9,5 @@
 @prefix schema: <https://schema.org#> .
 @prefix foaf: <http://xmlns.com/foaf/spec#> .
 @prefix pro: <http://purl.org/spar/pro#> .
+@prefix vra: <http://purl.org/vra#> .
+

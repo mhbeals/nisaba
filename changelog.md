@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.26
+
++ Allowed button fine tuning for image segmenting (Issue #8)
+
 ### v.0.2.25
 
 + Allowed mouse selection for image segmenting (Issue #8)

@@ -24,6 +24,13 @@ from ttkwidgets import CheckboxTreeview
 
 class database_display(cache_maintenance):
 
+	def incrementer(self,box,increment,function_call):
+				new_value = int(box.get()) + increment
+				new_value = 0 if new_value < 0 else new_value
+				box.delete(0,END)
+				box.insert(0,new_value)
+				function_call
+
 	def transcription_updater(self,start,end):
 
 		self.start_text.delete(0,END)
@@ -74,103 +81,103 @@ class database_display(cache_maintenance):
 			try:
 				# Set image file
 				self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
-				# Load Image
 				self.segment_image = PIL.Image.open(self.filename)
-			except(FileNotFoundError):
-				label = ttk.Label(self.segment_pane_two, text="Image Not Found")
-				label.grid(column=0,row=3)
-			else:
-				# Find Image Size
-				[self.segment_imageSizeWidth, self.segment_imageSizeHeight] = self.segment_image.size
-				self.segment_image_original_ratio = self.segment_imageSizeHeight / self.segment_imageSizeWidth
 				
-				# Pull Updated Coordinates
-				self.top = int(self.top_text.get())
-				self.bottom = int(self.bottom_text.get())
-				self.left = int(self.left_text.get())
-				self.right = int(self.right_text.get())
+			except(FileNotFoundError):
+				self.filename = str(Path(self.raw_data_images_path) / 'sample.jpg')
+				self.segment_image = PIL.Image.open(self.filename)
+			
+			# Find Image Size
+			[self.segment_imageSizeWidth, self.segment_imageSizeHeight] = self.segment_image.size
+			self.segment_image_original_ratio = self.segment_imageSizeHeight / self.segment_imageSizeWidth
+			
+			# Pull Updated Coordinates
+			self.top = int(self.top_text.get())
+			self.bottom = int(self.bottom_text.get())
+			self.left = int(self.left_text.get())
+			self.right = int(self.right_text.get())
 
-				# Find Crop Coordinates
-				self.segment_top_x_coordinate =  int(self.left*self.segment_imageSizeWidth / 100)
-				self.segment_top_y_coordinate = int(self.top*self.segment_imageSizeHeight / 100)
-				self.segment_bottom_x_coordinate = int(self.right*self.segment_imageSizeWidth / 100)
-				self.segment_bottom_y_coordinate = int(self.bottom*self.segment_imageSizeHeight / 100)
+			# Find Crop Coordinates
+			self.segment_top_x_coordinate =  int(self.left*self.segment_imageSizeWidth / 100)
+			self.segment_top_y_coordinate = int(self.top*self.segment_imageSizeHeight / 100)
+			self.segment_bottom_x_coordinate = int(self.right*self.segment_imageSizeWidth / 100)
+			self.segment_bottom_y_coordinate = int(self.bottom*self.segment_imageSizeHeight / 100)
 
-				# Crop Image
-				self.segment_image = self.segment_image.crop((self.segment_top_x_coordinate,
-															  self.segment_top_y_coordinate,
-															  self.segment_bottom_x_coordinate,
-															  self.segment_bottom_y_coordinate))
+			# Crop Image
+			self.segment_image = self.segment_image.crop((self.segment_top_x_coordinate,
+														  self.segment_top_y_coordinate,
+														  self.segment_bottom_x_coordinate,
+														  self.segment_bottom_y_coordinate))
 
-				[self.cropped_image_width, self.cropped_image_height] = self.segment_image.size
-				self.cropped_image_ratio_h = self.cropped_image_height / self.cropped_image_width
-				self.cropped_image_ratio_w = self.cropped_image_width /self.cropped_image_height
+			[self.cropped_image_width, self.cropped_image_height] = self.segment_image.size
+			self.cropped_image_ratio_h = self.cropped_image_height / self.cropped_image_width
+			self.cropped_image_ratio_w = self.cropped_image_width /self.cropped_image_height
 
-				# Resize Image to Fit Canvas
-				if self.cropped_image_width < self.cropped_image_height:
-					self.segment_sizeRatio = 600 / self.cropped_image_height
-					self.segment_newImageSizeHeight = int(self.cropped_image_height*self.segment_sizeRatio)
-					self.segment_newImageSizeWidth = int(self.segment_newImageSizeHeight*self.cropped_image_ratio_w)
+			# Resize Image to Fit Canvas
+			if self.cropped_image_width < self.cropped_image_height:
+				self.segment_sizeRatio = 600 / self.cropped_image_height
+				self.segment_newImageSizeHeight = int(self.cropped_image_height*self.segment_sizeRatio)
+				self.segment_newImageSizeWidth = int(self.segment_newImageSizeHeight*self.cropped_image_ratio_w)
 
+			else:
+				self.segment_sizeRatio = 600 / self.cropped_image_width
+				self.segment_newImageSizeWidth = int(self.cropped_image_width*self.segment_sizeRatio)
+				self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
+
+			self.segment_image = self.segment_image.resize((self.segment_newImageSizeWidth, self.segment_newImageSizeHeight), PIL.Image.ANTIALIAS)
+
+			# Prepare Image for Insertion
+			self.segment_photoImg = PIL.ImageTk.PhotoImage(self.segment_image)
+
+			# Display Image Canvas
+			self.segment_imageCanvas.config(width=self.segment_newImageSizeWidth+10, height = self.segment_newImageSizeHeight+10)
+			self.segment_imageCanvas.place(relwidth=1,relheight=.5)
+
+			# Add Image to Canvas
+			self.segment_imageCanvas.create_image(self.segment_newImageSizeWidth/2+6,
+												  self.segment_newImageSizeHeight/2+6,
+												  image=self.segment_photoImg,
+												  anchor="center")
+												  
+			def onmouse(event):
+				self.sx = event.x
+				self.sy = event.y
+
+				self.rect = self.segment_imageCanvas.create_rectangle(self.sx,self.sy,self.sx,self.sy, outline="yellow")
+					
+			def mousemove(event):
+				self.ex = event.x
+				self.ey = event.y
+				
+				self.segment_imageCanvas.coords(self.rect, self.sx,self.sy,self.ex,self.ey)
+					
+			def offmouse(event):
+				
+				self.segment_imageCanvas.delete(self.rect)				
+				self.top_text.delete(0,END)
+				self.bottom_text.delete(0,END)
+				self.left_text.delete(0,END)
+				self.right_text.delete(0,END)
+				
+				if self.sx < self.ex:
+					self.left_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
+					self.right_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
 				else:
-					self.segment_sizeRatio = 600 / self.cropped_image_width
-					self.segment_newImageSizeWidth = int(self.cropped_image_width*self.segment_sizeRatio)
-					self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
-
-				self.segment_image = self.segment_image.resize((self.segment_newImageSizeWidth, self.segment_newImageSizeHeight), PIL.Image.ANTIALIAS)
-
-				# Prepare Image for Insertion
-				self.segment_photoImg = PIL.ImageTk.PhotoImage(self.segment_image)
-
-				# Display Image Canvas
-				self.segment_imageCanvas.config(width=self.segment_newImageSizeWidth+10, height = self.segment_newImageSizeHeight+10)
-				self.segment_imageCanvas.grid(column=0,row=0, columnspan = 8, padx =10, pady = 10)
-
-				# Add Image to Canvas
-				self.segment_imageCanvas.create_image(self.segment_newImageSizeWidth/2+6,
-													  self.segment_newImageSizeHeight/2+6,
-													  image=self.segment_photoImg,
-													  anchor="center")
-													  
-				def onmouse(event):
-					self.sx = event.x
-					self.sy = event.y
-
-					self.rect = self.segment_imageCanvas.create_rectangle(self.sx,self.sy,self.sx,self.sy, outline="yellow")
-						
-				def mousemove(event):
-					self.ex = event.x
-					self.ey = event.y
+					self.left_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
+					self.right_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
 					
-					self.segment_imageCanvas.coords(self.rect, self.sx,self.sy,self.ex,self.ey)
-						
-				def offmouse(event):
-					
-					self.segment_imageCanvas.delete(self.rect)				
-					self.top_text.delete(0,END)
-					self.bottom_text.delete(0,END)
-					self.left_text.delete(0,END)
-					self.right_text.delete(0,END)
-					
-					if self.sx < self.ex:
-						self.left_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
-						self.right_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
-					else:
-						self.left_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
-						self.right_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
-						
-					if self.sy < self.ey:
-						self.top_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
-						self.bottom_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
-					else:
-						self.top_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
-						self.bottom_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
-					
-					self.cropped_image_updater()
+				if self.sy < self.ey:
+					self.top_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
+					self.bottom_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
+				else:
+					self.top_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
+					self.bottom_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
+				
+				self.cropped_image_updater()
 
-				self.segment_imageCanvas.bind('<Button-1>',onmouse)
-				self.segment_imageCanvas.bind('<B1-Motion>',mousemove)
-				self.segment_imageCanvas.bind('<ButtonRelease>',offmouse)
+			self.segment_imageCanvas.bind('<Button-1>',onmouse)
+			self.segment_imageCanvas.bind('<B1-Motion>',mousemove)
+			self.segment_imageCanvas.bind('<ButtonRelease>',offmouse)
 			
 	def entry_entries_displayer(self,tab,level):
 		
@@ -424,7 +431,7 @@ class database_display(cache_maintenance):
 		self.segment_pane_two = ttk.Frame(self.database_window)
 		split = 0.5
 		self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
-		self.segment_pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
+		self.segment_pane_two.place(y = 15, relx=split, relwidth=1.0-split, relheight=1)
 
 		# If the Segment is Text
 		if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
@@ -455,24 +462,17 @@ class database_display(cache_maintenance):
 			end_label.grid(column = 4, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
 			self.end_text.grid(column = 5, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
 			
-			def incrementer(box,increment):
-				new_value = int(box.get()) + increment
-				new_value = 0 if new_value < 0 else new_value
-				box.delete(0,END)
-				box.insert(0,new_value)
-				self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))
-			
-			# Create and Back Incrementors	
+			# Create and Back Incrementers	
 			start_increment_frame = ttk.Frame(self.segment_pane_two)
-			start_plus_button = ttk.Button(start_increment_frame, image=self.plus_icon, command=(lambda:incrementer(self.start_text,1)))
-			start_minus_button = ttk.Button(start_increment_frame, image=self.minus_icon, command=(lambda:incrementer(self.start_text,-1)))
+			start_plus_button = ttk.Button(start_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.start_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
+			start_minus_button = ttk.Button(start_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.start_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
 			start_plus_button.pack(side=TOP)
 			start_minus_button.pack(side=BOTTOM)
 			start_increment_frame.grid(column = 3, row = 0, sticky=W, padx =10, pady = 10)
 			
 			end_increment_frame = ttk.Frame(self.segment_pane_two)
-			end_plus_button = ttk.Button(end_increment_frame, image=self.plus_icon, command=(lambda:incrementer(self.end_text,1)))
-			end_minus_button = ttk.Button(end_increment_frame, image=self.minus_icon, command=(lambda:incrementer(self.end_text,-1)))
+			end_plus_button = ttk.Button(end_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.end_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
+			end_minus_button = ttk.Button(end_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.end_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
 			end_plus_button.pack(side=TOP)
 			end_minus_button.pack(side=BOTTOM)
 			end_increment_frame.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
@@ -511,18 +511,41 @@ class database_display(cache_maintenance):
 			bottom = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['bottom'])
 			right = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'])
 
+			def segmenter_box_maker(frame,label,entry):
+				# Create Label
+				frame_label = Label(frame, text=label)
+			
+				# Create Increment Buttons
+				button_frame = ttk.Frame(frame)
+				plus_button = ttk.Button(button_frame, image=self.plus_icon, command=(lambda:self.incrementer(entry,1,self.cropped_image_updater())))
+				minus_button = ttk.Button(button_frame, image=self.minus_icon, command=(lambda:self.incrementer(entry,-1,self.cropped_image_updater())))
+				plus_button.pack(side=TOP)
+				minus_button.pack(side=BOTTOM)
+				
+				# Pack All Pieces Together
+				frame_label.grid(column=0,row=0)
+				entry.grid(column=0,row=1)
+				button_frame.grid(column=1,row=0, rowspan=2)
+			
+			# Create Segmenter Frame
+			self.segmenter_frame = ttk.Frame(self.segment_pane_two)		
+			
 			# Create text boxes
-			self.top_label = Label(self.segment_pane_two, text="% from Top")
-			self.top_text = Entry(self.segment_pane_two)
-			self.bottom_label = Label(self.segment_pane_two, text="% to the Bottom")
-			self.bottom_text = Entry(self.segment_pane_two)
-			self.left_label = Label(self.segment_pane_two, text="% from Left")
-			self.left_text = Entry(self.segment_pane_two)
-			self.right_label = Label(self.segment_pane_two, text="% to the Right")
-			self.right_text = Entry(self.segment_pane_two)
-
-			# Create Image Canvas
-			self.segment_imageCanvas = Canvas(self.segment_pane_two)
+			self.top_box = ttk.Frame(self.segmenter_frame)
+			self.top_text = Entry(self.top_box)
+			segmenter_box_maker(self.top_box,'% from the Top',self.top_text)
+			
+			self.bottom_box = ttk.Frame(self.segmenter_frame)
+			self.bottom_text = Entry(self.bottom_box)
+			segmenter_box_maker(self.bottom_box,'% to the Bottom',self.bottom_text)
+			
+			self.left_box = ttk.Frame(self.segmenter_frame)
+			self.left_text = Entry(self.left_box)
+			segmenter_box_maker(self.left_box,'% from the Left',self.left_text)
+			
+			self.right_box = ttk.Frame(self.segmenter_frame)
+			self.right_text = Entry(self.right_box)
+			segmenter_box_maker(self.right_box,'% to the Right',self.right_text)
 
 			# Fill Entry Boxes
 			self.top_text.insert(4,top)
@@ -531,21 +554,26 @@ class database_display(cache_maintenance):
 			self.right_text.insert(4,right)
 
 			# Pack Labels and Entry Boxes into ttk.Frame
-			self.top_label.grid(column = 0, row = 1, sticky=NE)
-			self.top_text.grid(column = 1, row = 1, sticky=NE)
-			self.bottom_label.grid(column = 0, row = 2,sticky=NE)
-			self.bottom_text.grid(column = 1, row = 2, sticky=NE)
-			self.left_label.grid(column = 2, row = 1, sticky=NE)
-			self.left_text.grid(column = 3, row = 1, sticky=NE)
-			self.right_label.grid(column = 2, row = 2, sticky=NE)
-			self.right_text.grid(column = 3, row = 2, sticky=NE)
-
-			self.cropped_image_updater()
+			self.top_box.grid(column=1, row=1)
+			self.bottom_box.grid(column=1, row=3)
+			self.left_box.grid(column=3, row=1)
+			self.right_box.grid(column=3, row=3)
 
 			# Create and Pack Update Button
-			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=self.image_resetter)
+			update_button = ttk.Button(self.segmenter_frame, image=self.refresh_icon, command=self.image_resetter)
 			update_button_tt = ToolTip(update_button, "Reload Full Image",delay=0.01)
-			update_button.grid(column = 4, row = 1, rowspan=2, sticky=W, padx =5, pady = 5)
+			update_button.grid(column=5, row = 1)
+			
+			# Create Image Canvas
+			self.segment_imageCanvas = Canvas(self.segment_pane_two)
+			self.segmenter_frame.grid_columnconfigure(0, minsize=50)
+			self.segmenter_frame.grid_columnconfigure(2, minsize=50)
+			self.segmenter_frame.grid_columnconfigure(4, minsize=50)
+			self.segmenter_frame.grid_rowconfigure(1, minsize=50)
+			self.segmenter_frame.place(rely = .5, relwidth=1,relheight=.5)
+			
+			self.cropped_image_updater()
+
 			
 		# Setup Segment Window Tabs (Left / Pane 1)
 
@@ -654,7 +682,7 @@ class database_display(cache_maintenance):
 		self.pane_two = ttk.Frame(self.database_window)
 		split = 0.5
 		self.pane_one.place(rely=0, relwidth=split, relheight=1)
-		self.pane_two.place(relx=split, relwidth=1.0-split, relheight=1)
+		self.pane_two.place(y = 15, relx=split, relwidth=1.0-split, relheight=1)
 
 		####################################
 		# Setup Item Display Panel (Right) #
@@ -710,34 +738,35 @@ class database_display(cache_maintenance):
 			self.image_label.grid(column = 1, row = 0)
 			self.image_filename.grid(column = 2, row = 0)
 
-			# Set image file
-			filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
-
 			try:
-				# Load Image
-				image = PIL.Image.open(filename)
+				# Set image file
+				self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
+				image = PIL.Image.open(self.filename)	
+				
 			except(FileNotFoundError):
-				label = ttk.Label(self.pane_two, text="Image Not Found")
-				label.grid(column=3,row=2)
-			else:
-				# Find Image Size
-				[imageSizeWidth, imageSizeHeight] = image.size
+				self.filename = str(Path(self.raw_data_images_path) / 'sample.jpg')
+				image = PIL.Image.open(self.filename)	
+				label = ttk.Label(self.pane_two, text="Image Not Found!")
+				label.grid(column=2,row=3)			
 
-				# Resize Image to Fit Canvas
-				sizeRatio = 600 / imageSizeWidth
-				newImageSizeWidth = int(imageSizeWidth*sizeRatio)
-				newImageSizeHeight = int(imageSizeHeight*sizeRatio)
-				image = image.resize((newImageSizeWidth, newImageSizeHeight), PIL.Image.ANTIALIAS)
+			# Find Image Size
+			[imageSizeWidth, imageSizeHeight] = image.size
 
-				# Prepare Image for Insertion
-				self.photoImg = PIL.ImageTk.PhotoImage(image)
+			# Resize Image to Fit Canvas
+			sizeRatio = 600 / imageSizeWidth
+			newImageSizeWidth = int(imageSizeWidth*sizeRatio)
+			newImageSizeHeight = int(imageSizeHeight*sizeRatio)
+			image = image.resize((newImageSizeWidth, newImageSizeHeight), PIL.Image.ANTIALIAS)
 
-				# Display Image Canvas
-				imageCanvas = Canvas(self.pane_two, width=newImageSizeWidth+10, height=newImageSizeHeight+10, bg="black")
-				imageCanvas.grid(column = 0, row = 1, columnspan=5)
+			# Prepare Image for Insertion
+			self.photoImg = PIL.ImageTk.PhotoImage(image)
 
-				# Add Image to Canvas
-				imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
+			# Display Image Canvas
+			imageCanvas = Canvas(self.pane_two, width=newImageSizeWidth+10, height=newImageSizeHeight+10, bg="black")
+			imageCanvas.grid(column = 0, row = 1, columnspan=5)
+
+			# Add Image to Canvas
+			imageCanvas.create_image(newImageSizeWidth/2+6, newImageSizeHeight/2+6, anchor="center", image=self.photoImg)
 
 		####################################
 		# Setup Item Metadata Panel (Left) #
