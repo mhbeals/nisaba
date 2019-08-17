@@ -24,116 +24,112 @@
     "0": {
         "schema:editor": [
             "mhb",
-            "20190812_150854",
-            "20190812_150854"
+            "20190817_143828",
+            "20190817_143828"
         ],
         "dc:creator": [
             "Herodotus",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "dc:title": [
             "The Histories",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:hasShortTitle": [
             "Histories",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "prism:volume": [
             "",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:hasVolumeCount": [
             "",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "prism:edition": [
             "",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:hasSequenceIdentifier": [
             "",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "dc:date": [
             "440 BC",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:hasPageCount": [
             "716",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "prism:isbn": [
             "9780134449082",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "prism:doi": [
             "",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "fabio:Abstract": [
             "",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "dc:language": [
-            "",
+            "en",
             "mhb",
-            "20190812_150854"
+            "20190817_143828"
         ],
         "items": {
             "0": {
                 "schema:editor": [
                     "mhb",
-                    "20190812_134849",
-                    "20190812_134849"
+                    "20190817_143828",
+                    "20190817_143828"
                 ],
                 "item_type": "t",
-                "fabio_type": [
-                    "Section",
-                    "mhb",
-                    "20190812_134849"
-                ],
+                "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "0",
                     "mhb",
-                    "20190812_134849"
+                    "20190817_143828"
                 ],
                 "fabio:pageRange": [
                     "",
                     "mhb",
-                    "20190812_134849"
+                    "20190817_143828"
                 ],
                 "transcription": [
-                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n\n\n\n\n\n",
+                    "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
                     "mhb",
-                    "20190812_134849"
+                    "20190817_143828"
                 ],
                 "segments": {
                     "0": {
@@ -178,29 +174,25 @@
             "1": {
                 "schema:editor": [
                     "mhb",
-                    "20190809_102647",
-                    "20190809_102647"
+                    "20190817_143200",
+                    "20190817_143200"
                 ],
                 "item_type": "t",
-                "fabio_type": [
-                    "Section",
-                    "mhb",
-                    "20190809_102647"
-                ],
+                "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "1",
                     "mhb",
-                    ""
+                    "20190817_143200"
                 ],
                 "fabio:pageRange": [
                     "",
                     "mhb",
-                    ""
+                    "20190817_143200"
                 ],
                 "transcription": [
-                    "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\n\n\n",
+                    "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\n\n\n\n\n",
                     "mhb",
-                    "20190809_102647"
+                    "20190817_143200"
                 ],
                 "segments": {
                     "0": {
@@ -241,7 +233,52 @@
                         "20190810_095517"
                     ],
                     [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
                         "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
                         "mhb",
                         "20190810_095517"
                     ],
@@ -256,7 +293,52 @@
                         "20190810_095517"
                     ],
                     [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
                         "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
                         "mhb",
                         "20190810_095517"
                     ],
@@ -269,24 +351,176 @@
                         "Teleology",
                         "mhb",
                         "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory-Descriptive_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Explanatory_Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095517"
                     ]
                 ]
             },
             "2": {
                 "schema:editor": [
-                    "",
-                    "",
-                    ""
+                    "mhb",
+                    "20190817_143206",
+                    "20190817_143206"
                 ],
                 "item_type": "i",
                 "image_file": "sample.jpg",
-                "fabio_type": [
-                    "StillImage",
-                    ""
-                ],
+                "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "1",
-                    ""
+                    "mhb"
                 ],
                 "fabio:pageRange": [
                     "",
@@ -333,7 +567,52 @@
                         "20190810_095517"
                     ],
                     [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
                         "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Tertiary_Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Evidence",
+                        "mhb",
+                        "20190810_095517"
+                    ],
+                    [
+                        "Ontology",
                         "mhb",
                         "20190810_095517"
                     ],
@@ -344,26 +623,27 @@
                     ]
                 ]
             }
-        }
+        },
+        "fabio_type": "fabio:Book"
     },
     "1": {
         "schema:editor": [
             "mhb",
-            "20190811_145751",
-            "20190811_145751"
+            "20190817_143222",
+            "20190817_143222"
         ],
         "items": {
             "0": {
                 "schema:editor": [
                     "mhb",
-                    "20190810_095807",
-                    "20190810_095807"
+                    "20190817_143218",
+                    "20190817_143218"
                 ],
                 "item_type": "t",
                 "transcription": [
-                    "Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\n\n\n",
+                    "Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.\n\n\n\n\n",
                     "mhb",
-                    "20190810_095807"
+                    "20190817_143218"
                 ],
                 "segments": {
                     "0": {
@@ -405,7 +685,22 @@
                         "20190810_095807"
                     ],
                     [
+                        "Memorial_Teleology_of_History_General",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
                         "Memorial_Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Memorial_Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology_of_History",
                         "mhb",
                         "20190810_095807"
                     ],
@@ -418,36 +713,77 @@
                         "Teleology",
                         "mhb",
                         "20190810_095807"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Memorial_Teleology_of_History_General",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Memorial_Teleology_of_History_General",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Memorial_Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Memorial_Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology_of_History",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095807"
+                    ],
+                    [
+                        "Teleology",
+                        "mhb",
+                        "20190810_095807"
                     ]
                 ],
-                "fabio_type": [
-                    "Section",
-                    "mhb",
-                    "20190810_095807"
-                ],
+                "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "1",
                     "mhb",
-                    "20190810_095807"
+                    "20190817_143218"
                 ],
                 "fabio:pageRange": [
                     "35",
                     "mhb",
-                    "20190810_095807"
+                    "20190817_143218"
                 ]
             },
             "1": {
                 "schema:editor": [
                     "mhb",
-                    "20190811_145655",
-                    "20190811_145751"
+                    "20190817_143222",
+                    "20190817_143222"
                 ],
                 "item_type": "t",
                 "annotations": [],
                 "transcription": [
-                    "For instance, it is evident that the country now called Hellas had in ancient times no settled population; on the contrary, migrations were of frequent occurrence, the several tribes readily abandoning their homes under the pressure of superior numbers. Without commerce, without freedom of communication either by land or sea, cultivating no more of their territory than the exigencies of life required, destitute of capital, never planting their land (for they could not tell when an invader might not come and take it all away, and when he did come they had no walls to stop him), thinking that the necessities of daily sustenance could be supplied at one place as well as another, they cared little for shifting their habitation, and consequently neither built large cities nor attained to any other form of greatness. The richest soils were always most subject to this change of masters; such as the district now called Thessaly, Boeotia, most of the Peloponnese, Arcadia excepted, and the most fertile parts of the rest of Hellas. The goodness of the land favoured the aggrandizement of particular individuals, and thus created faction which proved a fertile source of ruin. It also invited invasion. \nAccordingly Attica, from the poverty of its soil enjoying from a very remote period freedom from faction, never changed its inhabitants. And here is no inconsiderable exemplification of my assertion that the migrations were the cause of there being no correspondent growth in other parts. The most powerful victims of war or faction from the rest of Hellas took refuge with the Athenians as a safe retreat; and at an early period, becoming naturalized, swelled the already large population of the city to such a height that Attica became at last too small to hold them, and they had to send out colonies to Ionia. \n",
+                    "For instance, it is evident that the country now called Hellas had in ancient times no settled population; on the contrary, migrations were of frequent occurrence, the several tribes readily abandoning their homes under the pressure of superior numbers. Without commerce, without freedom of communication either by land or sea, cultivating no more of their territory than the exigencies of life required, destitute of capital, never planting their land (for they could not tell when an invader might not come and take it all away, and when he did come they had no walls to stop him), thinking that the necessities of daily sustenance could be supplied at one place as well as another, they cared little for shifting their habitation, and consequently neither built large cities nor attained to any other form of greatness. The richest soils were always most subject to this change of masters; such as the district now called Thessaly, Boeotia, most of the Peloponnese, Arcadia excepted, and the most fertile parts of the rest of Hellas. The goodness of the land favoured the aggrandizement of particular individuals, and thus created faction which proved a fertile source of ruin. It also invited invasion. \nAccordingly Attica, from the poverty of its soil enjoying from a very remote period freedom from faction, never changed its inhabitants. And here is no inconsiderable exemplification of my assertion that the migrations were the cause of there being no correspondent growth in other parts. The most powerful victims of war or faction from the rest of Hellas took refuge with the Athenians as a safe retreat; and at an early period, becoming naturalized, swelled the already large population of the city to such a height that Attica became at last too small to hold them, and they had to send out colonies to Ionia. \n\n\n",
                     "mhb",
-                    "20190811_145655"
+                    "20190817_143222"
                 ],
                 "segments": {
                     "0": {
@@ -482,72 +818,69 @@
                         ]
                     }
                 },
-                "fabio_type": [
-                    "Section",
-                    "mhb",
-                    "20190811_145751"
-                ],
+                "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "2",
                     "mhb",
-                    "20190811_145751"
+                    "20190817_143222"
                 ],
                 "fabio:pageRange": [
                     "35-6",
                     "mhb",
-                    "20190811_145751"
+                    "20190817_143222"
                 ]
             }
         },
         "dc:creator": [
             "Thucydides",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "dc:title": [
             "History of the Peloponnesian War",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "fabio:hasShortTitle": [
             "Peloponnesian War",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "dc:date": [
             "1972",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "fabio:hasPageCount": [
             "468",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "prism:isbn": [
             "97800140440393",
             "mhb",
-            "20190811_145751"
+            "20190817_143222"
         ],
         "dc:language": [
             "en",
             "mhb",
-            "20190811_145751"
-        ]
+            "20190817_143222"
+        ],
+        "fabio_type": "fabio:Book"
     }
 }

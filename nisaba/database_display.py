@@ -1025,7 +1025,10 @@ class database_display(cache_maintenance):
 			elif 'fabio_type' in self.database[self.collection_index]['items'][item_number]:
 				if self.collections_title_namespace in self.database[self.collection_index]:
 					if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number] and dictionary['fabio:hasSequenceIdentifier'][0] != '':
-						display_item = "{0} on page {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]))
+						if self.database[self.collection_index]['items'][item_number]['fabio:pageRange'][0] !='':
+							display_item = "{0} {1} on page(s) {2}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(dictionary['fabio:pageRange'][0]))
+						else: 
+							display_item = "{0} {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]))
 					elif 'fabio:pageRange' in self.database[self.collection_index]['items'][item_number]:
 						display_item = "{0} on pages {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:pageRange'][0]))
 					else:
