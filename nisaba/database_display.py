@@ -70,104 +70,107 @@ class database_display(cache_maintenance):
 		self.cropped_image_updater()
 	
 	def cropped_image_updater(self):
-
-			# Set image file
-			self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
-
-			# Load Image
-			self.segment_image = PIL.Image.open(self.filename)
-
-			# Find Image Size
-			[self.segment_imageSizeWidth, self.segment_imageSizeHeight] = self.segment_image.size
-			self.segment_image_original_ratio = self.segment_imageSizeHeight / self.segment_imageSizeWidth
 			
-			# Pull Updated Coordinates
-			self.top = int(self.top_text.get())
-			self.bottom = int(self.bottom_text.get())
-			self.left = int(self.left_text.get())
-			self.right = int(self.right_text.get())
-
-			# Find Crop Coordinates
-			self.segment_top_x_coordinate =  int(self.left*self.segment_imageSizeWidth / 100)
-			self.segment_top_y_coordinate = int(self.top*self.segment_imageSizeHeight / 100)
-			self.segment_bottom_x_coordinate = int(self.right*self.segment_imageSizeWidth / 100)
-			self.segment_bottom_y_coordinate = int(self.bottom*self.segment_imageSizeHeight / 100)
-
-			# Crop Image
-			self.segment_image = self.segment_image.crop((self.segment_top_x_coordinate,
-														  self.segment_top_y_coordinate,
-														  self.segment_bottom_x_coordinate,
-														  self.segment_bottom_y_coordinate))
-
-			[self.cropped_image_width, self.cropped_image_height] = self.segment_image.size
-			self.cropped_image_ratio_h = self.cropped_image_height / self.cropped_image_width
-			self.cropped_image_ratio_w = self.cropped_image_width /self.cropped_image_height
-
-			# Resize Image to Fit Canvas
-			if self.cropped_image_width < self.cropped_image_height:
-				self.segment_sizeRatio = 600 / self.cropped_image_height
-				self.segment_newImageSizeHeight = int(self.cropped_image_height*self.segment_sizeRatio)
-				self.segment_newImageSizeWidth = int(self.segment_newImageSizeHeight*self.cropped_image_ratio_w)
-
+			try:
+				# Set image file
+				self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
+				# Load Image
+				self.segment_image = PIL.Image.open(self.filename)
+			except(FileNotFoundError):
+				label = ttk.Label(self.segment_pane_two, text="Image Not Found")
+				label.grid(column=0,row=3)
 			else:
-				self.segment_sizeRatio = 600 / self.cropped_image_width
-				self.segment_newImageSizeWidth = int(self.cropped_image_width*self.segment_sizeRatio)
-				self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
-
-			self.segment_image = self.segment_image.resize((self.segment_newImageSizeWidth, self.segment_newImageSizeHeight), PIL.Image.ANTIALIAS)
-
-			# Prepare Image for Insertion
-			self.segment_photoImg = PIL.ImageTk.PhotoImage(self.segment_image)
-
-			# Display Image Canvas
-			self.segment_imageCanvas.config(width=self.segment_newImageSizeWidth+10, height = self.segment_newImageSizeHeight+10)
-			self.segment_imageCanvas.grid(column=0,row=0, columnspan = 8, padx =10, pady = 10)
-
-			# Add Image to Canvas
-			self.segment_imageCanvas.create_image(self.segment_newImageSizeWidth/2+6,
-												  self.segment_newImageSizeHeight/2+6,
-												  image=self.segment_photoImg,
-												  anchor="center")
-												  
-			def onmouse(event):
-				self.sx = event.x
-				self.sy = event.y
-
-				self.rect = self.segment_imageCanvas.create_rectangle(self.sx,self.sy,self.sx,self.sy, outline="yellow")
-					
-			def mousemove(event):
-				self.ex = event.x
-				self.ey = event.y
+				# Find Image Size
+				[self.segment_imageSizeWidth, self.segment_imageSizeHeight] = self.segment_image.size
+				self.segment_image_original_ratio = self.segment_imageSizeHeight / self.segment_imageSizeWidth
 				
-				self.segment_imageCanvas.coords(self.rect, self.sx,self.sy,self.ex,self.ey)
-					
-			def offmouse(event):
-				
-				self.segment_imageCanvas.delete(self.rect)				
-				self.top_text.delete(0,END)
-				self.bottom_text.delete(0,END)
-				self.left_text.delete(0,END)
-				self.right_text.delete(0,END)
-				
-				if self.sx < self.ex:
-					self.left_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
-					self.right_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
+				# Pull Updated Coordinates
+				self.top = int(self.top_text.get())
+				self.bottom = int(self.bottom_text.get())
+				self.left = int(self.left_text.get())
+				self.right = int(self.right_text.get())
+
+				# Find Crop Coordinates
+				self.segment_top_x_coordinate =  int(self.left*self.segment_imageSizeWidth / 100)
+				self.segment_top_y_coordinate = int(self.top*self.segment_imageSizeHeight / 100)
+				self.segment_bottom_x_coordinate = int(self.right*self.segment_imageSizeWidth / 100)
+				self.segment_bottom_y_coordinate = int(self.bottom*self.segment_imageSizeHeight / 100)
+
+				# Crop Image
+				self.segment_image = self.segment_image.crop((self.segment_top_x_coordinate,
+															  self.segment_top_y_coordinate,
+															  self.segment_bottom_x_coordinate,
+															  self.segment_bottom_y_coordinate))
+
+				[self.cropped_image_width, self.cropped_image_height] = self.segment_image.size
+				self.cropped_image_ratio_h = self.cropped_image_height / self.cropped_image_width
+				self.cropped_image_ratio_w = self.cropped_image_width /self.cropped_image_height
+
+				# Resize Image to Fit Canvas
+				if self.cropped_image_width < self.cropped_image_height:
+					self.segment_sizeRatio = 600 / self.cropped_image_height
+					self.segment_newImageSizeHeight = int(self.cropped_image_height*self.segment_sizeRatio)
+					self.segment_newImageSizeWidth = int(self.segment_newImageSizeHeight*self.cropped_image_ratio_w)
+
 				else:
-					self.left_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
-					self.right_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
-					
-				if self.sy < self.ey:
-					self.top_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
-					self.bottom_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
-				else:
-					self.top_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
-					self.bottom_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
-				
-				self.cropped_image_updater()
+					self.segment_sizeRatio = 600 / self.cropped_image_width
+					self.segment_newImageSizeWidth = int(self.cropped_image_width*self.segment_sizeRatio)
+					self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
 
-			self.segment_imageCanvas.bind('<Button-1>',onmouse)
-			self.segment_imageCanvas.bind('<B1-Motion>',mousemove)
-			self.segment_imageCanvas.bind('<ButtonRelease>',offmouse)
+				self.segment_image = self.segment_image.resize((self.segment_newImageSizeWidth, self.segment_newImageSizeHeight), PIL.Image.ANTIALIAS)
+
+				# Prepare Image for Insertion
+				self.segment_photoImg = PIL.ImageTk.PhotoImage(self.segment_image)
+
+				# Display Image Canvas
+				self.segment_imageCanvas.config(width=self.segment_newImageSizeWidth+10, height = self.segment_newImageSizeHeight+10)
+				self.segment_imageCanvas.grid(column=0,row=0, columnspan = 8, padx =10, pady = 10)
+
+				# Add Image to Canvas
+				self.segment_imageCanvas.create_image(self.segment_newImageSizeWidth/2+6,
+													  self.segment_newImageSizeHeight/2+6,
+													  image=self.segment_photoImg,
+													  anchor="center")
+													  
+				def onmouse(event):
+					self.sx = event.x
+					self.sy = event.y
+
+					self.rect = self.segment_imageCanvas.create_rectangle(self.sx,self.sy,self.sx,self.sy, outline="yellow")
+						
+				def mousemove(event):
+					self.ex = event.x
+					self.ey = event.y
+					
+					self.segment_imageCanvas.coords(self.rect, self.sx,self.sy,self.ex,self.ey)
+						
+				def offmouse(event):
+					
+					self.segment_imageCanvas.delete(self.rect)				
+					self.top_text.delete(0,END)
+					self.bottom_text.delete(0,END)
+					self.left_text.delete(0,END)
+					self.right_text.delete(0,END)
+					
+					if self.sx < self.ex:
+						self.left_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
+						self.right_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
+					else:
+						self.left_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
+						self.right_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
+						
+					if self.sy < self.ey:
+						self.top_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
+						self.bottom_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
+					else:
+						self.top_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
+						self.bottom_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
+					
+					self.cropped_image_updater()
+
+				self.segment_imageCanvas.bind('<Button-1>',onmouse)
+				self.segment_imageCanvas.bind('<B1-Motion>',mousemove)
+				self.segment_imageCanvas.bind('<ButtonRelease>',offmouse)
 			
 	def entry_entries_displayer(self,tab,level):
 		
@@ -267,7 +270,10 @@ class database_display(cache_maintenance):
 		self.segment_entry_form.pack(fill=X)
 				
 		# Load Collection Metadata Questions
-		datafile = self.default_collection_type.get() + '.yaml'
+		if self.default_collection_type.get() != '':
+			datafile = self.default_collection_type.get() + '.yaml'
+		else:
+			datafile = 'Standard.yaml'
 		
 		with open (Path(self.metadata_path) / 'collections' / datafile, 'r') as collectionfile:
 			self.collection_questions = yaml.safe_load(collectionfile)
@@ -275,7 +281,10 @@ class database_display(cache_maintenance):
 		# Load Item Metadata Questions
 		if self.current_level == 'i' or self.current_level == 's':
 
-			datafile = self.default_item_type.get() + '.yaml'
+			if self.default_item_type.get() != '':
+				datafile = self.default_item_type.get() + '.yaml'
+			else:
+				datafile = 'Standard.yaml'
 			
 			with open (Path(self.metadata_path) /'items' / datafile, 'r') as itemfile:
 				self.item_questions = yaml.safe_load(itemfile)	  
