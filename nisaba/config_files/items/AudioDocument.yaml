@@ -1,0 +1,10 @@
+'mo:AudioFile' : 'Audio File:'
+'dc:title' : 'Title:'
+'mo:Composer': 'Composer:'
+'mo:MusicArtist' : 'Artist (Individual):'
+'mo:MusicGroup' : 'Artist (Group):'
+'dc:date' : 'Date Recorded:'
+'fabio:hasSequenceIdentifier' : 'Track Number:'
+'dc:rightsHolder' : 'Rights Holder:'
+'dc:rightsHolder_reference' : 'Rights Holder Reference:'
+

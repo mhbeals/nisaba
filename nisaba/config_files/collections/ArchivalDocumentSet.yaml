@@ -3,4 +3,5 @@
 'dc:title' : 'Title:'
 'fabio:hasShortTitle' : 'Short Title:'
 'dc:date' : 'Date:'
+'dc:format' : 'Format:'
 'fabio:Abstract' : 'Abstract:'
