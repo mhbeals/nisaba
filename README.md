@@ -1,12 +1,12 @@
-# Nisaba 0.2.26
+# Nisaba 0.2.27
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.2.26
+### v.0.2.27
 
-+ Allowed button fine tuning for image segmenting (Issue #8)
++ Improved Configuration Layout and File Display (Issue #16)
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

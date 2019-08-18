@@ -11,7 +11,7 @@ except ModuleNotFoundError:
 
 # Import External Libraries
 from pathlib import Path
-import csv
+import yaml
 
 # Import TKinter Libraries
 from tkinter import *
@@ -51,10 +51,10 @@ class metadata_display(cache_maintenance):
 		questions = {}
 
 		# Populate Dictionary with Imported File
-		with open (Path(self.config_path) / 'user_metadata.tsv', 'r') as file:
-			reader = csv.reader(file, delimiter='\t')
-			for line in reader:
-				questions[line[0]] = line[1]
+		filename = 'users/UserMetadata.yaml'
+		
+		with open (Path(self.config_path) / filename, 'r') as file:
+			self.questions = yaml.safe_load(file)
 		
 		# Create Entry Type List for Save Functions
 		self.entries = []
@@ -80,7 +80,7 @@ class metadata_display(cache_maintenance):
 			uid_entry.insert(0,self.current_user.get())
 		
 		# Create the Rest of the Entry Form Elements
-		for field,question in questions.items():
+		for field,question in self.questions.items():
 
 			# Create a Row
 			row = ttk.Frame(self.metadata_frame)

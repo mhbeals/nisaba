@@ -5,7 +5,7 @@ from pathlib import Path
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, Literal
 import urllib.parse
 import os
-import csv
+import configparser
 
 # Import tkinter Libraries
 from tkinter import END
@@ -21,8 +21,6 @@ class database_maintenance:
 	# Set Relative Paths
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
-	user_config_path = os.path.join(os.path.dirname(__file__), "config_files/user_defined")
-	metadata_path = os.path.join(os.path.dirname(__file__), "config_files/standard_metadata") 
 	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
 	database_backup_path = database_path + "backups/" 
@@ -30,26 +28,13 @@ class database_maintenance:
 	def __init__(self):
 		# Initialise programme with stored databases
 		
-		# Create Defaults Variable
-		self.defaults = []
-
-		# Populate Defaults with imported file
-		try: 
-			with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'r') as file:
-				reader = csv.reader(file,delimiter='\n')
-				for line in reader:
-					self.defaults.append(line[0])
-		except(FileNotFoundError):
-		
-			with open (Path(self.config_path) / 'sample_defaults.txt', 'r') as file:
-				reader = csv.reader(file,delimiter='\n')
-				for line in reader:
-					self.defaults.append(line[0])
+		# Create Configuration Defaults 
+		self.configuration_file_creator()
 		
 		# Set Current Database and Taxonomies
-		self.current_database = self.defaults[0]	
-		self.current_taxonomy = self.defaults[1]
-		self.taxonomy_level_defaults = [self.defaults[1],self.defaults[2],self.defaults[3]]
+		self.current_database = self.config['Database']	
+		self.current_taxonomy = self.config['CollectionTaxonomy']	
+		self.taxonomy_level_defaults = [self.config['CollectionTaxonomy'],self.config['ItemTaxonomy'],self.config['SegmentTaxonomy']]
 
 		#################
 		# JSON Database #
@@ -131,7 +116,8 @@ class database_maintenance:
 		# Checks the cache annotations against the saved ones and merges the list (deleting any annotations no longer in cache but keeping old dates/users for exisiting ones)
 	
 		new_annotations = []
-				
+		
+		# For every annotation in the current annotation list	
 		for cache_annotation in cache_annotations:
 			
 			found = False
@@ -150,55 +136,36 @@ class database_maintenance:
 			if found == False:
 				new_annotations.append(cache_annotation)
 		
-		# For every annotation in the current annotation list
-		for cache_annotation in cache_annotations:
-			
-			found = False
-			
-			# Go through every annotation in the saved/disk annotation list
-			for saved_annotation in saved_annotations:
-				
-				# If the annotation is the same
-				if cache_annotation[0] == saved_annotation[0]:
-					
-						# keep it as it is and mark as found
-						new_annotations.append(saved_annotation)
-						found = True
-				
-			# If you never found the annotation, add it from the cached version
-			if found == False:
-				new_annotations.append(cache_annotation)
-				
+		## This will delete any annotations that have been removed. If you want a different annotation list for a different user, then make a new segment ##
+		
 		return new_annotations			
 		
 	##############################
 	#      Saving Functions      #
 	##############################		
-
+	
 	def configuration_file_saver(self,file):
 
-		with open (Path(self.config_path) / file, 'w') as file:
+		filepath = self.path_dictionary[file]
+	
+		with open (filepath, 'w') as file:
 			file.write(self.configuration_textbox.get("1.0",END))
 
 		self.pane_two.destroy()
 	
 	def configuration_defaults_saver(self):
-
-		# Save default user
-		self.default_user_setter()
-
-		# Save default paths
-		savedata = str(self.current_database) + "\n"
-
-		# Save default taxonomies
-		savedata = savedata + str(self.taxonomy_level_defaults[0]) + "\n" + str(self.taxonomy_level_defaults[1]) + "\n" + str(self.taxonomy_level_defaults[2]) + "\n"
-
-		# Save default namespaces
-		for parameter_set in self.parameter_entries:
-			savedata = savedata + parameter_set[1].get() + "\n"
-
-		with open (Path(self.user_config_path) / 'user_defined_defaults.txt', 'w') as file:
-			file.write(savedata)
+	
+		self.config['Database'] = str(self.current_database)
+		self.config['CollectionTaxonomy'] = str(self.taxonomy_level_defaults[0])
+		self.config['ItemTaxonomy'] = str(self.taxonomy_level_defaults[1])
+		self.config['SegmentTaxonomy'] = str(self.taxonomy_level_defaults[2])
+	
+		for parameter in self.parameter_entries:
+		
+			self.config[parameter[0]] = parameter[1].get()
+	
+		with open(Path(self.config_path) / 'config.ini', 'w') as configfile:
+			self.default_config.write(configfile)
 	
 	def database_entry_saver(self, level):
 		# Saves Entries to Cached Database
@@ -411,10 +378,13 @@ class database_maintenance:
 	##############################
 	#     Loading Functions      #
 	##############################	
+	
+	def configuration_file_loader(self,event):
 
-	def configuration_file_loader(self,file):
-
-		with open (Path(self.config_path) / file, 'r') as file:
+		file = self.path_dictionary[event]
+	
+		#file = Path(self.config_path) / directory / event[0]
+		with open (file, 'r') as file:
 			loaddata = file.read()
 
 		return loaddata
@@ -438,7 +408,48 @@ class database_maintenance:
 		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
 		
 		function_call()
+	
+	##############################
+	#    Creating Functions      #
+	##############################	
+		
+	def configuration_file_creator(self):
+		
+		self.default_config = configparser.ConfigParser()
+		
+		try:
+			self.default_config.read(Path(self.config_path) / 'config.ini')
+			self.config = self.default_config['custom']
+		except(FileNotFoundError,KeyError):
+			self.default_config = configparser.ConfigParser()
+			self.default_config['DEFAULT']['Database'] = 'Path(self.database_path) / "database.json"'
+			self.default_config['DEFAULT']['CollectionTaxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
+			self.default_config['DEFAULT']['ItemTaxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
+			self.default_config['DEFAULT']['SegmentTaxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
+			self.default_config['DEFAULT']['v_Collection_Namespace'] = 'fabio:'
+			self.default_config['DEFAULT']['v_Item_Namespace'] = 'fabio:'
+			self.default_config['DEFAULT']['v_Segment_Namespace'] = 'fabio:'
+			self.default_config['DEFAULT']['v_Collection_Title_Field'] = 'dc:title'
+			self.default_config['DEFAULT']['v_Item_Title_Field'] = 'dc:title'
+			self.default_config['DEFAULT']['v_Segment_Title_Field'] = 'dc:title'
+			self.default_config['custom'] = {}
+			self.config = self.default_config['custom']
+	
+	def configuration_yaml_creator(self):
+		# Create new config file
 
+		file = asksaveasfile(initialdir = self.config_path, mode='w', defaultextension=".yaml")
+		if file is None:
+			return
+
+		data = '"namespace:element" : "Text"'
+			
+		file.write(data)
+		file.close()	
+		
+		self.default_database_loader()
+		
+		
 	def database_creator(self):
 		# Create new database
 
@@ -459,7 +470,7 @@ class database_maintenance:
 		# Map the JSON database to RDF
 	
 		# Load previous triples, if any
-		self.database_rdf.parse(self.database_path + "sample_database.ttl", format='turtle')
+		#self.database_rdf.parse(self.database_path + "sample_database.ttl", format='turtle')
 
 		# Set URIs
 		nisaba_vocab_uri = URIRef('http://purl.org/nisaba/vocab#')

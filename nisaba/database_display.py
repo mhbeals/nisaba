@@ -278,11 +278,11 @@ class database_display(cache_maintenance):
 				
 		# Load Collection Metadata Questions
 		if self.default_collection_type.get() != '':
-			datafile = self.default_collection_type.get() + '.yaml'
+			datafile = re.sub(' ','',self.default_collection_type.get()) + '.yaml'
 		else:
 			datafile = 'Standard.yaml'
 		
-		with open (Path(self.metadata_path) / 'collections' / datafile, 'r') as collectionfile:
+		with open (Path(self.config_path) / 'collections' / datafile, 'r') as collectionfile:
 			self.collection_questions = yaml.safe_load(collectionfile)
 		
 		# Load Item Metadata Questions
@@ -293,13 +293,13 @@ class database_display(cache_maintenance):
 			else:
 				datafile = 'Standard.yaml'
 			
-			with open (Path(self.metadata_path) /'items' / datafile, 'r') as itemfile:
+			with open (Path(self.config_path) /'items' / datafile, 'r') as itemfile:
 				self.item_questions = yaml.safe_load(itemfile)	  
 		
 		# Load Segment Metadata Questions
 		if self.current_level == "s": 
 			datafile = self.default_segment_type.get() + '.yaml'
-			with open (Path(self.metadata_path) /'segments' / datafile, 'r') as file:
+			with open (Path(self.config_path) /'segments' / datafile, 'r') as file:
 				self.segment_questions = yaml.safe_load(file)
 			
 		# Print Metadata Set Based on Level
@@ -323,10 +323,11 @@ class database_display(cache_maintenance):
 		
 		def type_populator():
 			# Looks up all available type YAML files
-			for root, dirs, files in os.walk(Path(self.config_path) / "standard_metadata" / self.directory):
+			for root, dirs, files in os.walk(Path(self.config_path) / self.directory):
 				for file in files:
 					if file.endswith(".yaml"):
-						self.types.append(os.path.splitext(file)[0])
+						filename = re.sub('(?!^)([A-Z]+)', r' \1',os.path.splitext(file)[0])
+						self.types.append(filename)
 		
 		# Set Options
 		if level == "c": 
@@ -1197,16 +1198,16 @@ class database_display(cache_maintenance):
 		self.audiovisual_icon=PhotoImage(file=Path(self.assets_path) / 'audiovisual.png')
 
 		# This is a prefix to put before the filename of the collection type, derived from the filename question config. For example 'book.tsv' with a namespace of 'fabio' would be 'fabio:book'
-		self.collections_type_namespace = self.defaults[4]
+		self.collections_type_namespace = self.config['v_Collection_Namespace']
 		
 		# This the field that is pulled in the listboxes for collections
-		self.collections_title_namespace = self.defaults[5]		
+		self.collections_title_namespace = self.config['v_Collection_Title_Field']
 		
 		# This is a prefix to put before the filename of the type type, derived from a drop down in the item screen. For example 'page' with a namespace of 'fabio' would be 'fabio:page'
-		self.item_type_namespace = self.defaults[6]
+		self.item_type_namespace = self.config['v_Item_Namespace']
 		
 		# This the field that is pulled in the listboxes for items
-		self.item_title_namespace = self.defaults[7]
+		self.item_title_namespace = self.config['v_Collection_Title_Field']
 		
 		# Set Name of Collections ttk.Frame	
 		self.database_window = window

@@ -1,0 +1,7 @@
+"schema:givenName" : "First Name:"
+"schema:familyName" : "Last Name:"
+"schema:sameAS" : "ORCID URL:"
+"schema:worksFor" : "Organisation (Employment):"
+"schema:memberOf" : "Organisation (Membership):"
+"schema:email" : "Email:"
+"foaf:homepage" : "Personal Website"

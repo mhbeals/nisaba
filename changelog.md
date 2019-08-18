@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.2.27
+
++ Improved Configuration Layout and File Display (Issue #16)
+
 ### v.0.2.26
 
 + Allowed button fine tuning for image segmenting (Issue #8)
