@@ -12,29 +12,17 @@
 <http://purl.org/nisaba/collection/users> a nisaba:CollectionEntry .
 
 <http://purl.org/nisaba/collection/0/item/0> a nisaba:ItemEntry ;
-    nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/0/segment/0>,
-        <http://purl.org/nisaba/collection/0/item/0/segment/1> ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/0/segment/0> ;
     nisaba:item_type "t" ;
     nisaba:transcription "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n', 'mhb', '20190818_161535']" .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:end 49,
-        65 ;
+    nisaba:end 49 ;
     nisaba:hasAnnotation "['Memorial-Justice-Hero_Teleology_of_History', 'mhb', '20190818_161559']",
         "['Memorial-Justice_Teleology_of_History', 'mhb', '20190818_161559']",
         "['Memorial_Teleology_of_History', 'mhb', '20190818_161559']",
         "['Teleology', 'mhb', '20190818_161559']",
         "['Teleology_of_History', 'mhb', '20190818_161559']" ;
-    nisaba:start 0,
-        11,
-        12 .
-
-<http://purl.org/nisaba/collection/0/item/0/segment/1> a nisaba:SegmentEntry ;
-    nisaba:end 28 ;
-    nisaba:hasAnnotation "['Memorial_Teleology_of_History', 'mhb', '20190818_161500']",
-        "['Memorial_Teleology_of_History_General', 'mhb', '20190818_161500']",
-        "['Teleology', 'mhb', '20190818_161500']",
-        "['Teleology_of_History', 'mhb', '20190818_161500']" ;
     nisaba:start 12 .
 
 <http://purl.org/nisaba/collection/0/item/1> a nisaba:ItemEntry ;

@@ -1,12 +1,14 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
-	from tooltip import *
+	from cache_maintenance import *
+	from tooltip_creation import *
 	from metadata_display import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
-	from nisaba.tooltip import *
+	from nisaba.cache_maintenance import *
+	from nisaba.tooltip_creation import *
 	from nisaba.metadata_display import *
 
 # Import External Libraries
@@ -23,33 +25,20 @@ from tkinter.ttk import *
 from tkinter import scrolledtext
 from tkinter import messagebox
 
-class configuration_display(database_maintenance):
+class configuration_display(cache_maintenance):
 
-	def default_user_setter(self):
-
-	# Set everyone to 0
-		for key,value in self.database['users'].items():
-			value['default'] = 0
-
-		# Set this user to default (1)
-		self.database['users'][self.current_user.get()]['default'] = 1
-
-		self.database_saver()
+	##############################
+	#      Panel Displays        #
+	##############################
 
 	def edit_user_frame_displayer(self):
-		##################
-		# Window Cleanup #
-		##################
-
+	# Displays user metadata in pane two
+	
 		# Delete Previous Panels and Menus or Create New Window
 		try:
 			self.pane_two.destroy()
 		except (NameError, AttributeError):
 			pass
-
-		##############################
-		# Create Configuration Frame #
-		##############################
 
 		# Create User Metadata instance
 		metadata_window = metadata_display()
@@ -61,21 +50,14 @@ class configuration_display(database_maintenance):
 		# Create User Frame
 		metadata_window.database_metadata_viewer(self.pane_two)
 
-	def configuration_textbox_frame_loader(self,filename):
-
-		##################
-		# Window Cleanup #
-		##################
-
+	def configuration_textbox_frame_displayer(self,filename):
+	# Displays configuration file in pane two
+	
 		# Delete Previous Panels and Menus or Create New Window
 		try:
 			self.pane_two.destroy()
 		except (NameError, AttributeError):
 			pass
-
-		##############################
-		# Create Configuration Frame #
-		##############################
 
 		# Create Configuration Frame
 		self.pane_two = ttk.Frame(self.configuration_window)
@@ -96,8 +78,8 @@ class configuration_display(database_maintenance):
 		self.save_button.pack(side=LEFT)
 		row.pack()
 
-	def configurations_loader(self):
-		# Loads non-database parameters from Configuration File
+	def configurations_frame_displayer(self):
+	# Loads non-database parameters from Configuration File
 		
 		# Create Configuration Frame
 		self.configurations_frame = ttk.Frame(self.pane_one)
@@ -161,7 +143,7 @@ class configuration_display(database_maintenance):
 				row = ttk.Frame(self.pane_one)
 				label = Label(row, text=directory.title(), anchor='w', width=30)
 				label.pack(side=LEFT)
-				dropdown = ttk.OptionMenu(row, default_type, *types, command=self.configuration_textbox_frame_loader)
+				dropdown = ttk.OptionMenu(row, default_type, *types, command=self.configuration_textbox_frame_displayer)
 				dropdown.pack(side=LEFT)
 				new_button = ttk.Button(row, text="New", command=self.configuration_yaml_creator)
 				new_button.pack(side=RIGHT)
@@ -178,7 +160,7 @@ class configuration_display(database_maintenance):
 		self.configurations_frame.pack()
 		self.button_frame.pack(anchor=NW)
 
-	def default_taxonomy_frame_creator(self):
+	def default_taxonomy_frame_displayer(self):
 	# Creates Fields for Default Taxonomies
 	
 		# Create Taxonomy Loader Frame
@@ -202,24 +184,24 @@ class configuration_display(database_maintenance):
 				self.collection_entry = Entry(row)
 				self.collection_entry.insert(0,self.taxonomy_level_defaults[0])
 				self.collection_entry.pack(side=LEFT, expand=YES, fill=X)
-				button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader("Collection",self.default_database_loader)))
+				button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader("Collection",self.default_database_panels_displayer)))
 			if level == 'Item':
 				self.item_entry = Entry(row)
 				self.item_entry.insert(0,self.taxonomy_level_defaults[1])
 				self.item_entry.pack(side=LEFT, expand=YES, fill=X)
-				button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader("Item",self.default_database_loader)))
+				button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader("Item",self.default_database_panels_displayer)))
 			if level == 'Segment':
 				self.segment_entry = Entry(row)
 				self.segment_entry.insert(0,self.taxonomy_level_defaults[2])
 				self.segment_entry.pack(side=LEFT, expand=YES, fill=X)
-				button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader("Segment",self.default_database_loader)))
+				button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader("Segment",self.default_database_panels_displayer)))
 			
 			button.pack(side=RIGHT)
 			
 		# Load other parameters
-		self.configurations_loader()
+		self.configurations_frame_displayer()
 
-	def user_dropdown_creator(self):
+	def user_dropdown_displayer(self):
 	# Creates Dropdown Menu of Possible Users
 
 		# Retrieve Existing User List
@@ -242,7 +224,7 @@ class configuration_display(database_maintenance):
 			label = Label(row, text="Default User: ", anchor='w', width=30)
 			label.pack(side=LEFT)
 			edit_button = ttk.Button(row, text="Edit Users", command=self.edit_user_frame_displayer)
-			refresh_button = ttk.Button(row, text="Refresh Users", command=self.default_database_loader)
+			refresh_button = ttk.Button(row, text="Refresh Users", command=self.default_database_panels_displayer)
 			edit_button.pack(side=RIGHT)
 			refresh_button.pack(side=RIGHT)
 
@@ -252,13 +234,9 @@ class configuration_display(database_maintenance):
 			# Display Selection ttk.Frame
 			users_menu.pack(anchor=W)
 
-			self.default_taxonomy_frame_creator()
+			self.default_taxonomy_frame_displayer()
 
-	def default_database_loader(self):
-
-		##################
-		# Window Cleanup #
-		##################
+	def default_database_panels_displayer(self):
 
 		# Delete Previous Panels and Menus or Create New Window
 		try:
@@ -267,22 +245,18 @@ class configuration_display(database_maintenance):
 		except (NameError, AttributeError):
 			pass
 
-		##############################
-		# Create Configuration Frame #
-		##############################
-
 		# Create Configuration Frame
 		self.pane_one = ttk.Frame(self.configuration_window)
-		self.pane_one.place(relwidth=.5, relheight=1, rely =.05)
+		self.pane_one.place(relwidth=.4, relheight=1, rely =.05)
 		self.pane_two = ttk.Frame(self.configuration_window)
-		self.pane_two.place(relx=.55, relwidth=.4, rely =.05, relheight=1)
+		self.pane_two.place(relx=.4, relwidth=.5, rely =.05, relheight=1)
 
 		# Create Database Loader Row
 		row = ttk.Frame(self.pane_one)
 		label = Label(row, text="Database: ", anchor='w', width=30)
 		entry = Entry(row)
 		entry.insert(0,self.current_database)
-		button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader('d',self.default_database_loader)))
+		button = ttk.Button(row, text="Load" , command=(lambda: self.database_loader('d',self.default_database_panels_displayer)))
 		new_button = ttk.Button(row, text="New", command=self.database_creator)
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		label.pack(side=LEFT)
@@ -290,11 +264,17 @@ class configuration_display(database_maintenance):
 		new_button.pack(side=RIGHT)
 		entry.pack(side=RIGHT, expand=YES, fill=X)
 
-		self.user_dropdown_creator()
+		self.user_dropdown_displayer()
 
+	##############################
+	#           Main             #
+	##############################		
+		
 	def configuration_viewer(self,window):
-
+	# Display Configuration Panels 
+	
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
+		
 		self.configuration_window = window
 		self.configuration_window.pack_forget
-		self.default_database_loader()
+		self.default_database_panels_displayer()

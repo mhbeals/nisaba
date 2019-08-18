@@ -2,12 +2,12 @@ try:
 	# Used when executing with Python
 	from database_maintenance import *
 	from cache_maintenance import *
-	from tooltip import *
+	from tooltip_creation import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
 	from nisaba.cache_maintenance import *
-	from nisaba.tooltip import *
+	from nisaba.tooltip_creation import *
 
 # Import External Libraries
 from pathlib import Path
@@ -24,15 +24,53 @@ from ttkwidgets import CheckboxTreeview
 
 class database_display(cache_maintenance):
 
-	def incrementer(self,box,increment,function_call):
-				new_value = int(box.get()) + increment
-				new_value = 0 if new_value < 0 else new_value
-				box.delete(0,END)
-				box.insert(0,new_value)
-				function_call
+	#########################
+	#   Event Processing    #
+	#########################	
+		
+	def segment_informer(self, evt):
+	# Collects Widget Event Data and Sets to Static Variable
+	
+		# Capture Event Information
+		segment_event_data = evt.widget
+		self.segment_index = str(segment_event_data.curselection()[0])
+		self.segment_value = segment_event_data.get( int(self.item_index))
+
+		# Open Segment Panels
+		self.segment_panels_displayer()
+		
+	def item_informer(self, evt):
+	# Collects Widget Event Data and Sets to Static Variable
+	
+		# Capture Event Information
+		item_event_data = evt.widget
+		self.item_index = str(item_event_data.curselection()[0])
+		self.item_value = item_event_data.get(int(self.item_index))
+
+		# Open Item Panels on Metadata Tab
+		self.item_panels_displayer('m')
+		
+	def collection_informer(self, evt):
+	# Collects Widget Event Data and Sets to Static Variable
+	
+		# Allows Reloading of Collections Screen Without Losing Original Index Number
+		try:
+			self.collection_event_data = evt.widget
+			self.collection_index = str(self.collection_event_data.curselection()[0])
+		except(AttributeError):	
+			pass
+
+		# Display Collection Panels
+		self.collection_metadata_panel_displayer()
+		self.collection_item_list_panel_displayer()
+	
+	#######################
+	#   Content Display   #
+	#######################	
 
 	def transcription_updater(self,start,end):
-
+	# Parses transcription data into greyed out (not selected) and black (selected) segments
+	
 		self.start_text.delete(0,END)
 		self.end_text.delete(0,END)
 		self.start_text.insert(0,start)
@@ -65,6 +103,7 @@ class database_display(cache_maintenance):
 		self.transcription_text.grid(column = 0, row = 1, columnspan=10, sticky=NSEW, padx =10, pady = 10)
 		
 	def image_resetter(self):
+	# Resets cropped image to 100%	
 	
 		self.top_text.delete(0,END)
 		self.bottom_text.delete(0,END)
@@ -77,13 +116,15 @@ class database_display(cache_maintenance):
 		self.cropped_image_updater()
 	
 	def cropped_image_updater(self):
-			
+	# Crops image to user-defined percentages
+	
 			try:
 				# Set image file
 				self.filename = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['image_file'])
 				self.segment_image = PIL.Image.open(self.filename)
 				
 			except(FileNotFoundError):
+				# Use stand in if file is not found
 				self.filename = str(Path(self.raw_data_images_path) / 'sample.jpg')
 				self.segment_image = PIL.Image.open(self.filename)
 			
@@ -109,21 +150,24 @@ class database_display(cache_maintenance):
 														  self.segment_bottom_x_coordinate,
 														  self.segment_bottom_y_coordinate))
 
+			# Compute Ratios
 			[self.cropped_image_width, self.cropped_image_height] = self.segment_image.size
 			self.cropped_image_ratio_h = self.cropped_image_height / self.cropped_image_width
 			self.cropped_image_ratio_w = self.cropped_image_width /self.cropped_image_height
-
-			# Resize Image to Fit Canvas
+			
+			# Implement Ratios for Portrait Images 
 			if self.cropped_image_width < self.cropped_image_height:
 				self.segment_sizeRatio = 600 / self.cropped_image_height
 				self.segment_newImageSizeHeight = int(self.cropped_image_height*self.segment_sizeRatio)
 				self.segment_newImageSizeWidth = int(self.segment_newImageSizeHeight*self.cropped_image_ratio_w)
-
+			
+			# Implement Ratios for Landscape Images
 			else:
 				self.segment_sizeRatio = 600 / self.cropped_image_width
 				self.segment_newImageSizeWidth = int(self.cropped_image_width*self.segment_sizeRatio)
 				self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
 
+			# Resize Image to Fit Canvas
 			self.segment_image = self.segment_image.resize((self.segment_newImageSizeWidth, self.segment_newImageSizeHeight), PIL.Image.ANTIALIAS)
 
 			# Prepare Image for Insertion
@@ -138,34 +182,40 @@ class database_display(cache_maintenance):
 												  self.segment_newImageSizeHeight/2+6,
 												  image=self.segment_photoImg,
 												  anchor="center")
-												  
+			
+			# Functions for cropping via mouse cursor 									  
 			def onmouse(event):
+			# When mouse clicks, start a yellow rectangle
+			
 				self.sx = event.x
 				self.sy = event.y
-
 				self.rect = self.segment_imageCanvas.create_rectangle(self.sx,self.sy,self.sx,self.sy, outline="yellow")
 					
 			def mousemove(event):
+			# As mouse moves, expand rectangle
 				self.ex = event.x
 				self.ey = event.y
-				
 				self.segment_imageCanvas.coords(self.rect, self.sx,self.sy,self.ex,self.ey)
 					
 			def offmouse(event):
-				
+			# When mouse is released, change percentage boxes to new values
+			
+				# Clear Values
 				self.segment_imageCanvas.delete(self.rect)				
 				self.top_text.delete(0,END)
 				self.bottom_text.delete(0,END)
 				self.left_text.delete(0,END)
 				self.right_text.delete(0,END)
-				
+			
+				# If the box was created right to left	
 				if self.sx < self.ex:
 					self.left_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
 					self.right_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
 				else:
 					self.left_text.insert(0,int(self.ex/self.segment_newImageSizeWidth*100))
 					self.right_text.insert(0,int(self.sx/self.segment_newImageSizeWidth*100))
-					
+				
+				# If the box was created left to right	
 				if self.sy < self.ey:
 					self.top_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
 					self.bottom_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
@@ -173,13 +223,19 @@ class database_display(cache_maintenance):
 					self.top_text.insert(0,int(self.ey/self.segment_newImageSizeHeight*100))
 					self.bottom_text.insert(0,int(self.sy/self.segment_newImageSizeHeight*100))
 				
+				# Update Image Canvas
 				self.cropped_image_updater()
 
 			self.segment_imageCanvas.bind('<Button-1>',onmouse)
 			self.segment_imageCanvas.bind('<B1-Motion>',mousemove)
 			self.segment_imageCanvas.bind('<ButtonRelease>',offmouse)
-			
-	def entry_entries_displayer(self,tab,level):
+				
+	#########################
+	#   Field Populators    #
+	#########################
+
+	def metadata_fields_displayer(self,tab,level):
+		# Displays metadata fields (draws data from metadata_fields_dropdown_displayer)
 		
 		entries = []
 		
@@ -247,20 +303,12 @@ class database_display(cache_maintenance):
 		if level == "i": self.item_entries = entries
 		if level == "s": self.segment_entries = entries
 		
-	def entry_form_maker(self):
-		
-		self.entry_entries_displayer(self.collection_entry_form,'c')
-	
-		if self.current_level == 'i' or self.current_level == 's': self.entry_entries_displayer(self.item_entry_form,'i')
-
-		if self.current_level == 's': self.entry_entries_displayer(self.item_entry_form,'s')		
-
-	def yaml_importer(self,event):
+	def metadata_fields_dropdown_displayer(self,event):
+		# Loads metadata fields from configuration files (pulls data from metadata_tab_displayer)
 		
 		# Cleanup Exisiting Information
 		try:
 			self.entry_form.destroy()
-		
 		except(NameError,AttributeError):
 			pass
 		
@@ -280,7 +328,7 @@ class database_display(cache_maintenance):
 		if self.default_collection_type.get() != '':
 			datafile = re.sub(' ','',self.default_collection_type.get()) + '.yaml'
 		else:
-			datafile = 'Standard.yaml'
+			datafile = 'StandardCollection.yaml'
 		
 		with open (Path(self.config_path) / 'collections' / datafile, 'r') as collectionfile:
 			self.collection_questions = yaml.safe_load(collectionfile)
@@ -289,23 +337,34 @@ class database_display(cache_maintenance):
 		if self.current_level == 'i' or self.current_level == 's':
 
 			if self.default_item_type.get() != '':
-				datafile = self.default_item_type.get() + '.yaml'
+				datafile = re.sub(' ','',self.default_item_type.get()) + '.yaml'
 			else:
-				datafile = 'Standard.yaml'
+				datafile = 'StandardItem.yaml'
 			
 			with open (Path(self.config_path) /'items' / datafile, 'r') as itemfile:
 				self.item_questions = yaml.safe_load(itemfile)	  
 		
 		# Load Segment Metadata Questions
 		if self.current_level == "s": 
-			datafile = self.default_segment_type.get() + '.yaml'
+		
+			if self.default_segment_type.get() != '':
+				datafile = re.sub(' ','',self.default_segment_type.get()) + '.yaml'
+			else:
+				datafile = 'StandardItem.yaml'
 			with open (Path(self.config_path) /'segments' / datafile, 'r') as file:
 				self.segment_questions = yaml.safe_load(file)
 			
 		# Print Metadata Set Based on Level
-		self.entry_form_maker()
-		
-	def bibliographic_form_maker(self, tab, level):
+		self.metadata_fields_displayer(self.collection_entry_form,'c')
+		if self.current_level == 'i' or self.current_level == 's': self.metadata_fields_displayer(self.item_entry_form,'i')
+		if self.current_level == 's': self.metadata_fields_displayer(self.item_entry_form,'s')	
+	
+	####################
+	#   Tab Display    #
+	####################	
+
+	def metadata_tab_displayer(self, tab, level):
+		# Creates Metadata Tab
 		
 		self.current_tab = tab
 		self.current_level = level
@@ -314,9 +373,11 @@ class database_display(cache_maintenance):
 		try:
 			if level == 'c': self.types = [self.database[self.collection_index]['fabio_type'][len(self.collections_type_namespace):]]
 			if level == 'i': self.types = [self.database[self.collection_index]['items'][self.item_index]['fabio_type'][len(self.item_type_namespace):]]
-			if level == 's': self.types = ['Standard']
+			if level == 's': self.types = ['StandardSegment']
 		except(KeyError):
-			self.types = ['Standard']
+			if level == 'c': self.types = ['StandardCollection']
+			if level == 'i': self.types = ['StandardItem']
+			if level == 's': self.types = ['StandardSegment']
 					
 		# Create Types Drop Down Menu
 		row = ttk.Frame(tab)
@@ -334,19 +395,19 @@ class database_display(cache_maintenance):
 			self.directory = "collections"
 			self.default_collection_type = StringVar(tab)
 			type_populator()
-			file_type_option = ttk.OptionMenu(row, self.default_collection_type, *self.types, command=self.yaml_importer)
+			file_type_option = ttk.OptionMenu(row, self.default_collection_type, *self.types, command=self.metadata_fields_dropdown_displayer)
 				
 		elif level == "i": 
 			self.directory = "items"
 			self.default_item_type = StringVar(tab)
 			type_populator()
-			file_type_option = ttk.OptionMenu(row, self.default_item_type, *self.types, command=self.yaml_importer)
+			file_type_option = ttk.OptionMenu(row, self.default_item_type, *self.types, command=self.metadata_fields_dropdown_displayer)
 				
 		elif level == "s": 
 			self.directory = "segments"
 			self.default_segment_type = StringVar(tab)
 			type_populator()
-			file_type_option = ttk.OptionMenu(row, self.default_segment_type, *self.types, command=self.yaml_importer)
+			file_type_option = ttk.OptionMenu(row, self.default_segment_type, *self.types, command=self.metadata_fields_dropdown_displayer)
 		
 		# Display Drop Down
 		type_label = Label(row, text="Type:", width = 25)
@@ -355,12 +416,12 @@ class database_display(cache_maintenance):
 		row.pack(side=TOP, fill=X, padx=5, pady=5)	
 		
 		# Load Saved or Default Type
-		self.yaml_importer('')
+		self.metadata_fields_dropdown_displayer('')
 
-	def annotation_tree_maker(self,tree_name,level):
-
+	def annotation_tab_displayer(self,tree_name,level):
+	# Creates Annotation Tree Tab
+	
 		# Create Tree Structure
-
 		tree_name["columns"]=("one","two","three")
 		tree_name.column("#0")
 		tree_name.column("one")
@@ -413,8 +474,13 @@ class database_display(cache_maintenance):
 		# Display Tree
 		tree_name.pack(anchor=NW)
 
+	#####################
+	#   Panel Display   #
+	#####################	
+	
 	def segment_panels_displayer(self):
-
+	# Creates Segment Level Panels
+	
 		##########################
 		# Set Up Segment Display #
 		##########################
@@ -430,7 +496,7 @@ class database_display(cache_maintenance):
 		# Setup Segment Window Panels
 		self.segment_pane_one = ttk.Frame(self.database_window)
 		self.segment_pane_two = ttk.Frame(self.database_window)
-		split = 0.5
+		split = 0.4
 		self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
 		self.segment_pane_two.place(y = 15, relx=split, relwidth=1.0-split, relheight=1)
 
@@ -594,7 +660,7 @@ class database_display(cache_maintenance):
 		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
 		refresh_button = ttk.Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
 		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
-		return_button = ttk.Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panel_displayer('m')))
+		return_button = ttk.Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('m')))
 		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
 		
 		buttonFrame.pack(anchor=NW)
@@ -636,7 +702,7 @@ class database_display(cache_maintenance):
 		last_modified_label.pack(side=RIGHT)
 
 		# Display bibliographic form and create entries database
-		self.bibliographic_form_maker(self.segment_tab_one, 's')
+		self.metadata_tab_displayer(self.segment_tab_one, 's')
 
 		##########################
 		# Set up Annotations Tab #
@@ -666,9 +732,10 @@ class database_display(cache_maintenance):
 		
 		# Create Tree
 		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="26")
-		self.annotation_tree_maker(self.segment_tree,'s')
+		self.annotation_tab_displayer(self.segment_tree,'s')
 		
-	def item_panel_displayer(self,focus):
+	def item_panels_displayer(self,focus):
+	# Creates Item Level Panels
 	
 		# Delete Previous Panels and Menus
 		try:
@@ -681,7 +748,7 @@ class database_display(cache_maintenance):
 		# Setup Item Window Panes
 		self.pane_one = ttk.Frame(self.database_window)
 		self.pane_two = ttk.Frame(self.database_window)
-		split = 0.5
+		split = 0.4
 		self.pane_one.place(rely=0, relwidth=split, relheight=1)
 		self.pane_two.place(y = 15, relx=split, relwidth=1.0-split, relheight=1)
 
@@ -801,7 +868,7 @@ class database_display(cache_maintenance):
 		delete_segment_tt = ToolTip(self.delete_segment_button, "Delete Selected Segment",delay=0.01)
 		self.save_button = ttk.Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
 		save_button_tt = ToolTip(self.save_button, "Save Item",delay=0.01)
-		self.refresh_button = ttk.Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panel_displayer('m')))
+		self.refresh_button = ttk.Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panels_displayer('m')))
 		refresh_button_tt = ToolTip(self.refresh_button, "Reload Item",delay=0.01)
 		self.return_button = ttk.Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
 		return_button_tt = ToolTip(self.return_button, "Return to Item View",delay=0.01)
@@ -848,7 +915,7 @@ class database_display(cache_maintenance):
 		last_modified_label.pack(side=RIGHT)
 		
 		# Display bibliographic form and create entries database
-		self.bibliographic_form_maker(self.item_tab_one, 'i')
+		self.metadata_tab_displayer(self.item_tab_one, 'i')
 
 		##########################
 		# Set up Annotations Tab #
@@ -878,7 +945,7 @@ class database_display(cache_maintenance):
 		
 		# Create Tree
 		self.item_tree = CheckboxTreeview(self.item_tab_two,height="26",)
-		self.annotation_tree_maker(self.item_tree,'i')
+		self.annotation_tab_displayer(self.item_tree,'i')
 
 		#######################
 		# Set Up Segments Tab #
@@ -921,10 +988,7 @@ class database_display(cache_maintenance):
 			self.segments.bind('<Double-Button>', self.segment_informer)
 	
 	def collection_metadata_panel_displayer(self):
-
-		##########################################
-		# Set up Bibliographic Information Panel #
-		##########################################
+	# Creates Collection Metadata Panel
 
 		# Delete Any Existing Information
 		try:
@@ -981,22 +1045,20 @@ class database_display(cache_maintenance):
 		###################
 		
 		# Display bibliographic form and create entries database
-		self.bibliographic_form_maker(item_metadata_frame, 'c')
+		self.metadata_tab_displayer(item_metadata_frame, 'c')
 
 		# Create "save" button for all tabs
 		save_item_button = ttk.Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
 		save_item_button_tt = ToolTip(save_item_button, "Save Collection",delay=0.01)
 		
-		collections_list_button = ttk.Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_frame_displayer(self.database_window)))
+		collections_list_button = ttk.Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_panels_displayer(self.database_window)))
 		collections_list_button_tt = ToolTip(collections_list_button, "Return to Collections List",delay=0.01)
 		
 		collections_list_button.pack(side=LEFT)
 		save_item_button.pack(side=LEFT)
 				
 	def collection_item_list_panel_displayer(self):
-		##############################
-		# Set up List of Items Panel #
-		##############################
+	# Creates Collection Item-List Panel
 
 		# Delete Any Existing Information
 		try:
@@ -1073,39 +1135,9 @@ class database_display(cache_maintenance):
 		self.delete_item_button.pack(side=RIGHT, padx=5, pady=5)
 		
 		self.buttonFrame.pack(anchor=NW)
-
-	def segment_informer(self, evt):
-
-		# Capture Event Information
-		segment_event_data = evt.widget
-		self.segment_index = str(segment_event_data.curselection()[0])
-		self.segment_value = segment_event_data.get( int(self.item_index))
-
-		self.segment_panels_displayer()
-		
-	def item_informer(self, evt):
-
-	   # Capture Event Information
-		item_event_data = evt.widget
-		self.item_index = str(item_event_data.curselection()[0])
-		self.item_value = item_event_data.get(int(self.item_index))
-
-		self.item_panel_displayer('m')
-		
-	def collection_informer(self, evt):
-
-		try:
-			self.collection_event_data = evt.widget
-			self.collection_index = str(self.collection_event_data.curselection()[0])
-		except(AttributeError):	
-			pass
-
-		# Display Collection Information Panels
-		self.collection_metadata_panel_displayer()
-		self.collection_item_list_panel_displayer()
-		
-	def database_frame_displayer(self,window):
-		# Display top-level window
+	
+	def database_panels_displayer(self,window):
+	# Display Database Panels
 		
 		##################
 		# Window Cleanup #
@@ -1169,9 +1201,13 @@ class database_display(cache_maintenance):
 		self.buttonFrame.pack(anchor=W)
 		self.add_collection_button.pack(side=LEFT)
 		self.delete_collection_button.pack(side=LEFT)
+
+	########################
+	#         Main         #
+	########################	
 		
-	def database_window_displayer(self,window):
-		# Setup Database ttk.Frame
+	def database_window_viewer(self,window):
+	# Setup Database Frame
 	
 		##################
 		# Window Cleanup #
@@ -1182,8 +1218,8 @@ class database_display(cache_maintenance):
 			self.database_window.destroy()
 		except (NameError, AttributeError):
 			pass
-
-
+			
+		# Set Icon Assets
 		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
 		self.up_level_icon=PhotoImage(file=Path(self.assets_path) / 'uplevel.png')
 		self.add_icon=PhotoImage(file=Path(self.assets_path) / 'add.png')
@@ -1213,4 +1249,4 @@ class database_display(cache_maintenance):
 		self.database_window = window
 		
 		# Open ttk.Frame
-		self.database_frame_displayer(self.database_window)
+		self.database_panels_displayer(self.database_window)

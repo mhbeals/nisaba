@@ -67,6 +67,13 @@
                         "type": "Evidence",
                         "definition": "On those materials deemed to be meta-analysis or narrative forming, based upon primary and secondmary material",
                         "children": {}
+                    },
+                    "3": {
+                        "iid": "Myth",
+                        "name": "Myth",
+                        "type": "Evidence",
+                        "definition": "On those materials deemed to be distilled or thematic narratives, rather than literal accounts",
+                        "children": {}
                     }
                 }
             }
@@ -113,27 +120,27 @@
                         "definition": "To encourage or support the remembrance of an event or process",
                         "children": {
                             "0": {
-                                "iid": "Memorial-Allusory_Teleology_of_History",
+                                "iid": "Memorial_Allusory_Teleology_of_History",
                                 "name": "Allusion",
                                 "type": "Teleology",
                                 "definition": "To use history as a common cultural touchstone in order to illustrate wider truths",
                                 "children": {}
                             },
                             "1": {
-                                "iid": "Memorial-Justice_Teleology_of_History",
+                                "iid": "Memorial_Justice_Teleology_of_History",
                                 "name": "Justice",
                                 "type": "Teleology",
                                 "definition": "To use history as a form of honouring specific individuals or groups",
                                 "children": {
                                     "0": {
-                                        "iid": "Memorial-Justice-Hero_Teleology_of_History",
+                                        "iid": "Memorial_Justice_Hero_Teleology_of_History",
                                         "name": "Heroes",
                                         "type": "Teleology",
                                         "definition": "To use history to honour or make exemplars of heroes of an event or process",
                                         "children": {}
                                     },
                                     "1": {
-                                        "iid": "Memorial-Justice-Victim_Teleology_of_History",
+                                        "iid": "Memorial_Justice_Victim_Teleology_of_History",
                                         "name": "Victims",
                                         "type": "Teleology",
                                         "definition": "To use history to honour or otherwise remember victims of an event or process",
@@ -160,24 +167,10 @@
         "type": "",
         "definition": "The methods by which History is practiced",
         "children": {
-            "0": {
-                "iid": "Oral_History_Methodology",
-                "name": "Oral History",
-                "type": "Methodology",
-                "definition": "The use of interviews with people having personal knowledge of past events",
-                "children": {}
-            },
-            "1": {
-                "iid": "Close_Reading",
-                "name": "Close Reading",
-                "type": "Methodology",
-                "definition": "The meticulous reading of a text for vocabulary choices, internal structures, and external references",
-                "children": {}
-            },
             "2": {
                 "iid": "Interpretive_Frameworks",
                 "name": "Interpretive Frameworks",
-                "type": "",
+                "type": "Frameworks",
                 "definition": "Methodological approaches that focus on a particular set of evidences or questions",
                 "children": {
                     "0": {
@@ -199,7 +192,7 @@
             "3": {
                 "iid": "Theoretical_Frameworks",
                 "name": "Theoretical Frameworks",
-                "type": "",
+                "type": "Frameworks",
                 "definition": "Theories that attempt to explains why the research problem under study exists",
                 "children": {
                     "0": {
@@ -214,6 +207,28 @@
                         "name": "Liberalism (IR)",
                         "type": "Theory",
                         "definition": "A theory which accepts multiple types of actors in a system that can include mutually benefitial cooperation",
+                        "children": {}
+                    }
+                }
+            },
+            "4": {
+                "iid": "Evidence_Frameworks",
+                "name": "Evidence Frameworks",
+                "type": "Frameworks",
+                "definition": "Practices suited to particular evidence types",
+                "children": {
+                    "0": {
+                        "iid": "Close_Reading_Methodology",
+                        "name": "Close Reading",
+                        "type": "Methodology",
+                        "definition": "The meticulous reading of a text for vocabulary choices, internal structures, and external references",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Oral_History_Methodology",
+                        "name": "Oral History",
+                        "type": "Methodology",
+                        "definition": "The use of interviews with people having personal knowledge of past events",
                         "children": {}
                     }
                 }

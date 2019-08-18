@@ -354,7 +354,7 @@ class database_maintenance:
 		savedata = json.dumps(self.taxonomy, indent=4)
 
 		# Save JSON to Disk
-		with open (Path(self.database_path) / "taxonomy.json", 'w') as file:
+		with open (self.current_taxonomy, 'w') as file:
 			file.write(savedata)
 
 	def database_saver(self):
@@ -447,8 +447,7 @@ class database_maintenance:
 		file.write(data)
 		file.close()	
 		
-		self.default_database_loader()
-		
+		self.default_database_panels_displayer()
 		
 	def database_creator(self):
 		# Create new database

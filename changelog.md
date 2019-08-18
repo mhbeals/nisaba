@@ -1,5 +1,9 @@
 # Change Log
 
+### v.0.3.0
+
++ Code Refactor
+
 ### v.0.2.27
 
 + Improved Configuration Layout and File Display (Issue #16)

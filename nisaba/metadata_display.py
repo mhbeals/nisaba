@@ -2,12 +2,12 @@ try:
 	# Used when executing with Python
 	from database_maintenance import *
 	from cache_maintenance import *
-	from tooltip import *
+	from tooltip_creation import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
 	from nisaba.cache_maintenance import *
-	from nisaba.tooltip import *
+	from nisaba.tooltip_creation import *
 
 # Import External Libraries
 from pathlib import Path
@@ -21,9 +21,13 @@ from tkinter import scrolledtext
 from tkinter import messagebox
 
 class metadata_display(cache_maintenance):
+
+	#########################
+	#   Field Populators    #
+	#########################
 		
-	def database_metadata_entry_loader(self,event):	
-		# Loads Metadata on Selected User
+	def user_metadata_fields_displayer(self,event):	
+	# Displays Metadata on Selected User
 		
 		##################
 		# Window Cleanup #
@@ -116,8 +120,8 @@ class metadata_display(cache_maintenance):
 		self.save_button.pack(side=LEFT, padx=5, pady=5)
 		self.delete_button.pack(side=LEFT, padx=5, pady=5)
 				
-	def user_dropdown_creator(self):
-		# Creates Dropdown Menu of Possible Users
+	def user_dropdown_displayer(self):
+	# Creates Dropdown Menu of Possible Users
 				
 		##################
 		# Window Cleanup #
@@ -147,18 +151,24 @@ class metadata_display(cache_maintenance):
 		# Create Dropdown Menu
 		self.current_user = StringVar(self.pane_one)
 		self.current_user.set(users[0]) # default value
-		users_menu = OptionMenu(self.pane_one, self.current_user, *users, command=self.database_metadata_entry_loader)
+		users_menu = OptionMenu(self.pane_one, self.current_user, *users, command=self.user_metadata_fields_displayer)
 
 		# Display Selection ttk.Frame
 		self.pane_one.place(relx=.01, rely=.01)
 		users_menu.pack(side=LEFT, padx=5, pady=5)
 	
-	def database_metadata_viewer(self,window):
+	########################
+	#         Main         #
+	########################
 	
+	def database_metadata_viewer(self,window):
+	# Displays User Information Panel
+				
+		# Set Icon Assets
 		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
 		self.delete_icon=PhotoImage(file=Path(self.assets_path) / 'delete.png')
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 	
 		self.metadata_window = window
 		self.metadata_window.pack_forget 
-		self.user_dropdown_creator()
+		self.user_dropdown_displayer()

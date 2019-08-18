@@ -3,13 +3,13 @@ try:
 	# Used when executing with Python
 	from database_display import *
 	from taxonomy_display import *
-	from configuration import *
+	from configuration_display import *
 	
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_display import *
 	from nisaba.taxonomy_display import *
-	from nisaba.configuration import *
+	from nisaba.configuration_display import *
 
 # Import TKinter Libraries
 from tkinter import *
@@ -36,7 +36,7 @@ def main():
 			
 			if switch == 'd': 
 				database_window = database_display()				
-				database_window.database_window_displayer(main_pane_viewer)
+				database_window.database_window_viewer(main_pane_viewer)
 			elif switch == 't': 
 				taxonomy_window = taxonomy_display()
 				taxonomy_window.taxonomy_viewer(main_pane_viewer)
@@ -60,7 +60,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.2.27')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.0')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project

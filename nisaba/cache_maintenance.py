@@ -17,7 +17,7 @@ class cache_maintenance(database_maintenance):
 	
 		# Go Through Database Items
 		for key,value in database.items():
-		
+			
 			# Check for Passed-Through IID
 			if value['iid'] == iid:
 			
@@ -47,7 +47,25 @@ class cache_maintenance(database_maintenance):
 					del database[str(i+1)]
 				else:
 					break
-					
+	
+	def default_user_setter(self):
+
+	# Set everyone to 0
+		for key,value in self.database['users'].items():
+			value['default'] = 0
+
+		# Set this user to default (1)
+		self.database['users'][self.current_user.get()]['default'] = 1
+
+		self.database_saver()
+	
+	def incrementer(self,box,increment,function_call):
+			new_value = int(box.get()) + increment
+			new_value = 0 if new_value < 0 else new_value
+			box.delete(0,END)
+			box.insert(0,new_value)
+			function_call
+	
 	##############################
 	#           Adding           #
 	##############################
@@ -63,7 +81,7 @@ class cache_maintenance(database_maintenance):
 
 		self.database[str(i)]= {"schema:editor":["","",""],'items' : {}}
 
-		self.database_frame_displayer(self.database_window)
+		self.database_panels_displayer(self.database_window)
 		
 	def item_adder(self,type):
 
@@ -101,7 +119,7 @@ class cache_maintenance(database_maintenance):
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 			self.database[self.collection_index]['items'][self.item_index]['segments'][str(i)] = {"schema:editor":["","",""],'top':0,'right':50,'bottom':50,'left':0,'annotations':[]}
 
-		self.item_panel_displayer('s')
+		self.item_panels_displayer('s')
 
 	def root_adder(self):
 		# Add a Taxon Root
@@ -116,7 +134,7 @@ class cache_maintenance(database_maintenance):
 
 		# Create new Root with Default Fields
 		self.taxonomy[i] = {}
-		self.taxonomy[i]['iid'] = "New_Root"
+		self.taxonomy[i]['iid'] = "_New_Root"
 		self.taxonomy[i]['name'] = "New Root"
 		self.taxonomy[i]['type'] = "New Root"
 		self.taxonomy[i]['definition'] = "New Root"
@@ -182,7 +200,7 @@ class cache_maintenance(database_maintenance):
 		
 		if level == 'c':
 			self.database_renumberer(database)
-			self.database_frame_displayer(self.database_window)
+			self.database_panels_displayer(self.database_window)
 		
 		elif level == 'i':
 			self.database_renumberer(database)
@@ -190,7 +208,7 @@ class cache_maintenance(database_maintenance):
 		
 		elif level == 's':
 			self.database_renumberer(database)
-			self.item_panel_displayer('s')
+			self.item_panels_displayer('s')
 	
 	##############################
 	#           Saving           #
