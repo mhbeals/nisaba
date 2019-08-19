@@ -116,12 +116,15 @@ class taxonomy_display(cache_maintenance):
 
 		# Create Add/Save/Delete Button Set
 		row = ttk.Frame(self.pane_two)
-		self.add_button = ttk.Button(row, image=self.add_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.child_adder)))
+		self.add_button = Button(row, image=self.add_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.child_adder)))
 		add_button_tt = ToolTip(self.add_button, "Add Child Taxon",delay=0.01)
 		self.add_button.pack(side=LEFT)
-		self.save_button = ttk.Button(row, image=self.save_icon, command=self.taxonomy_saver)
+		self.save_button = Button(row, image=self.save_icon, command=self.taxonomy_saver)
 		save_button_tt = ToolTip(self.save_button, "Save Current Taxon",delay=0.01)
 		self.save_button.pack(side=LEFT)
+		self.delete_button = Button(row, image=self.delete_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.element_deleter)))
+		delete_button_tt = ToolTip(self.delete_button, "Delete Current Taxon",delay=0.01)
+		self.delete_button.pack(side=LEFT)
 		row.pack()
 
 	def taxon_tree_displayer(self):
@@ -159,10 +162,10 @@ class taxonomy_display(cache_maintenance):
 		
 		# Create Add/Save/Delete Button Set
 		row = ttk.Frame(self.pane_one)
-		self.add_button = ttk.Button(row, image=self.add_icon, command=self.root_adder)
+		self.add_button = Button(row, image=self.add_icon, command=self.root_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Root Taxon",delay=0.01)
 		self.add_button.pack(side=LEFT)
-		self.delete_button = ttk.Button(row, image=self.delete_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.element_deleter)))
+		self.delete_button = Button(row, image=self.delete_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.element_deleter)))
 		delete_button_tt = ToolTip(self.delete_button, "Delete Current Taxon",delay=0.01)
 		self.delete_button.pack(side=LEFT)
 		row.pack()
@@ -215,3 +218,5 @@ class taxonomy_display(cache_maintenance):
 
 		# Set Up Definition Editor Panel 
 		self.taxon_editor_displayer()
+		
+		

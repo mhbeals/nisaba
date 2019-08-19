@@ -4,6 +4,7 @@ import datetime
 from pathlib import Path
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, Literal
 import urllib.parse
+import re
 import os
 import configparser
 from urllib.request import urlopen
@@ -50,7 +51,7 @@ class database_maintenance:
 				file.write(remote_database)
 			with open (Path(self.database_path / downloaded_database_filename), 'r') as file:
 				loaddata = file.read()
-		except(ValueError):  # invalid URL
+		except(ValueError,urllib.error.URLError):  # invalid URL
 			try:
 				with open (Path(self.current_database), 'r') as file:
 					loaddata = file.read()
@@ -240,7 +241,7 @@ class database_maintenance:
 
 			# If it is a Text, Save the Transcription
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
-				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END)
+				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -314,6 +315,10 @@ class database_maintenance:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['left'] = int(self.left_text.get())
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
+			# Save free-form notes
+			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['nisaba:notes'] = [self.note_text.get("1.0",END).rstrip(),self.segment_note_editor.get(),datetime.datetime.now().strftime('%Y%m%d_%H%M%S')]
+			
+				
 			# Update the Database with the Item's Lower-Level Entries
 			for entry in self.segment_entries:
 

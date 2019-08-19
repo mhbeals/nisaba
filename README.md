@@ -1,12 +1,14 @@
-# Nisaba 0.3.0
+# Nisaba 0.3.1
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.3.0
+### v.0.3.1
 
-+ Code Refactor
++ Changed Theme
++ Added Browse by Annotation Function (search)
++ Added "Commonplace" Notes tab to segments
 
 [Full Change Log](changelog.md) and [Development Roadmap](roadmap.md)
 

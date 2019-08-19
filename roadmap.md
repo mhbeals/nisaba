@@ -13,7 +13,7 @@
 + **Integrated metadata for individual bibliographic fields [v.0.2.15]**
 + **Integrated metadata for individual records [v.0.2.16]**
 + **Integrated metadata for individual annotations [v.0.2.17]**
-+ Integrated metadata for individual free-text notes
++ **Integrated metadata for individual free-text notes [v.0.3.1]**
 
 ## Database Support
 
@@ -30,3 +30,9 @@
 + Save all data as TEI boilerplate compatible file (XML)
 + Save all data as Human-Readable Markdown Collection (MD)
 
+## Online Support
++ **Pull Database from Internet [v.0.3.0]
++ Pull Image from Internet
++ Pull Audio File from Internet
++ Pull Video File from Internet
++ Pull Text From Internet

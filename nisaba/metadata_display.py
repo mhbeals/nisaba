@@ -45,7 +45,7 @@ class metadata_display(cache_maintenance):
 			
 		# Create Metadata ttk.Frame	
 		self.metadata_frame = ttk.Frame(self.metadata_window)
-		self.metadata_frame.place(relx=.01, rely=.05)
+		self.metadata_frame.place(y = 10, relx=.01, rely=.05)
 	
 		#################
 		# Load Metadata #
@@ -110,9 +110,9 @@ class metadata_display(cache_maintenance):
 			
 		# Create Save and Delete Buttons	
 		self.buttonFrame = ttk.Frame(self.metadata_frame)
-		self.save_button = ttk.Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.metadata_entry_saver(uid_entry.get())))
+		self.save_button = Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.metadata_entry_saver(uid_entry.get())))
 		save_button_tt = ToolTip(self.save_button, "Save User",delay=0.01)
-		self.delete_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.user_deleter(uid_entry.get())))
+		self.delete_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.user_deleter(uid_entry.get())))
 		delete_button_tt = ToolTip(self.delete_button, "Delete User",delay=0.01)
 		
 		# Display Save and Delete Buttons
@@ -136,12 +136,17 @@ class metadata_display(cache_maintenance):
 			pass
 
 		##############################
-		# Create User DropDown ttk.Frame #
+		# Create User DropDown Frame #
 		##############################		
 		
-		# Create User Dropdown ttk.Frame
+		# Create User Dropdown Frame
 		self.pane_one = ttk.Frame(self.metadata_window)
 
+		# Divider		
+		dividing_label = ttk.Label(self.pane_one, text="User Configuration")
+		dividing_label.configure(font=(14))
+		dividing_label.pack(pady = 20)
+		
 		# Retrieve Existing User List
 		users = ['Choose a User','New User']
 

@@ -531,15 +531,15 @@ class database_display(cache_maintenance):
 			
 			# Create and Back Incrementers	
 			start_increment_frame = ttk.Frame(self.segment_pane_two)
-			start_plus_button = ttk.Button(start_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.start_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
-			start_minus_button = ttk.Button(start_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.start_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
+			start_plus_button = Button(start_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.start_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
+			start_minus_button = Button(start_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.start_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
 			start_plus_button.pack(side=TOP)
 			start_minus_button.pack(side=BOTTOM)
 			start_increment_frame.grid(column = 3, row = 0, sticky=W, padx =10, pady = 10)
 			
 			end_increment_frame = ttk.Frame(self.segment_pane_two)
-			end_plus_button = ttk.Button(end_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.end_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
-			end_minus_button = ttk.Button(end_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.end_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
+			end_plus_button = Button(end_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.end_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
+			end_minus_button = Button(end_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.end_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
 			end_plus_button.pack(side=TOP)
 			end_minus_button.pack(side=BOTTOM)
 			end_increment_frame.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
@@ -562,7 +562,7 @@ class database_display(cache_maintenance):
 			self.transcription_text.bind('<ButtonRelease>', text_selector)
 
 			# Create and Pack Update Button
-			update_button = ttk.Button(self.segment_pane_two, image=self.refresh_icon, command=(lambda: self.transcription_updater(0,len(self.transcription_words))))
+			update_button = Button(self.segment_pane_two, image=self.refresh_icon, command=(lambda: self.transcription_updater(0,len(self.transcription_words))))
 			update_button_tt = ToolTip(update_button, "Reload Full Text",delay=0.01)
 			update_button.grid(column = 8, row = 0, sticky=W, padx =10, pady = 10)
 
@@ -584,8 +584,8 @@ class database_display(cache_maintenance):
 			
 				# Create Increment Buttons
 				button_frame = ttk.Frame(frame)
-				plus_button = ttk.Button(button_frame, image=self.plus_icon, command=(lambda:self.incrementer(entry,1,self.cropped_image_updater())))
-				minus_button = ttk.Button(button_frame, image=self.minus_icon, command=(lambda:self.incrementer(entry,-1,self.cropped_image_updater())))
+				plus_button = Button(button_frame, image=self.plus_icon, command=(lambda:self.incrementer(entry,1,self.cropped_image_updater())))
+				minus_button = Button(button_frame, image=self.minus_icon, command=(lambda:self.incrementer(entry,-1,self.cropped_image_updater())))
 				plus_button.pack(side=TOP)
 				minus_button.pack(side=BOTTOM)
 				
@@ -627,7 +627,7 @@ class database_display(cache_maintenance):
 			self.right_box.grid(column=3, row=3)
 
 			# Create and Pack Update Button
-			update_button = ttk.Button(self.segmenter_frame, image=self.refresh_icon, command=self.image_resetter)
+			update_button = Button(self.segmenter_frame, image=self.refresh_icon, command=self.image_resetter)
 			update_button_tt = ToolTip(update_button, "Reload Full Image",delay=0.01)
 			update_button.grid(column=5, row = 1)
 			
@@ -640,27 +640,28 @@ class database_display(cache_maintenance):
 			self.segmenter_frame.place(rely = .5, relwidth=1,relheight=.5)
 			
 			self.cropped_image_updater()
-
-			
+	
 		# Setup Segment Window Tabs (Left / Pane 1)
 
 		# Set Up Tabs
 		self.segment_tab_control = ttk.Notebook(self.segment_pane_one)
 		self.segment_tab_one = ttk.Frame(self.segment_tab_control)
 		self.segment_tab_two = ttk.Frame(self.segment_tab_control)
+		self.segment_tab_three = ttk.Frame(self.segment_tab_control)
 
 		# Pack Tabs into ttk.Frame
 		self.segment_tab_control.add(self.segment_tab_one, text='Bibliographic Information')
 		self.segment_tab_control.add(self.segment_tab_two, text='Annotations')
+		self.segment_tab_control.add(self.segment_tab_three, text='Notes')
 		self.segment_tab_control.pack(expand=1, fill='both')
 
 		# Create "save", "reset" and "return" buttons
 		buttonFrame = ttk.Frame(self.segment_pane_one)
-		save_button = ttk.Button(self.segment_pane_one, image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
+		save_button = Button(self.segment_pane_one, image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
 		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
-		refresh_button = ttk.Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
+		refresh_button = Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
 		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
-		return_button = ttk.Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('m')))
+		return_button = Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('m')))
 		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
 		
 		buttonFrame.pack(anchor=NW)
@@ -668,14 +669,11 @@ class database_display(cache_maintenance):
 		save_button.pack(side=LEFT)
 		refresh_button.pack(side=LEFT)
 
-
 		########################################
 		# Set up bibliographic information tab #
 		########################################
-		
-		################################
-		# Dislay Editor Box for Record #
-		################################
+
+		# Dislay Editor Box for Record 
 		
 		# Create String Variable
 		self.provenance_segment_editor = StringVar(self.segment_tab_one)
@@ -708,9 +706,7 @@ class database_display(cache_maintenance):
 		# Set up Annotations Tab #
 		##########################
 
-		##############################
-		# Dislay Editor Box for Tree #
-		##############################
+		# Dislay Editor Box for Tree 
 		
 		# Create String Variable
 		self.segment_annotation_editor = StringVar(self.segment_tab_two)
@@ -733,6 +729,34 @@ class database_display(cache_maintenance):
 		# Create Tree
 		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="26")
 		self.annotation_tab_displayer(self.segment_tree,'s')
+		
+		####################
+		# Set up Notes Tab #
+		####################
+		
+		# Dislay Editor Box for Tree 
+		
+		# Create String Variable
+		self.segment_note_editor = StringVar(self.segment_tab_two)
+		
+		# Set initial value
+		self.segment_note_editor.set(self.default_user)
+	
+		# Create a row
+		row = ttk.Frame(self.segment_tab_two)
+
+		# Create a labels and dropdown
+		label = Label(row, text="Current Annotator", anchor='w', width=25)
+		provenance =  OptionMenu(row, self.segment_note_editor, *self.users)
+
+		# Package Row
+		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		label.pack(side=LEFT)
+		provenance.pack(side=LEFT)
+		
+		self.note_text = Text(self.segment_tab_three, wrap=WORD)
+		self.note_text.pack(expand=Y,fill=BOTH)
+
 		
 	def item_panels_displayer(self,focus):
 	# Creates Item Level Panels
@@ -862,15 +886,15 @@ class database_display(cache_maintenance):
 		
 		# Create buttons for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.add_button = ttk.Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
+		self.add_button = Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Segment",delay=0.01)
-		self.delete_segment_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
+		self.delete_segment_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
 		delete_segment_tt = ToolTip(self.delete_segment_button, "Delete Selected Segment",delay=0.01)
-		self.save_button = ttk.Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
+		self.save_button = Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
 		save_button_tt = ToolTip(self.save_button, "Save Item",delay=0.01)
-		self.refresh_button = ttk.Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panels_displayer('m')))
+		self.refresh_button = Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panels_displayer('m')))
 		refresh_button_tt = ToolTip(self.refresh_button, "Reload Item",delay=0.01)
-		self.return_button = ttk.Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
+		self.return_button = Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
 		return_button_tt = ToolTip(self.return_button, "Return to Item View",delay=0.01)
 		
 		self.return_button.pack(side=LEFT)
@@ -886,9 +910,7 @@ class database_display(cache_maintenance):
 		# Set up Bibliographic Information Tab #
 		########################################
 
-		################################
-		# Dislay Editor Box for Record #
-		################################
+		# Dislay Editor Box for Record 
 			
 		# Create String Variable
 		self.provenance_item_editor = StringVar(self.item_tab_one)
@@ -921,9 +943,7 @@ class database_display(cache_maintenance):
 		# Set up Annotations Tab #
 		##########################
 
-		###############################
-		# Dislay Editor Box  for Tree #
-		###############################
+		# Dislay Editor Box  for Tree 
 		
 		# Create String Variable
 		self.item_annotation_editor = StringVar(self.item_tab_two)
@@ -947,9 +967,7 @@ class database_display(cache_maintenance):
 		self.item_tree = CheckboxTreeview(self.item_tab_two,height="26",)
 		self.annotation_tab_displayer(self.item_tree,'i')
 
-		#######################
-		# Set Up Segments Tab #
-		#######################
+		# Set Up Segments Tab 
 
 		# Set up segment list scrollbar
 		self.scrollbar = Scrollbar(self.item_tab_three)
@@ -1048,10 +1066,10 @@ class database_display(cache_maintenance):
 		self.metadata_tab_displayer(item_metadata_frame, 'c')
 
 		# Create "save" button for all tabs
-		save_item_button = ttk.Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
+		save_item_button = Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
 		save_item_button_tt = ToolTip(save_item_button, "Save Collection",delay=0.01)
 		
-		collections_list_button = ttk.Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_panels_displayer(self.database_window)))
+		collections_list_button = Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_panels_displayer(self.database_window)))
 		collections_list_button_tt = ToolTip(collections_list_button, "Return to Collections List",delay=0.01)
 		
 		collections_list_button.pack(side=LEFT)
@@ -1117,15 +1135,15 @@ class database_display(cache_maintenance):
 		# Create "save" button for all tabs
 		self.buttonFrame = ttk.Frame(self.pane_two)
 		
-		self.add_text_button = ttk.Button(self.buttonFrame, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
+		self.add_text_button = Button(self.buttonFrame, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
 		add_item_button_tt = ToolTip(self.add_text_button, "Add Text Item",delay=0.01)
-		self.add_image_button = ttk.Button(self.buttonFrame, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
+		self.add_image_button = Button(self.buttonFrame, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
 		add_image_button_tt = ToolTip(self.add_image_button, "Add Image Item",delay=0.01)
-		self.add_audio_button = ttk.Button(self.buttonFrame, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
+		self.add_audio_button = Button(self.buttonFrame, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
 		add_audio_button_tt = ToolTip(self.add_audio_button, "Add Audio Item",delay=0.01)
-		self.add_audiovisual_button = ttk.Button(self.buttonFrame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
+		self.add_audiovisual_button = Button(self.buttonFrame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
 		add_audiovisual_button_tt = ToolTip(self.add_audiovisual_button, "Add Audio-Visual Item",delay=0.01)
-		self.delete_item_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
+		self.delete_item_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
 		delete_item_tt = ToolTip(self.delete_item_button, "Delete Selected Item",delay=0.01)
 		
 		self.add_text_button.pack(side=LEFT)
@@ -1194,9 +1212,9 @@ class database_display(cache_maintenance):
 
 		# Add/Delete Collection Buttons
 		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.add_collection_button = ttk.Button(self.buttonFrame,image=self.add_icon,command=self.collection_adder)
+		self.add_collection_button = Button(self.buttonFrame,image=self.add_icon,command=self.collection_adder)
 		add_collection_tt = ToolTip(self.add_collection_button, "Add Collection",delay=0.01)
-		self.delete_collection_button = ttk.Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database,str(items.curselection()[0]),'c')))
+		self.delete_collection_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database,str(items.curselection()[0]),'c')))
 		delete_collection_tt = ToolTip(self.delete_collection_button, "Delete Selected Collection",delay=0.01)
 		self.buttonFrame.pack(anchor=W)
 		self.add_collection_button.pack(side=LEFT)

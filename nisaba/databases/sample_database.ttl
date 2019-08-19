@@ -7,31 +7,97 @@
 
 <http://purl.org/nisaba/collection/0> a nisaba:CollectionEntry ;
     nisaba:hasItem <http://purl.org/nisaba/collection/0/item/0>,
-        <http://purl.org/nisaba/collection/0/item/1> .
+        <http://purl.org/nisaba/collection/0/item/1>,
+        <http://purl.org/nisaba/collection/0/item/2> .
+
+<http://purl.org/nisaba/collection/1> a nisaba:CollectionEntry ;
+    nisaba:hasItem <http://purl.org/nisaba/collection/1/item/0>,
+        <http://purl.org/nisaba/collection/1/item/1>,
+        <http://purl.org/nisaba/collection/1/item/2> .
 
 <http://purl.org/nisaba/collection/users> a nisaba:CollectionEntry .
 
 <http://purl.org/nisaba/collection/0/item/0> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/0/segment/0> ;
     nisaba:item_type "t" ;
-    nisaba:transcription "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.\\n', 'mhb', '20190818_161535']" .
+    nisaba:transcription "['This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.', 'mhb', '20190819_234856']" .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
-    nisaba:end 49 ;
-    nisaba:hasAnnotation "['Memorial-Justice-Hero_Teleology_of_History', 'mhb', '20190818_161559']",
-        "['Memorial-Justice_Teleology_of_History', 'mhb', '20190818_161559']",
-        "['Memorial_Teleology_of_History', 'mhb', '20190818_161559']",
-        "['Teleology', 'mhb', '20190818_161559']",
-        "['Teleology_of_History', 'mhb', '20190818_161559']" ;
-    nisaba:start 12 .
+    nisaba:end 65 ;
+    nisaba:hasAnnotation "['Memorial_Justice_Hero_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Memorial_Justice_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Memorial_Teleology_of_History', 'mhb', '20190810_095517']",
+        "['Teleology', 'mhb', '20190810_095517']",
+        "['Teleology_of_History', 'mhb', '20190810_095517']" ;
+    nisaba:start 0 .
 
 <http://purl.org/nisaba/collection/0/item/1> a nisaba:ItemEntry ;
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/1/segment/0> ;
     nisaba:item_type "t" ;
-    nisaba:transcription "[\"Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\\n\\n\\n\\n\\n\", 'mhb', '20190817_143200']" .
+    nisaba:transcription "[\"Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.\", 'mhb', '20190819_234909']" .
 
 <http://purl.org/nisaba/collection/0/item/1/segment/0> a nisaba:SegmentEntry ;
     ns1:description "['', '']" ;
     nisaba:end 17 ;
+    nisaba:hasAnnotation "['Evidence', 'mhb', '20190810_095517']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Secondary_Evidence', 'mhb', '20190810_095517']" ;
     nisaba:start 0 .
+
+<http://purl.org/nisaba/collection/0/item/2> a nisaba:ItemEntry ;
+    nisaba:hasAnnotation "['Evidence', 'mhb', '20190810_095517']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Tertiary_Evidence', 'mhb', '20190810_095517']" ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/2/segment/0> ;
+    nisaba:image_file "sample.jpg" ;
+    nisaba:item_type "i" .
+
+<http://purl.org/nisaba/collection/0/item/2/segment/0> a nisaba:SegmentEntry ;
+    nisaba:bottom 100 ;
+    ns1:description "['', '']" ;
+    nisaba:hasAnnotation "['Evidence', 'mhb', '20190810_095517']",
+        "['Ontology', 'mhb', '20190810_095517']",
+        "['Primary_Evidence', 'mhb', '20190810_095517']" ;
+    nisaba:left 0 ;
+    nisaba:right 50 ;
+    nisaba:top 0 .
+
+<http://purl.org/nisaba/collection/1/item/0> a nisaba:ItemEntry ;
+    nisaba:hasAnnotation "['Memorial_Teleology_of_History', 'mhb', '20190810_095807']",
+        "['Memorial_Teleology_of_History_General', 'mhb', '20190810_095807']",
+        "['Teleology', 'mhb', '20190810_095807']",
+        "['Teleology_of_History', 'mhb', '20190810_095807']" ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/1/item/0/segment/0> ;
+    nisaba:item_type "t" ;
+    nisaba:transcription "['Thycydides the Athenian wrote the history of the war fought between Athens and Sparta, beginning the account at the very outbreak of the way, in the belief that it was going to be a great war and more worth writing about than any of those which had taken place in the past. My belief was based on the fact that the two sides were at the very height of their power and preparedness, and I saw, too, that the rest ofthe Hellenic world was committed to one side or the other; even those who were not immediately engaged were deliberating on the courses which they were to take later. This was the greatest distrubance in the history of the Hellenes, affecting also a large part of the non-Hellenic world, and indeed, I might almost say, the whole of mankind. For though I have found it impossible, because of its remoteness in time, to acquire a really precise knowledge of the distant past or even of the history preceding our own period, yet, after looking back into it as far as I can, all the evidence leads me to conclude that these periods were not great periods eithe rin warfare or in anything else.', 'mhb', '20190819_234915']" .
+
+<http://purl.org/nisaba/collection/1/item/0/segment/0> a nisaba:SegmentEntry ;
+    nisaba:end 52 ;
+    nisaba:hasAnnotation "['Memorial_Teleology_of_History', 'mhb', '20190810_095726']",
+        "['Memorial_Teleology_of_History_General', 'mhb', '20190810_095726']",
+        "['Teleology', 'mhb', '20190810_095726']",
+        "['Teleology_of_History', 'mhb', '20190810_095726']" ;
+    nisaba:start 0 .
+
+<http://purl.org/nisaba/collection/1/item/1> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/1/item/1/segment/0> ;
+    nisaba:item_type "t" ;
+    nisaba:transcription "['For instance, it is evident that the country now called Hellas had in ancient times no settled population; on the contrary, migrations were of frequent occurrence, the several tribes readily abandoning their homes under the pressure of superior numbers. Without commerce, without freedom of communication either by land or sea, cultivating no more of their territory than the exigencies of life required, destitute of capital, never planting their land (for they could not tell when an invader might not come and take it all away, and when he did come they had no walls to stop him), thinking that the necessities of daily sustenance could be supplied at one place as well as another, they cared little for shifting their habitation, and consequently neither built large cities nor attained to any other form of greatness. The richest soils were always most subject to this change of masters; such as the district now called Thessaly, Boeotia, most of the Peloponnese, Arcadia excepted, and the most fertile parts of the rest of Hellas. The goodness of the land favoured the aggrandizement of particular individuals, and thus created faction which proved a fertile source of ruin. It also invited invasion. \\nAccordingly Attica, from the poverty of its soil enjoying from a very remote period freedom from faction, never changed its inhabitants. And here is no inconsiderable exemplification of my assertion that the migrations were the cause of there being no correspondent growth in other parts. The most powerful victims of war or faction from the rest of Hellas took refuge with the Athenians as a safe retreat; and at an early period, becoming naturalized, swelled the already large population of the city to such a height that Attica became at last too small to hold them, and they had to send out colonies to Ionia.', 'mhb', '20190819_234917']" .
+
+<http://purl.org/nisaba/collection/1/item/1/segment/0> a nisaba:SegmentEntry ;
+    ns1:description "['', 'mhb', '20190811_145751']" ;
+    nisaba:end 197 ;
+    nisaba:hasAnnotation "['Methodology', 'mhb', '20190811_145751']",
+        "['Realism_IR_Theory', 'mhb', '20190811_145751']",
+        "['Theoretical_Frameworks', 'mhb', '20190811_145751']" ;
+    nisaba:start 0 .
+
+<http://purl.org/nisaba/collection/1/item/2> a nisaba:ItemEntry ;
+    nisaba:hasSegment <http://purl.org/nisaba/collection/1/item/2/segment/0> ;
+    nisaba:item_type "t" ;
+    nisaba:transcription "['However, I do not think that one will be far wrong in accepting the conclusions I have reached from the evidence which I have put forward. It is better evidence than that of the poets, who exaggerate the importance of their themes, or of the prose chroniclers, who are less interested in telling the truth than in catching the attention of their public, whose authorities cannot be checked, and whose subject-matter, owing to the passage of time, is mostly lost in the unreliable streams of mythology. We may claim instead to have used only the plainest evidence and to have reached conclusions which are reasonably accurate, considering that we have been dealing with ancient history. As for this present war, even though people are apt to think that the war in which they are fighting is the greatest of all wars and, when it is over, to relapse again into their admiration of the past, nevertheless, if one looks at the facts themselves, one will see that this was the greatest war of all.', 'mhb', '20190819_234920']" .
+
+<http://purl.org/nisaba/collection/1/item/2/segment/0> a nisaba:SegmentEntry ;
+    nisaba:end 86 ;
+    nisaba:start 26 .
 

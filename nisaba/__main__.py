@@ -4,12 +4,14 @@ try:
 	from database_display import *
 	from taxonomy_display import *
 	from configuration_display import *
+	from search_display import *
 	
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_display import *
 	from nisaba.taxonomy_display import *
 	from nisaba.configuration_display import *
+	from nisaba.search_display import *
 
 # Import TKinter Libraries
 from tkinter import *
@@ -41,8 +43,8 @@ def main():
 				taxonomy_window = taxonomy_display()
 				taxonomy_window.taxonomy_viewer(main_pane_viewer)
 			elif switch == 's':
-				comingsoon = Label(main_pane_viewer, text="Coming Soon")
-				comingsoon.place(relx=.5,rely=.5)
+				search_window = search_display()
+				search_window.search_viewer(main_pane_viewer)
 			elif switch == 'c':
 				configuration_window = configuration_display()
 				configuration_window.configuration_viewer(main_pane_viewer) 
@@ -60,7 +62,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.0')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.1')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
@@ -98,16 +100,20 @@ def main():
 		configuration_logo=PhotoImage(file=Path(assets_path) / 'configuration.png')
 		
 		# Setup Menu Options
-		edit_configuration = ttk.Button(main_pane_menu,text='Configuration', image=configuration_logo, compound="top", command=(lambda: option_switcher('c')))
-		edit_database = ttk.Button(main_pane_menu,text='Database', image=database_logo, compound="top", command=(lambda: option_switcher('d')))
-		edit_vocabulary = ttk.Button(main_pane_menu,text='Taxonomy', image=taxonomy_logo, compound="top", command=(lambda: option_switcher('t')))
-		search_database = ttk.Button(main_pane_menu,text='Search', image=search_logo, compound="top", command=(lambda: option_switcher('s')))
+		edit_configuration = Button(main_pane_menu,text='Configuration', image=configuration_logo, compound="top", command=(lambda: option_switcher('c')))
+		edit_database = Button(main_pane_menu,text='Database', image=database_logo, compound="top", command=(lambda: option_switcher('d')))
+		edit_vocabulary = Button(main_pane_menu,text='Taxonomy', image=taxonomy_logo, compound="top", command=(lambda: option_switcher('t')))
+		search_database = Button(main_pane_menu,text='Search', image=search_logo, compound="top", command=(lambda: option_switcher('s')))
 		
 		# Display Menu Options
 		edit_configuration.place(relx=0.5, rely=0.1, anchor=CENTER)
 		edit_database.place(relx=0.5, rely=0.3, anchor=CENTER)
 		edit_vocabulary.place(relx=0.5, rely=0.5, anchor=CENTER)
 		search_database.place(relx=0.5, rely=0.7, anchor=CENTER)
+		
+		style = ttk.Style()
+		style.configure('TButton')
+		style.theme_use('clam')
 		
 		main_window.mainloop()
 
