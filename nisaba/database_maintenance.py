@@ -6,6 +6,7 @@ from rdflib import Graph, URIRef, Namespace, RDF, RDFS, Literal
 import urllib.parse
 import os
 import configparser
+from urllib.request import urlopen
 
 # Import tkinter Libraries
 from tkinter import END
@@ -23,46 +24,55 @@ class database_maintenance:
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
 	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
-	database_backup_path = database_path + "backups/" 
+	database_backup_path = database_path + "backups/"
 
 	def __init__(self):
 		# Initialise programme with stored databases
-		
-		# Create Configuration Defaults 
+
+		# Create Configuration Defaults
 		self.configuration_file_creator()
-		
+
 		# Set Current Database and Taxonomies
-		self.current_database = self.config['Database']	
-		self.current_taxonomy = self.config['CollectionTaxonomy']	
+		self.current_database = self.config['Database']
+		self.current_taxonomy = self.config['CollectionTaxonomy']
 		self.taxonomy_level_defaults = [self.config['CollectionTaxonomy'],self.config['ItemTaxonomy'],self.config['SegmentTaxonomy']]
 
 		#################
 		# JSON Database #
 		#################
-		
+
 		# Load JSON database
+		# Try first to pull from Web if it's a URL
 		try:
-			with open (Path(self.current_database), 'r') as file:
+			remote_database = urlopen(self.current_database)
+			downloaded_database_filename = 'downloaded_database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
+			with open (Path(self.database_path / downloaded_database_filename), 'w') as file:
+				file.write(remote_database)
+			with open (Path(self.database_path / downloaded_database_filename), 'r') as file:
 				loaddata = file.read()
-		except(FileNotFoundError):
-			self.current_database = Path(self.database_path) / 'sample_database.json'
-			with open (Path(self.current_database), 'r') as file:
-				loaddata = file.read()
-			
+		except(ValueError):  # invalid URL
+			try:
+				with open (Path(self.current_database), 'r') as file:
+					loaddata = file.read()
+			except(FileNotFoundError):
+				self.current_database = Path(self.database_path) / 'sample_database.json'
+				with open (Path(self.current_database), 'r') as file:
+					loaddata = file.read()
+
 		# Import JSON into a Dictionary
 		self.database = json.loads(loaddata)
-		
+
 		################
 		# RDF Database #
 		################
-		
+
 		# Create a Blank Graph
 		self.database_rdf = Graph()
-		
+
 		#######################
 		# Annotation Taxonomy #
 		#######################
-		
+
 		# Load Taxonomy
 		try:
 			with open (Path(self.current_taxonomy), 'r') as file:
@@ -72,16 +82,16 @@ class database_maintenance:
 			self.taxonomy_level_defaults = [self.current_taxonomy,self.current_taxonomy,self.current_taxonomy]
 			with open (Path(self.current_taxonomy), 'r') as file:
 				loaddata = file.read()
-				
+
 		self.taxonomy = json.loads(loaddata)
 
 	##############################
 	#   Reformatting Functions   #
-	##############################	
-			
+	##############################
+
 	def annotation_provenance_setter (self,annotation_list,level):
 		# Adds provenance data to each cache annotation as a list [annotation,user,datetime]
-	
+
 		# Create Provenanced Annotation List
 		listed_annotation_list = []
 		for annotation in annotation_list:
@@ -89,107 +99,107 @@ class database_maintenance:
 				listed_annotation_list.append([annotation,self.item_annotation_editor.get(),datetime.datetime.now().strftime('%Y%m%d_%H%M%S')])
 			elif level == 's':
 				listed_annotation_list.append([annotation,self.segment_annotation_editor.get(),datetime.datetime.now().strftime('%Y%m%d_%H%M%S')])
-		
+
 		# Return Provenanced Annotation List
 		return listed_annotation_list
-	
+
 	def annotation_parent_setter(self,tree_name):
-		# Ticks the Parents of Selected Annotations with the TreeView Widget 
+		# Ticks the Parents of Selected Annotations with the TreeView Widget
 		# This is a Bug Fix to Prevent the Default 'Third State') of Parents Boxes
-		
+
 		# Create a List of All Checked Items
 		annotation_list = tree_name.get_checked()
-		
+
 		# For Every Item in the List
 		for annotation in annotation_list:
-			
+
 			# If that Item has a Parent and that Parent is not Already in the List
 			if tree_name.parent(annotation) != "" and tree_name.parent(annotation) not in annotation_list:
-			
+
 				# Add Parent Item to the List
 				annotation_list.append(tree_name.parent(annotation))
-		
+
 		# Return the Updated List of Annotations
 		return annotation_list
 
 	def annotation_list_updater(self,cache_annotations,saved_annotations):
 		# Checks the cache annotations against the saved ones and merges the list (deleting any annotations no longer in cache but keeping old dates/users for exisiting ones)
-	
+
 		new_annotations = []
-		
-		# For every annotation in the current annotation list	
+
+		# For every annotation in the current annotation list
 		for cache_annotation in cache_annotations:
-			
+
 			found = False
-			
+
 			# Go through every annotation in the saved/disk annotation list
 			for saved_annotation in saved_annotations:
-				
+
 				# If the annotation is the same
 				if cache_annotation[0] == saved_annotation[0]:
-					
+
 						# keep it as it is and mark as found
 						new_annotations.append(saved_annotation)
 						found = True
-				
+
 			# If you never found the annotation, add it from the cached version
 			if found == False:
 				new_annotations.append(cache_annotation)
-		
+
 		## This will delete any annotations that have been removed. If you want a different annotation list for a different user, then make a new segment ##
-		
-		return new_annotations			
-		
+
+		return new_annotations
+
 	##############################
 	#      Saving Functions      #
-	##############################		
-	
+	##############################
+
 	def configuration_file_saver(self,file):
 
 		filepath = self.path_dictionary[file]
-	
+
 		with open (filepath, 'w') as file:
 			file.write(self.configuration_textbox.get("1.0",END))
 
 		self.pane_two.destroy()
-	
+
 	def configuration_defaults_saver(self):
-	
+
 		self.config['Database'] = str(self.current_database)
 		self.config['CollectionTaxonomy'] = str(self.taxonomy_level_defaults[0])
 		self.config['ItemTaxonomy'] = str(self.taxonomy_level_defaults[1])
 		self.config['SegmentTaxonomy'] = str(self.taxonomy_level_defaults[2])
-	
+
 		for parameter in self.parameter_entries:
-		
+
 			self.config[parameter[0]] = parameter[1].get()
-	
+
 		with open(Path(self.config_path) / 'config.ini', 'w') as configfile:
 			self.default_config.write(configfile)
-	
+
 	def database_entry_saver(self, level):
 		# Saves Entries to Cached Database
-		
+
 		#############
 		# All Items #
 		#############
-		
+
 		# Update the collection bibliography type
 		self.database[self.collection_index]['fabio_type'] = self.collections_type_namespace + self.default_collection_type.get()
-		
+
 		# For Every Item
 		for entry in self.collection_entries:
-		
+
 			# Update the Record Editor Metadata
 			if self.provenance_collection_editor != self.database[self.collection_index]['schema:editor'][0]:
 				self.database[self.collection_index]['schema:editor'][0] = self.provenance_collection_editor.get()
 				self.database[self.collection_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-						
+
 			try:
 				# Update the Database with the Item's Top-Level Entries
 				if entry[2].get() != self.database[self.collection_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index][entry[0]][0]:
 					self.database[self.collection_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-					
+
 			except(KeyError):
 				# Create the Database with the Item's Top-Level Entries
 				if entry[1].get() !='':
@@ -197,20 +207,20 @@ class database_maintenance:
 					self.database[self.collection_index][entry[0]][0] = entry[1].get()
 					self.database[self.collection_index][entry[0]][1] = entry[2].get()
 					self.database[self.collection_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			else:	
+			else:
 				self.database[self.collection_index][entry[0]][0] = entry[1].get()
 				self.database[self.collection_index][entry[0]][1] = entry[2].get()
 				self.database[self.collection_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-				
+
 			self.database[self.collection_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-		
+
 		###################
 		# Mid-Level Items #
 		###################
-		
+
 		# If Saving an Mid-Level Item
 		if level == 'i':
-		
+
 			# Update the item bibliography type
 			self.database[self.collection_index]['items'][self.item_index]['fabio_type'] = self.item_type_namespace + self.default_item_type.get()
 
@@ -218,13 +228,13 @@ class database_maintenance:
 			if self.provenance_item_editor != self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0]:
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0] = self.provenance_item_editor.get()
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-				
+
 			# Save the Annotation Tree to the Mid-Level
 			try:
 				cache_annotations = self.annotation_list_updater(self.annotation_provenance_setter(self.annotation_parent_setter(self.item_tree),level),self.database[self.collection_index]['items'][self.item_index]['annotations'])
 			except(KeyError):
 				cache_annotations = []
-				
+
 			self.database[self.collection_index]['items'][self.item_index]['annotations'] = cache_annotations
 			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -240,11 +250,11 @@ class database_maintenance:
 				self.database[self.collection_index]['items'][self.item_index]['image_file'] = self.image_filename.get()
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
-				
+
 		###################################
 		# Mid-Level and Lower-Level Items #
 		###################################
-		
+
 		# If Saving a Mid or Lower-Level Item
 		if level == 'i' or level == 's':
 			# Update the Database with the Item's Mid-Level Entries
@@ -253,7 +263,7 @@ class database_maintenance:
 					# Update the Database with the Item's Top-Level Entries
 					if entry[2].get() != self.database[self.collection_index]['items'][self.item_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index]['items'][self.item_index][entry[0]][0]:
 						self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-						
+
 				except(KeyError):
 					# Create the Database with the Item's Top-Level Entries
 					if entry[1].get() !='':
@@ -261,23 +271,23 @@ class database_maintenance:
 						self.database[self.collection_index]['items'][self.item_index][entry[0]][0] = entry[1].get()
 						self.database[self.collection_index]['items'][self.item_index][entry[0]][1] = entry[2].get()
 						self.database[self.collection_index]['items'][self.item_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-				else:	
+				else:
 					self.database[self.collection_index]['items'][self.item_index][entry[0]][0] = entry[1].get()
 					self.database[self.collection_index]['items'][self.item_index][entry[0]][1] = entry[2].get()
 					self.database[self.collection_index]['items'][self.item_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-					
+
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-		
+
 		#####################
 		# Lower-Level Items #
 		#####################
-		
+
 		# If Saving a Lower-Level ITem
 		if level == 's':
-		
+
 			# Update the segment bibliography type
 			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['fabio_type'] = self.default_segment_type.get()
-		
+
 			# Update the Record Editor Metadata
 			if self.provenance_segment_editor != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0]:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0] = self.provenance_segment_editor.get()
@@ -306,12 +316,12 @@ class database_maintenance:
 
 			# Update the Database with the Item's Lower-Level Entries
 			for entry in self.segment_entries:
-			
+
 				try:
 					# Update the Database with the Item's Top-Level Entries
 					if entry[2].get() != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] or entry[1].get() != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0]:
 						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-						
+
 				except(KeyError):
 					# Create the Database with the Item's Top-Level Entries
 					if entry[1].get() !='':
@@ -319,17 +329,17 @@ class database_maintenance:
 						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0] = entry[1].get()
 						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] = entry[2].get()
 						self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-				else:	
+				else:
 					self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][0] = entry[1].get()
 					self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][1] = entry[2].get()
 					self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index][entry[0]][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-					
+
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-		
+
 		#################
 		# Save Database #
 		#################
-		
+
 		# Save Cached Database to Disk
 		self.database_saver()
 
@@ -338,7 +348,7 @@ class database_maintenance:
 
 		def entry_retriever(database,key):
 			# Retrieves entries from Taxonomy Form
-			
+
 			database[key]['iid'] = self.taxonomy_iid_entry.get()
 			database[key]['name'] = self.taxonomy_annotation_entry.get()
 			database[key]['type'] = self.taxonomy_type_entry.get()
@@ -346,7 +356,7 @@ class database_maintenance:
 
 		# Save All Entries to Cached Taxonomy Database
 		self.iid_iterator(self.taxonomy,self.clicked_item,entry_retriever)
-		
+
 		# Reload Taxonomy Window
 		self.taxonomy_viewer(self.taxonomy_window)
 
@@ -359,14 +369,14 @@ class database_maintenance:
 
 	def database_saver(self):
 		# Save Cached Database to Disk
-	
+
 		# Convert Database to JSON
 		savedata = json.dumps(self.database, indent=4)
 
 		# Save JSON to disk
 		with open (Path(self.current_database), 'w') as file:
 			file.write(savedata)
-			
+
 		# Save Date-Stamped Backup of Database to Backups
 		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
 		with open (Path(self.database_backup_path) / backup_filename, 'w') as file:
@@ -377,46 +387,46 @@ class database_maintenance:
 
 	##############################
 	#     Loading Functions      #
-	##############################	
-	
+	##############################
+
 	def configuration_file_loader(self,event):
 
 		file = self.path_dictionary[event]
-	
+
 		#file = Path(self.config_path) / directory / event[0]
 		with open (file, 'r') as file:
 			loaddata = file.read()
 
 		return loaddata
-	
+
 	def database_loader(self,type,function_call):
 		# Loads a New (non-default) JSON Database
-		
+
 		# Load Database
 		file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
-		
-		if type == 'd': 
-		
+
+		if type == 'd':
+
 			self.current_database = Path(file)
-			
+
 			with open (file, 'r') as file:
 				loaddata = file.read()
 			self.database = json.loads(loaddata)
-			
+
 		elif type == 'Collection': self.taxonomy_level_defaults[0]=Path(file)
 		elif type == 'Item': self.taxonomy_level_defaults[1]=Path(file)
 		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
-		
+
 		function_call()
-	
+
 	##############################
 	#    Creating Functions      #
-	##############################	
-		
+	##############################
+
 	def configuration_file_creator(self):
-		
+
 		self.default_config = configparser.ConfigParser()
-		
+
 		try:
 			self.default_config.read(Path(self.config_path) / 'config.ini')
 			self.config = self.default_config['custom']
@@ -434,7 +444,7 @@ class database_maintenance:
 			self.default_config['DEFAULT']['v_Segment_Title_Field'] = 'dc:title'
 			self.default_config['custom'] = {}
 			self.config = self.default_config['custom']
-	
+
 	def configuration_yaml_creator(self):
 		# Create new config file
 
@@ -443,12 +453,12 @@ class database_maintenance:
 			return
 
 		data = '"namespace:element" : "Text"'
-			
+
 		file.write(data)
-		file.close()	
-		
+		file.close()
+
 		self.default_database_panels_displayer()
-		
+
 	def database_creator(self):
 		# Create new database
 
@@ -457,17 +467,17 @@ class database_maintenance:
 			return
 
 		data = '{"users":{"nid":{"schema:givenName":"New","schema:familyName":"User","schema:sameAS":"","schema:worksFor":"","schema:memberOf":"","schema:email":"","foaf:homepage":"","default":1}},"0":{"schema:editor":["","",""],"dc:title":["New Collection","",""],"items":{},"dc:creator":["","",""]}}'
-			
+
 		file.write(data)
 		file.close()
-			
+
 	##############################
 	#   Linked Data Functions    #
-	##############################	
-	
+	##############################
+
 	def rdf_mapper(self):
 		# Map the JSON database to RDF
-	
+
 		# Load previous triples, if any
 		#self.database_rdf.parse(self.database_path + "sample_database.ttl", format='turtle')
 
@@ -552,7 +562,7 @@ class database_maintenance:
 		############
 		# Save RDF #
 		############
-		
+
 		# Save RDF
 		with open(Path(self.database_path) / 'sample_database.ttl', 'wb') as file:
 			file.write(self.database_rdf.serialize(format='turtle'))
@@ -561,11 +571,3 @@ class database_maintenance:
 		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
 		with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
 			file.write(self.database_rdf.serialize(format='turtle'))
-
-
-			
-
-
-
-
-
