@@ -66,6 +66,14 @@ class cache_maintenance(database_maintenance):
 			box.insert(0,new_value)
 			function_call
 	
+	def database_alphabetiser(self,database):
+		# Alphabetise Taxonomy
+		alpha_taxonomy = []
+		for item,dictionary in database.items():
+			alpha_taxonomy.append(dictionary['iid'])
+		alpha_taxonomy = sorted(alpha_taxonomy)
+		return alpha_taxonomy
+	
 	##############################
 	#           Adding           #
 	##############################
@@ -154,17 +162,20 @@ class cache_maintenance(database_maintenance):
 		while loop:
 			i = i + 1
 			loop = str(i) in database[key]['children']
-
+		
 		# Create New Child with Default Fields
 		database[key]['children'][i] = {}
-		database[key]['children'][i]['iid'] = "New_Item"
-		database[key]['children'][i]['name'] = "New Item"
-		database[key]['children'][i]['type'] = "New Item"
-		database[key]['children'][i]['definition'] = "New Item"
+		database[key]['children'][i]['iid'] = "New_Item_" + str(i)
+		database[key]['children'][i]['name'] = "New Item " + str(i)
+		database[key]['children'][i]['type'] = "New Item " + str(i)
+		database[key]['children'][i]['definition'] = "New Item " + str(i)
 		database[key]['children'][i]['children'] = {}
+		
+		savedata = json.dumps(self.taxonomy, indent=4)
 
-		# Save to disk
-		self.taxonomy_saver()
+		# Save JSON to Disk
+		with open (self.current_taxonomy, 'w') as file:
+			file.write(savedata)
 
 		# Reload Taxonomy Viewer
 		self.taxonomy_viewer(self.taxonomy_window)

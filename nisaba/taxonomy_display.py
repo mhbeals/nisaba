@@ -30,26 +30,36 @@ class taxonomy_display(cache_maintenance):
 		# Create Root
 		top=self.taxonomy_tree.insert("", "end", dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
-		def iterateAllKeys(child_dictionary,parent_branch):
+		def individual_branch_builder(child_dictionary,parent_branch):
 		# Recursive Function to Go Through an Unknown Number of Layers
 
+			# Alphabetise children
+			alpha_taxonomy = self.database_alphabetiser(child_dictionary)
+		
 			# Create Lambda Dictionary
 			x, d = -1, {}
-
+			
 			# Go Through Every Key (Numerical Values) in Current "children" Dictionary
-			for new_key,new_dictionary in child_dictionary.items():
-
-				# Advance Branch Lambda Variable
-				x = x + 1
-
-				# Create New Branch
-				d[x+1]=self.taxonomy_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
+			for taxon in alpha_taxonomy:
+				
+				for key,value in child_dictionary.items():
+					
+					if value['iid'] == taxon:
+					
+						# Set Child Dictionary
+						new_dictionary = value
+					
+						# Advance Branch Lambda Variable
+						x = x + 1
+						
+						# Create New Branch
+						d[x+1]=self.taxonomy_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
 
 				# Re-Run Recursive Function with New "children" Dictionary
-				iterateAllKeys(new_dictionary['children'],d[x+1])
+				individual_branch_builder(new_dictionary['children'],d[x+1])
 
 		# Begin Recursive Function
-		iterateAllKeys(dictionary['children'],top)
+		individual_branch_builder(dictionary['children'],top)
 	
 	def taxon_metadata_field_displayer(self,database,key):
 	# Populates entry boxes from disks
@@ -147,10 +157,7 @@ class taxonomy_display(cache_maintenance):
 		self.taxonomy_tree.heading("Detail", text="Detail",anchor=W)
 
 		# Alphabetise Taxonomy
-		alpha_taxonomy = []
-		for item,dictionary in self.taxonomy.items():
-			alpha_taxonomy.append(dictionary['iid'])
-		alpha_taxonomy = sorted(alpha_taxonomy)
+		alpha_taxonomy = self.database_alphabetiser(self.taxonomy)
 		
 		# Go through taxonomy alphabetically and build branches
 		for taxon in alpha_taxonomy:
@@ -193,7 +200,6 @@ class taxonomy_display(cache_maintenance):
 		try:
 			self.pane_one.destroy()
 			self.pane_two.destroy()
-			self.pane_three.destroy()
 		except (NameError, AttributeError):
 			pass
 
@@ -203,17 +209,14 @@ class taxonomy_display(cache_maintenance):
 
 		# Setup Taxonomy Window
 		self.taxonomy_window = window
-
+		
 		# Setup Taxonomy Window Panels
 		self.pane_one = ttk.Frame(self.taxonomy_window)
 		self.pane_two = ttk.Frame(self.taxonomy_window)
 		self.pane_one.place(relwidth=.5, relheight=1)
 		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 
-		#menubar.add_command(label="Add New Root", command=self.root_adder)
-
 		# Set Up Annotation Selection (Tree) Panel 
-		
 		self.taxon_tree_displayer()
 
 		# Set Up Definition Editor Panel 

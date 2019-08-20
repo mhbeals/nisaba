@@ -31,7 +31,7 @@ class search_display(cache_maintenance):
 		# Create Root
 		top=self.search_tree.insert("", "end", dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
-		def iterateAllKeys(child_dictionary,parent_branch):
+		def individual_branch_builder(child_dictionary,parent_branch):
 		# Recursive Function to Go Through an Unknown Number of Layers
 
 			# Create Lambda Dictionary
@@ -47,10 +47,10 @@ class search_display(cache_maintenance):
 				d[x+1]=self.search_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
 
 				# Re-Run Recursive Function with New "children" Dictionary
-				iterateAllKeys(new_dictionary['children'],d[x+1])
+				individual_branch_builder(new_dictionary['children'],d[x+1])
 
 		# Begin Recursive Function
-		iterateAllKeys(dictionary['children'],top)
+		individual_branch_builder(dictionary['children'],top)
 
 
 	#########################
@@ -62,7 +62,7 @@ class search_display(cache_maintenance):
 		segment_selection = segment_event_data.curselection()[0]
 		selection_coordinates = self.export_list[segment_selection]	
 		
-		self.snippet_displayer(selection_coordinates)
+		self.segment_displayer(selection_coordinates)
 		
 	def taxon_informer(self,event):
 	# Send Selected ID to Iterator
@@ -78,6 +78,7 @@ class search_display(cache_maintenance):
 	#####################		
 	
 	def note_displayer(self,selection_coordinates):
+	# Display notes on segment
 	
 		self.note_text = Text(self.pane_two_bottom_right, wrap=WORD)
 		self.note_text.tag_config("normal", font=(14))
@@ -91,7 +92,7 @@ class search_display(cache_maintenance):
 		notes = '{} -{} ({})'.format(note,signature,date)
 		self.note_text.insert("0.0",notes)
 	
-	def snippet_displayer(self,selection_coordinates):
+	def segment_displayer(self,selection_coordinates):
 	
 		self.pane_two_bottom_left.destroy()		
 		self.pane_two_bottom_right.destroy()		
@@ -213,6 +214,7 @@ class search_display(cache_maintenance):
 												  image=self.segment_photoImg,
 												  anchor="center")
 	
+		# Display Notes
 		self.note_displayer(selection_coordinates)
 	
 	def taxon_list_displayer(self,database,key):

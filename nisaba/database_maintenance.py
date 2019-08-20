@@ -353,17 +353,17 @@ class database_maintenance:
 
 		def entry_retriever(database,key):
 			# Retrieves entries from Taxonomy Form
-
+			print(database[key])
+			print(self.taxonomy_iid_entry.get())
+			
 			database[key]['iid'] = self.taxonomy_iid_entry.get()
 			database[key]['name'] = self.taxonomy_annotation_entry.get()
 			database[key]['type'] = self.taxonomy_type_entry.get()
 			database[key]['definition'] = self.taxonomy_detail_entry.get()
+			print(database[key])
 
 		# Save All Entries to Cached Taxonomy Database
 		self.iid_iterator(self.taxonomy,self.clicked_item,entry_retriever)
-
-		# Reload Taxonomy Window
-		self.taxonomy_viewer(self.taxonomy_window)
 
 		# Convert Database to JSON
 		savedata = json.dumps(self.taxonomy, indent=4)
@@ -371,6 +371,9 @@ class database_maintenance:
 		# Save JSON to Disk
 		with open (self.current_taxonomy, 'w') as file:
 			file.write(savedata)
+			
+		# Reload Taxonomy Window
+		self.taxonomy_viewer(self.taxonomy_window)
 
 	def database_saver(self):
 		# Save Cached Database to Disk

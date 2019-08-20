@@ -76,6 +76,57 @@
                         "children": {}
                     }
                 }
+            },
+            "1": {
+                "iid": "Records",
+                "name": "Records",
+                "type": "Ontology",
+                "definition": "On the nature and interpretation of documents and other historical records",
+                "children": {
+                    "0": {
+                        "iid": "Architectural_Record",
+                        "name": "Architecture",
+                        "type": "Records",
+                        "definition": "On the built environment",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Customs_Record",
+                        "name": "Customs",
+                        "type": "Records",
+                        "definition": "On long-term cultural habits and customs",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Geographical_Record",
+                        "name": "Geography",
+                        "type": "Records",
+                        "definition": "On the geographical record",
+                        "children": {}
+                    },
+                    "3": {
+                        "iid": "Spoken_Records",
+                        "name": "Speeches",
+                        "type": "Records",
+                        "definition": "On records of prepared human speech",
+                        "children": {}
+                    }
+                }
+            },
+            "2": {
+                "iid": "Sociological_Grouping",
+                "name": "Sociological Grouping",
+                "type": "Ontology",
+                "definition": "On the conceptual groups catagorising human beings",
+                "children": {
+                    "0": {
+                        "iid": "Nationality_Sociological_Grouping",
+                        "name": "Nationality",
+                        "type": "Sociological Grouping",
+                        "definition": "On the causes or effects of grouping by nationality",
+                        "children": {}
+                    }
+                }
             }
         }
     },
@@ -170,21 +221,28 @@
             "2": {
                 "iid": "Interpretive_Frameworks",
                 "name": "Interpretive Frameworks",
-                "type": "Frameworks",
+                "type": "Framework",
                 "definition": "Methodological approaches that focus on a particular set of evidences or questions",
                 "children": {
                     "0": {
                         "iid": "Material_Historicism",
                         "name": "Material Historicism",
-                        "type": "Methodology",
+                        "type": "Interpretation",
                         "definition": "A framework which focuses on the material conditions of the past as well as productive roles and relations",
                         "children": {}
                     },
                     "1": {
                         "iid": "Feminist_Historiography",
                         "name": "Feminist Historiography",
-                        "type": "Methodology",
+                        "type": "Interpretation",
                         "definition": "A framework which focuses on gender (biological or social) identity and relations in the past",
+                        "children": {}
+                    },
+                    "2": {
+                        "iid": "Histoire_des_mentalit\u00e9s",
+                        "name": "Histoire des Mentalit\u00e9s",
+                        "type": "Interpretation",
+                        "definition": "A framework which focuses on the ways in which people of a given time period thought about, interacted with, and classified the world around them",
                         "children": {}
                     }
                 }
@@ -192,7 +250,7 @@
             "3": {
                 "iid": "Theoretical_Frameworks",
                 "name": "Theoretical Frameworks",
-                "type": "Frameworks",
+                "type": "Framework",
                 "definition": "Theories that attempt to explains why the research problem under study exists",
                 "children": {
                     "0": {
@@ -214,7 +272,7 @@
             "4": {
                 "iid": "Evidence_Frameworks",
                 "name": "Evidence Frameworks",
-                "type": "Frameworks",
+                "type": "Framework",
                 "definition": "Practices suited to particular evidence types",
                 "children": {
                     "0": {

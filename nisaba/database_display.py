@@ -436,7 +436,7 @@ class database_display(cache_maintenance):
 			top=tree_name.insert("", 1, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
 			# Recursive Function to Go Through Unknown Number of Layers
-			def iterateAllKeys(child_dictionary,parent_branch):
+			def individual_branch_builder(child_dictionary,parent_branch):
 
 				# Create Lambda Dictionary
 				x, d = -1, {}
@@ -451,10 +451,10 @@ class database_display(cache_maintenance):
 					d[x+1]=tree_name.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary[	'type'],new_dictionary['definition']))
 
 					# Re-Run Recursive Function with New "children" Dictionary
-					iterateAllKeys(new_dictionary['children'],d[x+1])
+					individual_branch_builder(new_dictionary['children'],d[x+1])
 
 			# Begin Recursive Function
-			iterateAllKeys(dictionary['children'],top)
+			individual_branch_builder(dictionary['children'],top)
 
 		# Highlight Those Already Saved
 		if level == 'i':
@@ -727,7 +727,7 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		# Create Tree
-		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="26")
+		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="50")
 		self.annotation_tab_displayer(self.segment_tree,'s')
 		
 		####################
@@ -756,8 +756,7 @@ class database_display(cache_maintenance):
 		
 		self.note_text = Text(self.segment_tab_three, wrap=WORD)
 		self.note_text.pack(expand=Y,fill=BOTH)
-
-		
+	
 	def item_panels_displayer(self,focus):
 	# Creates Item Level Panels
 	
@@ -903,7 +902,6 @@ class database_display(cache_maintenance):
 		self.add_button.pack(side=LEFT)
 		self.delete_segment_button.pack(side=LEFT)
 		
-		
 		self.buttonFrame.pack(anchor=NW)
 
 		########################################
@@ -943,7 +941,7 @@ class database_display(cache_maintenance):
 		# Set up Annotations Tab #
 		##########################
 
-		# Dislay Editor Box  for Tree 
+		# Dislay Editor Box for Tree 
 		
 		# Create String Variable
 		self.item_annotation_editor = StringVar(self.item_tab_two)
@@ -964,7 +962,7 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		# Create Tree
-		self.item_tree = CheckboxTreeview(self.item_tab_two,height="26",)
+		self.item_tree = CheckboxTreeview(self.item_tab_two,height="50",)
 		self.annotation_tab_displayer(self.item_tree,'i')
 
 		# Set Up Segments Tab 
@@ -1106,7 +1104,7 @@ class database_display(cache_maintenance):
 			elif 'fabio_type' in self.database[self.collection_index]['items'][item_number]:
 				if self.collections_title_namespace in self.database[self.collection_index]:
 					if 'fabio:hasSequenceIdentifier' in self.database[self.collection_index]['items'][item_number] and dictionary['fabio:hasSequenceIdentifier'][0] != '':
-						if self.database[self.collection_index]['items'][item_number]['fabio:pageRange'][0] !='':
+						if 'fabio:pageRange' in self.database[self.collection_index]['items'][item_number] and self.database[self.collection_index]['items'][item_number]['fabio:pageRange'][0] !='':
 							display_item = "{0} {1} on page(s) {2}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]),str(dictionary['fabio:pageRange'][0]))
 						else: 
 							display_item = "{0} {1}".format(str(dictionary['fabio_type'][len(self.item_type_namespace):]),str(dictionary['fabio:hasSequenceIdentifier'][0]))

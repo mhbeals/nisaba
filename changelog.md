@@ -1,5 +1,15 @@
 # Change Log
 
+### v.0.3.2
+
++ Improved Taxonomy Editor Functions
+
+### v.0.3.1
+
++ Changed Theme
++ Added Browse by Annotation Function (search)
++ Added "Commonplace" Notes tab to segments
+
 ### v.0.3.0
 
 + Code Refactor
