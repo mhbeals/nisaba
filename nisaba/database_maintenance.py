@@ -353,14 +353,11 @@ class database_maintenance:
 
 		def entry_retriever(database,key):
 			# Retrieves entries from Taxonomy Form
-			print(database[key])
-			print(self.taxonomy_iid_entry.get())
 			
 			database[key]['iid'] = self.taxonomy_iid_entry.get()
 			database[key]['name'] = self.taxonomy_annotation_entry.get()
 			database[key]['type'] = self.taxonomy_type_entry.get()
 			database[key]['definition'] = self.taxonomy_detail_entry.get()
-			print(database[key])
 
 		# Save All Entries to Cached Taxonomy Database
 		self.iid_iterator(self.taxonomy,self.clicked_item,entry_retriever)
