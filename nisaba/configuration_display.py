@@ -63,11 +63,6 @@ class configuration_display(cache_maintenance):
 		self.pane_two = ttk.Frame(self.configuration_window)
 		self.pane_two.place(relx=.55, relwidth=.4, rely =.05, relheight=1)
 
-		# Divider
-		dividing_label = ttk.Label(self.pane_two, text="Configuration File Editor")
-		dividing_label.configure(font=(10))
-		dividing_label.pack(pady = 20)		
-
 		# Create Loader Frame
 		self.configuration_textbox_frame = ttk.Frame(self.pane_two)
 		self.configuration_textbox_frame.pack(side=TOP, fill=X)
@@ -80,7 +75,7 @@ class configuration_display(cache_maintenance):
 		row = ttk.Frame(self.pane_two)
 		self.save_button = Button(row, image=self.save_icon, command=(lambda:self.configuration_file_saver(filename)))
 		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
-		self.save_button.pack(side=LEFT)
+		self.save_button.pack(padx=1,pady=1,side=LEFT)
 		row.pack(pady=10)
 
 	def configurations_frame_displayer(self):
@@ -111,11 +106,6 @@ class configuration_display(cache_maintenance):
 				
 				# Save Label and Pointer
 				self.parameter_entries.append([key,entry])
-
-		# Divider
-		dividing_label = ttk.Label(self.pane_one, text="Metadata Configuration")
-		dividing_label.configure(font=(10))
-		dividing_label.pack(pady = 20)
 				
 		# Load up Additional Config Files
 		standard_directories = ['collections','items','segments','users']
@@ -151,7 +141,7 @@ class configuration_display(cache_maintenance):
 					label.pack(side=LEFT)
 					dropdown = ttk.OptionMenu(row, default_type, *types, command=self.configuration_textbox_frame_displayer)
 					dropdown.pack(side=LEFT)
-					new_button.pack(side=RIGHT)
+					new_button.pack(padx=1,pady=1,side=RIGHT)
 					row.pack(side=TOP, fill=X)
 					
 					# Enlarge Option Menu
@@ -164,11 +154,6 @@ class configuration_display(cache_maintenance):
 		
 		for directory in standard_directories:
 			config_dropdown_displayer()
-		
-		# Divider		
-		dividing_label = ttk.Label(self.pane_one, text="Additional Configuration Options")
-		dividing_label.configure(font=(10))
-		dividing_label.pack(pady = 20)
 	
 		for directory in directories:
 			config_dropdown_displayer()
@@ -176,7 +161,7 @@ class configuration_display(cache_maintenance):
 		self.button_frame = ttk.Frame(self.pane_one)
 		self.save_button = Button(self.button_frame, image=self.save_icon, command=self.configuration_defaults_saver)
 		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
-		self.save_button.pack()
+		self.save_button.pack(padx=1,pady=1,)
 		self.configurations_frame.pack(pady=5)
 		self.button_frame.pack(anchor=NW)
 
@@ -216,7 +201,7 @@ class configuration_display(cache_maintenance):
 				self.segment_entry.pack(side=LEFT, expand=YES, fill=X)
 				button = Button(row, text="Load" , command=(lambda: self.database_loader("Segment",self.default_database_panels_displayer)))
 			
-			button.pack(side=RIGHT)
+			button.pack(padx=1,pady=1,side=RIGHT)
 			
 		# Load other parameters
 		self.configurations_frame_displayer()
@@ -245,8 +230,8 @@ class configuration_display(cache_maintenance):
 			label.pack(side=LEFT)
 			edit_button = Button(row, text="Edit Users", command=self.edit_user_frame_displayer)
 			refresh_button = Button(row, text="Refresh Users", command=self.default_database_panels_displayer)
-			edit_button.pack(side=RIGHT)
-			refresh_button.pack(side=RIGHT)
+			edit_button.pack(padx=1,pady=1,side=RIGHT)
+			refresh_button.pack(padx=1,pady=1,side=RIGHT)
 
 			# Create Dropdown Menu
 			users_menu = OptionMenu(row, self.current_user, *users)
@@ -271,10 +256,6 @@ class configuration_display(cache_maintenance):
 		self.pane_two = ttk.Frame(self.configuration_window)
 		self.pane_two.place(relx=.5, relwidth=.4, rely =.05, relheight=1)
 
-		dividing_label = ttk.Label(self.pane_one, text="Database Configuration")
-		dividing_label.configure(font=(10))
-		dividing_label.pack(pady = 10)
-		
 		# Create Database Loader Row
 		row = ttk.Frame(self.pane_one)
 		label =ttk.Label(row, text="Database: ", anchor='w', width=30)
@@ -284,8 +265,8 @@ class configuration_display(cache_maintenance):
 		new_button = Button(row, text="New", command=self.database_creator)
 		row.pack(side=TOP, fill=X)
 		label.pack(side=LEFT)
-		button.pack(side=RIGHT)
-		new_button.pack(side=RIGHT)
+		button.pack(padx=1,pady=1,side=RIGHT)
+		new_button.pack(padx=1,pady=1,side=RIGHT)
 		entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		self.user_dropdown_displayer()

@@ -1,4 +1,4 @@
-try:
+try: 
 	# Used when executing with Python
 	from database_maintenance import *
 	from cache_maintenance import *
@@ -519,7 +519,7 @@ class database_display(cache_maintenance):
 			self.start_box = ttk.Frame(self.coord_box)
 			self.start_box.place(relwidth=.35, relx=.05)
 			start_label = ttk.Label(self.start_box, text="Starting Word")
-			self.start_text = ttk.Spinbox(self.start_box,from_=0, to=len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),command=(lambda: self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))))
+			self.start_text =  Spinbox(self.start_box,from_=0, to=len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),command=(lambda: self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))))
 			start_label.pack()
 			self.start_text.pack()
 			
@@ -527,7 +527,7 @@ class database_display(cache_maintenance):
 			self.end_box = ttk.Frame(self.coord_box)
 			self.end_box.place(relwidth=.35, relx=.45)
 			end_label = ttk.Label(self.end_box, text="Ending Word")
-			self.end_text = ttk.Spinbox(self.end_box,from_=0, to=len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),command=lambda: self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))
+			self.end_text =  Spinbox(self.end_box,from_=0, to=len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),command=lambda: self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))
 			end_label.pack()
 			self.end_text.pack()
 			
@@ -583,19 +583,19 @@ class database_display(cache_maintenance):
 			
 			# Create text boxes
 			self.top_box = ttk.Frame(self.segmenter_frame)
-			self.top_text = ttk.Spinbox(self.top_box,from_=0, to=100,command=self.cropped_image_updater)
+			self.top_text =  Spinbox(self.top_box,from_=0, to=100,command=self.cropped_image_updater)
 			segmenter_box_maker(self.top_box,'% from the Top',self.top_text,.05,.1,.4)
 			
 			self.bottom_box = ttk.Frame(self.segmenter_frame)
-			self.bottom_text = ttk.Spinbox(self.bottom_box,from_=0, to=100,command=self.cropped_image_updater)
+			self.bottom_text =  Spinbox(self.bottom_box,from_=0, to=100,command=self.cropped_image_updater)
 			segmenter_box_maker(self.bottom_box,'% to the Bottom',self.bottom_text,.05,.4,.4)
 			
 			self.left_box = ttk.Frame(self.segmenter_frame)
-			self.left_text = ttk.Spinbox(self.left_box,from_=0, to=100,command=self.cropped_image_updater)
+			self.left_text =  Spinbox(self.left_box,from_=0, to=100,command=self.cropped_image_updater)
 			segmenter_box_maker(self.left_box,'% from the Left',self.left_text,.45,.1,.4)
 			
 			self.right_box = ttk.Frame(self.segmenter_frame)
-			self.right_text = ttk.Spinbox(self.right_box,from_=0, to=100,command=self.cropped_image_updater)
+			self.right_text = Spinbox(self.right_box,from_=0, to=100,command=self.cropped_image_updater)
 			segmenter_box_maker(self.right_box,'% to the Right',self.right_text,.45,.4,.4)
 
 			# Fill Entry Boxes
