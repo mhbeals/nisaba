@@ -69,8 +69,8 @@ class metadata_display(cache_maintenance):
 		
 		# Create User ID Entry Box and Default User Check - This Ensures a User ID if Omitted from Config File
 		row = ttk.Frame(self.metadata_frame)
-		uid_label = Label(row, text="User ID: ", anchor='w', width=30)
-		uid_entry = Entry(row, width=50)		
+		uid_label =ttk.Label(row, text="User ID: ", anchor='w', width=30)
+		uid_entry = ttk.Entry(row, width=50)		
 
 		# Display User ID Entry Box
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -90,8 +90,8 @@ class metadata_display(cache_maintenance):
 			row = ttk.Frame(self.metadata_frame)
 
 			# Create a Label and Text Box
-			label = Label(row, text=question, anchor='w', width=30)
-			entry = Entry(row, width=50)
+			label =ttk.Label(row, text=question, anchor='w', width=30)
+			entry = ttk.Entry(row, width=50)
 
 			# Display Row
 			row.pack(side=TOP, fill=X, padx=5, pady=5,)
@@ -144,7 +144,7 @@ class metadata_display(cache_maintenance):
 
 		# Divider		
 		dividing_label = ttk.Label(self.pane_one, text="User Configuration")
-		dividing_label.configure(font=(14))
+		dividing_label.configure(font=(10))
 		dividing_label.pack(pady = 20)
 		
 		# Retrieve Existing User List

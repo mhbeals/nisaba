@@ -1,12 +1,13 @@
-# Nisaba 0.3.2
+# Nisaba 0.3.4
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-### v.0.3.2
+# Nisaba 0.3.4
 
-+ Improved Taxonomy Editor Functions
++ Improved layout for low resolution screens
++ Some bug fixes throughout
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

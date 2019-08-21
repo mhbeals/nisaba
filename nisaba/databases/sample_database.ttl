@@ -85,10 +85,12 @@
     nisaba:hasSegment <http://purl.org/nisaba/collection/0/item/0/segment/0>,
         <http://purl.org/nisaba/collection/0/item/0/segment/1> ;
     nisaba:item_type "t" ;
-    nisaba:transcription "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy \"in an admirable speech, excellently delivered. She said that she placed the whole of the resources of the State and her own life at the disposal of the Queen. The Viceroy, in replying, announced that the Begum had offered to merge her troops into an Imperial service corps.\\n\\n\\n', 'om', '20190817_102456']" .
+    nisaba:transcription "['The Indian Viceregal party arrived at Bhopal on Saturday. The city was illuminated at night on a magnificent scale. Lord Lansdowne was entertained at a banquet by the Begum, who herself was present wearing the bhurka, or veil. Speaking in Urdu, her Highness proposed the toast of \"The Queen and the health of the Viceroy \"in an admirable speech, excellently delivered. She said that she placed the whole of the resources of the State and her own life at the disposal of the Queen. The Viceroy, in replying, announced that the Begum had offered to merge her troops into an Imperial service corps.', 'om', '20190821_195111']" .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/0> a nisaba:SegmentEntry ;
     nisaba:end 38 ;
+    nisaba:hasAnnotation "['Character_Traits', 'om', '20190821_195116']",
+        "['Violent', 'om', '20190821_195116']" ;
     nisaba:start 0 .
 
 <http://purl.org/nisaba/collection/0/item/0/segment/1> a nisaba:SegmentEntry ;

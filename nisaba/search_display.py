@@ -81,7 +81,7 @@ class search_display(cache_maintenance):
 	# Display notes on segment
 	
 		self.note_text = Text(self.pane_two_bottom_right, wrap=WORD)
-		self.note_text.tag_config("normal", font=(14))
+		self.note_text.configure(font=(10))
 		self.note_text.pack(anchor="nw", expand=Y, fill=BOTH)
 		full_note = self.database[selection_coordinates[0]]['items'][selection_coordinates[1]]['segments'][selection_coordinates[2]]['nisaba:notes']
 		
@@ -97,9 +97,9 @@ class search_display(cache_maintenance):
 		self.pane_two_bottom_left.destroy()		
 		self.pane_two_bottom_right.destroy()		
 		self.pane_two_bottom_left = ttk.Frame(self.search_window)
-		self.pane_two_bottom_left.place(relx=.2, rely = .45, relwidth=.37, relheight=.4)
+		self.pane_two_bottom_left.place(relx=.25, rely = .45, relwidth=.32, relheight=.4)
 		self.pane_two_bottom_right = ttk.Frame(self.search_window)
-		self.pane_two_bottom_right.place(relx=.57, rely = .45, relwidth=.37, relheight=.4)
+		self.pane_two_bottom_right.place(relx=.65, rely = .45, relwidth=.32, relheight=.4)
 		
 		self.collection_index = selection_coordinates[0]
 		self.item_index = selection_coordinates[1]
@@ -128,8 +128,8 @@ class search_display(cache_maintenance):
 			post_transcription = ' '.join(self.transcription_words[end:end+20])
 
 			# Set Highlighting / Background Colours
-			self.transcription_text.tag_config("faded", foreground="light gray", font=(14))
-			self.transcription_text.tag_config("normal", font=(14))
+			self.transcription_text.tag_config("faded", foreground="light gray", font=(10))
+			self.transcription_text.tag_config("normal", font=(10))
 
 			# Clear Existing Text
 			self.transcription_text.insert(END,"...")
@@ -234,11 +234,11 @@ class search_display(cache_maintenance):
 		
 		# Setup search Window Panels
 		self.pane_two = ttk.Frame(self.search_window)
-		self.pane_two.place(y=15, relx=.2, relwidth=.75, relheight=.4)
+		self.pane_two.place(y=15, relx=.25, relwidth=.74, relheight=.4)
 		self.pane_two_bottom_left = ttk.Frame(self.search_window)
-		self.pane_two_bottom_left.place(relx=.2, rely = .45, relwidth=.37, relheight=.4)
+		self.pane_two_bottom_left.place(relx=.25, rely = .45, relwidth=.32, relheight=.4)
 		self.pane_two_bottom_right = ttk.Frame(self.search_window)
-		self.pane_two_bottom_right.place(relx=.57, rely = .45, relwidth=.37, relheight=.4)
+		self.pane_two_bottom_right.place(relx=.65, rely = .45, relwidth=.32, relheight=.4)
 		
 		# Set up segment list scrollbar
 		self.scrollbar = Scrollbar(self.pane_two)
@@ -251,32 +251,33 @@ class search_display(cache_maintenance):
 		#Populate Segment List Box
 		for collection_number,dictionary in self.database.items():
 			if collection_number != 'users':
-				for item_number,dictionary in self.database[collection_number]['items'].items():
-					for segment_number,dictionary in self.database[collection_number]['items'][item_number]['segments'].items():
-						for annotation in self.database[collection_number]['items'][item_number]['segments'][segment_number]['annotations']:
-							if annotation[0] == current_id:
-						
-								# If the segment is text
-								if self.database[collection_number]['items'][item_number]['item_type'] == "t":
-								
-									if 'fabio:pageRange' in self.database[collection_number]['items'][item_number].items() and self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] != '':
-
-										display_item = 'Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
-										
-									else: display_item = 'Text ' + str(int(segment_number) + 1) + ' of ' + self.database[collection_number]['dc:title'][0]
-
-								# If the segment is an image
-								elif self.database[collection_number]['items'][item_number]['item_type'] == "i":
-
-									display_item = 'Image ' + str(int(segment_number) + 1) + ' of ' + self.database[collection_number]['dc:title'][0]
-
-								# Display the number and title
-								segment = display_item
-								self.segments.insert(END, segment)
-								
-								# Save to export list
-								self.export_list.append([collection_number,item_number,segment_number])
+				for item_number,item_dictionary in self.database[collection_number]['items'].items():
+					for segment_number,segment_dictionary in self.database[collection_number]['items'][item_number]['segments'].items():
+						if 'annotations' in segment_dictionary:
+							for annotation in segment_dictionary['annotations']:
+								if annotation[0] == current_id:
+							
+									# If the segment is text
+									if self.database[collection_number]['items'][item_number]['item_type'] == "t":
+									
+										if 'fabio:pageRange' in self.database[collection_number]['items'][item_number]:
 		
+											display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
+											
+										else: display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
+
+									# If the segment is an image
+									elif self.database[collection_number]['items'][item_number]['item_type'] == "i":
+
+										display_item = 'Image ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
+
+									# Display the number and title
+									segment = display_item
+									self.segments.insert(END, segment)
+									
+									# Save to export list
+									self.export_list.append([collection_number,item_number,segment_number])
+			
 		# Bind scrollbar to listbox
 		self.segments.config(yscrollcommand=self.scrollbar.set)
 		self.scrollbar.config(command=self.segments.yview)
@@ -287,12 +288,20 @@ class search_display(cache_maintenance):
 	def taxon_tree_displayer(self):
 	# Displays search Tree Panel
 	
-		# Determine Window Size / Screen Resolution
 		window_width = self.search_window.winfo_screenwidth()
 		window_height = self.search_window.winfo_screenheight()
+		style = ttk.Style()		
+		
+		if window_width > 1200:
+			style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 10)) # Modify the font of the body
+			style.configure('Treeview', rowheight=20)
+		else:
+			style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 8)) # Modify the font of the body
+			style.configure('Treeview', rowheight=14)
+
 	
 		# Create Tree
-		self.search_tree = ttk.Treeview(self.pane_one,height=int(window_height),selectmode='browse',show='tree')
+		self.search_tree = ttk.Treeview(self.pane_one,height=int(window_height),selectmode='browse',show='tree',style="Treeview")
 
 		# Create Tree Layout
 		self.search_tree.column("#0", stretch=1)		
@@ -348,8 +357,8 @@ class search_display(cache_maintenance):
 		# Setup search Window Panels
 		self.pane_one = ttk.Frame(self.search_window)
 		self.pane_two = ttk.Frame(self.search_window)
-		self.pane_one.place(y=15, relwidth=.2, relheight=.85)
-		self.pane_two.place(y=15, relx=.2, relwidth=.8, relheight=.4)
+		self.pane_one.place(y=15, relwidth=.20, relheight=.85)
+		self.pane_two.place(y=15, relx=.25, relwidth=.74, relheight=.4)
 
 		#menubar.add_command(label="Add New Root", command=self.root_adder)
 

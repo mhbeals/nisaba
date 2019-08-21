@@ -59,13 +59,6 @@ class cache_maintenance(database_maintenance):
 
 		self.database_saver()
 	
-	def incrementer(self,box,increment,function_call):
-			new_value = int(box.get()) + increment
-			new_value = 0 if new_value < 0 else new_value
-			box.delete(0,END)
-			box.insert(0,new_value)
-			function_call
-	
 	def database_alphabetiser(self,database):
 		# Alphabetise Taxonomy
 		alpha_taxonomy = []

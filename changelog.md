@@ -1,5 +1,14 @@
 # Change Log
 
+# Nisaba 0.3.4
+
++ Improved layout for low resolution screens
++ Some bug fixes throughout
+
+## Nisaba 0.3.3
+
++ Packaged for release
+
 ### v.0.3.2
 
 + Improved Taxonomy Editor Functions

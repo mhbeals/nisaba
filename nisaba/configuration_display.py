@@ -65,14 +65,14 @@ class configuration_display(cache_maintenance):
 
 		# Divider
 		dividing_label = ttk.Label(self.pane_two, text="Configuration File Editor")
-		dividing_label.configure(font=(14))
+		dividing_label.configure(font=(10))
 		dividing_label.pack(pady = 20)		
 
 		# Create Loader Frame
 		self.configuration_textbox_frame = ttk.Frame(self.pane_two)
 		self.configuration_textbox_frame.pack(side=TOP, fill=X)
 
-		self.configuration_textbox = Text(self.configuration_textbox_frame, wrap=WORD)
+		self.configuration_textbox =Text(self.configuration_textbox_frame, wrap=WORD)
 		self.configuration_textbox.pack(expand=YES, fill=BOTH)
 
 		self.configuration_textbox.insert("0.0",self.configuration_file_loader(filename))
@@ -102,10 +102,10 @@ class configuration_display(cache_maintenance):
 			
 				# Create Row
 				row = ttk.Frame(self.pane_one)
-				label = Label(row, text=label_text, anchor='w', width=30)
-				entry = Entry(row)
+				label =ttk.Label(row, text=label_text, anchor='w', width=30)
+				entry = ttk.Entry(row)
 				entry.insert(0,value)
-				row.pack(side=TOP, fill=X, padx=5, pady=5)
+				row.pack(side=TOP, fill=X, pady=3)
 				label.pack(side=LEFT)
 				entry.pack(side=RIGHT, expand=YES, fill=X)
 				
@@ -114,7 +114,7 @@ class configuration_display(cache_maintenance):
 
 		# Divider
 		dividing_label = ttk.Label(self.pane_one, text="Metadata Configuration")
-		dividing_label.configure(font=(14))
+		dividing_label.configure(font=(10))
 		dividing_label.pack(pady = 20)
 				
 		# Load up Additional Config Files
@@ -147,16 +147,19 @@ class configuration_display(cache_maintenance):
 					# Create Question Row
 					row = ttk.Frame(self.pane_one)
 					new_button = Button(row, text="New", command=self.configuration_yaml_creator)
-					label = Label(row, text=directory.title() + ':', anchor='w', width=30)
+					label =ttk.Label(row, text=directory.title() + ':', anchor='w', width=30)
 					label.pack(side=LEFT)
 					dropdown = ttk.OptionMenu(row, default_type, *types, command=self.configuration_textbox_frame_displayer)
 					dropdown.pack(side=LEFT)
 					new_button.pack(side=RIGHT)
-					row.pack(side=TOP, fill=X, padx=5, pady=5)
+					row.pack(side=TOP, fill=X)
 					
 					# Enlarge Option Menu
 					self.pane_one.update()
-					window_width = row.winfo_width()*.21 - new_button.winfo_width() - 5
+					if self.configuration_window.winfo_screenwidth() > 1100:
+						window_width = row.winfo_width()*.21 - new_button.winfo_width() - 5
+					else:
+						window_width = self.configuration_window.winfo_screenwidth()*.05 - new_button.winfo_width() - 5
 					dropdown.config(width=int(window_width))
 		
 		for directory in standard_directories:
@@ -164,23 +167,18 @@ class configuration_display(cache_maintenance):
 		
 		# Divider		
 		dividing_label = ttk.Label(self.pane_one, text="Additional Configuration Options")
-		dividing_label.configure(font=(14))
+		dividing_label.configure(font=(10))
 		dividing_label.pack(pady = 20)
 	
 		for directory in directories:
 			config_dropdown_displayer()
-		
-		# Divider		
-		dividing_label = ttk.Label(self.pane_one, text=" ")
-		dividing_label.configure(font=(14))
-		dividing_label.pack(pady = 20)
 	
 		self.button_frame = ttk.Frame(self.pane_one)
 		self.save_button = Button(self.button_frame, image=self.save_icon, command=self.configuration_defaults_saver)
 		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
 		self.save_button.pack()
-		self.configurations_frame.pack()
-		self.button_frame.pack(anchor=CENTER)
+		self.configurations_frame.pack(pady=5)
+		self.button_frame.pack(anchor=NW)
 
 	def default_taxonomy_frame_displayer(self):
 	# Creates Fields for Default Taxonomies
@@ -197,28 +195,28 @@ class configuration_display(cache_maintenance):
 			
 			# Create Taxonmy Loader Row
 			row = ttk.Frame(self.taxonomy_loader_frame)
-			row.pack(side=TOP, fill=X, padx=5, pady=5)
-			label = Label(row, text="Default " + level + " Taxonomy: ", anchor='w', width=30)
+			row.pack(side=TOP, fill=X)
+			label =ttk.Label(row, text="Default " + level + " Taxonomy: ", anchor='w', width=30)
 			label.pack(side=LEFT)
 			
 			# Load Default Taxonomy Paths
 			if level == 'Collection':
-				self.collection_entry = Entry(row)
+				self.collection_entry = ttk.Entry(row)
 				self.collection_entry.insert(0,self.taxonomy_level_defaults[0])
 				self.collection_entry.pack(side=LEFT, expand=YES, fill=X)
 				button = Button(row, text="Load", command=(lambda: self.database_loader("Collection",self.default_database_panels_displayer)))
 			if level == 'Item':
-				self.item_entry = Entry(row)
+				self.item_entry = ttk.Entry(row)
 				self.item_entry.insert(0,self.taxonomy_level_defaults[1])
 				self.item_entry.pack(side=LEFT, expand=YES, fill=X)
 				button = Button(row, text="Load" , command=(lambda: self.database_loader("Item",self.default_database_panels_displayer)))
 			if level == 'Segment':
-				self.segment_entry = Entry(row)
+				self.segment_entry = ttk.Entry(row)
 				self.segment_entry.insert(0,self.taxonomy_level_defaults[2])
 				self.segment_entry.pack(side=LEFT, expand=YES, fill=X)
 				button = Button(row, text="Load" , command=(lambda: self.database_loader("Segment",self.default_database_panels_displayer)))
 			
-			button.pack(side=RIGHT, padx=5)
+			button.pack(side=RIGHT)
 			
 		# Load other parameters
 		self.configurations_frame_displayer()
@@ -242,13 +240,13 @@ class configuration_display(cache_maintenance):
 		else:
 			# Create Default User Row
 			row = ttk.Frame(self.pane_one)
-			row.pack(side=TOP, fill=X, padx=5, pady=5)
-			label = Label(row, text="Default User: ", anchor='w', width=30)
+			row.pack(side=TOP, fill=X)
+			label =ttk.Label(row, text="Default User: ", anchor='w', width=30)
 			label.pack(side=LEFT)
 			edit_button = Button(row, text="Edit Users", command=self.edit_user_frame_displayer)
 			refresh_button = Button(row, text="Refresh Users", command=self.default_database_panels_displayer)
-			edit_button.pack(side=RIGHT,padx=5)
-			refresh_button.pack(side=RIGHT,padx=5)
+			edit_button.pack(side=RIGHT)
+			refresh_button.pack(side=RIGHT)
 
 			# Create Dropdown Menu
 			users_menu = OptionMenu(row, self.current_user, *users)
@@ -274,20 +272,20 @@ class configuration_display(cache_maintenance):
 		self.pane_two.place(relx=.5, relwidth=.4, rely =.05, relheight=1)
 
 		dividing_label = ttk.Label(self.pane_one, text="Database Configuration")
-		dividing_label.configure(font=(14))
+		dividing_label.configure(font=(10))
 		dividing_label.pack(pady = 10)
 		
 		# Create Database Loader Row
 		row = ttk.Frame(self.pane_one)
-		label = Label(row, text="Database: ", anchor='w', width=30)
-		entry = Entry(row)
+		label =ttk.Label(row, text="Database: ", anchor='w', width=30)
+		entry = ttk.Entry(row)
 		entry.insert(0,self.current_database)
 		button = Button(row, text="Load", command=(lambda: self.database_loader('d',self.default_database_panels_displayer)))
 		new_button = Button(row, text="New", command=self.database_creator)
-		row.pack(side=TOP, fill=X, padx=5, pady=5)
+		row.pack(side=TOP, fill=X)
 		label.pack(side=LEFT)
-		button.pack(side=RIGHT,padx=5)
-		new_button.pack(side=RIGHT,padx=5)
+		button.pack(side=RIGHT)
+		new_button.pack(side=RIGHT)
 		entry.pack(side=RIGHT, expand=YES, fill=X)
 
 		self.user_dropdown_displayer()

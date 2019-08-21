@@ -108,15 +108,15 @@ class taxonomy_display(cache_maintenance):
 		annotation_row = ttk.Frame(self.pane_two)
 		type_row = ttk.Frame(self.pane_two)
 		detail_row = ttk.Frame(self.pane_two)
-		self.taxonomy_iid_entry = Entry(iid_row)
-		self.taxonomy_annotation_entry = Entry(annotation_row)
-		self.taxonomy_type_entry = Entry(type_row)
-		self.taxonomy_detail_entry = Entry(detail_row)
+		self.taxonomy_iid_entry = ttk.Entry(iid_row)
+		self.taxonomy_annotation_entry = ttk.Entry(annotation_row)
+		self.taxonomy_type_entry = ttk.Entry(type_row)
+		self.taxonomy_detail_entry = ttk.Entry(detail_row)
 		entries = [(self.taxonomy_iid_entry,iid_row),(self.taxonomy_annotation_entry,annotation_row),(self.taxonomy_type_entry,type_row),(self.taxonomy_detail_entry,detail_row)]
 		
 		def row_builder(current_entry,current_row):
 			row = ttk.Frame(self.pane_two)
-			label = Label(row, text="ID", anchor='w', width=10)
+			label =ttk.Label(row, text="ID", anchor='w', width=10)
 			label.pack(side=LEFT)
 			current_entry.pack(side=RIGHT, expand=YES, fill=X)
 			current_row.pack(side=TOP, fill=X, padx=5, pady=5)

@@ -87,8 +87,8 @@ class database_display(cache_maintenance):
 		post_transcription = ' '.join(self.transcription_words[end:end+20])
 
 		# Set Highlighting / Background Colours
-		self.transcription_text.tag_config("faded", foreground="light gray", font=(14))
-		self.transcription_text.tag_config("normal", font=(14))
+		self.transcription_text.tag_config("faded", foreground="light gray", font=(10))
+		self.transcription_text.tag_config("normal", font=(10))
 
 		# Clear Existing Text
 		self.transcription_text.insert(END,"...")
@@ -100,7 +100,7 @@ class database_display(cache_maintenance):
 		self.transcription_text.insert(END,post_transcription, ('faded'))
 
 		# Display Textbox
-		self.transcription_text.grid(column = 0, row = 1, columnspan=10, sticky=NSEW, padx =10, pady = 10)
+		self.transcription_text.place(rely=.1, relwidth=1)
 		
 	def image_resetter(self):
 	# Resets cropped image to 100%	
@@ -258,13 +258,14 @@ class database_display(cache_maintenance):
 				row = ttk.Frame(tab)
 
 				# Create a label and text box
-				label = Label(row, text=question, anchor='w', width=25)
-				entry = Entry(row)
+				label = ttk.Label(row, text=question, anchor='w', width=25)
+				entry = ttk.Entry(row)
 				provenance =  OptionMenu(row, self.provenance_user, *self.users)
+				provenance.configure(width=int(4))
 
 				# Package Row
-				row.pack(side=TOP, fill=X, padx=5, pady=5)
-				provenance.pack(side=RIGHT)
+				row.pack(side=TOP, fill=X)
+				provenance.pack(side=RIGHT, padx=2)
 				label.pack(side=LEFT)
 				entry.pack(side=RIGHT, expand=YES, fill=X)
 
@@ -410,9 +411,10 @@ class database_display(cache_maintenance):
 			file_type_option = ttk.OptionMenu(row, self.default_segment_type, *self.types, command=self.metadata_fields_dropdown_displayer)
 		
 		# Display Drop Down
-		type_label = Label(row, text="Type:", width = 25)
+		type_label =ttk.Label(row, text="Type:", width = 25)
 		type_label.pack(side=LEFT)
 		file_type_option.pack(side=LEFT)
+		
 		row.pack(side=TOP, fill=X, padx=5, pady=5)	
 		
 		# Load Saved or Default Type
@@ -489,16 +491,18 @@ class database_display(cache_maintenance):
 		try:
 			self.pane_one.destroy()
 			self.pane_two.destroy()
-			self.pane_three.destroy()
+			self.button_frame.destroy()
 		except (NameError, AttributeError):
 			pass			
 
 		# Setup Segment Window Panels
-		self.segment_pane_one = ttk.Frame(self.database_window)
-		self.segment_pane_two = ttk.Frame(self.database_window)
-		split = 0.4
-		self.segment_pane_one.place(rely=0, relwidth=split, relheight=1)
-		self.segment_pane_two.place(y = 15, relx=split, relwidth=1.0-split, relheight=1)
+		self.pane_one = ttk.Frame(self.database_window)
+		self.pane_two = ttk.Frame(self.database_window)
+		self.button_frame = ttk.Frame(self.database_window)
+		self.button_frame.place(relwidth=1)
+		self.button_frame.configure(relief=RIDGE)
+		self.pane_one.place(y=42, relwidth=.49, relheight=1)
+		self.pane_two.place(y = 77, x=15, relx=.5, relwidth=.45, relheight=1)
 
 		# If the Segment is Text
 		if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
@@ -508,44 +512,36 @@ class database_display(cache_maintenance):
 			end = self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['end']
 
 			# Create text boxes
-			start_label = Label(self.segment_pane_two, text="Starting Word")
-			self.start_text = Entry(self.segment_pane_two)
-			end_label = Label(self.segment_pane_two, text="Ending Word")
-			self.end_text = Entry(self.segment_pane_two)
-
-			# Increase Font Size
-			self.start_text.configure(font=(14))
-			start_label.configure(font=(14))
-			self.end_text.configure(font=(14))
-			end_label.configure(font=(14))
+			self.coord_box = ttk.Frame(self.pane_two)
+			self.coord_box.place(relheight=.1, relwidth=1)
 			
+			# Starting Word
+			self.start_box = ttk.Frame(self.coord_box)
+			self.start_box.place(relwidth=.35, relx=.05)
+			start_label = ttk.Label(self.start_box, text="Starting Word")
+			self.start_text = ttk.Spinbox(self.start_box,from_=0, to=len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),command=(lambda: self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))))
+			start_label.pack()
+			self.start_text.pack()
+			
+			# Ending Word
+			self.end_box = ttk.Frame(self.coord_box)
+			self.end_box.place(relwidth=.35, relx=.45)
+			end_label = ttk.Label(self.end_box, text="Ending Word")
+			self.end_text = ttk.Spinbox(self.end_box,from_=0, to=len(self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()),command=lambda: self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))
+			end_label.pack()
+			self.end_text.pack()
+			
+			# Update Button
+			update_button = Button(self.coord_box, image=self.refresh_icon, command=(lambda: self.transcription_updater(0,len(self.transcription_words))))
+			update_button_tt = ToolTip(update_button, "Reload Full Text",delay=0.01)
+			update_button.place(relwidth=.1, relx=.9)
+
 			# Fill Entry Boxes
 			self.start_text.insert(4,start)
 			self.end_text.insert(4,end)
 
-			# Pack Labels and Entry Boxes into ttk.Frame
-			start_label.grid(column = 1, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
-			self.start_text.grid(column = 2, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
-			end_label.grid(column = 4, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
-			self.end_text.grid(column = 5, row = 0, sticky=NW, padx =10, pady = 10, ipady=7)
-			
-			# Create and Back Incrementers	
-			start_increment_frame = ttk.Frame(self.segment_pane_two)
-			start_plus_button = Button(start_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.start_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
-			start_minus_button = Button(start_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.start_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
-			start_plus_button.pack(side=TOP)
-			start_minus_button.pack(side=BOTTOM)
-			start_increment_frame.grid(column = 3, row = 0, sticky=W, padx =10, pady = 10)
-			
-			end_increment_frame = ttk.Frame(self.segment_pane_two)
-			end_plus_button = Button(end_increment_frame, image=self.plus_icon, command=(lambda:self.incrementer(self.end_text,1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
-			end_minus_button = Button(end_increment_frame, image=self.minus_icon, command=(lambda:self.incrementer(self.end_text,-1,self.transcription_updater(int(self.start_text.get()),int(self.end_text.get())))))
-			end_plus_button.pack(side=TOP)
-			end_minus_button.pack(side=BOTTOM)
-			end_increment_frame.grid(column = 6, row = 0, sticky=W, padx =10, pady = 10)
-
 			# Create Text Box
-			self.transcription_text = Text(self.segment_pane_two, wrap=WORD)
+			self.transcription_text = Text(self.pane_two, wrap=WORD)
 			
 			# Create Segmentation Binder
 			def text_selector(event):
@@ -561,11 +557,6 @@ class database_display(cache_maintenance):
 					
 			self.transcription_text.bind('<ButtonRelease>', text_selector)
 
-			# Create and Pack Update Button
-			update_button = Button(self.segment_pane_two, image=self.refresh_icon, command=(lambda: self.transcription_updater(0,len(self.transcription_words))))
-			update_button_tt = ToolTip(update_button, "Reload Full Text",delay=0.01)
-			update_button.grid(column = 8, row = 0, sticky=W, padx =10, pady = 10)
-
 			# Populate Text Box
 			self.transcription_updater(int(self.start_text.get()),int(self.end_text.get()))
 
@@ -578,41 +569,34 @@ class database_display(cache_maintenance):
 			bottom = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['bottom'])
 			right = int(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['right'])
 
-			def segmenter_box_maker(frame,label,entry):
+			def segmenter_box_maker(frame,label,entry,xcoord,ycoord,width):
 				# Create Label
-				frame_label = Label(frame, text=label)
-			
-				# Create Increment Buttons
-				button_frame = ttk.Frame(frame)
-				plus_button = Button(button_frame, image=self.plus_icon, command=(lambda:self.incrementer(entry,1,self.cropped_image_updater())))
-				minus_button = Button(button_frame, image=self.minus_icon, command=(lambda:self.incrementer(entry,-1,self.cropped_image_updater())))
-				plus_button.pack(side=TOP)
-				minus_button.pack(side=BOTTOM)
+				frame_label =ttk.Label(frame, text=label)
 				
 				# Pack All Pieces Together
-				frame_label.grid(column=0,row=0)
-				entry.grid(column=0,row=1)
-				button_frame.grid(column=1,row=0, rowspan=2)
+				frame_label.pack()
+				entry.pack()
+				frame.place(relx=xcoord,rely=ycoord,relwidth=width)
 			
 			# Create Segmenter Frame
-			self.segmenter_frame = ttk.Frame(self.segment_pane_two)		
+			self.segmenter_frame = ttk.Frame(self.pane_two)		
 			
 			# Create text boxes
 			self.top_box = ttk.Frame(self.segmenter_frame)
-			self.top_text = Entry(self.top_box)
-			segmenter_box_maker(self.top_box,'% from the Top',self.top_text)
+			self.top_text = ttk.Spinbox(self.top_box,from_=0, to=100,command=self.cropped_image_updater)
+			segmenter_box_maker(self.top_box,'% from the Top',self.top_text,.05,.1,.4)
 			
 			self.bottom_box = ttk.Frame(self.segmenter_frame)
-			self.bottom_text = Entry(self.bottom_box)
-			segmenter_box_maker(self.bottom_box,'% to the Bottom',self.bottom_text)
+			self.bottom_text = ttk.Spinbox(self.bottom_box,from_=0, to=100,command=self.cropped_image_updater)
+			segmenter_box_maker(self.bottom_box,'% to the Bottom',self.bottom_text,.05,.4,.4)
 			
 			self.left_box = ttk.Frame(self.segmenter_frame)
-			self.left_text = Entry(self.left_box)
-			segmenter_box_maker(self.left_box,'% from the Left',self.left_text)
+			self.left_text = ttk.Spinbox(self.left_box,from_=0, to=100,command=self.cropped_image_updater)
+			segmenter_box_maker(self.left_box,'% from the Left',self.left_text,.45,.1,.4)
 			
 			self.right_box = ttk.Frame(self.segmenter_frame)
-			self.right_text = Entry(self.right_box)
-			segmenter_box_maker(self.right_box,'% to the Right',self.right_text)
+			self.right_text = ttk.Spinbox(self.right_box,from_=0, to=100,command=self.cropped_image_updater)
+			segmenter_box_maker(self.right_box,'% to the Right',self.right_text,.45,.4,.4)
 
 			# Fill Entry Boxes
 			self.top_text.insert(4,top)
@@ -620,60 +604,47 @@ class database_display(cache_maintenance):
 			self.left_text.insert(4,left)
 			self.right_text.insert(4,right)
 
-			# Pack Labels and Entry Boxes into ttk.Frame
-			self.top_box.grid(column=1, row=1)
-			self.bottom_box.grid(column=1, row=3)
-			self.left_box.grid(column=3, row=1)
-			self.right_box.grid(column=3, row=3)
-
 			# Create and Pack Update Button
 			update_button = Button(self.segmenter_frame, image=self.refresh_icon, command=self.image_resetter)
 			update_button_tt = ToolTip(update_button, "Reload Full Image",delay=0.01)
-			update_button.grid(column=5, row = 1)
+			update_button.place(relx=.85,rely=.2,relheight=.25,relwidth=.1)
 			
 			# Create Image Canvas
-			self.segment_imageCanvas = Canvas(self.segment_pane_two)
-			self.segmenter_frame.grid_columnconfigure(0, minsize=50)
-			self.segmenter_frame.grid_columnconfigure(2, minsize=50)
-			self.segmenter_frame.grid_columnconfigure(4, minsize=50)
-			self.segmenter_frame.grid_rowconfigure(1, minsize=50)
-			self.segmenter_frame.place(rely = .5, relwidth=1,relheight=.5)
-			
+			self.segment_imageCanvas = Canvas(self.pane_two)
+			self.segmenter_frame.place(rely = .54, relwidth=1, relheight=.25)
 			self.cropped_image_updater()
 	
 		# Setup Segment Window Tabs (Left / Pane 1)
 
+		# Create "save", "reset" and "return" buttons
+		save_button = Button(self.button_frame , image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
+		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
+		refresh_button = Button(self.button_frame , image=self.refresh_icon, command=self.segment_panels_displayer)
+		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
+		return_button = Button(self.button_frame, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('m')))
+		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
+		return_button.pack(side=LEFT)
+		save_button.pack(side=LEFT)
+		refresh_button.pack(side=LEFT)
+		
 		# Set Up Tabs
-		self.segment_tab_control = ttk.Notebook(self.segment_pane_one)
+		self.segment_tab_control = ttk.Notebook(self.pane_one)
 		self.segment_tab_one = ttk.Frame(self.segment_tab_control)
 		self.segment_tab_two = ttk.Frame(self.segment_tab_control)
 		self.segment_tab_three = ttk.Frame(self.segment_tab_control)
-
+		
 		# Pack Tabs into ttk.Frame
 		self.segment_tab_control.add(self.segment_tab_one, text='Bibliographic Information')
 		self.segment_tab_control.add(self.segment_tab_two, text='Annotations')
 		self.segment_tab_control.add(self.segment_tab_three, text='Notes')
 		self.segment_tab_control.pack(expand=1, fill='both')
 
-		# Create "save", "reset" and "return" buttons
-		buttonFrame = ttk.Frame(self.segment_pane_one)
-		save_button = Button(self.segment_pane_one, image=self.save_icon, command=(lambda: self.database_entry_saver('s')))
-		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
-		refresh_button = Button(self.segment_pane_one, image=self.refresh_icon, command=self.segment_panels_displayer)
-		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
-		return_button = Button(self.segment_pane_one, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('m')))
-		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
-		
-		buttonFrame.pack(anchor=NW)
-		return_button.pack(side=LEFT)
-		save_button.pack(side=LEFT)
-		refresh_button.pack(side=LEFT)
 
 		########################################
 		# Set up bibliographic information tab #
 		########################################
 
-		# Dislay Editor Box for Record 
+		# Display Editor Box for Record 
 		
 		# Create String Variable
 		self.provenance_segment_editor = StringVar(self.segment_tab_one)
@@ -688,10 +659,10 @@ class database_display(cache_maintenance):
 		row = ttk.Frame(self.segment_tab_one)
 
 		# Create a labels and dropdown
-		label = Label(row, text="Record Creator", anchor='w', width=25)
+		label =ttk.Label(row, text="Record Creator", anchor='w', width=25)
 		provenance =  OptionMenu(row, self.provenance_segment_editor, *self.users)		
 		modified_date = '{}/{}/{}'.format(self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2][6:8],self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2][4:6],self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][2][:4])
-		last_modified_label = Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
+		last_modified_label =ttk.Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
 
 		# Package Row
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -706,7 +677,7 @@ class database_display(cache_maintenance):
 		# Set up Annotations Tab #
 		##########################
 
-		# Dislay Editor Box for Tree 
+		# Display Editor Box for Tree 
 		
 		# Create String Variable
 		self.segment_annotation_editor = StringVar(self.segment_tab_two)
@@ -718,7 +689,7 @@ class database_display(cache_maintenance):
 		row = ttk.Frame(self.segment_tab_two)
 
 		# Create a labels and dropdown
-		label = Label(row, text="Current Annotator", anchor='w', width=25)
+		label =ttk.Label(row, text="Current Annotator", anchor='w', width=25)
 		provenance =  OptionMenu(row, self.segment_annotation_editor, *self.users)
 
 		# Package Row
@@ -727,26 +698,26 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		# Create Tree
-		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="50")
+		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="30")
 		self.annotation_tab_displayer(self.segment_tree,'s')
 		
 		####################
 		# Set up Notes Tab #
 		####################
 		
-		# Dislay Editor Box for Tree 
+		# Display Editor Box for Tree 
 		
 		# Create String Variable
-		self.segment_note_editor = StringVar(self.segment_tab_two)
+		self.segment_note_editor = StringVar(self.segment_tab_three)
 		
 		# Set initial value
 		self.segment_note_editor.set(self.default_user)
 	
 		# Create a row
-		row = ttk.Frame(self.segment_tab_two)
+		row = ttk.Frame(self.segment_tab_three)
 
 		# Create a labels and dropdown
-		label = Label(row, text="Current Annotator", anchor='w', width=25)
+		label =ttk.Label(row, text="Current Annotator", anchor='w', width=25)
 		provenance =  OptionMenu(row, self.segment_note_editor, *self.users)
 
 		# Package Row
@@ -755,25 +726,31 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		self.note_text = Text(self.segment_tab_three, wrap=WORD)
+		self.note_text.config(font=(10))
+		try:
+			self.note_text.insert("0.0",self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['nisaba:notes'][0])
+		except(KeyError):
+			pass
 		self.note_text.pack(expand=Y,fill=BOTH)
 	
 	def item_panels_displayer(self,focus):
 	# Creates Item Level Panels
 	
-		# Delete Previous Panels and Menus
 		try:
 			self.pane_one.destroy()
 			self.pane_two.destroy()
-			self.pane_three.destroy()
+			self.button_frame.destroy()
 		except (NameError, AttributeError):
-			pass
+			pass			
 
-		# Setup Item Window Panes
+		# Setup Segment Window Panels
 		self.pane_one = ttk.Frame(self.database_window)
 		self.pane_two = ttk.Frame(self.database_window)
-		split = 0.4
-		self.pane_one.place(rely=0, relwidth=split, relheight=1)
-		self.pane_two.place(y = 15, relx=split, relwidth=1.0-split, relheight=1)
+		self.button_frame = ttk.Frame(self.database_window)
+		self.button_frame.place(relwidth=1)
+		self.button_frame.configure(relief=RIDGE)
+		self.pane_one.place(y=42, relwidth=.45, relheight=1)
+		self.pane_two.place(y = 52, x=15, relx=.48, relwidth=.4, relheight=1)
 
 		####################################
 		# Setup Item Display Panel (Right) #
@@ -793,7 +770,7 @@ class database_display(cache_maintenance):
 
 			# Insert transcription in text box
 			self.transcription_text.insert("1.0",transcription)
-			self.transcription_text.configure(font=(14))
+			self.transcription_text.configure(font=(10))
 			
 			# Create Dropdown Menu
 			self.transcription_provenance_user = StringVar(self.pane_two)
@@ -803,7 +780,7 @@ class database_display(cache_maintenance):
 			
 			# Create Provenance Box
 			self.transcription_provenance_row = ttk.Frame(self.pane_two)
-			self.transcription_provenance_label = Label(self.transcription_provenance_row, text="Transcriber: ")
+			self.transcription_provenance_label =ttk.Label(self.transcription_provenance_row, text="Transcriber: ")
 			self.transcription_provenance = OptionMenu(self.transcription_provenance_row, self.transcription_provenance_user, *self.users)
 			
 			if self.database[self.collection_index]['items'][self.item_index]['transcription'][1] != '':
@@ -819,8 +796,8 @@ class database_display(cache_maintenance):
 		elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 
 			# Create text boxes
-			self.image_label = Label(self.pane_two, text="Image File")
-			self.image_filename = Entry(self.pane_two)
+			self.image_label =ttk.Label(self.pane_two, text="Image File")
+			self.image_filename = ttk.Entry(self.pane_two)
 
 			# Fill Entry Boxes
 			self.image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['image_file'])
@@ -884,16 +861,15 @@ class database_display(cache_maintenance):
 			self.item_tab_control.select(self.item_tab_three)
 		
 		# Create buttons for all tabs
-		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.add_button = Button(self.buttonFrame, image=self.add_icon,command=self.segment_adder)
+		self.add_button = Button(self.button_frame, image=self.add_icon,command=self.segment_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Segment",delay=0.01)
-		self.delete_segment_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
+		self.delete_segment_button = Button(self.button_frame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
 		delete_segment_tt = ToolTip(self.delete_segment_button, "Delete Selected Segment",delay=0.01)
-		self.save_button = Button(self.buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
+		self.save_button = Button(self.button_frame, image=self.save_icon, command=(lambda: self.database_entry_saver('i')))
 		save_button_tt = ToolTip(self.save_button, "Save Item",delay=0.01)
-		self.refresh_button = Button(self.buttonFrame, image=self.refresh_icon, command=(lambda: self.item_panels_displayer('m')))
+		self.refresh_button = Button(self.button_frame, image=self.refresh_icon, command=(lambda: self.item_panels_displayer('m')))
 		refresh_button_tt = ToolTip(self.refresh_button, "Reload Item",delay=0.01)
-		self.return_button = Button(self.buttonFrame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
+		self.return_button = Button(self.button_frame, image=self.up_level_icon, command=(lambda: self.collection_informer('')))
 		return_button_tt = ToolTip(self.return_button, "Return to Item View",delay=0.01)
 		
 		self.return_button.pack(side=LEFT)
@@ -901,14 +877,12 @@ class database_display(cache_maintenance):
 		self.refresh_button.pack(side=LEFT)
 		self.add_button.pack(side=LEFT)
 		self.delete_segment_button.pack(side=LEFT)
-		
-		self.buttonFrame.pack(anchor=NW)
 
 		########################################
 		# Set up Bibliographic Information Tab #
 		########################################
 
-		# Dislay Editor Box for Record 
+		# Display Editor Box for Record 
 			
 		# Create String Variable
 		self.provenance_item_editor = StringVar(self.item_tab_one)
@@ -923,10 +897,10 @@ class database_display(cache_maintenance):
 		row = ttk.Frame(self.item_tab_one)
 
 		# Create a label and dropdown
-		label = Label(row, text="Record Creator", anchor='w', width=25)
+		label =ttk.Label(row, text="Record Creator", anchor='w', width=25)
 		provenance =  OptionMenu(row, self.provenance_item_editor, *self.users)
 		modified_date = '{}/{}/{}'.format(self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2][6:8],self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2][4:6],self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2][:4])
-		last_modified_label = Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
+		last_modified_label =ttk.Label(row, text='Modified: ' + modified_date, anchor='w', width=25)
 
 		# Package Row
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -941,7 +915,7 @@ class database_display(cache_maintenance):
 		# Set up Annotations Tab #
 		##########################
 
-		# Dislay Editor Box for Tree 
+		# Display Editor Box for Tree 
 		
 		# Create String Variable
 		self.item_annotation_editor = StringVar(self.item_tab_two)
@@ -953,7 +927,7 @@ class database_display(cache_maintenance):
 		row = ttk.Frame(self.item_tab_two)
 
 		# Create a labels and dropdown
-		label = Label(row, text="Current Annotator", anchor='w', width=25)
+		label =ttk.Label(row, text="Current Annotator", anchor='w', width=25)
 		provenance =  OptionMenu(row, self.item_annotation_editor, *self.users)
 
 		# Package Row
@@ -962,10 +936,12 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		# Create Tree
-		self.item_tree = CheckboxTreeview(self.item_tab_two,height="50",)
+		self.item_tree = CheckboxTreeview(self.item_tab_two,height="30",)
 		self.annotation_tab_displayer(self.item_tree,'i')
 
-		# Set Up Segments Tab 
+		#######################
+		# Set Up Segments Tab #
+		#######################
 
 		# Set up segment list scrollbar
 		self.scrollbar = Scrollbar(self.item_tab_three)
@@ -1000,20 +976,26 @@ class database_display(cache_maintenance):
 			self.segments.config(yscrollcommand=self.scrollbar.set)
 			self.scrollbar.config(command=self.segments.yview)
 
-			# Bind seleection to event
+			# Bind selection to event
 			self.segments.bind('<Double-Button>', self.segment_informer)
 	
 	def collection_metadata_panel_displayer(self):
 	# Creates Collection Metadata Panel
 
-		# Delete Any Existing Information
+	
+		# Delete Previous Panels and Menus
 		try:
 			self.pane_one.destroy()
+			self.button_frame.destroy()
 		except (NameError, AttributeError):
-			pass
+			pass			
 
+		# Setup Segment Window Panels
+		self.button_frame = ttk.Frame(self.database_window)
+		self.button_frame.place(relwidth=1)
+		self.button_frame.configure(relief=RIDGE)
 		self.pane_one = ttk.Frame(self.database_window)
-		self.pane_one.place(relwidth=.5, relheight=1)
+		self.pane_one.place(y=42, relwidth=.45, relheight=1)
 		item_metadata_frame = ttk.Frame(self.pane_one)
 		item_metadata_buttonFrame = ttk.Frame(self.pane_one)
 		item_metadata_frame.pack(side=TOP, expand=True, fill=X, anchor='nw')
@@ -1029,7 +1011,7 @@ class database_display(cache_maintenance):
 				self.default_user = key
 		
 		#####################
-		# Dislay Editor Box #
+		# Display Editor Box #
 		#####################
 		
 		# Create String Variable
@@ -1045,10 +1027,10 @@ class database_display(cache_maintenance):
 		row = ttk.Frame(item_metadata_frame)
 
 		# Create a label and dropdown
-		label = Label(row, text="Record Creator", anchor='w', width=25)
+		label =ttk.Label(row, text="Record Creator", anchor='w', width=25)
 		provenance =  OptionMenu(row, self.provenance_collection_editor, *self.users)
 		modified_date = '{}/{}/{}'.format(self.database[self.collection_index]['schema:editor'][2][6:8],self.database[self.collection_index]['schema:editor'][2][4:6],self.database[self.collection_index]['schema:editor'][2][:4])
-		last_modified_label = Label(row, text='Last Modified: ' + modified_date, anchor='w', width=25)
+		last_modified_label =ttk.Label(row, text='Modified: ' + modified_date, anchor='w', width=25)
 		
 		# Package Row
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
@@ -1056,18 +1038,18 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		last_modified_label.pack(side=RIGHT)
 			
-		###################
-		# Dislay Metadata #
-		###################
+		####################
+		# Display Metadata #
+		####################
 		
 		# Display bibliographic form and create entries database
 		self.metadata_tab_displayer(item_metadata_frame, 'c')
 
 		# Create "save" button for all tabs
-		save_item_button = Button(item_metadata_buttonFrame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
+		save_item_button = Button(self.button_frame, image=self.save_icon, command=(lambda: self.database_entry_saver('c')))
 		save_item_button_tt = ToolTip(save_item_button, "Save Collection",delay=0.01)
 		
-		collections_list_button = Button(item_metadata_buttonFrame, image=self.up_level_icon, command=(lambda: self.database_panels_displayer(self.database_window)))
+		collections_list_button = Button(self.button_frame, image=self.up_level_icon, command=(lambda: self.database_panels_displayer(self.database_window)))
 		collections_list_button_tt = ToolTip(collections_list_button, "Return to Collections List",delay=0.01)
 		
 		collections_list_button.pack(side=LEFT)
@@ -1083,7 +1065,7 @@ class database_display(cache_maintenance):
 			pass
 
 		self.pane_two = ttk.Frame(self.database_window)
-		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
+		self.pane_two.place(y = 52, x=15, relx=.48, relwidth=.45, relheight=1)
 
 		# Setup scroll bar
 		scrollbar = Scrollbar(self.pane_two)
@@ -1168,9 +1150,12 @@ class database_display(cache_maintenance):
 			pass
 
 		# Setup Window Panes
+		self.button_frame = ttk.Frame(self.database_window)
+		self.button_frame.place(relwidth=1)
+		self.button_frame.configure(relief=RIDGE)
 		self.pane_one = ttk.Frame(self.database_window)
-		self.pane_one.place(rely=0, relwidth=1, relheight=1)
-
+		self.pane_one.place(y=42, relwidth=1, relheight=.8)
+		
 		##############################
 		# Collection Selection Panel #
 		##############################
@@ -1209,12 +1194,10 @@ class database_display(cache_maintenance):
 		items.bind('<Double-Button>', self.collection_informer)
 
 		# Add/Delete Collection Buttons
-		self.buttonFrame = ttk.Frame(self.pane_one)
-		self.add_collection_button = Button(self.buttonFrame,image=self.add_icon,command=self.collection_adder)
+		self.add_collection_button = Button(self.button_frame, image=self.add_icon,command=self.collection_adder)
 		add_collection_tt = ToolTip(self.add_collection_button, "Add Collection",delay=0.01)
-		self.delete_collection_button = Button(self.buttonFrame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database,str(items.curselection()[0]),'c')))
+		self.delete_collection_button = Button(self.button_frame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database,str(items.curselection()[0]),'c')))
 		delete_collection_tt = ToolTip(self.delete_collection_button, "Delete Selected Collection",delay=0.01)
-		self.buttonFrame.pack(anchor=W)
 		self.add_collection_button.pack(side=LEFT)
 		self.delete_collection_button.pack(side=LEFT)
 
@@ -1234,6 +1217,23 @@ class database_display(cache_maintenance):
 			self.database_window.destroy()
 		except (NameError, AttributeError):
 			pass
+			
+		# Set Name of Collections Frame	
+		self.database_window = window	
+			
+		# Set Style Information
+		window_width = self.database_window.winfo_screenwidth()
+		window_height = self.database_window.winfo_screenheight()
+		style = ttk.Style()		
+		style.configure("TLabel", font=('Calibri', 10))
+		style.configure("TEntry", font=('Calibri', 10))
+		style.configure("TNotebook", borderwidth=0)
+		style.configure("Tab", focuscolor=style.configure(".")["background"])
+		style.configure("TOptionMenu", focuscolor=style.configure(".")["background"])
+		style.configure("Checkbox.Treeview", font=('Calibri', 10))
+		style.configure('Checkbox.Treeview', rowheight=18)	
+		style.configure('TMenubutton', relief='flat')
+		
 			
 		# Set Icon Assets
 		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)
@@ -1261,8 +1261,5 @@ class database_display(cache_maintenance):
 		# This the field that is pulled in the listboxes for items
 		self.item_title_namespace = self.config['v_Collection_Title_Field']
 		
-		# Set Name of Collections ttk.Frame	
-		self.database_window = window
-		
-		# Open ttk.Frame
+		# Open Frame
 		self.database_panels_displayer(self.database_window)
