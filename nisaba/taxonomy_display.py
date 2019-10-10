@@ -20,7 +20,7 @@ class taxonomy_display(cache_maintenance):
 	#########################
 	#   Field Populators    #
 	#########################
-
+	
 	def taxon_branch_builder(self,database,key):
 	# Populates tree branches with data
 		

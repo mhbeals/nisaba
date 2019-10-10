@@ -62,7 +62,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.4')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.5')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project
@@ -103,7 +103,7 @@ def main():
 		edit_configuration = Button(main_pane_menu,text='Configuration', image=configuration_logo, compound="top", command=(lambda: option_switcher('c')))
 		edit_database = Button(main_pane_menu,text='Database', image=database_logo, compound="top", command=(lambda: option_switcher('d')))
 		edit_vocabulary = Button(main_pane_menu,text='Taxonomy', image=taxonomy_logo, compound="top", command=(lambda: option_switcher('t')))
-		search_database = Button(main_pane_menu,text='Search', image=search_logo, compound="top", command=(lambda: option_switcher('s')))
+		search_database = Button(main_pane_menu,text='Browse', image=search_logo, compound="top", command=(lambda: option_switcher('s')))
 		
 		# Display Menu Options
 		edit_configuration.place(relx=0.5, rely=0.1, anchor=CENTER)

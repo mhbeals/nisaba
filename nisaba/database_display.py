@@ -424,39 +424,51 @@ class database_display(cache_maintenance):
 	# Creates Annotation Tree Tab
 	
 		# Create Tree Structure
-		tree_name["columns"]=("one","two","three")
-		tree_name.column("#0")
-		tree_name.column("one")
-		tree_name.column("two")
+		tree_name["columns"]=("Type","Detail","")
+		tree_name.column("#0", minwidth=int(self.window_width/10), stretch=1)
+		tree_name.column("Type", minwidth=int(self.window_width/24),  stretch=1)
+		tree_name.column("Detail", minwidth=int(self.window_width), stretch=1)
 		tree_name.heading("#0",text="Annotation",anchor=W)
-		tree_name.heading("one", text="Type",anchor=W)
-		tree_name.heading("two", text="Detail",anchor=W)
-
+		tree_name.heading("Type", text="Type",anchor=W)
+		tree_name.heading("Detail", text="Detail",anchor=W)
+		
+		alpha_taxonomy = self.database_alphabetiser(self.taxonomy)
+		
 		# Create Root
-		for item,dictionary in self.taxonomy.items():
+		for taxon in alpha_taxonomy:
+		
+			for item,dictionary in self.taxonomy.items():
+			
+				if dictionary['iid'] == taxon:
 
-			top=tree_name.insert("", 1, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
+					top=tree_name.insert("", END, dictionary['iid'], text=dictionary['name'], values=(dictionary['type'],dictionary['definition']),open = True)
 
-			# Recursive Function to Go Through Unknown Number of Layers
-			def individual_branch_builder(child_dictionary,parent_branch):
+					# Recursive Function to Go Through Unknown Number of Layers
+					def individual_branch_builder(child_dictionary,parent_branch):
 
-				# Create Lambda Dictionary
-				x, d = -1, {}
+						alpha_child_taxonomy = self.database_alphabetiser(child_dictionary)	
+						
+						for taxon in alpha_child_taxonomy:	
+					
+							# Create Lambda Dictionary
+							x, d = -1, {}
+								
+							# Go through every key (numerical values) in current "children" dictionary
+							for new_key,new_dictionary in child_dictionary.items():
+							
+								if new_dictionary['iid'] == taxon:					
+									
+									# Advance Branch Lambda Variable
+									x = x + 1
 
-				# Go through every key (numerical values) in current "children" dictionary
-				for new_key,new_dictionary in child_dictionary.items():
+									# Create New Branch
+									d[x+1]=tree_name.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary[	'type'],new_dictionary['definition']))
 
-					# Advance Branch Lambda Variable
-					x = x + 1
-
-					# Create New Branch
-					d[x+1]=tree_name.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary[	'type'],new_dictionary['definition']))
-
-					# Re-Run Recursive Function with New "children" Dictionary
-					individual_branch_builder(new_dictionary['children'],d[x+1])
-
-			# Begin Recursive Function
-			individual_branch_builder(dictionary['children'],top)
+									# Re-Run Recursive Function with New "children" Dictionary
+									individual_branch_builder(new_dictionary['children'],d[x+1])
+										
+					# Begin Recursive Function
+					individual_branch_builder(dictionary['children'],top)		
 
 		# Highlight Those Already Saved
 		if level == 'i':
@@ -936,7 +948,7 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		# Create Tree
-		self.item_tree = CheckboxTreeview(self.item_tab_two,height="30",)
+		self.item_tree = CheckboxTreeview(self.item_tab_two,height="30")
 		self.annotation_tab_displayer(self.item_tree,'i')
 
 		#######################
@@ -1130,9 +1142,6 @@ class database_display(cache_maintenance):
 		self.add_audio_button.pack(side=RIGHT)
 		self.add_image_button.pack(side=RIGHT)
 		self.add_text_button.pack(side=RIGHT)
-		
-		
-		
 	
 	def database_panels_displayer(self,window):
 	# Display Database Panels
@@ -1222,8 +1231,8 @@ class database_display(cache_maintenance):
 		self.database_window = window	
 			
 		# Set Style Information
-		window_width = self.database_window.winfo_screenwidth()
-		window_height = self.database_window.winfo_screenheight()
+		self.window_width = self.database_window.winfo_screenwidth()
+		self.window_height = self.database_window.winfo_screenheight()
 		style = ttk.Style()		
 		style.configure("TLabel", font=('Calibri', 10))
 		style.configure("TEntry", font=('Calibri', 10))

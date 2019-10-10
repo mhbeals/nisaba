@@ -34,20 +34,26 @@ class search_display(cache_maintenance):
 		def individual_branch_builder(child_dictionary,parent_branch):
 		# Recursive Function to Go Through an Unknown Number of Layers
 
-			# Create Lambda Dictionary
-			x, d = -1, {}
+			alpha_child_taxonomy = self.database_alphabetiser(child_dictionary)	
+						
+			for taxon in alpha_child_taxonomy:	
+			
+				# Create Lambda Dictionary
+				x, d = -1, {}
 
-			# Go Through Every Key (Numerical Values) in Current "children" Dictionary
-			for new_key,new_dictionary in child_dictionary.items():
+				# Go Through Every Key (Numerical Values) in Current "children" Dictionary
+				for new_key,new_dictionary in child_dictionary.items():
 
-				# Advance Branch Lambda Variable
-				x = x + 1
+					if new_dictionary['iid'] == taxon:
+				
+						# Advance Branch Lambda Variable
+						x = x + 1
 
-				# Create New Branch
-				d[x+1]=self.search_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
+						# Create New Branch
+						d[x+1]=self.search_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
 
-				# Re-Run Recursive Function with New "children" Dictionary
-				individual_branch_builder(new_dictionary['children'],d[x+1])
+						# Re-Run Recursive Function with New "children" Dictionary
+						individual_branch_builder(new_dictionary['children'],d[x+1])
 
 		# Begin Recursive Function
 		individual_branch_builder(dictionary['children'],top)
@@ -83,14 +89,17 @@ class search_display(cache_maintenance):
 		self.note_text = Text(self.pane_two_bottom_right, wrap=WORD)
 		self.note_text.configure(font=(10))
 		self.note_text.pack(anchor="nw", expand=Y, fill=BOTH)
-		full_note = self.database[selection_coordinates[0]]['items'][selection_coordinates[1]]['segments'][selection_coordinates[2]]['nisaba:notes']
-		
-		note = full_note[0]
-		signature = full_note[1]
-		date = '{}/{}/{}'.format(full_note[2][6:8],full_note[2][4:6],full_note[2][:4])
-		
-		notes = '{} -{} ({})'.format(note,signature,date)
-		self.note_text.insert("0.0",notes)
+		try:
+			full_note = self.database[selection_coordinates[0]]['items'][selection_coordinates[1]]['segments'][selection_coordinates[2]]['nisaba:notes']
+		except(KeyError):
+			pass
+		else:
+			note = full_note[0]
+			signature = full_note[1]
+			date = '{}/{}/{}'.format(full_note[2][6:8],full_note[2][4:6],full_note[2][:4])
+			
+			notes = '{} -{} ({})'.format(note,signature,date)
+			self.note_text.insert("0.0",notes)
 	
 	def segment_displayer(self,selection_coordinates):
 	
@@ -262,7 +271,12 @@ class search_display(cache_maintenance):
 									
 										if 'fabio:pageRange' in self.database[collection_number]['items'][item_number]:
 		
-											display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
+											if 'dc:description' in self.database[collection_number]['items'][item_number]['segments'][segment_number]:
+		
+												display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
+												
+											else:
+												display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
 											
 										else: display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
 
@@ -299,7 +313,6 @@ class search_display(cache_maintenance):
 			style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 8)) # Modify the font of the body
 			style.configure('Treeview', rowheight=14)
 
-	
 		# Create Tree
 		self.search_tree = ttk.Treeview(self.pane_one,height=int(window_height),selectmode='browse',show='tree',style="Treeview")
 
