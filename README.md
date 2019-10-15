@@ -1,10 +1,8 @@
-# Nisaba 0.3.5
+# Nisaba 0.3.7
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
-
-### Nisaba 0.3.7
 
 + Fixed "duplicating add bar" bug
 
