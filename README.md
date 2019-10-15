@@ -1,13 +1,12 @@
-# Nisaba 0.3.4
+# Nisaba 0.3.5
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-# Nisaba 0.3.4
+### Nisaba 0.3.7
 
-+ Improved layout for low resolution screens
-+ Some bug fixes throughout
++ Fixed "duplicating add bar" bug
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

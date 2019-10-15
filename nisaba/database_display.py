@@ -1073,12 +1073,15 @@ class database_display(cache_maintenance):
 		# Delete Any Existing Information
 		try:
 			self.pane_two.destroy()
+			self.item_panel.destroy()
 		except (NameError, AttributeError):
 			pass
 
 		self.pane_two = ttk.Frame(self.database_window)
 		self.pane_two.place(y = 55, x=15, relx=.48, relwidth=.45, relheight=1)
-
+		self.item_panel = ttk.Frame(self.button_frame)
+		self.item_panel.pack(side=RIGHT)
+		
 		# Setup scroll bar
 		scrollbar = Scrollbar(self.pane_two)
 		scrollbar.pack(side=RIGHT,fill=Y)
@@ -1123,18 +1126,18 @@ class database_display(cache_maintenance):
 
 		# Bind selected item to event
 		items_list.bind('<Double-Button>', self.item_informer)
-
-		# Create "save" button for all tabs
 		
-		self.add_text_button = Button(self.button_frame, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
+		# Create add/delete item buttons
+		
+		self.add_text_button = Button(self.item_panel, image=self.text_icon, command=(lambda t="t": self.item_adder(t)))
 		add_item_button_tt = ToolTip(self.add_text_button, "Add Text Item",delay=0.01)
-		self.add_image_button = Button(self.button_frame, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
+		self.add_image_button = Button(self.item_panel, image=self.image_icon, command=(lambda t="i": self.item_adder(t)))
 		add_image_button_tt = ToolTip(self.add_image_button, "Add Image Item",delay=0.01)
-		self.add_audio_button = Button(self.button_frame, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
+		self.add_audio_button = Button(self.item_panel, image=self.audio_icon, command=(lambda t="a": self.item_adder(t)))
 		add_audio_button_tt = ToolTip(self.add_audio_button, "Add Audio Item",delay=0.01)
-		self.add_audiovisual_button = Button(self.button_frame, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
+		self.add_audiovisual_button = Button(self.item_panel, image=self.audiovisual_icon, command=(lambda t="av": self.item_adder(t)))
 		add_audiovisual_button_tt = ToolTip(self.add_audiovisual_button, "Add Audio-Visual Item",delay=0.01)
-		self.delete_item_button = Button(self.button_frame, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
+		self.delete_item_button = Button(self.item_panel, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'],str(items_list.curselection()[0]),'i')))
 		delete_item_tt = ToolTip(self.delete_item_button, "Delete Selected Item",delay=0.01)
 		
 		self.delete_item_button.pack(side=RIGHT)

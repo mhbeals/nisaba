@@ -1,6 +1,10 @@
 # Change Log
 
-# Nisaba 0.3.4
+## Nisaba 0.3.7
+
++ Fixed "duplicating add bar" bug
+
+## Nisaba 0.3.4
 
 + Improved layout for low resolution screens
 + Some bug fixes throughout
