@@ -278,7 +278,7 @@ class search_display(cache_maintenance):
 											else:
 												display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
 											
-										else: display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
+										else: display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
 
 									# If the segment is an image
 									elif self.database[collection_number]['items'][item_number]['item_type'] == "i":

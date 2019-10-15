@@ -1,10 +1,10 @@
-# Nisaba 0.3.7
+# Nisaba 0.3.7.1
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Fixed "duplicating add bar" bug
++ Fixed "Missing Description when no page number" bug
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

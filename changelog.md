@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.7.1
+
++ Fixed "Missing Description when no page number" bug
+
 ## Nisaba 0.3.7
 
 + Fixed "duplicating add bar" bug
