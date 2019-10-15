@@ -1,10 +1,10 @@
-# Nisaba 0.3.7.1
+# Nisaba 0.3.8
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Fixed "Missing Description when no page number" bug
++ Fixed basic text selection bug when selection last word (Issue #18)
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

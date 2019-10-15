@@ -1,8 +1,8 @@
 # Change Log
 
-## Nisaba 0.3.7.1
+## Nisaba 0.3.8
 
-+ Fixed "Missing Description when no page number" bug
++ Fixed basic text selection bug when selection last word (Issue #18)
 
 ## Nisaba 0.3.7
 

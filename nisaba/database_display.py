@@ -557,9 +557,11 @@ class database_display(cache_maintenance):
 			
 			# Create Segmentation Binder
 			def text_selector(event):
-				
+								
 				try:
 					selection_index = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].find(self.transcription_text.selection_get())
+					if selection_index == -1:
+						selection_index = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].find(self.transcription_text.selection_get()[:-1])
 				except(TclError):
 					pass
 				else:
