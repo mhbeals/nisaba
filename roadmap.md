@@ -31,7 +31,7 @@
 + Save all data as Human-Readable Markdown Collection (MD)
 
 ## Online Support
-+ **Pull Database from Internet [v.0.3.0]
++ **Pull Database from Internet [v.0.3.0]**
 + Pull Image from Internet
 + Pull Audio File from Internet
 + Pull Video File from Internet
