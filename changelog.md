@@ -6,7 +6,7 @@
 
 ## Nisaba 0.3.8
 
-+ Fixed basic text selection bug when selection last word (Issue #18)
++ Fixed basic text selection bug when selecting last word (Issue #18)
 
 ## Nisaba 0.3.7
 
