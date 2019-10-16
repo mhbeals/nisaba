@@ -569,10 +569,10 @@ class database_maintenance:
 		############
 
 		# Save RDF
-		with open(Path(self.database_path) / 'sample_database.ttl', 'wb') as file:
-			file.write(self.database_rdf.serialize(format='turtle'))
+		#with open(Path(self.database_path) / 'sample_database.ttl', 'wb') as file:
+			#file.write(self.database_rdf.serialize(format='turtle'))
 
 		# Save Date-Stamped Backup of RDF in Backups
-		backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
-		with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
-			file.write(self.database_rdf.serialize(format='turtle'))
+		#backup_filename = 'database_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.ttl'
+		#with open(Path(self.database_backup_path) / backup_filename, 'wb') as file:
+			#file.write(self.database_rdf.serialize(format='turtle'))

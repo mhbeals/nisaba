@@ -1,10 +1,10 @@
-# Nisaba 0.3.8
+# Nisaba 0.3.8.1
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Fixed basic text selection bug when selection last word (Issue #18)
++ Improved button layout (Issue #20)
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

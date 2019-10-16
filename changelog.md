@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.8.1
+
++ Improved button layout (Issue #20)
+
 ## Nisaba 0.3.8
 
 + Fixed basic text selection bug when selection last word (Issue #18)
