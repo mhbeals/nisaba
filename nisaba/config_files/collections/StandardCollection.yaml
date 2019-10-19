@@ -1,6 +1,7 @@
 'dc:title' : 'Title:'
 'fabio:hasShortTitle' : 'Short Title:'
 'pro:editor' : 'Editor:'
+'pro:translator' : 'Translator:'
 'dc:creator' : 'Author:'
 'prism:volume' : 'Volume Number:'
 'fabio:hasVolumeCount' : 'Number of Volumes:'
@@ -18,4 +19,5 @@
 'dc:rightsHolder' : 'Holding Institution:'
 'dc:rightsHolder_reference' : 'Institutional Reference:'
 'fabio:Abstract' : 'Abstract:'
+
 

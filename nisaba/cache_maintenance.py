@@ -1,9 +1,11 @@
 try:
 	# Used when executing with Python
 	from database_maintenance import *
+	from scrollframe_builder import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
+	from nisaba.scrollframe_builder import *
 
 class cache_maintenance(database_maintenance):
 

@@ -3,11 +3,13 @@ try:
 	from database_maintenance import *
 	from cache_maintenance import *
 	from tooltip_creation import *
+	from scrollframe_builder import *
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
 	from nisaba.cache_maintenance import *
 	from nisaba.tooltip_creation import *
+	from nisaba.scrollframe_builder import *
 
 # Import TKinter Libraries
 from tkinter import *

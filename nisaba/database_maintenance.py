@@ -180,7 +180,7 @@ class database_maintenance:
 
 	def database_entry_saver(self, level):
 		# Saves Entries to Cached Database
-
+		
 		#############
 		# All Items #
 		#############
@@ -221,7 +221,7 @@ class database_maintenance:
 
 		# If Saving an Mid-Level Item
 		if level == 'i':
-
+		
 			# Update the item bibliography type
 			self.database[self.collection_index]['items'][self.item_index]['fabio_type'] = self.item_type_namespace + self.default_item_type.get()
 
@@ -240,12 +240,12 @@ class database_maintenance:
 			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is a Text, Save the Transcription
-			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':
+			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':			
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-
+				
 			# If it is an Image, Save the Filepath
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == 'i':
 				self.database[self.collection_index]['items'][self.item_index]['image_file'] = self.image_filename.get()

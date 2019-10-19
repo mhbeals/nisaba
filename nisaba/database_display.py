@@ -749,6 +749,14 @@ class database_display(cache_maintenance):
 			pass
 		self.note_text.pack(expand=Y,fill=BOTH)
 	
+		def transcription_setter():
+			self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
+			self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
+			self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+			
+		self.database_window.bind('<Control-s>', self.database_entry_saver('s') )
+	
 	def item_panels_displayer(self,focus):
 	# Creates Item Level Panels
 	
@@ -880,7 +888,7 @@ class database_display(cache_maintenance):
 		if focus == 's':
 			self.item_tab_control.select(self.item_tab_three)
 		
-		# Create buttons for all tabs
+		# Create buttons for all tabs		
 		self.add_button = Button(self.button_frame_left, image=self.add_icon,command=self.segment_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Segment",delay=0.01)
 		self.delete_segment_button = Button(self.button_frame_left, image=self.delete_icon, command=(lambda: self.unit_deleter(self.database[self.collection_index]['items'][self.item_index]['segments'],str(self.segments.curselection()[0]),'s')))
@@ -1000,6 +1008,14 @@ class database_display(cache_maintenance):
 			# Bind selection to event
 			self.segments.bind('<Double-Button>', self.segment_informer)
 	
+		def transcription_setter():
+			self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
+			self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
+			self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+			
+		self.database_window.bind('<Control-s>', self.database_entry_saver('i') )
+				
 	def collection_metadata_panel_displayer(self):
 	# Creates Collection Metadata Panel
 	
@@ -1077,7 +1093,7 @@ class database_display(cache_maintenance):
 		
 		collections_list_button.pack(side=LEFT)
 		save_item_button.pack(side=LEFT)
-				
+		
 	def collection_item_list_panel_displayer(self):
 	# Creates Collection Item-List Panel
 
@@ -1223,6 +1239,7 @@ class database_display(cache_maintenance):
 		delete_collection_tt = ToolTip(self.delete_collection_button, "Delete Selected Collection",delay=0.01)
 		self.add_collection_button.pack(side=LEFT)
 		self.delete_collection_button.pack(side=LEFT)
+		
 
 	########################
 	#         Main         #
