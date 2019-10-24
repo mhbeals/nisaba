@@ -190,9 +190,9 @@ class database_maintenance:
 
 		# For Every Item
 		for entry in self.collection_entries:
-
+		
 			# Update the Record Editor Metadata
-			if self.provenance_collection_editor != self.database[self.collection_index]['schema:editor'][0]:
+			if self.provenance_collection_editor.get() != self.database[self.collection_index]['schema:editor'][0]:
 				self.database[self.collection_index]['schema:editor'][0] = self.provenance_collection_editor.get()
 				self.database[self.collection_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -226,7 +226,7 @@ class database_maintenance:
 			self.database[self.collection_index]['items'][self.item_index]['fabio_type'] = self.item_type_namespace + self.default_item_type.get()
 
 			# Update the Record Editor Metadata
-			if self.provenance_item_editor != self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0]:
+			if self.provenance_item_editor.get() != self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0]:
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][0] = self.provenance_item_editor.get()
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -240,7 +240,7 @@ class database_maintenance:
 			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# If it is a Text, Save the Transcription
-			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':			
+			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':		
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -290,7 +290,7 @@ class database_maintenance:
 			self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['fabio_type'] = self.default_segment_type.get()
 
 			# Update the Record Editor Metadata
-			if self.provenance_segment_editor != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0]:
+			if self.provenance_segment_editor.get() != self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0]:
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][0] = self.provenance_segment_editor.get()
 				self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['schema:editor'][1] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 

@@ -1,11 +1,10 @@
-# Nisaba 0.3.8.2
+# Nisaba 0.3.8.3
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Add cntl+s functionality (Issue #25) to items and segments
-+ Add scrolling window functionality (Issue #23) through scrollframe_builder.py
++ Add 'backspace' functionality (Issue #23)
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

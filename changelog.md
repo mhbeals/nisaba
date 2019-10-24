@@ -1,5 +1,14 @@
 # Change Log
 
+## Nisaba 0.3.8.3
+
++ Add 'backspace' functionality (Issue #23)
+
+## Nisaba 0.3.8.2
+
++ Add cntl+s functionality (Issue #25) to items and segments
++ Add scrolling window functionality (Issue #23) through scrollframe_builder.py
+
 ## Nisaba 0.3.8.1
 
 + Improved button layout (Issue #20)

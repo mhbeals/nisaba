@@ -748,15 +748,10 @@ class database_display(cache_maintenance):
 		except(KeyError):
 			pass
 		self.note_text.pack(expand=Y,fill=BOTH)
-	
-		def transcription_setter():
-			self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
-			self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
-			self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			
-		self.database_window.bind('<Control-s>', self.database_entry_saver('s') )
-	
+		
+		# Create save event
+		self.database_window.bind("<Control-s>", self.database_entry_saver('s'))
+		
 	def item_panels_displayer(self,focus):
 	# Creates Item Level Panels
 	
@@ -795,7 +790,7 @@ class database_display(cache_maintenance):
 
 			# Create wrapping text box
 			self.transcription_text = Text(self.pane_two, wrap=WORD)
-
+			
 			# Insert transcription in text box
 			self.transcription_text.insert("1.0",transcription)
 			self.transcription_text.configure(font=(10))
@@ -1007,14 +1002,9 @@ class database_display(cache_maintenance):
 
 			# Bind selection to event
 			self.segments.bind('<Double-Button>', self.segment_informer)
-	
-		def transcription_setter():
-			self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
-			self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
-			self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			
-		self.database_window.bind('<Control-s>', self.database_entry_saver('i') )
+
+		# Create save event
+		self.database_window.bind("<Control-s>", self.database_entry_saver('i'))
 				
 	def collection_metadata_panel_displayer(self):
 	# Creates Collection Metadata Panel
