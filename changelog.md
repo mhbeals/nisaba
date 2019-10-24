@@ -2,7 +2,7 @@
 
 ## Nisaba 0.3.8.3
 
-+ Add 'backspace' functionality (Issue #23)
++ Revert Control-S functionality (Issue #25)
 
 ## Nisaba 0.3.8.2
 

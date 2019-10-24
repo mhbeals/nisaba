@@ -749,9 +749,6 @@ class database_display(cache_maintenance):
 			pass
 		self.note_text.pack(expand=Y,fill=BOTH)
 		
-		# Create save event
-		self.database_window.bind("<Control-s>", self.database_entry_saver('s'))
-		
 	def item_panels_displayer(self,focus):
 	# Creates Item Level Panels
 	
@@ -1002,9 +999,6 @@ class database_display(cache_maintenance):
 
 			# Bind selection to event
 			self.segments.bind('<Double-Button>', self.segment_informer)
-
-		# Create save event
-		self.database_window.bind("<Control-s>", self.database_entry_saver('i'))
 				
 	def collection_metadata_panel_displayer(self):
 	# Creates Collection Metadata Panel

@@ -4,7 +4,7 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Add 'backspace' functionality (Issue #23)
++ Revert Control-S functionality (Issue #25)
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 
