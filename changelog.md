@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.8.4
+
++ Repaired error in segmenting text when text has double-spaces instead of spaces. This causes a loss of paragraphing as well but is the best solution for PDF C&P so far
+
 ## Nisaba 0.3.8.3
 
 + Revert Control-S functionality (Issue #25)

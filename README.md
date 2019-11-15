@@ -1,10 +1,10 @@
-# Nisaba 0.3.8.3
+# Nisaba 0.3.8.4
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Revert Control-S functionality (Issue #25)
++ Repaired error in segmenting text when text has double-spaces instead of spaces. This causes a loss of paragraphing as well but is the best solution for PDF C&P so far
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

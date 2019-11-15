@@ -241,7 +241,7 @@ class database_maintenance:
 
 			# If it is a Text, Save the Transcription
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':		
-				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = self.transcription_text.get("1.0",END).rstrip()
+				self.database[self.collection_index]['items'][self.item_index]['transcription'][0] = re.sub('\s+',' ',self.transcription_text.get("1.0",END).rstrip())
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][1] = self.transcription_provenance_user.get()
 				self.database[self.collection_index]['items'][self.item_index]['transcription'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 				self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
