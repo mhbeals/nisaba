@@ -3,8 +3,10 @@ try:
 	from database_maintenance import *
 	from cache_maintenance import *
 	from tooltip_creation import *
+	from taxonomy_display import *
 except ModuleNotFoundError:
 	# Used when calling as library
+	from nisaba.taxonomy_display import *
 	from nisaba.database_maintenance import *
 	from nisaba.cache_maintenance import *
 	from nisaba.tooltip_creation import *
@@ -637,7 +639,7 @@ class database_display(cache_maintenance):
 		save_button_tt = ToolTip(save_button, "Save Segment",delay=0.01)
 		refresh_button = Button(self.button_frame , image=self.refresh_icon, command=self.segment_panels_displayer)
 		refresh_button_tt = ToolTip(refresh_button, "Reload Segment",delay=0.01)
-		return_button = Button(self.button_frame, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('m')))
+		return_button = Button(self.button_frame, image=self.up_level_icon, command=(lambda: self.item_panels_displayer('s')))
 		return_button_tt = ToolTip(return_button, "Return to Item View",delay=0.01)
 		return_button.pack(side=LEFT)
 		save_button.pack(side=LEFT)
@@ -706,13 +708,23 @@ class database_display(cache_maintenance):
 
 		# Create a labels and dropdown
 		label =ttk.Label(row, text="Current Annotator", anchor='w', width=25)
-		provenance =  OptionMenu(row, self.segment_annotation_editor, *self.users)
+		provenance =  OptionMenu(row, self.segment_annotation_editor, *self.users)        
 
 		# Package Row
 		row.pack(side=TOP, fill=X, padx=5, pady=5)
 		label.pack(side=LEFT)
 		provenance.pack(side=LEFT)
 		
+		def taxonomy_switcher():
+			self.placeholder = [1,self.collection_index,self.item_index,self.segment_index]
+			self.database_entry_saver('s')
+			taxonomy_window = taxonomy_display()
+			taxonomy_window.taxonomy_viewer(self.database_window,self.placeholder)
+		
+		# Create "go to taxonomy" button
+		taxonomy_button = ttk.Button(row, text="Change Taxonomy",command = taxonomy_switcher)
+		taxonomy_button.pack(side=RIGHT)
+
 		# Create Tree
 		self.segment_tree=CheckboxTreeview(self.segment_tab_two,height="30")
 		self.annotation_tab_displayer(self.segment_tree,'s')
@@ -956,6 +968,15 @@ class database_display(cache_maintenance):
 		label.pack(side=LEFT)
 		provenance.pack(side=LEFT)
 		
+		def taxonomy_switcher():
+			self.database_entry_saver('i')
+			taxonomy_window = taxonomy_display()
+			taxonomy_window.taxonomy_viewer(self.database_window,True)
+		
+		# Create "go to taxonomy" button
+		taxonomy_button = ttk.Button(row, text="Change Taxonomy",command = taxonomy_switcher)
+		taxonomy_button.pack(side=RIGHT)
+        
 		# Create Tree
 		self.item_tree = CheckboxTreeview(self.item_tab_two,height="30")
 		self.annotation_tab_displayer(self.item_tree,'i')
@@ -977,10 +998,16 @@ class database_display(cache_maintenance):
 
 			# If the segment is text
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == "t":
-
-				# Obtain Snippet Transcription and Package for Display
-				transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()
-				display_item = ' '.join(transcription_words[dictionary['start']:dictionary['start']+10])
+            
+				try:
+					display_item = self.database[self.collection_index]['items'][self.item_index]['segments'][segment_number]['dc:description'][0]
+					transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()
+					display_item = display_item + ' (' + ' '.join(transcription_words[dictionary['start']:dictionary['start']+10]) + ')'
+                
+				except(KeyError):
+                	# Obtain Snippet Transcription and Package for Display
+					transcription_words = self.database[self.collection_index]['items'][self.item_index]['transcription'][0].split()
+					display_item = ' '.join(transcription_words[dictionary['start']:dictionary['start']+10])
 
 			# If the segment is an image
 			elif self.database[self.collection_index]['items'][self.item_index]['item_type'] == "i":
@@ -1257,7 +1284,6 @@ class database_display(cache_maintenance):
 		style.configure("Checkbox.Treeview", font=('Calibri', 10))
 		style.configure('Checkbox.Treeview', rowheight=18)	
 		style.configure('TMenubutton', relief='flat')
-		
 			
 		# Set Icon Assets
 		# Menu Bar Icons made by Pixel Buddha (https://www.flaticon.com/authors/pixel-buddha) from http://www.flaticon.com  CC-BY (http://creativecommons.org/licenses/by/3.0/)

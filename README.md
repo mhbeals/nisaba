@@ -1,10 +1,12 @@
-# Nisaba 0.3.8.4
+# Nisaba 0.3.8.5
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Repaired error in segmenting text when text has double-spaces instead of spaces. This causes a loss of paragraphing as well but is the best solution for PDF C&P so far
++ Added ability to quickly switch to taxonomy and return using up arrow
++ Fixed Browse not rendering entries without a description tag
++ Added description tag to segment list in database display
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

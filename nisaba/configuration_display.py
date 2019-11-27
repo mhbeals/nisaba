@@ -172,36 +172,16 @@ class configuration_display(cache_maintenance):
 		self.taxonomy_loader_frame = ttk.Frame(self.pane_one)
 		self.taxonomy_loader_frame.pack(side=TOP, fill=X)
 
-		# Create Taxonomy Levels
-		self.taxonomy_levels = ['Collection','Item','Segment']
-
-		for level in self.taxonomy_levels:
-
-			
-			# Create Taxonmy Loader Row
-			row = ttk.Frame(self.taxonomy_loader_frame)
-			row.pack(side=TOP, fill=X)
-			label =ttk.Label(row, text="Default " + level + " Taxonomy: ", anchor='w', width=30)
-			label.pack(side=LEFT)
-			
-			# Load Default Taxonomy Paths
-			if level == 'Collection':
-				self.collection_entry = ttk.Entry(row)
-				self.collection_entry.insert(0,self.taxonomy_level_defaults[0])
-				self.collection_entry.pack(side=LEFT, expand=YES, fill=X)
-				button = Button(row, text="Load", command=(lambda: self.database_loader("Collection",self.default_database_panels_displayer)))
-			if level == 'Item':
-				self.item_entry = ttk.Entry(row)
-				self.item_entry.insert(0,self.taxonomy_level_defaults[1])
-				self.item_entry.pack(side=LEFT, expand=YES, fill=X)
-				button = Button(row, text="Load" , command=(lambda: self.database_loader("Item",self.default_database_panels_displayer)))
-			if level == 'Segment':
-				self.segment_entry = ttk.Entry(row)
-				self.segment_entry.insert(0,self.taxonomy_level_defaults[2])
-				self.segment_entry.pack(side=LEFT, expand=YES, fill=X)
-				button = Button(row, text="Load" , command=(lambda: self.database_loader("Segment",self.default_database_panels_displayer)))
-			
-			button.pack(padx=1,pady=1,side=RIGHT)
+        # Create Taxonmy Loader Row
+		row = ttk.Frame(self.taxonomy_loader_frame)
+		row.pack(side=TOP, fill=X)
+		label =ttk.Label(row, text="Default Taxonomy: ", anchor='w', width=30)
+		label.pack(side=LEFT)   
+		self.collection_entry = ttk.Entry(row)
+		self.collection_entry.insert(0,self.current_taxonomy)
+		self.collection_entry.pack(side=LEFT, expand=YES, fill=X)
+		button = Button(row, text="Load", command=(lambda: self.database_loader("Collection",self.default_database_panels_displayer)))
+		button.pack(padx=1,pady=1,side=RIGHT)
 			
 		# Load other parameters
 		self.configurations_frame_displayer()
@@ -272,7 +252,7 @@ class configuration_display(cache_maintenance):
 		self.user_dropdown_displayer()
 
 	##############################
-	#           Main             #
+	#		   Main		     #
 	##############################		
 		
 	def configuration_viewer(self,window):

@@ -41,7 +41,7 @@ def main():
 				database_window.database_window_viewer(main_pane_viewer)
 			elif switch == 't': 
 				taxonomy_window = taxonomy_display()
-				taxonomy_window.taxonomy_viewer(main_pane_viewer)
+				taxonomy_window.taxonomy_viewer(main_pane_viewer,True)
 			elif switch == 's':
 				search_window = search_display()
 				search_window.search_viewer(main_pane_viewer)
@@ -62,7 +62,7 @@ def main():
 
 		# Setup Taxonomy Window
 		main_window = Tk()
-		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.8.4')
+		main_window.title('Nisaba: Multi-Modal Annotation v.0.3.8.5')
 		
 		# Place Icon
 		# "Writing" by IQON from the Noun Project

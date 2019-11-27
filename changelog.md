@@ -1,5 +1,11 @@
 # Change Log
 
+## Nisaba 0.3.8.5
+
++ Added ability to quickly switch to taxonomy and return using up arrow
++ Fixed Browse not rendering entries without a description tag
++ Added description tag to segment list in database display
+
 ## Nisaba 0.3.8.4
 
 + Repaired error in segmenting text when text has double-spaces instead of spaces. This causes a loss of paragraphing as well but is the best solution for PDF C&P so far

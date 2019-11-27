@@ -144,7 +144,7 @@ class cache_maintenance(database_maintenance):
 		self.taxonomy[i]['children'] = {}
 
 		# Reload Taxonomy Viewer
-		self.taxonomy_viewer(self.taxonomy_window)
+		self.taxonomy_viewer(self.taxonomy_window,self.switcher_active)
 
 	def child_adder(self,database,key):
 		# Add a Taxon Child
@@ -173,7 +173,7 @@ class cache_maintenance(database_maintenance):
 			file.write(savedata)
 
 		# Reload Taxonomy Viewer
-		self.taxonomy_viewer(self.taxonomy_window)
+		self.taxonomy_viewer(self.taxonomy_window,self.switcher_active)
 	
 	##############################
 	#           Deleting         #
@@ -198,7 +198,7 @@ class cache_maintenance(database_maintenance):
 		del database[key]
 
 		# Reload Taxonomy Viewer
-		self.taxonomy_viewer(self.taxonomy_window)
+		self.taxonomy_viewer(self.taxonomy_window,self.switcher_active)
 
 	def unit_deleter(self,database,key,level):
 	

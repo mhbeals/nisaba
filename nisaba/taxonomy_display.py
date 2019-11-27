@@ -1,15 +1,18 @@
 try:
 	# Used when executing with Python
+	from database_display import *
 	from database_maintenance import *
 	from cache_maintenance import *
 	from tooltip_creation import *
 	from scrollframe_builder import *
+    
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
 	from nisaba.cache_maintenance import *
 	from nisaba.tooltip_creation import *
 	from nisaba.scrollframe_builder import *
+	from nisaba.database_display import *
 
 # Import TKinter Libraries
 from tkinter import *
@@ -55,7 +58,7 @@ class taxonomy_display(cache_maintenance):
 						x = x + 1
 						
 						# Create New Branch
-						d[x+1]=self.taxonomy_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
+						d[x+1]=self.taxonomy_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = False)
 
 				# Re-Run Recursive Function with New "children" Dictionary
 				individual_branch_builder(new_dictionary['children'],d[x+1])
@@ -169,11 +172,22 @@ class taxonomy_display(cache_maintenance):
 		self.taxonomy_tree.pack()
 		self.taxonomy_tree.bind('<Button-1>', self.taxon_informer)
 		
+		def segment_returner():
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+        
 		# Create Add/Save/Delete Button Set
 		row = ttk.Frame(self.pane_one)
 		self.add_button = Button(row, image=self.add_icon, command=self.root_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Root Taxon",delay=0.01)
 		self.add_button.pack(side=LEFT)
+        
+        # If this is a switcher
+		if self.switcher_active == True:
+			self.return_button = ttk.Button(row, image=self.up_level_icon, command=segment_returner)
+			self.return_button_tt = ToolTip(self.return_button, "Return to Segment Annotation",delay=0.01)
+			self.return_button.pack(side=LEFT)
+		
 		self.delete_button = Button(row, image=self.delete_icon, command=(lambda: self.iid_iterator(self.taxonomy,self.taxonomy_iid_entry.get(),self.element_deleter)))
 		delete_button_tt = ToolTip(self.delete_button, "Delete Current Taxon",delay=0.01)
 		self.delete_button.pack(side=LEFT)
@@ -183,7 +197,7 @@ class taxonomy_display(cache_maintenance):
 	#         Main         #
 	########################	
 		
-	def taxonomy_viewer(self,window):
+	def taxonomy_viewer(self,window,switcher_active):
 	# Displays the Taxonomy Panels
 
 		# Set Icon Assets
@@ -211,6 +225,7 @@ class taxonomy_display(cache_maintenance):
 
 		# Setup Taxonomy Window
 		self.taxonomy_window = window
+		self.switcher_active = switcher_active
 		
 		# Setup Taxonomy Window Panels
 		self.pane_one = ttk.Frame(self.taxonomy_window)
@@ -223,5 +238,4 @@ class taxonomy_display(cache_maintenance):
 
 		# Set Up Definition Editor Panel 
 		self.taxon_editor_displayer()
-		
 		

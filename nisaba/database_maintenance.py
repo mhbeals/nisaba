@@ -35,8 +35,7 @@ class database_maintenance:
 
 		# Set Current Database and Taxonomies
 		self.current_database = self.config['Database']
-		self.current_taxonomy = self.config['CollectionTaxonomy']
-		self.taxonomy_level_defaults = [self.config['CollectionTaxonomy'],self.config['ItemTaxonomy'],self.config['SegmentTaxonomy']]
+		self.current_taxonomy = self.config['Taxonomy']
 
 		#################
 		# JSON Database #
@@ -80,7 +79,6 @@ class database_maintenance:
 				loaddata = file.read()
 		except(FileNotFoundError):
 			self.current_taxonomy = Path(self.database_path) / 'sample_taxonomy.json'
-			self.taxonomy_level_defaults = [self.current_taxonomy,self.current_taxonomy,self.current_taxonomy]
 			with open (Path(self.current_taxonomy), 'r') as file:
 				loaddata = file.read()
 
@@ -167,9 +165,7 @@ class database_maintenance:
 	def configuration_defaults_saver(self):
 
 		self.config['Database'] = str(self.current_database)
-		self.config['CollectionTaxonomy'] = str(self.taxonomy_level_defaults[0])
-		self.config['ItemTaxonomy'] = str(self.taxonomy_level_defaults[1])
-		self.config['SegmentTaxonomy'] = str(self.taxonomy_level_defaults[2])
+		self.config['Taxonomy'] = str(self.current_taxonomy)
 
 		for parameter in self.parameter_entries:
 
@@ -370,7 +366,7 @@ class database_maintenance:
 			file.write(savedata)
 			
 		# Reload Taxonomy Window
-		self.taxonomy_viewer(self.taxonomy_window)
+		self.taxonomy_viewer(self.taxonomy_window,self.switcher_active)
 
 	def database_saver(self):
 		# Save Cached Database to Disk
@@ -418,9 +414,9 @@ class database_maintenance:
 				loaddata = file.read()
 			self.database = json.loads(loaddata)
 
-		elif type == 'Collection': self.taxonomy_level_defaults[0]=Path(file)
-		elif type == 'Item': self.taxonomy_level_defaults[1]=Path(file)
-		elif type == 'Segment': self.taxonomy_level_defaults[2]=Path(file)
+		elif type == 'Collection': self.current_taxonomy=Path(file)
+		elif type == 'Item': self.current_taxonomy=Path(file)
+		elif type == 'Segment': self.current_taxonomy=Path(file)
 
 		function_call()
 
