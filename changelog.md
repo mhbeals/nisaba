@@ -1,10 +1,11 @@
 # Change Log
 
-## Nisaba 0.3.8.5
+## Nisaba 0.3.9
 
 + Added ability to quickly switch to taxonomy and return using up arrow
 + Fixed Browse not rendering entries without a description tag
 + Added description tag to segment list in database display
++ Fixed Annotation Errors when taxonomy is missing entries in database
 
 ## Nisaba 0.3.8.4
 

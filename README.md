@@ -1,4 +1,4 @@
-# Nisaba 0.3.8.5
+# Nisaba 0.3.9
 
 A tool for multi-modal annotation
 
@@ -7,6 +7,7 @@ A tool for multi-modal annotation
 + Added ability to quickly switch to taxonomy and return using up arrow
 + Fixed Browse not rendering entries without a description tag
 + Added description tag to segment list in database display
++ Fixed Annotation Errors when taxonomy is missing entries in database
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

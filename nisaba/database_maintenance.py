@@ -35,7 +35,11 @@ class database_maintenance:
 
 		# Set Current Database and Taxonomies
 		self.current_database = self.config['Database']
-		self.current_taxonomy = self.config['Taxonomy']
+        
+		try:
+			self.current_taxonomy = self.config['Taxonomy']
+		except(KeyError):
+			self.current_taxonomy = self.config['CollectionTaxonomy']
 
 		#################
 		# JSON Database #
@@ -434,9 +438,7 @@ class database_maintenance:
 		except(FileNotFoundError,KeyError):
 			self.default_config = configparser.ConfigParser()
 			self.default_config['DEFAULT']['Database'] = 'Path(self.database_path) / "database.json"'
-			self.default_config['DEFAULT']['CollectionTaxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
-			self.default_config['DEFAULT']['ItemTaxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
-			self.default_config['DEFAULT']['SegmentTaxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
+			self.default_config['DEFAULT']['Taxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
 			self.default_config['DEFAULT']['v_Collection_Namespace'] = 'fabio:'
 			self.default_config['DEFAULT']['v_Item_Namespace'] = 'fabio:'
 			self.default_config['DEFAULT']['v_Segment_Namespace'] = 'fabio:'

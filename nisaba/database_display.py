@@ -477,15 +477,21 @@ class database_display(cache_maintenance):
 
 			if 'annotations' in self.database[self.collection_index]['items'][self.item_index]:
 				for annotation in self.database[self.collection_index]['items'][self.item_index]['annotations']:
-					tree_name.change_state(tree_name.parent(annotation[0]),"checked")
-					tree_name.change_state(annotation[0],"checked")
+					try:
+						tree_name.change_state(tree_name.parent(annotation[0]),"checked")
+						tree_name.change_state(annotation[0],"checked")
+					except(TclError):
+						pass
 
 		elif level == 's':
 
 			if 'annotations' in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]:
 				for annotation in self.database[self.collection_index]['items'][self.item_index]['segments'][self.segment_index]['annotations']:
-					tree_name.change_state(tree_name.parent(annotation[0]),"checked")
-					tree_name.change_state(annotation[0],"checked")
+					try:
+						tree_name.change_state(tree_name.parent(annotation[0]),"checked")
+						tree_name.change_state(annotation[0],"checked")
+					except(TclError):
+						pass
 
 		# Display Tree
 		tree_name.pack(anchor=NW)
@@ -716,10 +722,9 @@ class database_display(cache_maintenance):
 		provenance.pack(side=LEFT)
 		
 		def taxonomy_switcher():
-			self.placeholder = [1,self.collection_index,self.item_index,self.segment_index]
 			self.database_entry_saver('s')
 			taxonomy_window = taxonomy_display()
-			taxonomy_window.taxonomy_viewer(self.database_window,self.placeholder)
+			taxonomy_window.taxonomy_viewer(self.database_window,True)
 		
 		# Create "go to taxonomy" button
 		taxonomy_button = ttk.Button(row, text="Change Taxonomy",command = taxonomy_switcher)
