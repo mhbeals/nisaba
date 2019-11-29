@@ -48,12 +48,15 @@ def main():
 			elif switch == 'c':
 				configuration_window = configuration_display()
 				configuration_window.configuration_viewer(main_pane_viewer) 
+			elif switch == 'g':
+				gist_window = configuration_display()
+				gist_window.gist_viewer(main_pane_viewer) 
 		
 		#######################
 		# Setup Key Variables #
 		#######################
 		
-		# Set assest path
+		# Set asset path
 		assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	
 		################
@@ -98,18 +101,21 @@ def main():
 		taxonomy_logo=PhotoImage(file=Path(assets_path) / 'taxonomy.png')
 		search_logo=PhotoImage(file=Path(assets_path) / 'search.png')
 		configuration_logo=PhotoImage(file=Path(assets_path) / 'configuration.png')
+		gist_logo=PhotoImage(file=Path(assets_path) / 'gist.png')
 		
 		# Setup Menu Options
 		edit_configuration = Button(main_pane_menu,text='Configuration', image=configuration_logo, compound="top", command=(lambda: option_switcher('c')))
 		edit_database = Button(main_pane_menu,text='Database', image=database_logo, compound="top", command=(lambda: option_switcher('d')))
 		edit_vocabulary = Button(main_pane_menu,text='Taxonomy', image=taxonomy_logo, compound="top", command=(lambda: option_switcher('t')))
 		search_database = Button(main_pane_menu,text='Browse', image=search_logo, compound="top", command=(lambda: option_switcher('s')))
+		gist_database = Button(main_pane_menu,text='Gist Upload', image=gist_logo, compound="top", command=(lambda: option_switcher('g')))
 		
 		# Display Menu Options
-		edit_configuration.place(relx=0.5, rely=0.1, anchor=CENTER)
+		edit_configuration.place(relx=0.5, rely=0.15, anchor=CENTER)
 		edit_database.place(relx=0.5, rely=0.3, anchor=CENTER)
-		edit_vocabulary.place(relx=0.5, rely=0.5, anchor=CENTER)
-		search_database.place(relx=0.5, rely=0.7, anchor=CENTER)
+		edit_vocabulary.place(relx=0.5, rely=0.45, anchor=CENTER)
+		search_database.place(relx=0.5, rely=0.6, anchor=CENTER)
+		gist_database.place(relx=0.5, rely=0.75, anchor=CENTER)
 		
 		style = ttk.Style()
 		style.configure('TButton')

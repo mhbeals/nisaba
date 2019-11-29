@@ -17,6 +17,7 @@ import csv
 import yaml
 import configparser
 import re 
+import os, requests, sys, json
 
 # Import TKinter Libraries
 from tkinter import *
@@ -30,6 +31,93 @@ class configuration_display(cache_maintenance):
 	##############################
 	#      Panel Displays        #
 	##############################
+	
+	def gist_viewer(self,window):
+	
+		# Download Gists
+		def pull_file():
+		
+			url = 'https://gist.githubusercontent.com/' + str(self.Github_Username) + '/' + str(self.Github_DataBase_ID) + '/raw'
+			r = requests.get(url, allow_redirects=True)
+			open(Path(self.current_database), 'wb').write(r.content)
+			url = 'https://gist.githubusercontent.com/' + str(self.Github_Username) + '/' + str(self.Github_Taxonomy_ID) + '/raw'
+			r = requests.get(url, allow_redirects=True)
+			open (Path(self.current_taxonomy), 'wb').write(r.content)						
+		
+		#Upload Gists	
+		def push_file():
+		
+			db_address = 'https://api.github.com/gists/' + str(self.Github_DataBase_ID)
+			t_address =  'https://api.github.com/gists/' + str(self.Github_Taxonomy_ID)
+			r = requests.post(db_address,json.dumps({'files':{"database.json":{"content":open(Path(self.current_database), 'r').read()}}}),auth=requests.auth.HTTPBasicAuth(self.Github_Username, password_entry.get())) 
+			r = requests.post(t_address,json.dumps({'files':{"taxonomy.json":{"content":open(Path(self.current_taxonomy), 'r').read()}}}),auth=requests.auth.HTTPBasicAuth(self.Github_Username, password_entry.get()))
+		
+		# Load Save Icon
+		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
+		
+		# Delete Previous Panels and Menus or Create New Window
+		try:
+			self.pane_one.destroy()
+			self.pane_two.destroy()
+		except (NameError, AttributeError):
+			pass
+
+		# Create Configuration Frame
+		self.gist_window = window
+		self.pane_one = ttk.Frame(self.gist_window)
+		self.pane_one.place(relwidth=.5, relheight=1, rely =.05)
+		
+		row = ttk.Frame(self.pane_one)
+		label = ttk.Label(row, text='Github Username:' , anchor='w', width=30)
+		entry = ttk.Entry(row)
+		entry.insert(0,self.Github_Username)
+		label.pack(side=LEFT)
+		entry.pack(side=RIGHT, expand=YES, fill=X)
+		row.pack(side=TOP, fill=X)
+		
+		row = ttk.Frame(self.pane_one)
+		label = ttk.Label(row, text='Github Password:' , anchor='w', width=30)
+		password_entry = ttk.Entry(row)
+		label.pack(side=LEFT)
+		password_entry.pack(side=RIGHT, expand=YES, fill=X)
+		row.pack(side=TOP, fill=X)
+		
+		row = ttk.Frame(self.pane_one)
+		label = ttk.Label(row, text='Github Database ID: ', anchor='w', width=30)
+		entry = ttk.Entry(row)
+		entry.insert(0,self.Github_DataBase_ID)
+		label.pack(side=LEFT)
+		entry.pack(side=LEFT, expand=YES, fill=X)
+		row.pack(side=TOP, fill=X)
+
+		row = ttk.Frame(self.pane_one)
+		label = ttk.Label(row, text='Github Taxonomy ID: ', anchor='w', width=30)
+		entry = ttk.Entry(row)
+		entry.insert(0,self.Github_Taxonomy_ID)
+		label.pack(side=LEFT)
+		entry.pack(side=LEFT, expand=YES, fill=X)
+		row.pack(side=TOP, fill=X)
+		
+		
+		row = ttk.Frame(self.pane_one)
+		label = ttk.Label(row, text='')
+		label.pack()
+		row.pack(side=TOP, fill=X)		
+
+		row = ttk.Frame(self.pane_one)
+		pull_button = Button(row, text="Download Gist Database and Taxonomy", command=pull_file)
+		push_button = Button(row, text="Upload Gist Database and Taxonomy", command=push_file)
+		pull_button.pack(side=LEFT)
+		push_button.pack(side=RIGHT)
+		row.pack(side=TOP, fill=X)		
+
+		self.github_window = window
+		
+		# Save button
+		self.button_frame = ttk.Frame(self.pane_one)
+		self.save_button = Button(self.button_frame, image=self.save_icon, command=self.configuration_defaults_saver)
+		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
+		self.save_button.pack(padx=1,pady=1,)
 
 	def edit_user_frame_displayer(self):
 	# Displays user metadata in pane two
@@ -49,7 +137,7 @@ class configuration_display(cache_maintenance):
 
 		# Create User Frame
 		metadata_window.database_metadata_viewer(self.pane_two)
-
+		
 	def configuration_textbox_frame_displayer(self,filename):
 	# Displays configuration file in pane two
 	
@@ -67,7 +155,7 @@ class configuration_display(cache_maintenance):
 		self.configuration_textbox_frame = ttk.Frame(self.pane_two)
 		self.configuration_textbox_frame.pack(side=TOP, fill=X)
 
-		self.configuration_textbox =Text(self.configuration_textbox_frame, wrap=WORD)
+		self.configuration_textbox = Text(self.configuration_textbox_frame, wrap=WORD)
 		self.configuration_textbox.pack(expand=YES, fill=BOTH)
 
 		self.configuration_textbox.insert("0.0",self.configuration_file_loader(filename))
@@ -158,6 +246,10 @@ class configuration_display(cache_maintenance):
 		for directory in directories:
 			config_dropdown_displayer()
 	
+		self. github_entries_displayer()
+	
+	
+		# Save button
 		self.button_frame = ttk.Frame(self.pane_one)
 		self.save_button = Button(self.button_frame, image=self.save_icon, command=self.configuration_defaults_saver)
 		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
@@ -184,7 +276,8 @@ class configuration_display(cache_maintenance):
 		button.pack(padx=1,pady=1,side=RIGHT)
 			
 		# Load other parameters
-		self.configurations_frame_displayer()
+		self.user_dropdown_displayer()
+		
 
 	def user_dropdown_displayer(self):
 	# Creates Dropdown Menu of Possible Users
@@ -218,8 +311,9 @@ class configuration_display(cache_maintenance):
 
 			# Display Selection ttk.Frame
 			users_menu.pack(anchor=W)
-
-			self.default_taxonomy_frame_displayer()
+			
+		self.configurations_frame_displayer()
+			
 
 	def default_database_panels_displayer(self):
 
@@ -236,6 +330,7 @@ class configuration_display(cache_maintenance):
 		self.pane_two = ttk.Frame(self.configuration_window)
 		self.pane_two.place(relx=.5, relwidth=.4, rely =.05, relheight=1)
 
+
 		# Create Database Loader Row
 		row = ttk.Frame(self.pane_one)
 		label =ttk.Label(row, text="Database: ", anchor='w', width=30)
@@ -243,16 +338,17 @@ class configuration_display(cache_maintenance):
 		entry.insert(0,self.current_database)
 		button = Button(row, text="Load", command=(lambda: self.database_loader('d',self.default_database_panels_displayer)))
 		new_button = Button(row, text="New", command=self.database_creator)
-		row.pack(side=TOP, fill=X)
+		row.pack(side=TOP, fill=X)	
 		label.pack(side=LEFT)
 		button.pack(padx=1,pady=1,side=RIGHT)
 		new_button.pack(padx=1,pady=1,side=RIGHT)
 		entry.pack(side=RIGHT, expand=YES, fill=X)
+		
 
-		self.user_dropdown_displayer()
+		self.default_taxonomy_frame_displayer()
 
 	##############################
-	#		   Main		     #
+	#		   Main		         #
 	##############################		
 		
 	def configuration_viewer(self,window):

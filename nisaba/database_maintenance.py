@@ -40,6 +40,15 @@ class database_maintenance:
 			self.current_taxonomy = self.config['Taxonomy']
 		except(KeyError):
 			self.current_taxonomy = self.config['CollectionTaxonomy']
+			
+		try:
+			self.Github_DataBase_ID = self.config['Github_DataBase_ID']
+			self.Github_Taxonomy_ID = self.config['Github_Taxonomy_ID']
+			self.Github_Username = self.config['Github_Username']
+		except(KeyError):
+			self.Github_DataBase_ID = '123456789'
+			self.Github_Taxonomy_ID = '123456789'
+			self.Github_Username = 'username'
 
 		#################
 		# JSON Database #
@@ -170,6 +179,9 @@ class database_maintenance:
 
 		self.config['Database'] = str(self.current_database)
 		self.config['Taxonomy'] = str(self.current_taxonomy)
+		self.config['Github_DataBase_ID'] = str(self.Github_DataBase_ID)
+		self.config['Github_Taxonomy_ID'] = str(self.Github_Taxonomy_ID)
+		self.config['Github_Username'] = str(self.Github_Username)
 
 		for parameter in self.parameter_entries:
 
@@ -439,6 +451,9 @@ class database_maintenance:
 			self.default_config = configparser.ConfigParser()
 			self.default_config['DEFAULT']['Database'] = 'Path(self.database_path) / "database.json"'
 			self.default_config['DEFAULT']['Taxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
+			self.default_config['DEFAULT']['Github_DataBase_ID'] = '1234567890'
+			self.default_config['DEFAULT']['Github_Taxonomy_ID'] = '1234567890'
+			self.default_config['DEFAULT']['Github_Username'] = 'username'
 			self.default_config['DEFAULT']['v_Collection_Namespace'] = 'fabio:'
 			self.default_config['DEFAULT']['v_Item_Namespace'] = 'fabio:'
 			self.default_config['DEFAULT']['v_Segment_Namespace'] = 'fabio:'
