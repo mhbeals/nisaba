@@ -179,13 +179,23 @@ class database_maintenance:
 
 		self.config['Database'] = str(self.current_database)
 		self.config['Taxonomy'] = str(self.current_taxonomy)
-		self.config['Github_DataBase_ID'] = str(self.Github_DataBase_ID)
-		self.config['Github_Taxonomy_ID'] = str(self.Github_Taxonomy_ID)
-		self.config['Github_Username'] = str(self.Github_Username)
+        
+		try:
+			self.config['Github_DataBase_ID'] = str(self.github_database_ID_entry.get())
+			self.config['Github_Taxonomy_ID'] = str(self.github_taxonomy_ID_entry.get())
+			self.config['Github_Username'] = str(self.github_username_entry.get())
+			
+		except(AttributeError):
+			self.config['Github_DataBase_ID'] = str(self.Github_DataBase_ID)
+			self.config['Github_Taxonomy_ID'] = str(self.Github_Taxonomy_ID)
+			self.config['Github_Username'] = str(self.Github_Username)
 
-		for parameter in self.parameter_entries:
-
-			self.config[parameter[0]] = parameter[1].get()
+		try:
+			for parameter in self.parameter_entries:
+				self.config[parameter[0]] = parameter[1].get()
+			
+		except(AttributeError):
+			pass
 
 		with open(Path(self.config_path) / 'config.ini', 'w') as configfile:
 			self.default_config.write(configfile)
@@ -403,7 +413,7 @@ class database_maintenance:
 		self.rdf_mapper()
 
 	##############################
-	#     Loading Functions      #
+	#	 Loading Functions	  #
 	##############################
 
 	def configuration_file_loader(self,event):
@@ -437,7 +447,7 @@ class database_maintenance:
 		function_call()
 
 	##############################
-	#    Creating Functions      #
+	#	Creating Functions	  #
 	##############################
 
 	def configuration_file_creator(self):
@@ -490,7 +500,7 @@ class database_maintenance:
 		file.close()
 
 	##############################
-	#   Linked Data Functions    #
+	#   Linked Data Functions	#
 	##############################
 
 	def rdf_mapper(self):

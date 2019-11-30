@@ -66,13 +66,13 @@ class configuration_display(cache_maintenance):
 		self.gist_window = window
 		self.pane_one = ttk.Frame(self.gist_window)
 		self.pane_one.place(relwidth=.5, relheight=1, rely =.05)
-		
+        
 		row = ttk.Frame(self.pane_one)
 		label = ttk.Label(row, text='Github Username:' , anchor='w', width=30)
-		entry = ttk.Entry(row)
-		entry.insert(0,self.Github_Username)
+		self.github_username_entry = ttk.Entry(row)
+		self.github_username_entry.insert(0,self.Github_Username)
 		label.pack(side=LEFT)
-		entry.pack(side=RIGHT, expand=YES, fill=X)
+		self.github_username_entry.pack(side=RIGHT, expand=YES, fill=X)
 		row.pack(side=TOP, fill=X)
 		
 		row = ttk.Frame(self.pane_one)
@@ -84,18 +84,18 @@ class configuration_display(cache_maintenance):
 		
 		row = ttk.Frame(self.pane_one)
 		label = ttk.Label(row, text='Github Database ID: ', anchor='w', width=30)
-		entry = ttk.Entry(row)
-		entry.insert(0,self.Github_DataBase_ID)
+		self.github_database_ID_entry = ttk.Entry(row)
+		self.github_database_ID_entry.insert(0,self.Github_DataBase_ID)
 		label.pack(side=LEFT)
-		entry.pack(side=LEFT, expand=YES, fill=X)
+		self.github_database_ID_entry.pack(side=LEFT, expand=YES, fill=X)
 		row.pack(side=TOP, fill=X)
 
 		row = ttk.Frame(self.pane_one)
 		label = ttk.Label(row, text='Github Taxonomy ID: ', anchor='w', width=30)
-		entry = ttk.Entry(row)
-		entry.insert(0,self.Github_Taxonomy_ID)
+		self.github_taxonomy_ID_entry = ttk.Entry(row)
+		self.github_taxonomy_ID_entry.insert(0,self.Github_Taxonomy_ID)
 		label.pack(side=LEFT)
-		entry.pack(side=LEFT, expand=YES, fill=X)
+		self.github_taxonomy_ID_entry.pack(side=LEFT, expand=YES, fill=X)
 		row.pack(side=TOP, fill=X)
 		
 		
@@ -110,14 +110,13 @@ class configuration_display(cache_maintenance):
 		pull_button.pack(side=LEFT)
 		push_button.pack(side=RIGHT)
 		row.pack(side=TOP, fill=X)		
-
-		self.github_window = window
 		
 		# Save button
-		self.button_frame = ttk.Frame(self.pane_one)
-		self.save_button = Button(self.button_frame, image=self.save_icon, command=self.configuration_defaults_saver)
+		row = ttk.Frame(self.pane_one)
+		self.save_button = Button(row, image=self.save_icon, command=self.configuration_defaults_saver)
 		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
-		self.save_button.pack(padx=1,pady=1,)
+		self.save_button.pack(padx=1,pady=1)
+		row.pack(side=TOP, fill=X)		
 
 	def edit_user_frame_displayer(self):
 	# Displays user metadata in pane two
@@ -244,10 +243,7 @@ class configuration_display(cache_maintenance):
 			config_dropdown_displayer()
 	
 		for directory in directories:
-			config_dropdown_displayer()
-	
-		self. github_entries_displayer()
-	
+			config_dropdown_displayer()	
 	
 		# Save button
 		self.button_frame = ttk.Frame(self.pane_one)

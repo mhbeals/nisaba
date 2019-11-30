@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.10
+
++ Added ability to save / load from Gist (github)
+
 ## Nisaba 0.3.9
 
 + Added ability to quickly switch to taxonomy and return using up arrow
