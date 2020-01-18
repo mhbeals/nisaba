@@ -380,6 +380,7 @@ class database_maintenance:
 			database[key]['name'] = self.taxonomy_annotation_entry.get()
 			database[key]['type'] = self.taxonomy_type_entry.get()
 			database[key]['definition'] = self.taxonomy_detail_entry.get()
+			database[key]['reference'] = self.taxonomy_reference_entry.get("1.0",END)
 
 		# Save All Entries to Cached Taxonomy Database
 		self.iid_iterator(self.taxonomy,self.clicked_item,entry_retriever)

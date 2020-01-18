@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.10.1
+
++ Added reference box to taxonomy detail screen
+
 ## Nisaba 0.3.10
 
 + Added ability to save / load from Gist (github)

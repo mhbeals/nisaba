@@ -1,10 +1,10 @@
-# Nisaba 0.3.10
+# Nisaba 0.3.10.1
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Added ability to save / load from Gist (github)
++ Added reference box to taxonomy detail screen
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

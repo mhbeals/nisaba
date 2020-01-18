@@ -77,6 +77,14 @@ class taxonomy_display(cache_maintenance):
 		self.taxonomy_annotation_entry.insert(0,database[key]['name'])
 		self.taxonomy_type_entry.insert(0,database[key]['type'])
 		self.taxonomy_detail_entry.insert(0,database[key]['definition'])
+		
+		# Fill in references 
+		try:
+			self.taxonomy_reference_entry.insert("1.0",database[key]['reference'])
+			
+		except(KeyError):
+			# To support deprecated taxonomy databases
+			self.taxonomy_reference_entry.insert("1.0","")
 
 	#########################
 	#   Event Processing    #
@@ -108,26 +116,32 @@ class taxonomy_display(cache_maintenance):
 		self.pane_two = ttk.Frame(self.taxonomy_window)
 		self.pane_two.place(relx=.5, relwidth=.5, relheight=1)
 
-		# Create static entry widgets
+		# Create static entry rows
 		iid_row = ttk.Frame(self.pane_two)
 		annotation_row = ttk.Frame(self.pane_two)
 		type_row = ttk.Frame(self.pane_two)
 		detail_row = ttk.Frame(self.pane_two)
+		reference_row = ttk.Frame(self.pane_two)
+		
+		# Create static entry boxes
 		self.taxonomy_iid_entry = ttk.Entry(iid_row)
 		self.taxonomy_annotation_entry = ttk.Entry(annotation_row)
 		self.taxonomy_type_entry = ttk.Entry(type_row)
 		self.taxonomy_detail_entry = ttk.Entry(detail_row)
-		entries = [(self.taxonomy_iid_entry,iid_row),(self.taxonomy_annotation_entry,annotation_row),(self.taxonomy_type_entry,type_row),(self.taxonomy_detail_entry,detail_row)]
+		self.taxonomy_reference_entry = Text(reference_row,wrap=WORD)
 		
-		def row_builder(current_entry,current_row):
+		# Create entry list
+		entries = [("ID",self.taxonomy_iid_entry,iid_row),("Annotation",self.taxonomy_annotation_entry,annotation_row),("Type",self.taxonomy_type_entry,type_row),("Definition",self.taxonomy_detail_entry,detail_row),("References",self.taxonomy_reference_entry,reference_row)]
+		
+		def row_builder(current_label,current_entry,current_row):
 			row = ttk.Frame(self.pane_two)
-			label =ttk.Label(row, text="ID", anchor='w', width=10)
-			label.pack(side=LEFT)
+			label = ttk.Label(current_row, text=current_label, anchor='w', width=10)
+			label.pack(anchor=NW)
 			current_entry.pack(side=RIGHT, expand=YES, fill=X)
 			current_row.pack(side=TOP, fill=X, padx=5, pady=5)
 			
 		for entry in entries:
-			row_builder(entry[0],entry[1])
+			row_builder(entry[0],entry[1],entry[2])
 
 		# Create Add/Save/Delete Button Set
 		row = ttk.Frame(self.pane_two)
