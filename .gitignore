@@ -7,3 +7,8 @@ lib/
 nisaba/databases/backups/*.ttl
 nisaba/databases/backups/*.json
 nisaba/config_files/config.ini
+/.vs/slnx.sqlite
+/.vs/PythonSettings.json
+/.vs/ProjectSettings.json
+/.vs/nisaba/v16/.suo
+/.vs/nisaba/v16
