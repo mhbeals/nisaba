@@ -13,6 +13,7 @@ from urllib.request import urlopen
 from tkinter import END
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfile
+from tkinter.filedialog import askdirectory
 
 class database_maintenance:
 
@@ -23,8 +24,9 @@ class database_maintenance:
 	# Set Relative Paths
 	assets_path = os.path.join(os.path.dirname(__file__), "assets/")
 	config_path = os.path.join(os.path.dirname(__file__), "config_files/")
-	raw_data_images_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_path = os.path.join(os.path.dirname(__file__), "databases/")
+	raw_data_path = os.path.join(os.path.dirname(__file__), "raw_data/")
+	sample_image_path = os.path.join(os.path.dirname(__file__), "raw_data/images/")
 	database_backup_path = database_path + "backups/"
 
 	def __init__(self):
@@ -35,7 +37,12 @@ class database_maintenance:
 
 		# Set Current Database and Taxonomies
 		self.current_database = self.config['Database']
-        
+
+		try:
+			self.raw_data_images_path = self.config['ImagePath']
+		except(KeyError):
+			self.raw_data_images_path = Path(os.path.join(os.path.dirname(__file__), "raw_data/images/"))
+		
 		try:
 			self.current_taxonomy = self.config['Taxonomy']
 		except(KeyError):
@@ -179,7 +186,8 @@ class database_maintenance:
 
 		self.config['Database'] = str(self.current_database)
 		self.config['Taxonomy'] = str(self.current_taxonomy)
-        
+		self.config['ImagePath'] = str(self.raw_data_images_path)
+
 		try:
 			self.config['Github_DataBase_ID'] = str(self.github_database_ID_entry.get())
 			self.config['Github_Taxonomy_ID'] = str(self.github_taxonomy_ID_entry.get())
@@ -430,20 +438,26 @@ class database_maintenance:
 	def database_loader(self,type,function_call):
 		# Loads a New (non-default) JSON Database
 
-		# Load Database
-		file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
+		if type == 'ip':
+			folder = askdirectory()
+			self.raw_data_images_path=Path(folder)
 
-		if type == 'd':
+		else:
 
-			self.current_database = Path(file)
+			# Load Database
+			file = askopenfilename(initialdir = self.database_path,title = "Select Database",filetypes = (("json files","*.json"),("all files","*.*")))
 
-			with open (file, 'r') as file:
-				loaddata = file.read()
-			self.database = json.loads(loaddata)
+			if type == 'd':
 
-		elif type == 'Collection': self.current_taxonomy=Path(file)
-		elif type == 'Item': self.current_taxonomy=Path(file)
-		elif type == 'Segment': self.current_taxonomy=Path(file)
+				self.current_database = Path(file)
+
+				with open (file, 'r') as file:
+					loaddata = file.read()
+				self.database = json.loads(loaddata)
+
+			elif type == 't': self.current_taxonomy=Path(file)
+			elif type == 'Item': self.current_taxonomy=Path(file)
+			elif type == 'Segment': self.current_taxonomy=Path(file)
 
 		function_call()
 

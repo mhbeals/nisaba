@@ -265,10 +265,31 @@ class configuration_display(cache_maintenance):
 		row.pack(side=TOP, fill=X)
 		label =ttk.Label(row, text="Default Taxonomy: ", anchor='w', width=30)
 		label.pack(side=LEFT)   
-		self.collection_entry = ttk.Entry(row)
-		self.collection_entry.insert(0,self.current_taxonomy)
-		self.collection_entry.pack(side=LEFT, expand=YES, fill=X)
-		button = Button(row, text="Load", command=(lambda: self.database_loader("Collection",self.default_database_panels_displayer)))
+		self.entry = ttk.Entry(row)
+		self.entry.insert(0,self.current_taxonomy)
+		self.entry.pack(side=LEFT, expand=YES, fill=X)
+		button = Button(row, text="Load", command=(lambda: self.database_loader("t",self.default_database_panels_displayer)))
+		button.pack(padx=1,pady=1,side=RIGHT)
+
+		# Set image page
+		self.default_image_path_frame_displayer()
+
+	def default_image_path_frame_displayer(self):
+	# Creates Fields for Default Taxonomies
+	
+		# Create Taxonomy Loader Frame
+		self.default_image_path_frame = ttk.Frame(self.pane_one)
+		self.default_image_path_frame.pack(side=TOP, fill=X)
+
+        # Create Taxonmy Loader Row
+		row = ttk.Frame(self.default_image_path_frame)
+		row.pack(side=TOP, fill=X)
+		label =ttk.Label(row, text="Default Image Path: ", anchor='w', width=30)
+		label.pack(side=LEFT)   
+		self.entry = ttk.Entry(row)
+		self.entry.insert(0,self.raw_data_images_path)
+		self.entry.pack(side=LEFT, expand=YES, fill=X)
+		button = Button(row, text="Load", command=(lambda: self.database_loader("ip",self.default_database_panels_displayer)))
 		button.pack(padx=1,pady=1,side=RIGHT)
 			
 		# Load other parameters

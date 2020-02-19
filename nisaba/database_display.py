@@ -183,7 +183,7 @@ class database_display(cache_maintenance):
                 
             except(FileNotFoundError):
                 # Use stand in if file is not found
-                self.filename = str(Path(self.raw_data_images_path) / 'sample.jpg')
+                self.filename = str(Path(self.sample_image_path) / 'sample.jpg')
                 self.segment_image = PIL.Image.open(self.filename)
             
             # Find Image Size
@@ -933,7 +933,7 @@ class database_display(cache_maintenance):
                 image = PIL.Image.open(self.filename)    
                 
             except(FileNotFoundError):
-                self.filename = str(Path(self.raw_data_images_path) / 'sample.jpg')
+                self.filename = str(Path(self.sample_image_path) / 'sample.jpg')
                 image = PIL.Image.open(self.filename)    
                 label = ttk.Label(self.pane_two, text="Image Not Found!")
                 label.grid(column=2,row=3)            

@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.12
+
++ Added image directory to config menu~
+
 ## Nisaba 0.3.11
 
 + Added next and previous navigation to items and segments

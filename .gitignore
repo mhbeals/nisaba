@@ -7,3 +7,4 @@ lib/
 nisaba/databases/backups/*.ttl
 nisaba/databases/backups/*.json
 nisaba/config_files/config.ini
+/.vs

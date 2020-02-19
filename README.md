@@ -1,10 +1,10 @@
-# Nisaba 0.3.11
+# Nisaba 0.3.12
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Added next and previous navigation to items and segments
++ + Added image directory to config menu~+ Added image directory to config menu~
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

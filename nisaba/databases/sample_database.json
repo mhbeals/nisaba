@@ -25,87 +25,87 @@
         "schema:editor": [
             "mhb",
             "20190819_005403",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "dc:creator": [
             "Herodotus",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "dc:title": [
             "The Histories",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:hasShortTitle": [
             "Histories",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "prism:volume": [
             "",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:hasVolumeCount": [
             "",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "prism:edition": [
             "",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:hasSequenceIdentifier": [
             "",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "dc:date": [
             "440 BC",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:hasPageCount": [
             "716",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "prism:isbn": [
             "9780134449082",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "prism:doi": [
             "",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "fabio:Abstract": [
             "",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "dc:language": [
             "en",
             "mhb",
-            "20200219_114723"
+            "20200219_122143"
         ],
         "items": {
             "0": {
@@ -212,6 +212,18 @@
                     }
                 },
                 "annotations": []
+            },
+            "2": {
+                "schema:editor": [
+                    "mhb",
+                    "20200219_121749",
+                    "20200219_122143"
+                ],
+                "item_type": "i",
+                "annotations": [],
+                "image_file": "atlaslogo.jpg",
+                "segments": {},
+                "fabio_type": "fabio:StandardItem"
             }
         },
         "fabio_type": "fabio:Book"
