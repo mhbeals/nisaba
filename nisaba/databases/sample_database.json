@@ -212,18 +212,6 @@
                     }
                 },
                 "annotations": []
-            },
-            "2": {
-                "schema:editor": [
-                    "mhb",
-                    "20200219_121749",
-                    "20200219_122143"
-                ],
-                "item_type": "i",
-                "annotations": [],
-                "image_file": "atlaslogo.jpg",
-                "segments": {},
-                "fabio_type": "fabio:StandardItem"
             }
         },
         "fabio_type": "fabio:Book"
