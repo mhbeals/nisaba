@@ -1,10 +1,10 @@
-# Nisaba 0.3.10.1
+# Nisaba 0.3.11
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Added reference box to taxonomy detail screen
++ Added next and previous navigation to items and segments
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

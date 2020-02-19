@@ -52,7 +52,7 @@ class search_display(cache_maintenance):
 						x = x + 1
 
 						# Create New Branch
-						d[x+1]=self.search_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = True)
+						d[x+1]=self.search_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = False)
 
 						# Re-Run Recursive Function with New "children" Dictionary
 						individual_branch_builder(new_dictionary['children'],d[x+1])
@@ -327,7 +327,7 @@ class search_display(cache_maintenance):
 		self.search_tree = ttk.Treeview(self.pane_one,height=int(window_height),selectmode='browse',show='tree',style="Treeview")
 
 		# Create Tree Layout
-		self.search_tree.column("#0", stretch=1)		
+		self.search_tree.column("#0", width=int(window_width/2), stretch=1)		
 
 		# Alphabetise search
 		alpha_search = []
@@ -343,6 +343,8 @@ class search_display(cache_maintenance):
 		self.search_tree.pack(anchor="w")
 		self.search_tree.bind('<Button-1>', self.taxon_informer)
 		
+		self.search_tree.update()
+        
 	########################
 	#         Main         #
 	########################	

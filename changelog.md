@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.11
+
++ Added next and previous navigation to items and segments
+
 ## Nisaba 0.3.10.1
 
 + Added reference box to taxonomy detail screen

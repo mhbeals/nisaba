@@ -1,4 +1,5 @@
 'dc:title' : 'Article Title:'
+'dc:date' : 'Issue Date'
 'fabio:hasSequenceIdentifier' : 'Page Number:'
 'fabio:pageRange' : 'Page Range:'
 'fabio:Expression' : 'Article Type:'

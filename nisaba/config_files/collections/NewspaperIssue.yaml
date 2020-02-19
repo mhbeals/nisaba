@@ -1,5 +1,4 @@
 'dc:title' : 'Newspaper Title:'
-'dc:date' : 'Issue Date'
 'fabio:NewspaperIssue': 'Issue Number: '
 'fabio:hasPageCount' : 'Number of Pages:'
 'fabio:hasPlaceOfPublication' : 'Place of Publication:'

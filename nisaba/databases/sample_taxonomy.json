@@ -6,205 +6,889 @@
         "definition": "The theory of knowledge, especially with regard to its methods, validity, and scope, and the distinction between justified belief and opinion",
         "children": {
             "0": {
-                "iid": "Positivism",
-                "name": "Positivism",
+                "iid": "Rationalism",
+                "name": "Rationalism",
                 "type": "Epistemology",
-                "definition": "On their being definite, knowable truths or facts, which are verifiable",
-                "children": {}
-            },
-            "1": {
-                "iid": "Empiricism",
-                "name": "Empiricism",
-                "type": "Epistemology",
-                "definition": "Wherein truth is defined probabilistically based on sensory (or sensory derived) evidence",
-                "children": {}
-            },
-            "2": {
-                "iid": "Anti-Positivism",
-                "name": "Anti-Positivism",
-                "type": "Epistemology",
-                "definition": "Wherein definite truth is unknowable and all definitions are considered constructed by the definer",
-                "children": {}
-            },
-            "3": {
-                "iid": "Post-Positivism",
-                "name": "Post-Positivism",
-                "type": "Epistemology",
-                "definition": "On their being definite, knowable truths or facts, which are considered true until falsified",
-                "children": {}
-            }
-        }
-    },
-    "1": {
-        "iid": "Ontology",
-        "name": "Ontology",
-        "type": "",
-        "definition": "On the set of concepts and categories in a subject area or domain that shows their properties and the relations between them.",
-        "children": {
-            "0": {
-                "iid": "Evidence",
-                "name": "Evidence",
-                "type": "Ontology",
-                "definition": "On those catagories relating to the raw materials upon which conclusions are made",
+                "definition": "On rationalist epistemological approaches",
                 "children": {
                     "0": {
-                        "iid": "Primary_Evidence",
-                        "name": "Primary Evidence",
-                        "type": "Evidence",
-                        "definition": "On those materials deemed immediately connected with the phenomena they describe",
+                        "iid": "Positivism",
+                        "name": "Positivism",
+                        "type": "Rationalism",
+                        "definition": "On their being definite, knowable truths or facts, which are verifiable",
                         "children": {}
                     },
                     "1": {
-                        "iid": "Secondary_Evidence",
-                        "name": "Secondary Evidence",
-                        "type": "Evidence",
-                        "definition": "On those materials deemed to be analysis or critical comment, based upon primary material",
-                        "children": {}
-                    },
-                    "2": {
-                        "iid": "Tertiary_Evidence",
-                        "name": "Tertiary Evidence",
-                        "type": "Evidence",
-                        "definition": "On those materials deemed to be meta-analysis or narrative forming, based upon primary and secondmary material",
-                        "children": {}
-                    },
-                    "3": {
-                        "iid": "Myth",
-                        "name": "Myth",
-                        "type": "Evidence",
-                        "definition": "On those materials deemed to be distilled or thematic narratives, rather than literal accounts",
+                        "iid": "Post-Positivism",
+                        "name": "Post-Positivism",
+                        "type": "Rationalism",
+                        "definition": "On their being definite, knowable truths or facts, which are considered true until falsified",
                         "children": {}
                     }
                 }
             },
             "1": {
-                "iid": "Records",
-                "name": "Records",
-                "type": "Ontology",
-                "definition": "On the nature and interpretation of documents and other historical records",
+                "iid": "Skepticism",
+                "name": "Skepticism",
+                "type": "Epistemology",
+                "definition": "On skepticial epistemological approaches",
                 "children": {
                     "0": {
-                        "iid": "Architectural_Record",
-                        "name": "Architecture",
-                        "type": "Records",
-                        "definition": "On the built environment",
+                        "iid": "Empiricism",
+                        "name": "Empiricism",
+                        "type": "Skepticism",
+                        "definition": "Wherein truth is defined probabilistically based on sensory (or sensory derived) evidence",
                         "children": {}
                     },
                     "1": {
-                        "iid": "Customs_Record",
-                        "name": "Customs",
-                        "type": "Records",
-                        "definition": "On long-term cultural habits and customs",
-                        "children": {}
-                    },
-                    "2": {
-                        "iid": "Geographical_Record",
-                        "name": "Geography",
-                        "type": "Records",
-                        "definition": "On the geographical record",
-                        "children": {}
-                    },
-                    "3": {
-                        "iid": "Spoken_Records",
-                        "name": "Speeches",
-                        "type": "Records",
-                        "definition": "On records of prepared human speech",
-                        "children": {}
-                    }
-                }
-            },
-            "2": {
-                "iid": "Sociological_Grouping",
-                "name": "Sociological Grouping",
-                "type": "Ontology",
-                "definition": "On the conceptual groups catagorising human beings",
-                "children": {
-                    "0": {
-                        "iid": "Nationality_Sociological_Grouping",
-                        "name": "Nationality",
-                        "type": "Sociological Grouping",
-                        "definition": "On the causes or effects of grouping by nationality",
+                        "iid": "Anti-Positivism",
+                        "name": "Anti-Positivism",
+                        "type": "Skepticism",
+                        "definition": "Wherein definite truth is unknowable and all definitions are considered constructed by the definer",
                         "children": {}
                     }
                 }
             }
         }
     },
-    "2": {
+    "1": {
         "iid": "Teleology",
         "name": "Teleology",
         "type": "",
         "definition": "On the explanation of phenomena in terms of the purpose they serve rather than of the cause by which they arise.",
         "children": {
             "0": {
-                "iid": "Teleology_of_History",
-                "name": "History",
-                "type": "Discipline",
-                "definition": "On the purpose of the study of history",
+                "iid": "Explanatory_Teleology_of_History",
+                "name": "Explanatory",
+                "type": "Teleology",
+                "definition": "To explain the causes or circumstance of an event or process",
                 "children": {
                     "0": {
-                        "iid": "Explanatory_Teleology_of_History",
-                        "name": "Explanatory",
+                        "iid": "Explanatory-Descriptive_Teleology_of_History",
+                        "name": "Descriptive",
                         "type": "Teleology",
-                        "definition": "To explain the causes or circumstance of an event or process",
+                        "definition": "To recreate or simulate past events 'as they really were'",
+                        "children": {}
+                    },
+                    "1": {
+                        "iid": "Explanatory-Predictive_Teleology_of_History",
+                        "name": "Predictive",
+                        "type": "Teleology",
+                        "definition": "To use history as a means of developing models for predicting events or processes in the future",
+                        "children": {}
+                    }
+                }
+            },
+            "1": {
+                "iid": "Memorial_Teleology_of_History",
+                "name": "Memorial",
+                "type": "Teleology",
+                "definition": "To encourage or support the remembrance of an event or process",
+                "children": {
+                    "0": {
+                        "iid": "Moralising_Historiography",
+                        "name": "Moral",
+                        "type": "Memorial",
+                        "definition": "On the practice of judging the morality of historical actions",
                         "children": {
                             "0": {
-                                "iid": "Explanatory-Descriptive_Teleology_of_History",
-                                "name": "Descriptive",
+                                "iid": "Memorial_Justice_Teleology_of_History",
+                                "name": "Justice",
                                 "type": "Teleology",
-                                "definition": "To recreate or simulate past events 'as they really were'",
-                                "children": {}
+                                "definition": "To use history as a form of honouring or condemning specific individuals or groups",
+                                "children": {
+                                    "0": {
+                                        "iid": "Memorial_Justice_Hero_Teleology_of_History",
+                                        "name": "Heroes",
+                                        "type": "Justice",
+                                        "definition": "To use history to honour or make exemplars of heroes of an event or process",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Memorial_Justice_Villan_Teleology_of_History",
+                                        "name": "Villains",
+                                        "type": "Justice",
+                                        "definition": "To use history to condemn or punish villians",
+                                        "children": {}
+                                    }
+                                }
                             },
                             "1": {
-                                "iid": "Explanatory-Predictive_Teleology_of_History",
-                                "name": "Predicitive",
-                                "type": "Teleology",
-                                "definition": "To use history as a means of developing models for predicting events or processes in the future",
-                                "children": {}
+                                "iid": "Character_Historiography",
+                                "name": "Example",
+                                "type": "Memorial",
+                                "definition": "On using history to provide moral (or immoral) examples",
+                                "children": {
+                                    "0": {
+                                        "iid": "Virtue_Example",
+                                        "name": "Virtue",
+                                        "type": "Example",
+                                        "definition": "On providing virtuous examples to follow",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Vice_Example",
+                                        "name": "Vice",
+                                        "type": "Example",
+                                        "definition": "On providing examples of vice to avoid",
+                                        "children": {}
+                                    }
+                                }
                             }
                         }
                     },
                     "1": {
-                        "iid": "Memorial_Teleology_of_History",
-                        "name": "Memorial",
-                        "type": "Teleology",
-                        "definition": "To encourage or support the remembrance of an event or process",
+                        "iid": "Amoral_Memorial",
+                        "name": "Amoral",
+                        "type": "Memorial",
+                        "definition": "On memorials without a morality component",
                         "children": {
                             "0": {
+                                "iid": "Archival_Telelogy_of_History",
+                                "name": "Archival",
+                                "type": "Telelogy",
+                                "definition": "To approach a historical project in order to fill gaps or complete narratives",
+                                "children": {}
+                            },
+                            "1": {
                                 "iid": "Memorial_Allusory_Teleology_of_History",
                                 "name": "Allusion",
                                 "type": "Teleology",
                                 "definition": "To use history as a common cultural touchstone in order to illustrate wider truths",
                                 "children": {}
-                            },
-                            "1": {
-                                "iid": "Memorial_Justice_Teleology_of_History",
-                                "name": "Justice",
-                                "type": "Teleology",
-                                "definition": "To use history as a form of honouring specific individuals or groups",
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "2": {
+        "iid": "Methodology",
+        "name": "Methodology",
+        "type": "",
+        "definition": "The methods by which History is practiced",
+        "children": {
+            "1": {
+                "iid": "Theory_Methodology",
+                "name": "Theory",
+                "type": "Methodology",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Relationships_Theory",
+                        "name": "Relationships",
+                        "type": "Theory",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Groups_Relationships",
+                                "name": "Groups",
+                                "type": "Relationships",
+                                "definition": "",
                                 "children": {
                                     "0": {
-                                        "iid": "Memorial_Justice_Hero_Teleology_of_History",
-                                        "name": "Heroes",
-                                        "type": "Teleology",
-                                        "definition": "To use history to honour or make exemplars of heroes of an event or process",
+                                        "iid": "Material_Historicism",
+                                        "name": "Material Historicism",
+                                        "type": "Interpretation",
+                                        "definition": "A framework which focuses on the material conditions of the past as well as productive roles and relations",
                                         "children": {}
                                     },
                                     "1": {
-                                        "iid": "Memorial_Justice_Victim_Teleology_of_History",
-                                        "name": "Victims",
-                                        "type": "Teleology",
-                                        "definition": "To use history to honour or otherwise remember victims of an event or process",
+                                        "iid": "Feminist_Historiography",
+                                        "name": "Feminist Historiography",
+                                        "type": "Interpretation",
+                                        "definition": "A framework which focuses on gender (biological or social) identity and relations in the past",
+                                        "children": {}
+                                    },
+                                    "2": {
+                                        "iid": "Histoire_des_mentalit\u00e9s",
+                                        "name": "Histoire des Mentalit\u00e9s",
+                                        "type": "Interpretation",
+                                        "definition": "A framework which focuses on the ways in which people of a given time period thought about, interacted with, and classified the world around them",
+                                        "children": {}
+                                    },
+                                    "3": {
+                                        "iid": "Liberalism_IR_Theory",
+                                        "name": "Liberalism (IR)",
+                                        "type": "Theory",
+                                        "definition": "A theory which accepts multiple types of actors in a system that can include mutually benefitial cooperation",
+                                        "children": {}
+                                    },
+                                    "4": {
+                                        "iid": "Realism_IR_Theory",
+                                        "name": "Realism (IR)",
+                                        "type": "Theory",
+                                        "definition": "A theory which declares states to be the actors in an anarchic system based on self-interest",
                                         "children": {}
                                     }
                                 }
                             },
-                            "2": {
-                                "iid": "Memorial_Teleology_of_History_General",
-                                "name": "Memorial (General)",
-                                "type": "Teleology",
-                                "definition": "To encourage or support the remembrance of an event or process",
+                            "1": {
+                                "iid": "Individuals_Relationships",
+                                "name": "Individuals",
+                                "type": "Relationships",
+                                "definition": "",
                                 "children": {}
+                            }
+                        }
+                    },
+                    "1": {
+                        "iid": "Trends_Theory",
+                        "name": "Trends",
+                        "type": "Theory",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Cyclical_Trends",
+                                "name": "Cyclical",
+                                "type": "Trends",
+                                "definition": "",
+                                "children": {}
+                            },
+                            "1": {
+                                "iid": "Directional_Trends",
+                                "name": "Directional",
+                                "type": "Trends",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Whiggish_Theory",
+                                        "name": "Rise",
+                                        "type": "Directional",
+                                        "definition": "",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Fall_Directional",
+                                        "name": "Decline",
+                                        "type": "Directional",
+                                        "definition": "",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "2": {
+                "iid": "Practice_Methodology",
+                "name": "Practice",
+                "type": "Methodology",
+                "definition": "",
+                "children": {
+                    "0": {
+                        "iid": "Research_Practice",
+                        "name": "Research",
+                        "type": "Practice",
+                        "definition": "",
+                        "children": {
+                            "0": {
+                                "iid": "Collection_Research",
+                                "name": "Collection",
+                                "type": "Research",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Observation_Collection",
+                                        "name": "Archival",
+                                        "type": "Collection",
+                                        "definition": "After Observation; On using archival material",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Oral_History_Methodology",
+                                        "name": "Survey",
+                                        "type": "Collection",
+                                        "definition": "After Experimentation; On using survey or other actively collected material",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Analysis_Research",
+                                "name": "Analysis",
+                                "type": "Research",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Qualitative_Analysis",
+                                        "name": "Qualitative",
+                                        "type": "Analysis",
+                                        "definition": "",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Close_Reading_Methodology",
+                                                "name": "Close Reading",
+                                                "type": "Qualitative",
+                                                "definition": "The meticulous reading of a text for vocabulary choices, internal structures, and external references",
+                                                "children": {}
+                                            },
+                                            "1": {
+                                                "iid": "Sampling_Qualitative",
+                                                "name": "Sampling",
+                                                "type": "Qualitative",
+                                                "definition": "",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "1": {
+                                        "iid": "Quantitative_Analysis",
+                                        "name": "Quantitative",
+                                        "type": "Analysis",
+                                        "definition": "",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Statistical_Analysis_Methodology",
+                                                "name": "Probabilistic",
+                                                "type": "Quantitative",
+                                                "definition": "On the process of discerning trends or patterns from large quantities of quantitative data",
+                                                "children": {}
+                                            },
+                                            "1": {
+                                                "iid": "Absolute_Quantitative",
+                                                "name": "Absolute",
+                                                "type": "Quantitative",
+                                                "definition": "",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "1": {
+                        "iid": "Historiography",
+                        "name": "Presentation",
+                        "type": "Practice",
+                        "definition": "The process by which history is written",
+                        "children": {
+                            "0": {
+                                "iid": "Scope",
+                                "name": "Scope",
+                                "type": "Methodology",
+                                "definition": "On the scope, geographically, chronologically or sociologically of history",
+                                "children": {
+                                    "0": {
+                                        "iid": "General",
+                                        "name": "General",
+                                        "type": "Scope",
+                                        "definition": "",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Particular",
+                                        "name": "Particular",
+                                        "type": "Scope",
+                                        "definition": "",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Case_Study",
+                                                "name": "Case Study",
+                                                "type": "Particular",
+                                                "definition": "On a small geographical, chronological or sociological segment of history",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Comparative_History_Scope",
+                                                        "name": "Comparative History",
+                                                        "type": "Case Study",
+                                                        "definition": "On comparing two or more case studies on a common chronological, geographical and sociological segment of history",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Environmental_Comparative",
+                                                                "name": "Environmental",
+                                                                "type": "Comparative",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Chronological_Environmental_Comparative",
+                                                                        "name": "Chronological",
+                                                                        "type": "Environmental",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Geographical_Environmental_Comparative",
+                                                                        "name": "Geographical",
+                                                                        "type": "Environmental",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "1": {
+                                                                "iid": "Sociological_Comparative",
+                                                                "name": "Sociological",
+                                                                "type": "Comparative",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Cultural_Sociological_Comparative",
+                                                                        "name": "Cultural",
+                                                                        "type": "Sociological",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Circumstantial_Sociological_Comparative",
+                                                                        "name": "Circumstantial",
+                                                                        "type": "Sociological",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "iid": "Single_Case_Study",
+                                                        "name": "Single",
+                                                        "type": "Case Study",
+                                                        "definition": "On a single case studies on a specific chronological, geographical and sociological segment of history",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Environmental_Single",
+                                                                "name": "Chronological",
+                                                                "type": "Single",
+                                                                "definition": "On a small chronological segment of history",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Short_History",
+                                                                        "name": "Chronological",
+                                                                        "type": "Single",
+                                                                        "definition": "On a small chronological segment of history",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Local_History",
+                                                                        "name": "Geographical",
+                                                                        "type": "Single",
+                                                                        "definition": "On a small geographical segment of history",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "1": {
+                                                                "iid": "Group_History",
+                                                                "name": "Sociological",
+                                                                "type": "Single",
+                                                                "definition": "On a small sociological segment (group) of history",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Cultural_Group",
+                                                                        "name": "Cultural",
+                                                                        "type": "Sociological",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Circumstantial_Sociological_Single",
+                                                                        "name": "Circumstantial",
+                                                                        "type": "Sociological",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Long_Duree_Particular",
+                                                "name": "Long Duree",
+                                                "type": "Particular",
+                                                "definition": "On a long geographical, chronological or sociological segment of history",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Environmental_Long",
+                                                        "name": "Environmental",
+                                                        "type": "Long Duree",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Chronological_Environmental_Long",
+                                                                "name": "Chronological",
+                                                                "type": "Environmental Long Duree",
+                                                                "definition": "",
+                                                                "children": {}
+                                                            },
+                                                            "1": {
+                                                                "iid": "Geographical_Environmental_Long",
+                                                                "name": "Geographical",
+                                                                "type": "Environmental Long Duree",
+                                                                "definition": "",
+                                                                "children": {}
+                                                            }
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "iid": "Sociological_Long",
+                                                        "name": "Sociological",
+                                                        "type": "Long Duree",
+                                                        "definition": "On the history of races or long duree civilisations",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Structure",
+                                "name": "Structure",
+                                "type": "",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "Modelling_Historiography",
+                                        "name": "Modelling",
+                                        "type": "Historiography",
+                                        "definition": "On the practice of developing general models from disparate sets of data",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Narrative_Historiography",
+                                        "name": "Narrative",
+                                        "type": "Structure",
+                                        "definition": "On the practice of using a stylized or streamlined narrative",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Style_Narrative",
+                                                "name": "Style",
+                                                "type": "Narrative",
+                                                "definition": "",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Omniscient_Style",
+                                                        "name": "Omniscient",
+                                                        "type": "Style",
+                                                        "definition": "",
+                                                        "children": {}
+                                                    },
+                                                    "1": {
+                                                        "iid": "Observant_Style",
+                                                        "name": "Observant",
+                                                        "type": "Style",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Descriptive_Observant",
+                                                                "name": "Descriptive",
+                                                                "type": "Observant",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Single_Descriptive",
+                                                                        "name": "Single",
+                                                                        "type": "Descriptive",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Alternative_Descriptive",
+                                                                        "name": "Alternatives",
+                                                                        "type": "Descriptive",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "1": {
+                                                                "iid": "Argument_Observant",
+                                                                "name": "Argument",
+                                                                "type": "Observant",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Purpose_Argument",
+                                                                        "name": "Purpose",
+                                                                        "type": "Argument",
+                                                                        "definition": "",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Pro_Purpose",
+                                                                                "name": "In Favour",
+                                                                                "type": "Purpose",
+                                                                                "definition": "",
+                                                                                "children": {}
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Counter-Arguments_Historiography",
+                                                                                "name": "Counter Argument",
+                                                                                "type": "Argument",
+                                                                                "definition": "On the practice of negating or falsifying an alternative narrative ",
+                                                                                "children": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Rhetoric",
+                                                                        "name": "Structure",
+                                                                        "type": "Argument",
+                                                                        "definition": "",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "External_Structure",
+                                                                                "name": "External",
+                                                                                "type": "Structure",
+                                                                                "definition": "",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Ethos_Rhetoric",
+                                                                                        "name": "Ethos",
+                                                                                        "type": "External",
+                                                                                        "definition": "On the authority of the speaker",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Pathos_Rhetoric",
+                                                                                        "name": "Pathos",
+                                                                                        "type": "External",
+                                                                                        "definition": "On the emotions aroused in the reader",
+                                                                                        "children": {}
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Logos_Rhetoric",
+                                                                                "name": "Internal",
+                                                                                "type": "Structure",
+                                                                                "definition": "",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Deduction_Logos",
+                                                                                        "name": "Deduction",
+                                                                                        "type": "Logos",
+                                                                                        "definition": "Reasoning from a priori or analytic truths",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Inferential_Internal",
+                                                                                        "name": "Inferential",
+                                                                                        "type": "Internal",
+                                                                                        "definition": "Infering premises from empirical evidence",
+                                                                                        "children": {
+                                                                                            "0": {
+                                                                                                "iid": "Induction_Logos",
+                                                                                                "name": "Induction",
+                                                                                                "type": "Inferential",
+                                                                                                "definition": "Infering premises from empirical evidence",
+                                                                                                "children": {}
+                                                                                            },
+                                                                                            "2": {
+                                                                                                "iid": "Abduction_Logos",
+                                                                                                "name": "Abduction",
+                                                                                                "type": "Inferential",
+                                                                                                "definition": "Accepting a wider premise as probable in order to consider minor premises and conclusions",
+                                                                                                "children": {}
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Substance_Narrative",
+                                                "name": "Substance",
+                                                "type": "Narrative",
+                                                "definition": "",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Moment",
+                                                        "name": "Moment",
+                                                        "type": "Substance",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Critical_Analysis",
+                                                                "name": "Critical Analysis",
+                                                                "type": "Moment",
+                                                                "definition": "On the practice of writing critical anlayses of historical evidence",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Brute",
+                                                                        "name": "Brute",
+                                                                        "type": "Critical Analysis",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Judgement_Methodology",
+                                                                        "name": "Judgement",
+                                                                        "type": "Critical Analysis",
+                                                                        "definition": "On that general sense of \"historical judgement\" employed by historians in selecting evidence, cause and effect chains, and relevancy",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Evidence_Selection_Historiography",
+                                                                                "name": "Selection",
+                                                                                "type": "Judgement",
+                                                                                "definition": "On the choice of evidence from a selection of possible options",
+                                                                                "children": {}
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Definitions_Historiography",
+                                                                                "name": "Definitions",
+                                                                                "type": "Judgement",
+                                                                                "definition": "On the practice of providing discplinary (rather than lexographic) definitions",
+                                                                                "children": {}
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "1": {
+                                                                "iid": "Discussion",
+                                                                "name": "Discussion",
+                                                                "type": "",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Depth",
+                                                                        "name": "Depth",
+                                                                        "type": "Discussion",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Corroboration_Historiography",
+                                                                        "name": "Breadth",
+                                                                        "type": "Discussion",
+                                                                        "definition": "On the practice of providing multiple evidence sources when making a claim",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Internal",
+                                                                                "name": "Internal",
+                                                                                "type": "Breadth",
+                                                                                "definition": "",
+                                                                                "children": {}
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Peer_Review",
+                                                                                "name": "External",
+                                                                                "type": "Breadth",
+                                                                                "definition": "",
+                                                                                "children": {}
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "iid": "Sequence",
+                                                        "name": "Sequence",
+                                                        "type": "",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Discrete",
+                                                                "name": "Discrete",
+                                                                "type": "",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Dates_Narrative",
+                                                                        "name": "Correlation",
+                                                                        "type": "Discrete",
+                                                                        "definition": "On the process of ascribing or pin-pointing events in time",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Ordering_Narrative",
+                                                                        "name": "Ordering",
+                                                                        "type": "Discrete",
+                                                                        "definition": "On the orderng of events in sequence",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "1": {
+                                                                "iid": "Cause_and_Effect_Historiography",
+                                                                "name": "Causal",
+                                                                "type": "Sequence",
+                                                                "definition": "On the practice of determining and illustrating cause and effect",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Effect",
+                                                                        "name": "Effect",
+                                                                        "type": "Causal",
+                                                                        "definition": "",
+                                                                        "children": {}
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Causes_Cause_and_Effect",
+                                                                        "name": "Cause",
+                                                                        "type": "Causal",
+                                                                        "definition": "On the description of causation ",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Motives_Cause_and_Effect",
+                                                                                "name": "Action",
+                                                                                "type": "Cause",
+                                                                                "definition": "On the ascription of motives to actions",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Desire",
+                                                                                        "name": "Desire",
+                                                                                        "type": "Action",
+                                                                                        "definition": "",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Expectations_Cause_and_Effect",
+                                                                                        "name": "Expectations",
+                                                                                        "type": "Action",
+                                                                                        "definition": "On people acting based on inferred motives or forthcoming actions of others",
+                                                                                        "children": {}
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Reaction",
+                                                                                "name": "Reaction",
+                                                                                "type": "",
+                                                                                "definition": "",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Extrinsic",
+                                                                                        "name": "Extrinsic",
+                                                                                        "type": "",
+                                                                                        "definition": "",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Intrinsic_Cause_and_Effect",
+                                                                                        "name": "Intrinsic",
+                                                                                        "type": "Reaction",
+                                                                                        "definition": "On explaining causes through intrinsic character traits",
+                                                                                        "children": {}
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -213,81 +897,652 @@
         }
     },
     "3": {
-        "iid": "Methodology",
-        "name": "Methodology",
+        "iid": "Ontology",
+        "name": "Ontology",
         "type": "",
-        "definition": "The methods by which History is practiced",
+        "definition": "On the set of concepts and categories in a subject area or domain that shows their properties and the relations between them.",
         "children": {
-            "2": {
-                "iid": "Interpretive_Frameworks",
-                "name": "Interpretive Frameworks",
-                "type": "Framework",
-                "definition": "Methodological approaches that focus on a particular set of evidences or questions",
+            "0": {
+                "iid": "Conceptual_Ontology",
+                "name": "Conceptual",
+                "type": "Ontology",
+                "definition": "On the categorisation and mapping of relationships between concepts",
                 "children": {
                     "0": {
-                        "iid": "Material_Historicism",
-                        "name": "Material Historicism",
-                        "type": "Interpretation",
-                        "definition": "A framework which focuses on the material conditions of the past as well as productive roles and relations",
-                        "children": {}
+                        "iid": "Evidence_Conceptual",
+                        "name": "Evidence",
+                        "type": "Conceptual",
+                        "definition": "On the categorisation and mapping of relationships between concepts of evidence",
+                        "children": {
+                            "0": {
+                                "iid": "Records_Evidence",
+                                "name": "Records",
+                                "type": "Evidence",
+                                "definition": "On the nature and interpretation of documents and other historical records",
+                                "children": {
+                                    "0": {
+                                        "iid": "Primary_Evidence",
+                                        "name": "Direct",
+                                        "type": "Record",
+                                        "definition": "On those materials deemed immediately connected with the phenomena they describe",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Literal_Direct",
+                                                "name": "Literal",
+                                                "type": "Direct",
+                                                "definition": "",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Testiomy_Literal",
+                                                        "name": "Testimony",
+                                                        "type": "Literal",
+                                                        "definition": "",
+                                                        "children": {}
+                                                    },
+                                                    "1": {
+                                                        "iid": "Impression_Literal",
+                                                        "name": "Impressions",
+                                                        "type": "Literal",
+                                                        "definition": "Non-testimony based marks, impression, or evidence of action",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Metaphorical_Direct",
+                                                "name": "Metaphorical",
+                                                "type": "Direct",
+                                                "definition": "",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Myth",
+                                                        "name": "Myth",
+                                                        "type": "Metaphorical",
+                                                        "definition": "On those materials deemed to be distilled or thematic narratives, rather than literal accounts",
+                                                        "children": {}
+                                                    },
+                                                    "1": {
+                                                        "iid": "Literary_Metaphorical",
+                                                        "name": "Literary",
+                                                        "type": "Metaphorical",
+                                                        "definition": "",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "1": {
+                                        "iid": "Indirect_Record",
+                                        "name": "Indirect",
+                                        "type": "Record",
+                                        "definition": "On the concept of records that are indirect or removed from what they record",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Secondary_Evidence",
+                                                "name": "Secondary Evidence",
+                                                "type": "Evidence",
+                                                "definition": "On those materials deemed to be analysis or critical comment, based upon primary material",
+                                                "children": {}
+                                            },
+                                            "1": {
+                                                "iid": "Tertiary_Evidence",
+                                                "name": "Tertiary Evidence",
+                                                "type": "Evidence",
+                                                "definition": "On those materials deemed to be meta-analysis or narrative forming, based upon primary and secondmary material",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Generalisations_Evidence",
+                                "name": "Generalisations",
+                                "type": "Evidence",
+                                "definition": "",
+                                "children": {
+                                    "0": {
+                                        "iid": "A_Priori_Generalisations",
+                                        "name": "A Priori",
+                                        "type": "Generalisations",
+                                        "definition": "Generalisations / Knowledge so imbedded in human experience they are pre-cultural",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Cultural_Generalisations",
+                                        "name": "Cultural",
+                                        "type": "Generalisations",
+                                        "definition": "Generalisations that are culture-dependent",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
                     },
                     "1": {
-                        "iid": "Feminist_Historiography",
-                        "name": "Feminist Historiography",
-                        "type": "Interpretation",
-                        "definition": "A framework which focuses on gender (biological or social) identity and relations in the past",
-                        "children": {}
-                    },
-                    "2": {
-                        "iid": "Histoire_des_mentalit\u00e9s",
-                        "name": "Histoire des Mentalit\u00e9s",
-                        "type": "Interpretation",
-                        "definition": "A framework which focuses on the ways in which people of a given time period thought about, interacted with, and classified the world around them",
-                        "children": {}
+                        "iid": "Analysis_Conceptual",
+                        "name": "Analysis",
+                        "type": "Conceptual",
+                        "definition": "On the categorisation and mapping of relationships between analytical concepts",
+                        "children": {
+                            "0": {
+                                "iid": "Property_Analysis",
+                                "name": "Property",
+                                "type": "Analysis",
+                                "definition": "On the categorisation of analytical concepts (core categories)",
+                                "children": {
+                                    "0": {
+                                        "iid": "Events_Ontology",
+                                        "name": "Event",
+                                        "type": "Property",
+                                        "definition": "On the analytical concept of a discrete event",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Process_Property",
+                                        "name": "Process",
+                                        "type": "Property",
+                                        "definition": "On the analytical concept of a process (an ongoing event)",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Attribute_Analysis",
+                                "name": "Attribute",
+                                "type": "Analysis",
+                                "definition": "On attaching specific attributes to analytical concepts (differientation)",
+                                "children": {
+                                    "0": {
+                                        "iid": "Domain_Attribute",
+                                        "name": "Domain",
+                                        "type": "Attribute",
+                                        "definition": "The fields, discplines or other scholarly domains which differientate the purpose of the analysis",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Natural_Philosophy_Domain",
+                                                "name": "Natural Philosophy",
+                                                "type": "Domain",
+                                                "definition": "On the study of the natural world",
+                                                "children": {
+                                                    "3": {
+                                                        "iid": "Natural_History_Discipline",
+                                                        "name": "Natural History",
+                                                        "type": "Domain",
+                                                        "definition": "On the discipline of Natural History as distinct from other disciplines",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Moral_Philosophy_Domain",
+                                                "name": "Moral Philosophy",
+                                                "type": "Domain",
+                                                "definition": "On the study of the conceptual world",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Ethnography_Discipline",
+                                                        "name": "Ethnography",
+                                                        "type": "Domain",
+                                                        "definition": "On the discipline of Ethnography as distinct from other disciplines",
+                                                        "children": {}
+                                                    },
+                                                    "1": {
+                                                        "iid": "History_Discipline",
+                                                        "name": "History",
+                                                        "type": "Domain",
+                                                        "definition": "On the discipline of History as distinct from other disciplines",
+                                                        "children": {}
+                                                    },
+                                                    "2": {
+                                                        "iid": "Philosophy_Discipline",
+                                                        "name": "Philosophy",
+                                                        "type": "Domain",
+                                                        "definition": "On the discipline of Philosophy as distinct from other disciplines",
+                                                        "children": {}
+                                                    },
+                                                    "3": {
+                                                        "iid": "Political_Science_Discipline",
+                                                        "name": "Political Science",
+                                                        "type": "Domain",
+                                                        "definition": "On the discipline of Political Science as distinct from other disciplines",
+                                                        "children": {}
+                                                    },
+                                                    "4": {
+                                                        "iid": "International_Relations_Discipline",
+                                                        "name": "International Relations",
+                                                        "type": "Domain",
+                                                        "definition": "On the discipline of International Relations as distinct from other disciplines",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "1": {
+                                        "iid": "Range_Attribute",
+                                        "name": "Range",
+                                        "type": "Attribute",
+                                        "definition": "The categories or descriptions attributed to analytical concepts during differientation",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Environment_Attribute",
+                                                "name": "Environment",
+                                                "type": "Attribute",
+                                                "definition": "",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Periodisation_Environment",
+                                                        "name": "Periodisation",
+                                                        "type": "Environment",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Modern_Periodisation",
+                                                                "name": "Modern History",
+                                                                "type": "Periodisation",
+                                                                "definition": "History that occurs after 1500 A.D.",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Late_Modern",
+                                                                        "name": "Late Modern History",
+                                                                        "type": "Periodisation",
+                                                                        "definition": "History that occurs after 1800 A.D.",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Long_Nineteenth_Century",
+                                                                                "name": "Long Nineteenth Century",
+                                                                                "type": "Periodisation",
+                                                                                "definition": "History that occurs between c1800 A.D. and c1900",
+                                                                                "children": {}
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Long_Twentieth_Century",
+                                                                                "name": "Long Twentieth Century",
+                                                                                "type": "Periodisation",
+                                                                                "definition": "History that occures between c1900 A.D. and the present",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Non_Contemporary",
+                                                                                        "name": "Non-Contemporary History",
+                                                                                        "type": "Periodisation",
+                                                                                        "definition": "History that occurred in the 20th century but not at the time of writing",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Contemporary_History_Periodisation",
+                                                                                        "name": "Contemporary History",
+                                                                                        "type": "Periodisation",
+                                                                                        "definition": "History that is contemporaneous with the historian (20th Century)",
+                                                                                        "children": {}
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Early_Modern",
+                                                                        "name": "Early Modern History",
+                                                                        "type": "Periodisation",
+                                                                        "definition": "History between 1500 and 1800 A.D.",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "1": {
+                                                                "iid": "Pre_Modern_Periodisation",
+                                                                "name": "Pre-Modern History",
+                                                                "type": "Periodisation",
+                                                                "definition": "History before 1500 A.D.",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Pre_Medieval_History",
+                                                                        "name": "Pre-Medieval History",
+                                                                        "type": "Pre-Modern",
+                                                                        "definition": "History before fuedal or medieval period",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Recorded_History",
+                                                                                "name": "Recorded History",
+                                                                                "type": "Pre-Medieval",
+                                                                                "definition": "History since writing, before the fuedal period",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Classical_History",
+                                                                                        "name": "Classical History",
+                                                                                        "type": "Recorded",
+                                                                                        "definition": "History of the Classical world",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Ancient_History",
+                                                                                        "name": "Ancient History",
+                                                                                        "type": "Periodisation",
+                                                                                        "definition": "History of the Ancient World",
+                                                                                        "children": {}
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Pre_Recorded_History",
+                                                                                "name": "Before Recorded History",
+                                                                                "type": "Pre-Medieval",
+                                                                                "definition": "History before the advent of writing",
+                                                                                "children": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Medieval_History",
+                                                                        "name": "Medieval History",
+                                                                        "type": "Pre-Modern",
+                                                                        "definition": "History of the fuedal or medieval period",
+                                                                        "children": {}
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "iid": "Spatialisation_Environment",
+                                                        "name": "Spatialisation",
+                                                        "type": "Environment",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Global_Spatialisation",
+                                                                "name": "Global",
+                                                                "type": "Spatialisation",
+                                                                "definition": "",
+                                                                "children": {}
+                                                            },
+                                                            "1": {
+                                                                "iid": "Specific_Spatialisation",
+                                                                "name": "Specific",
+                                                                "type": "Spatialisation",
+                                                                "definition": "",
+                                                                "children": {
+                                                                    "0": {
+                                                                        "iid": "Geographical_Specific",
+                                                                        "name": "Geographical",
+                                                                        "type": "Specific",
+                                                                        "definition": "",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Land_Geographical",
+                                                                                "name": "Land",
+                                                                                "type": "Specific",
+                                                                                "definition": "Defined by land",
+                                                                                "children": {}
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Water_Geographical",
+                                                                                "name": "Water",
+                                                                                "type": "Specific",
+                                                                                "definition": "Defined by Water",
+                                                                                "children": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "1": {
+                                                                        "iid": "Sociological_Specific",
+                                                                        "name": "Sociological",
+                                                                        "type": "Specific",
+                                                                        "definition": "",
+                                                                        "children": {
+                                                                            "0": {
+                                                                                "iid": "Political_Sociological",
+                                                                                "name": "Political",
+                                                                                "type": "Sociological",
+                                                                                "definition": "",
+                                                                                "children": {}
+                                                                            },
+                                                                            "1": {
+                                                                                "iid": "Cultural_Sociological",
+                                                                                "name": "Culture",
+                                                                                "type": "Sociological",
+                                                                                "definition": "",
+                                                                                "children": {
+                                                                                    "0": {
+                                                                                        "iid": "Linguistic_Cultural",
+                                                                                        "name": "Language",
+                                                                                        "type": "Cultural",
+                                                                                        "definition": "",
+                                                                                        "children": {}
+                                                                                    },
+                                                                                    "1": {
+                                                                                        "iid": "Custom_Cultural",
+                                                                                        "name": "Custom",
+                                                                                        "type": "Cultural",
+                                                                                        "definition": "",
+                                                                                        "children": {}
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Behaviour_Attribute",
+                                                "name": "Behaviour",
+                                                "type": "Attribute",
+                                                "definition": "",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Persons_Behaviour",
+                                                        "name": "Persons",
+                                                        "type": "Behaviour",
+                                                        "definition": "",
+                                                        "children": {}
+                                                    },
+                                                    "1": {
+                                                        "iid": "Groups_Behaviour",
+                                                        "name": "Groups",
+                                                        "type": "Behaviour",
+                                                        "definition": "",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Nationality_Sociological_Grouping",
+                                                                "name": "Nationality",
+                                                                "type": "Groups",
+                                                                "definition": "On the causes or effects of grouping by nationality",
+                                                                "children": {}
+                                                            },
+                                                            "1": {
+                                                                "iid": "Ethnic_Sociological_Grouping",
+                                                                "name": "Ethnic Groups",
+                                                                "type": "Groups",
+                                                                "definition": "On the causes or effects of grouping by common culture, language or origin",
+                                                                "children": {}
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
-            "3": {
-                "iid": "Theoretical_Frameworks",
-                "name": "Theoretical Frameworks",
-                "type": "Framework",
-                "definition": "Theories that attempt to explains why the research problem under study exists",
+            "1": {
+                "iid": "Physical_Ontology",
+                "name": "Physical",
+                "type": "Ontology",
+                "definition": "On the categorisation and mapping of relationships between physical manifestations (items and behaviours)",
                 "children": {
                     "0": {
-                        "iid": "Realism_IR_Theory",
-                        "name": "Realism (IR)",
-                        "type": "Theory",
-                        "definition": "A theory which declares states to be the actors in an anarchic system based on self-interest",
-                        "children": {}
+                        "iid": "Environment_Physical",
+                        "name": "Environment",
+                        "type": "Physical",
+                        "definition": "On the categorisation and mapping of relationships between environmental factors (non-human)",
+                        "children": {
+                            "0": {
+                                "iid": "Fixed_Enivornment",
+                                "name": "Fixed",
+                                "type": "Environment",
+                                "definition": "On (practically) fixed elements of the environment, such as geographical features",
+                                "children": {
+                                    "0": {
+                                        "iid": "Geographical_Record",
+                                        "name": "Geography",
+                                        "type": "Records",
+                                        "definition": "On the geographical record",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Temporary_Environment",
+                                "name": "Temporary",
+                                "type": "Environment",
+                                "definition": "On (practically) temporary elements of the environment, such as weather events or disastors",
+                                "children": {}
+                            }
+                        }
                     },
                     "1": {
-                        "iid": "Liberalism_IR_Theory",
-                        "name": "Liberalism (IR)",
-                        "type": "Theory",
-                        "definition": "A theory which accepts multiple types of actors in a system that can include mutually benefitial cooperation",
-                        "children": {}
-                    }
-                }
-            },
-            "4": {
-                "iid": "Evidence_Frameworks",
-                "name": "Evidence Frameworks",
-                "type": "Framework",
-                "definition": "Practices suited to particular evidence types",
-                "children": {
-                    "0": {
-                        "iid": "Close_Reading_Methodology",
-                        "name": "Close Reading",
-                        "type": "Methodology",
-                        "definition": "The meticulous reading of a text for vocabulary choices, internal structures, and external references",
-                        "children": {}
-                    },
-                    "1": {
-                        "iid": "Oral_History_Methodology",
-                        "name": "Oral History",
-                        "type": "Methodology",
-                        "definition": "The use of interviews with people having personal knowledge of past events",
-                        "children": {}
+                        "iid": "Human_Physical",
+                        "name": "Human",
+                        "type": "Physical",
+                        "definition": "On the categorisation and mapping of relationships between manifestations of human agency",
+                        "children": {
+                            "0": {
+                                "iid": "Behaviour_Human",
+                                "name": "Behaviour",
+                                "type": "Human",
+                                "definition": "On the manifestations of human behaviour",
+                                "children": {
+                                    "0": {
+                                        "iid": "Customs_Record",
+                                        "name": "Customs",
+                                        "type": "Records",
+                                        "definition": "On long-term cultural habits and customs",
+                                        "children": {}
+                                    },
+                                    "1": {
+                                        "iid": "Actions_Behaviour",
+                                        "name": "Individual Actions",
+                                        "type": "Behaviour",
+                                        "definition": "On the individualised actions of persons, rather than general customs or habits of peoples",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "1": {
+                                "iid": "Artefacts_Human",
+                                "name": "Artefacts",
+                                "type": "Human",
+                                "definition": "On the physcial remains of human agency; artefacts and manipulated objects",
+                                "children": {
+                                    "0": {
+                                        "iid": "Object_Artefact",
+                                        "name": "Object",
+                                        "type": "Artefact",
+                                        "definition": "On physical objects without (or not concerned with) human markingsdenoting language",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Fixed_Object",
+                                                "name": "Fixed",
+                                                "type": "Object",
+                                                "definition": "On fixed or practically immovable objects of human creation",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Architectural_Record",
+                                                        "name": "Architecture",
+                                                        "type": "Records",
+                                                        "definition": "On the built environment",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Movable_Object",
+                                                "name": "Movable",
+                                                "type": "Object",
+                                                "definition": "On practically movable objects of human creation",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "1": {
+                                        "iid": "Mark_Artefact",
+                                        "name": "Mark",
+                                        "type": "Artefact",
+                                        "definition": "On human markings, whether phoentic language or other communication",
+                                        "children": {
+                                            "0": {
+                                                "iid": "Image_Mark",
+                                                "name": "Image",
+                                                "type": "Mark",
+                                                "definition": "On images of human creation",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Designed_Image",
+                                                        "name": "Designed",
+                                                        "type": "Image",
+                                                        "definition": "On images of human creation that are primarily created from intervening design rather than procedural capture (drawing/carving)",
+                                                        "children": {}
+                                                    },
+                                                    "1": {
+                                                        "iid": "Captured_Image",
+                                                        "name": "Captured",
+                                                        "type": "Image",
+                                                        "definition": "On images of human creation that are primarily created from procedural capture rather than intervening design (video / photography)",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            },
+                                            "1": {
+                                                "iid": "Text_Mark",
+                                                "name": "Text",
+                                                "type": "Mark",
+                                                "definition": "On texts (loosely defined) of human creation; marks that convey literal or direct information ",
+                                                "children": {
+                                                    "0": {
+                                                        "iid": "Oral_Text",
+                                                        "name": "Oral",
+                                                        "type": "Text",
+                                                        "definition": "Information originally or intended to be conveyed orally (including written records of them)",
+                                                        "children": {
+                                                            "0": {
+                                                                "iid": "Spoken_Records",
+                                                                "name": "Speeches",
+                                                                "type": "Records",
+                                                                "definition": "On records of prepared human speech",
+                                                                "children": {}
+                                                            },
+                                                            "1": {
+                                                                "iid": "Rumour_Record",
+                                                                "name": "Rumours",
+                                                                "type": "Records",
+                                                                "definition": "On rumours or folk histories",
+                                                                "children": {}
+                                                            }
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "iid": "Written_Text",
+                                                        "name": "Written",
+                                                        "type": "Text",
+                                                        "definition": "Information originally or intended to be conveyed in written form",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

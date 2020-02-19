@@ -51,7 +51,7 @@ class configuration_display(cache_maintenance):
 			t_address =  'https://api.github.com/gists/' + str(self.Github_Taxonomy_ID)
 			r = requests.post(db_address,json.dumps({'files':{"database.json":{"content":open(Path(self.current_database), 'r').read()}}}),auth=requests.auth.HTTPBasicAuth(self.Github_Username, password_entry.get())) 
 			r = requests.post(t_address,json.dumps({'files':{"taxonomy.json":{"content":open(Path(self.current_taxonomy), 'r').read()}}}),auth=requests.auth.HTTPBasicAuth(self.Github_Username, password_entry.get()))
-		
+			
 		# Load Save Icon
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 		
