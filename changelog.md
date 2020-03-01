@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.14
+
++ Add reference image tab for transcriptions to item panel
+
 ## Nisaba 0.3.13
 
 + Updated Samples

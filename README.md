@@ -1,10 +1,10 @@
-# Nisaba 0.3.13
+# Nisaba 0.3.14
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Updated samples
++ Add reference image tab for transcriptions to item panel
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 
