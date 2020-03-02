@@ -1124,102 +1124,105 @@ class database_display(cache_maintenance):
         # Set Up Reference Image Tab #
         ##############################
 
-            # Create text boxes
-            self.reference_image_label =ttk.Label(self.item_tab_four, text="Image File")
-            self.reference_image_filename = ttk.Entry(self.item_tab_four)            
+        # Create text boxes
+        self.reference_image_label =ttk.Label(self.item_tab_four, text="Image File")
+        self.reference_image_filename = ttk.Entry(self.item_tab_four)            
+        
+        # Fill Entry Boxes
+        try:
+            self.reference_image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['reference_image_file'])
             
-            # Fill Entry Boxes
-            try:
-                self.reference_image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['reference_image_file'])
-                
-            except(KeyError,FileNotFoundError):
-                self.reference_image_filename.insert(4,'Missing File')
+        except(KeyError,FileNotFoundError):
+            self.database[self.collection_index]['items'][self.item_index]['reference_image_file'] = 'filename.jpg'
+            self.reference_image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['reference_image_file'])
 
-            # Display Image Filename
-            self.reference_image_label.grid(column = 1, row = 0)
-            self.reference_image_filename.grid(column = 2, row = 0)
+        # Display Image Filename
+        self.reference_image_label.grid(column = 1, row = 0)
+        self.reference_image_filename.grid(column = 2, row = 0)
+        
+        def reference_image_save_and_refresher():
+            self.database_entry_saver('i')
+            self.item_panels_displayer('r')
             
-            def reference_image_save_and_refresher():
-                self.database_entry_saver('i')
-                self.item_panels_displayer('r')
+        def reference_image_rotater(canvas):
+            self.reference_image = self.reference_image.rotate(270, expand=True)
+            self.reference_image_rotation = self.reference_image_rotation + 270
+            self.database_entry_saver('i')
+            self.item_panels_displayer('r')
+            
+            # Find Image Size
+            [imageSizeWidth, imageSizeHeight] = self.reference_image.size               
+
+            # Resize Image to Fit Canvas
+            if imageSizeWidth > imageSizeHeight:
+                sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
+                imageSizeWidth = int(imageSizeWidth*sizeRatio)
+                imageSizeHeight = int(imageSizeHeight*sizeRatio)
                 
-            def reference_image_rotater(canvas):
-                self.reference_image = self.reference_image.rotate(270, expand=True)
-                self.reference_image_rotation = self.reference_image_rotation + 270
+            else:
+                sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
+                imageSizeWidth = int(imageSizeWidth*sizeRatio)
+                imageSizeHeight = int(imageSizeHeight*sizeRatio)
                 
-                # Find Image Size
-                [imageSizeWidth, imageSizeHeight] = self.reference_image.size               
+            self.reference_image = self.reference_image.resize((imageSizeWidth, imageSizeHeight), PIL.Image.ANTIALIAS)
 
-                # Resize Image to Fit Canvas
-                if imageSizeWidth > imageSizeHeight:
-                    sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
-                    imageSizeWidth = int(imageSizeWidth*sizeRatio)
-                    imageSizeHeight = int(imageSizeHeight*sizeRatio)
-                    
-                else:
-                    sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
-                    imageSizeWidth = int(imageSizeWidth*sizeRatio)
-                    imageSizeHeight = int(imageSizeHeight*sizeRatio)
-                    
-                self.reference_image = self.reference_image.resize((imageSizeWidth, imageSizeHeight), PIL.Image.ANTIALIAS)
+            # Prepare Image for Insertion
+            self.reference_photoImg = PIL.ImageTk.PhotoImage(self.reference_image)
 
-                # Prepare Image for Insertion
-                self.reference_photoImg = PIL.ImageTk.PhotoImage(self.reference_image)
+            # Add Image to Canvas
+            canvas.create_image(imageSizeWidth/2+6, imageSizeHeight/2+6, anchor="center", image=self.reference_photoImg)
 
-                # Add Image to Canvas
-                canvas.create_image(imageSizeWidth/2+6, imageSizeHeight/2+6, anchor="center", image=self.reference_photoImg)
+        # Create save/rotate button
+        self.reference_image_rotate_button = Button(self.item_tab_four, image=self.refresh_icon,command=lambda:reference_image_rotater(self.reference_imageCanvas))
+        reference_image_rotate_button_tt = ToolTip(self.reference_image_rotate_button, "Rotate Image",delay=0.01)
+        self.reference_image_rotate_button.grid(column = 4, row = 0)
+        self.reference_image_save_button = Button(self.item_tab_four, image=self.save_icon,command=reference_image_save_and_refresher)
+        reference_image_rotate_save_tt = ToolTip(self.reference_image_save_button, "Save Filename",delay=0.01)
+        self.reference_image_save_button.grid(column = 3, row = 0)
 
-            # Create save/rotate button
-            self.reference_image_rotate_button = Button(self.item_tab_four, image=self.refresh_icon,command=lambda:reference_image_rotater(self.reference_imageCanvas))
-            reference_image_rotate_button_tt = ToolTip(self.reference_image_rotate_button, "Rotate Image",delay=0.01)
-            self.reference_image_rotate_button.grid(column = 4, row = 0)
-            self.reference_image_save_button = Button(self.item_tab_four, image=self.save_icon,command=reference_image_save_and_refresher)
-            reference_image_rotate_save_tt = ToolTip(self.reference_image_save_button, "Save Filename",delay=0.01)
-            self.reference_image_save_button.grid(column = 3, row = 0)
-
+        try:
+            # Set image file
+            self.reference_image_filename_string = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['reference_image_file'])
+            self.reference_image = PIL.Image.open(self.reference_image_filename_string)    
+            
             try:
-                # Set image file
-                self.reference_image_filename_string = str(Path(self.raw_data_images_path) / self.database[self.collection_index]['items'][self.item_index]['reference_image_file'])
-                self.reference_image = PIL.Image.open(self.reference_image_filename_string)    
+                self.reference_image_rotation = self.database[self.collection_index]['items'][self.item_index]['reference_image_file_rotation']
+            except(KeyError):
+                self.reference_image_rotation = 0
+            
+            self.reference_image = self.reference_image.rotate(self.reference_image_rotation, expand=True)
+            
+            # Find Image Size
+            [imageSizeWidth, imageSizeHeight] = self.reference_image.size               
+
+            # Resize Image to Fit Canvas
+            if imageSizeWidth > imageSizeHeight:
+                sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
+                imageSizeWidth = int(imageSizeWidth*sizeRatio)
+                imageSizeHeight = int(imageSizeHeight*sizeRatio)
                 
-                try:
-                    self.reference_image_rotation = self.database[self.collection_index]['items'][self.item_index]['reference_image_file_rotation']
-                except(KeyError):
-                    self.reference_image_rotation = 0
+            else:
+                sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
+                imageSizeWidth = int(imageSizeWidth*sizeRatio)
+                imageSizeHeight = int(imageSizeHeight*sizeRatio)
                 
-                self.reference_image = self.reference_image.rotate(self.reference_image_rotation, expand=True)
-                
-                # Find Image Size
-                [imageSizeWidth, imageSizeHeight] = self.reference_image.size               
+            self.reference_image = self.reference_image.resize((imageSizeWidth, imageSizeHeight), PIL.Image.ANTIALIAS)
 
-                # Resize Image to Fit Canvas
-                if imageSizeWidth > imageSizeHeight:
-                    sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
-                    imageSizeWidth = int(imageSizeWidth*sizeRatio)
-                    imageSizeHeight = int(imageSizeHeight*sizeRatio)
-                    
-                else:
-                    sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
-                    imageSizeWidth = int(imageSizeWidth*sizeRatio)
-                    imageSizeHeight = int(imageSizeHeight*sizeRatio)
-                    
-                self.reference_image = self.reference_image.resize((imageSizeWidth, imageSizeHeight), PIL.Image.ANTIALIAS)
+            # Prepare Image for Insertion
+            self.reference_photoImg = PIL.ImageTk.PhotoImage(self.reference_image)
 
-                # Prepare Image for Insertion
-                self.reference_photoImg = PIL.ImageTk.PhotoImage(self.reference_image)
+            # Display Image Canvas
+            self.reference_imageCanvas = Canvas(self.item_tab_four, width=imageSizeWidth+10, height=imageSizeHeight+10, bg="black")
+            self.reference_imageCanvas.grid(column = 0, row = 1, columnspan=5)
 
-                # Display Image Canvas
-                self.reference_imageCanvas = Canvas(self.item_tab_four, width=imageSizeWidth+10, height=imageSizeHeight+10, bg="black")
-                self.reference_imageCanvas.grid(column = 0, row = 1, columnspan=5)
+            # Add Image to Canvas
+            self.reference_imageCanvas.create_image(imageSizeWidth/2+6, imageSizeHeight/2+6, anchor="center", image=self.reference_photoImg)
 
-                # Add Image to Canvas
-                self.reference_imageCanvas.create_image(imageSizeWidth/2+6, imageSizeHeight/2+6, anchor="center", image=self.reference_photoImg)
+        except(KeyError,FileNotFoundError):
+            label = ttk.Label(self.item_tab_four, text="Image Not Found!")
+            label.grid(column = 2, row = 1)          
 
-            except(KeyError,FileNotFoundError):
-                label = ttk.Label(self.item_tab_four, text="Image Not Found!")
-                label.grid(column = 2, row = 1)          
-
-                
+            
     def collection_metadata_panel_displayer(self):
     # Creates Collection Metadata Panel
     
