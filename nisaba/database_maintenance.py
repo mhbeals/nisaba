@@ -270,8 +270,9 @@ class database_maintenance:
 			self.database[self.collection_index]['items'][self.item_index]['schema:editor'][2] = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 			# Save any reference images/
-			self.database[self.collection_index]['items'][self.item_index]['reference_image_file'] = self.reference_image_filename.get()
-			self.database[self.collection_index]['items'][self.item_index]['reference_image_file_rotation'] = self.reference_image_rotation
+			if self.reference_image_filename.get() != 'filename.jpg':
+				self.database[self.collection_index]['items'][self.item_index]['reference_image_file'] = self.reference_image_filename.get()
+				self.database[self.collection_index]['items'][self.item_index]['reference_image_file_rotation'] = self.reference_image_rotation
 
 			# If it is a Text, Save the Transcription
 			if self.database[self.collection_index]['items'][self.item_index]['item_type'] == 't':		

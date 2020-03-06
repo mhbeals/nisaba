@@ -1147,30 +1147,7 @@ class database_display(cache_maintenance):
         def reference_image_rotater(canvas):
             self.reference_image = self.reference_image.rotate(270, expand=True)
             self.reference_image_rotation = self.reference_image_rotation + 270
-            self.database_entry_saver('i')
-            self.item_panels_displayer('r')
-            
-            # Find Image Size
-            [imageSizeWidth, imageSizeHeight] = self.reference_image.size               
-
-            # Resize Image to Fit Canvas
-            if imageSizeWidth > imageSizeHeight:
-                sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
-                imageSizeWidth = int(imageSizeWidth*sizeRatio)
-                imageSizeHeight = int(imageSizeHeight*sizeRatio)
-                
-            else:
-                sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
-                imageSizeWidth = int(imageSizeWidth*sizeRatio)
-                imageSizeHeight = int(imageSizeHeight*sizeRatio)
-                
-            self.reference_image = self.reference_image.resize((imageSizeWidth, imageSizeHeight), PIL.Image.ANTIALIAS)
-
-            # Prepare Image for Insertion
-            self.reference_photoImg = PIL.ImageTk.PhotoImage(self.reference_image)
-
-            # Add Image to Canvas
-            canvas.create_image(imageSizeWidth/2+6, imageSizeHeight/2+6, anchor="center", image=self.reference_photoImg)
+            reference_image_save_and_refresher()
 
         # Create save/rotate button
         self.reference_image_rotate_button = Button(self.item_tab_four, image=self.refresh_icon,command=lambda:reference_image_rotater(self.reference_imageCanvas))
