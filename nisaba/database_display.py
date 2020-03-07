@@ -419,7 +419,7 @@ class database_display(cache_maintenance):
 		if self.current_level == 's': self.metadata_fields_displayer(self.item_entry_form,'s')	
 	
 	####################
-	#   Tab Display	#
+	#   Tab Display	   #
 	####################	
 
 	def metadata_tab_displayer(self, tab, level):
@@ -855,8 +855,8 @@ class database_display(cache_maintenance):
 		self.button_frame_left = ttk.Frame(self.button_frame)
 		self.button_frame_left.place(relwidth=.45, y=0)
 		
-		self.pane_one.place(y=42, relwidth=.45, relheight=1)
-		self.pane_two.place(y = 52, x=15, relx=.48, relwidth=.4, relheight=1)
+		self.pane_one.place(y=42, relwidth=.45, relheight=.9)
+		self.pane_two.place(y=52, x=15, relx=.48, relwidth=.4, relheight=1)
 
 		####################################
 		# Setup Item Display Panel (Right) #
@@ -1233,9 +1233,9 @@ class database_display(cache_maintenance):
 			if value.get('default',0,) == 1:
 				self.default_user = key
 		
-		#####################
+		######################
 		# Display Editor Box #
-		#####################
+		######################
 		
 		# Create String Variable
 		self.provenance_collection_editor = StringVar(item_metadata_frame)
@@ -1292,7 +1292,7 @@ class database_display(cache_maintenance):
 		self.button_frame_right.place(relx=.49, relwidth=.45, y=0)
 
 		self.pane_two = ttk.Frame(self.database_window)
-		self.pane_two.place(y = 55, x=15, relx=.48, relwidth=.45, relheight=1)
+		self.pane_two.place(y = 55, x=15, relx=.48, relwidth=.45, relheight=.8)
 		
 		# Setup scroll bar
 		scrollbar = Scrollbar(self.pane_two)
