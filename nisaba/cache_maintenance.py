@@ -10,7 +10,7 @@ except ModuleNotFoundError:
 class cache_maintenance(database_maintenance):
 
 	##############################
-	#         Navigation         #
+	#		 Navigation		 #
 	##############################
 
 	def iid_iterator(self,database,iid,function_call):
@@ -70,7 +70,7 @@ class cache_maintenance(database_maintenance):
 		return alpha_taxonomy
 	
 	##############################
-	#           Adding           #
+	#		   Adding		   #
 	##############################
 	
 	def collection_adder(self):
@@ -176,7 +176,7 @@ class cache_maintenance(database_maintenance):
 		self.taxonomy_viewer(self.taxonomy_window,self.switcher_active)
 	
 	##############################
-	#           Deleting         #
+	#		   Deleting		 #
 	##############################
 
 	def user_deleter(self,current_user):
@@ -217,7 +217,7 @@ class cache_maintenance(database_maintenance):
 			self.item_panels_displayer('s')
 	
 	##############################
-	#           Saving           #
+	#		   Saving		   #
 	##############################
 	
 	def metadata_entry_saver(self,current_user):

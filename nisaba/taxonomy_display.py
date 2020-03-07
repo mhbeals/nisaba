@@ -5,7 +5,7 @@ try:
 	from cache_maintenance import *
 	from tooltip_creation import *
 	from scrollframe_builder import *
-    
+	
 except ModuleNotFoundError:
 	# Used when calling as library
 	from nisaba.database_maintenance import *
@@ -23,7 +23,7 @@ from tkinter.ttk import *
 class taxonomy_display(cache_maintenance):
 
 	#########################
-	#   Field Populators    #
+	#   Field Populators	#
 	#########################
 	
 	def taxon_branch_builder(self,database,key):
@@ -87,7 +87,7 @@ class taxonomy_display(cache_maintenance):
 			self.taxonomy_reference_entry.insert("1.0","")
 
 	#########################
-	#   Event Processing    #
+	#   Event Processing	#
 	#########################			
 		
 	def taxon_informer(self,event):
@@ -189,14 +189,14 @@ class taxonomy_display(cache_maintenance):
 		def segment_returner():
 			self.pane_one.destroy()
 			self.pane_two.destroy()
-        
+		
 		# Create Add/Save/Delete Button Set
 		row = ttk.Frame(self.pane_one)
 		self.add_button = Button(row, image=self.add_icon, command=self.root_adder)
 		add_button_tt = ToolTip(self.add_button, "Add Root Taxon",delay=0.01)
 		self.add_button.pack(side=LEFT)
-        
-        # If this is a switcher
+		
+		# If this is a switcher
 		if self.switcher_active == True:
 			self.return_button = ttk.Button(row, image=self.up_level_icon, command=segment_returner)
 			self.return_button_tt = ToolTip(self.return_button, "Return to Segment Annotation",delay=0.01)
@@ -208,7 +208,7 @@ class taxonomy_display(cache_maintenance):
 		row.pack()
 		
 	########################
-	#         Main         #
+	#		 Main		 #
 	########################	
 		
 	def taxonomy_viewer(self,window,switcher_active):

@@ -1,10 +1,10 @@
-# Nisaba 0.3.14
+# Nisaba 0.3.15
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Add reference image tab for transcriptions to item panel
++ Improved Gist Upload to Git Push (requires SSH authorisation on computer and exisiting GIT repo)
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

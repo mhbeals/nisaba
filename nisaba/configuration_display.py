@@ -29,111 +29,34 @@ from tkinter import messagebox
 
 class configuration_display(cache_maintenance):
 
+	
 	##############################
-	#      Panel Displays        #
+	#	  Git Functions		     #
 	##############################
 	
-	def gist_viewer(self,window):
-	
-        # Add, Commit and push
-        
-		def git_push_automation():
-			try:
-				cp = cmd.run("file path", check=True, shell=True)
-				print("cp", cp)
-				cmd.run('git add -A', check=True, shell=True)
-				cmd.run('git commit -m "message"', check=True, shell=True)
-				cmd.run("git push -u origin master -f", check=True, shell=True)
-				print("Success")
-				return True
-			except:
-				print("Error git automation")
-				return False
-        
-    
-		# Download Gists
-		def pull_file():
-		
-			url = 'https://gist.githubusercontent.com/' + str(self.Github_Username) + '/' + str(self.Github_DataBase_ID) + '/raw'
-			r = requests.get(url, allow_redirects=True)
-			open(Path(self.current_database), 'wb').write(r.content)
-			url = 'https://gist.githubusercontent.com/' + str(self.Github_Username) + '/' + str(self.Github_Taxonomy_ID) + '/raw'
-			r = requests.get(url, allow_redirects=True)
-			open (Path(self.current_taxonomy), 'wb').write(r.content)						
-		
-		#Upload Gists	
-		def push_file():
-		
-			db_address = 'https://api.github.com/gists/' + str(self.Github_DataBase_ID)
-			t_address =  'https://api.github.com/gists/' + str(self.Github_Taxonomy_ID)
-			r = requests.post(db_address,json.dumps({'files':{"database.json":{"content":open(Path(self.current_database), 'r').read()}}}),auth=requests.auth.HTTPBasicAuth(self.Github_Username, password_entry.get())) 
-			r = requests.post(t_address,json.dumps({'files':{"taxonomy.json":{"content":open(Path(self.current_taxonomy), 'r').read()}}}),auth=requests.auth.HTTPBasicAuth(self.Github_Username, password_entry.get()))
-			
-		# Load Save Icon
-		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
-		
-		# Delete Previous Panels and Menus or Create New Window
+	def git_push_automation(self):
 		try:
-			self.pane_one.destroy()
-			self.pane_two.destroy()
-		except (NameError, AttributeError):
-			pass
-
-		# Create Configuration Frame
-		self.gist_window = window
-		self.pane_one = ttk.Frame(self.gist_window)
-		self.pane_one.place(relwidth=.5, relheight=1, rely =.05)
-        
-		row = ttk.Frame(self.pane_one)
-		label = ttk.Label(row, text='Github Username:' , anchor='w', width=30)
-		self.github_username_entry = ttk.Entry(row)
-		self.github_username_entry.insert(0,self.Github_Username)
-		label.pack(side=LEFT)
-		self.github_username_entry.pack(side=RIGHT, expand=YES, fill=X)
-		row.pack(side=TOP, fill=X)
-		
-		row = ttk.Frame(self.pane_one)
-		label = ttk.Label(row, text='Github Password:' , anchor='w', width=30)
-		password_entry = ttk.Entry(row)
-		label.pack(side=LEFT)
-		password_entry.pack(side=RIGHT, expand=YES, fill=X)
-		row.pack(side=TOP, fill=X)
-		
-		row = ttk.Frame(self.pane_one)
-		label = ttk.Label(row, text='Github Database ID: ', anchor='w', width=30)
-		self.github_database_ID_entry = ttk.Entry(row)
-		self.github_database_ID_entry.insert(0,self.Github_DataBase_ID)
-		label.pack(side=LEFT)
-		self.github_database_ID_entry.pack(side=LEFT, expand=YES, fill=X)
-		row.pack(side=TOP, fill=X)
-
-		row = ttk.Frame(self.pane_one)
-		label = ttk.Label(row, text='Github Taxonomy ID: ', anchor='w', width=30)
-		self.github_taxonomy_ID_entry = ttk.Entry(row)
-		self.github_taxonomy_ID_entry.insert(0,self.Github_Taxonomy_ID)
-		label.pack(side=LEFT)
-		self.github_taxonomy_ID_entry.pack(side=LEFT, expand=YES, fill=X)
-		row.pack(side=TOP, fill=X)
-		
-		
-		row = ttk.Frame(self.pane_one)
-		label = ttk.Label(row, text='')
-		label.pack()
-		row.pack(side=TOP, fill=X)		
-
-		row = ttk.Frame(self.pane_one)
-		pull_button = Button(row, text="Download Gist Database and Taxonomy", command=git_push_automation)
-		push_button = Button(row, text="Upload Gist Database and Taxonomy", command=push_file)
-		pull_button.pack(side=LEFT)
-		push_button.pack(side=RIGHT)
-		row.pack(side=TOP, fill=X)		
-		
-		# Save button
-		row = ttk.Frame(self.pane_one)
-		self.save_button = Button(row, image=self.save_icon, command=self.configuration_defaults_saver)
-		save_button_tt = ToolTip(self.save_button, "Save Configuration File",delay=0.01)
-		self.save_button.pack(padx=1,pady=1)
-		row.pack(side=TOP, fill=X)		
+			cmd.run('git add -A ', check=True, shell=True, cwd=self.git_path)
+			cmd.run('git commit -m "Updating Database"', check=True, shell=True, cwd=self.git_path)
+			cmd.run("git push -u origin master -f", check=True, shell=True, cwd=self.git_path)
+			messagebox.showinfo("Git Push", "Your Database Has Been Successfully Pushed to Github")
+			return True
+		except:
+			messagebox.showinfo("Git Push", "Your Database Was Not Successfully Pushed to Github")
+			return False
+			
+	def git_pull_automation(self):
+		try:
+			cmd.run("git pull", check=True, shell=True, cwd=self.git_path)
+			print("Success")
+			return True
+		except:
+			print("Error git pull")
+			return False
+			
+	##############################
+	#	  Panel Displays		#
+	##############################
 
 	def edit_user_frame_displayer(self):
 	# Displays user metadata in pane two
@@ -277,7 +200,7 @@ class configuration_display(cache_maintenance):
 		self.taxonomy_loader_frame = ttk.Frame(self.pane_one)
 		self.taxonomy_loader_frame.pack(side=TOP, fill=X)
 
-        # Create Taxonmy Loader Row
+		# Create Taxonmy Loader Row
 		row = ttk.Frame(self.taxonomy_loader_frame)
 		row.pack(side=TOP, fill=X)
 		label =ttk.Label(row, text="Default Taxonomy: ", anchor='w', width=30)
@@ -287,18 +210,40 @@ class configuration_display(cache_maintenance):
 		self.entry.pack(side=LEFT, expand=YES, fill=X)
 		button = Button(row, text="Load", command=(lambda: self.database_loader("t",self.default_database_panels_displayer)))
 		button.pack(padx=1,pady=1,side=RIGHT)
-
+        
 		# Set image page
 		self.default_image_path_frame_displayer()
 
+	def default_git_path_frame_displayer(self):	
+		# Create Image Paths Frame
+		self.default_git_path_frame = ttk.Frame(self.pane_one)
+		self.default_git_path_frame.pack(side=TOP, fill=X)
+
+		# Create Image Loader Row
+		row = ttk.Frame(self.default_git_path_frame)
+		row.pack(side=TOP, fill=X)
+		label =ttk.Label(row, text="Default Git Repository Path: ", anchor='w', width=30)
+		label.pack(side=LEFT)   
+		self.entry = ttk.Entry(row)
+		self.entry.insert(0,self.git_path)
+		self.entry.pack(side=LEFT, expand=YES, fill=X)
+		load_button = Button(row, text="Load", command=(lambda: self.database_loader("g",self.default_database_panels_displayer)))
+		pull_button = Button(row, text="Download Database", command=self.git_pull_automation)
+		push_button = Button(row, text="Upload Database", command=self.git_push_automation)
+		pull_button.pack(padx=1,pady=1,side=RIGHT)
+		load_button.pack(padx=1,pady=1,side=RIGHT)
+		
+		#Load Image Path Displayer
+		self.user_dropdown_displayer()
+		
 	def default_image_path_frame_displayer(self):
-	# Creates Fields for Default Taxonomies
-	
-		# Create Taxonomy Loader Frame
+	# Creates Fields for Default Image Path
+		
+		# Create Image Paths Frame
 		self.default_image_path_frame = ttk.Frame(self.pane_one)
 		self.default_image_path_frame.pack(side=TOP, fill=X)
 
-        # Create Taxonmy Loader Row
+		# Create Image Loader Row
 		row = ttk.Frame(self.default_image_path_frame)
 		row.pack(side=TOP, fill=X)
 		label =ttk.Label(row, text="Default Image Path: ", anchor='w', width=30)
@@ -310,7 +255,7 @@ class configuration_display(cache_maintenance):
 		button.pack(padx=1,pady=1,side=RIGHT)
 			
 		# Load other parameters
-		self.user_dropdown_displayer()
+		self.default_git_path_frame_displayer()
 		
 
 	def user_dropdown_displayer(self):
@@ -382,7 +327,7 @@ class configuration_display(cache_maintenance):
 		self.default_taxonomy_frame_displayer()
 
 	##############################
-	#		   Main		         #
+	#		   Main				 #
 	##############################		
 		
 	def configuration_viewer(self,window):

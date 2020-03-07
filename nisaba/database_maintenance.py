@@ -18,7 +18,7 @@ from tkinter.filedialog import askdirectory
 class database_maintenance:
 
 	##############################
-	#       Initialisation       #
+	#	   Initialisation	   #
 	##############################
 
 	# Set Relative Paths
@@ -37,6 +37,11 @@ class database_maintenance:
 
 		# Set Current Database and Taxonomies
 		self.current_database = self.config['Database']
+
+		try:
+			self.git_path = self.config['GitPath']
+		except(KeyError):
+			self.git_path = Path(os.path.join(os.path.dirname(__file__)))
 
 		try:
 			self.raw_data_images_path = self.config['ImagePath']
@@ -170,7 +175,7 @@ class database_maintenance:
 		return new_annotations
 
 	##############################
-	#      Saving Functions      #
+	#	  Saving Functions	  #
 	##############################
 
 	def configuration_file_saver(self,file):
@@ -187,6 +192,7 @@ class database_maintenance:
 		self.config['Database'] = str(self.current_database)
 		self.config['Taxonomy'] = str(self.current_taxonomy)
 		self.config['ImagePath'] = str(self.raw_data_images_path)
+		self.config['GitPath'] = str(self.git_path)
 
 		try:
 			self.config['Github_DataBase_ID'] = str(self.github_database_ID_entry.get())
@@ -443,7 +449,11 @@ class database_maintenance:
 	def database_loader(self,type,function_call):
 		# Loads a New (non-default) JSON Database
 
-		if type == 'ip':
+		if type == 'g':
+			folder = askdirectory()
+			self.git_path=Path(folder)
+
+		elif type == 'ip':
 			folder = askdirectory()
 			self.raw_data_images_path=Path(folder)
 
@@ -481,6 +491,8 @@ class database_maintenance:
 			self.default_config = configparser.ConfigParser()
 			self.default_config['DEFAULT']['Database'] = 'Path(self.database_path) / "database.json"'
 			self.default_config['DEFAULT']['Taxonomy'] = 'Path(self.database_path) / "taxonomy.json"'
+			self.default_config['DEFAULT']['ImagePath'] = 'Path(self.database_path) / images/'
+			self.default_config['DEFAULT']['GitPath'] = 'Path(self.database_path)'
 			self.default_config['DEFAULT']['Github_DataBase_ID'] = '1234567890'
 			self.default_config['DEFAULT']['Github_Taxonomy_ID'] = '1234567890'
 			self.default_config['DEFAULT']['Github_Username'] = 'username'

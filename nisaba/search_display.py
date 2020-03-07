@@ -21,7 +21,7 @@ import PIL.Image
 class search_display(cache_maintenance):
 
 	#########################
-	#   Field Populators    #
+	#   Field Populators	#
 	#########################
 
 	def taxon_branch_builder(self,database,key):
@@ -62,7 +62,7 @@ class search_display(cache_maintenance):
 
 
 	#########################
-	#   Event Processing    #
+	#   Event Processing	#
 	#########################		
 
 	def result_viewer(self,event):		
@@ -281,13 +281,13 @@ class search_display(cache_maintenance):
 												display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
 											
 										else: 
-                                        
+										
 											if 'dc:description' in self.database[collection_number]['items'][item_number]['segments'][segment_number]:
-                                                
+												
 												display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
-                                            
+											
 											else: 
-                                            
+											
 												display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
 
 									# If the segment is an image
@@ -344,9 +344,9 @@ class search_display(cache_maintenance):
 		self.search_tree.bind('<Button-1>', self.taxon_informer)
 		
 		self.search_tree.update()
-        
+		
 	########################
-	#         Main         #
+	#		 Main		 #
 	########################	
 		
 	def search_viewer(self,window):

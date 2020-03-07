@@ -23,7 +23,7 @@ from tkinter import messagebox
 class metadata_display(cache_maintenance):
 
 	#########################
-	#   Field Populators    #
+	#   Field Populators	#
 	#########################
 		
 	def user_metadata_fields_displayer(self,event):	
@@ -163,7 +163,7 @@ class metadata_display(cache_maintenance):
 		users_menu.pack(side=LEFT, padx=5, pady=5)
 	
 	########################
-	#         Main         #
+	#		 Main		 #
 	########################
 	
 	def database_metadata_viewer(self,window):

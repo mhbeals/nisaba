@@ -1,5 +1,9 @@
 # Change Log
 
+## Nisaba 0.3.15
+
++ Improved Gist Upload to Git Push (requires SSH authorisation on computer and exisiting GIT repo)
+
 ## Nisaba 0.3.14
 
 + Add reference image tab for transcriptions to item panel
