@@ -12,6 +12,7 @@ except ModuleNotFoundError:
 	from nisaba.metadata_display import *
 
 # Import External Libraries
+import subprocess as cmd
 from pathlib import Path
 import csv
 import yaml
@@ -34,6 +35,22 @@ class configuration_display(cache_maintenance):
 	
 	def gist_viewer(self,window):
 	
+        # Add, Commit and push
+        
+		def git_push_automation():
+			try:
+				cp = cmd.run("file path", check=True, shell=True)
+				print("cp", cp)
+				cmd.run('git add -A', check=True, shell=True)
+				cmd.run('git commit -m "message"', check=True, shell=True)
+				cmd.run("git push -u origin master -f", check=True, shell=True)
+				print("Success")
+				return True
+			except:
+				print("Error git automation")
+				return False
+        
+    
 		# Download Gists
 		def pull_file():
 		
@@ -105,7 +122,7 @@ class configuration_display(cache_maintenance):
 		row.pack(side=TOP, fill=X)		
 
 		row = ttk.Frame(self.pane_one)
-		pull_button = Button(row, text="Download Gist Database and Taxonomy", command=pull_file)
+		pull_button = Button(row, text="Download Gist Database and Taxonomy", command=git_push_automation)
 		push_button = Button(row, text="Upload Gist Database and Taxonomy", command=push_file)
 		pull_button.pack(side=LEFT)
 		push_button.pack(side=RIGHT)
