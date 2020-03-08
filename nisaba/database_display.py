@@ -1173,13 +1173,13 @@ class database_display(cache_maintenance):
 			[imageSizeWidth, imageSizeHeight] = self.reference_image.size			   
 
 			# Resize Image to Fit Canvas
-			if imageSizeWidth > imageSizeHeight:
-				sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
+			if imageSizeWidth < imageSizeHeight:
+				sizeRatio = self.item_tab_four.winfo_screenheight()*.75 / imageSizeHeight
 				imageSizeWidth = int(imageSizeWidth*sizeRatio)
 				imageSizeHeight = int(imageSizeHeight*sizeRatio)
 				
 			else:
-				sizeRatio = self.item_tab_four.winfo_screenheight()*.5 / imageSizeWidth
+				sizeRatio = self.item_tab_four.winfo_screenheight()*.75 / imageSizeWidth
 				imageSizeWidth = int(imageSizeWidth*sizeRatio)
 				imageSizeHeight = int(imageSizeHeight*sizeRatio)
 				
@@ -1377,7 +1377,7 @@ class database_display(cache_maintenance):
 		self.button_frame.place(relwidth=1)
 		self.button_frame.configure(relief=RIDGE)
 		self.pane_one = ttk.Frame(self.database_window)
-		self.pane_one.place(y=42, relwidth=1, relheight=.8)
+		self.pane_one.place(y=42, relwidth=1, relheight=.9)
 		
 		##############################
 		# Collection Selection Panel #

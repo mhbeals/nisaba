@@ -48,10 +48,10 @@ class configuration_display(cache_maintenance):
 	def git_pull_automation(self):
 		try:
 			cmd.run("git pull", check=True, shell=True, cwd=self.git_path)
-			print("Success")
+			messagebox.showinfo("Git Pull", "Your Database Has Been Successfully Pulled from Github")
 			return True
 		except:
-			print("Error git pull")
+			messagebox.showinfo("Git Pull", "Your Database Was Not Successfully Pulled from Github")
 			return False
 			
 	##############################
