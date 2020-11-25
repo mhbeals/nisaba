@@ -25,170 +25,176 @@
         "schema:editor": [
             "mhb",
             "20190819_005403",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "dc:creator": [
             "Herodotus",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "dc:title": [
             "The Histories",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:hasShortTitle": [
             "Histories",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "prism:volume": [
             "",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:hasVolumeCount": [
             "",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "prism:edition": [
             "",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:BookSeries": [
             "Penguin Classics",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:hasSequenceIdentifier": [
             "",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:hasPlaceOfPublication": [
             "London",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "dc:publisher": [
             "Penguin Books",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "dc:date": [
             "440 BC",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:hasPageCount": [
             "716",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "prism:isbn": [
             "9780134449082",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "prism:doi": [
             "",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "fabio:Abstract": [
             "",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "dc:language": [
             "en",
             "mhb",
-            "20200301_132133"
+            "20201019_220008"
         ],
         "items": {
             "0": {
                 "schema:editor": [
                     "mhb",
                     "20190818_161535",
-                    "20200219_114723"
+                    "20201019_215526"
                 ],
                 "item_type": "t",
                 "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "0",
                     "mhb",
-                    "20200219_114723"
+                    "20201019_215526"
                 ],
                 "fabio:pageRange": [
                     "",
                     "mhb",
-                    "20200219_114723"
+                    "20201019_215526"
                 ],
                 "transcription": [
                     "This is the Showing forth of the Inquiry of Herodotus of Halicarnassos, to the end that neither the deeds of men may be forgotten by lapse of time, nor the works great and marvellous, which have been produced some by Hellenes and some by Barbarians, may lose their renown; and especially that the causes may be remembered for which these waged war with one another.",
                     "mhb",
-                    "20200219_114723"
+                    "20201019_214311"
                 ],
                 "segments": {
                     "0": {
                         "schema:editor": [
                             "mhb",
                             "20190818_191833",
-                            "20190818_191833"
+                            "20201019_215526"
                         ],
                         "start": 12,
                         "end": 49,
-                        "fabio_type": "Standard Segment",
+                        "fabio_type": "StandardSegment",
                         "annotations": [
                             [
-                                "Memorial-Justice-Hero_Teleology_of_History",
+                                "Positivism",
                                 "mhb",
-                                "20190818_161559"
+                                "20201019_215523"
                             ],
                             [
-                                "Memorial-Justice_Teleology_of_History",
+                                "Anti-Positivism",
                                 "mhb",
-                                "20190818_161559"
+                                "20201019_215526"
                             ],
                             [
-                                "Memorial_Teleology_of_History",
+                                "Rationalism",
                                 "mhb",
-                                "20190818_161559"
+                                "20201019_215523"
                             ],
                             [
-                                "Teleology_of_History",
+                                "Skepticism",
                                 "mhb",
-                                "20190818_161559"
+                                "20201019_215526"
                             ],
                             [
-                                "Teleology",
+                                "Epistemology",
                                 "mhb",
-                                "20190818_161559"
+                                "20201019_215523"
                             ]
+                        ],
+                        "nisaba:notes": [
+                            "",
+                            "mhb",
+                            "20201019_215526"
                         ]
                     }
                 },
-                "annotations": []
+                "annotations": [],
+                "reference_image_file": "filename.jpg"
             },
             "1": {
                 "schema:editor": [
                     "mhb",
                     "20190817_143200",
-                    "20200301_132133"
+                    "20201019_220008"
                 ],
                 "item_type": "t",
                 "fabio_type": "fabio:Paragraph",
                 "fabio:hasSequenceIdentifier": [
                     "1",
                     "mhb",
-                    "20200301_132133"
+                    "20201019_220008"
                 ],
                 "fabio:pageRange": [
                     "",
                     "mhb",
-                    "20200301_132133"
+                    "20201019_220008"
                 ],
                 "transcription": [
                     "Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel. These, they say, came from that which is called the Erythraian Sea to this of ours; and having settled in the land where they continue even now to dwell, set themselves forthwith to make long voyages by sea. And conveying merchandise of Egypt and of Assyria they arrived at other places and also at Argos; now Argos was at that time in all points the first of the States within that land which is now called Hellas; the Phenicians arrived then at this land of Argos, and began to dispose of their ship's cargo: and on the fifth or sixth day after they had arrived, when their goods had been almost all sold, there came down to the sea a great company of women, and among them the daughter of the king; and her name, as the Hellenes also agree, was Io the daughter of Inachos. These standing near to the stern of the ship were buying of the wares such as pleased them most, when of a sudden the Phenicians, passing the word from one to another, made a rush upon them; and the greater part of the women escaped by flight, but Io and certain others were carried off. So they put them on board their ship, and forthwith departed, sailing away to Egypt.",
@@ -198,20 +204,39 @@
                 "segments": {
                     "0": {
                         "schema:editor": [
-                            "",
-                            "",
-                            ""
+                            "mhb",
+                            "20190818_191833",
+                            "20201019_220008"
                         ],
                         "start": 0,
                         "end": 17,
-                        "annotations": [],
-                        "dc:description": [
+                        "fabio_type": "StandardSegment",
+                        "annotations": [
+                            [
+                                "Positivism",
+                                "mhb",
+                                "20201019_215523"
+                            ],
+                            [
+                                "Rationalism",
+                                "mhb",
+                                "20201019_215523"
+                            ],
+                            [
+                                "Epistemology",
+                                "mhb",
+                                "20201019_215523"
+                            ]
+                        ],
+                        "nisaba:notes": [
                             "",
-                            ""
+                            "mhb",
+                            "20201019_220008"
                         ]
                     }
                 },
-                "annotations": []
+                "annotations": [],
+                "reference_image_file": "filename.jpg"
             }
         },
         "fabio_type": "fabio:Book"

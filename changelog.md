@@ -1,5 +1,10 @@
 # Change Log
 
+## Nisaba 0.3.18
+
++ Fixed errors associated with duplicate or missing taxonomy entries
++ Some refactoring of code
+
 ## Nisaba 0.3.15
 
 + Improved Gist Upload to Git Push (requires SSH authorisation on computer and exisiting GIT repo)

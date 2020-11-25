@@ -4,7 +4,8 @@ A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Improved Gist Upload to Git Push (requires SSH authorisation on computer and exisiting GIT repo)
++ Fixed errors associated with duplicate or missing taxonomy entries
++ Some refactoring of code
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

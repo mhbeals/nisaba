@@ -58,8 +58,15 @@ class taxonomy_display(cache_maintenance):
 						x = x + 1
 						
 						# Create New Branch
-						d[x+1]=self.taxonomy_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = False)
-
+						try:
+							d[x+1]=self.taxonomy_tree.insert(parent_branch, "end", new_dictionary['iid'], text=new_dictionary['name'],values=(new_dictionary['type'],new_dictionary['definition']),open = False)
+						except TclError:
+							if new_dictionary['iid'] == "":
+								print("You have a blank iid in your taxonomy. Search json file for \"iid\": \"\"")
+							else:
+								print("You have a duplicate iid in your taxonomy. Search json file for " + new_dictionary['iid'])
+							
+		
 				# Re-Run Recursive Function with New "children" Dictionary
 				individual_branch_builder(new_dictionary['children'],d[x+1])
 

@@ -1227,7 +1227,7 @@ class database_display(cache_maintenance):
 		# Retrieve Existing User List
 		self.users = ['']
 		self.default_user = ''
-
+		
 		for key,value in self.database['users'].items():
 			self.users.append(key)
 			if value.get('default',0,) == 1:

@@ -1,5 +1,5 @@
 try:
-	# Used when executing with Python
+# Used when executing with Python
 	from database_maintenance import *
 	from cache_maintenance import *
 	from tooltip_creation import *
@@ -17,6 +17,9 @@ from tkinter import END
 from tkinter import ttk
 from tkinter.ttk import *
 import PIL.Image
+
+from ttkwidgets import CheckboxTreeview
+
 
 class search_display(cache_maintenance):
 
@@ -65,6 +68,18 @@ class search_display(cache_maintenance):
 	#   Event Processing	#
 	#########################		
 
+	def get_checked_annotations(self):   
+		self.annotation_list = (self.search_tree.get_checked())
+		for annotation in self.annotation_list:
+
+			# If that Item has a Parent and that Parent is not Already in the List
+			if self.search_tree.parent(annotation) != "" and self.search_tree.parent(annotation) not in self.annotation_list:
+
+				# Add Parent Item to the List
+				self.annotation_list.append(self.search_tree.parent(annotation))
+		   
+		self.taxon_list_displayer(self.taxonomy,self.annotation_list)
+
 	def result_viewer(self,event):		
 		segment_event_data = event.widget
 		segment_selection = segment_event_data.curselection()[0]
@@ -79,7 +94,7 @@ class search_display(cache_maintenance):
 		self.clicked_item = self.search_tree.identify('item',event.x,event.y)
 
 		# Send to iid_iterator
-		self.iid_iterator(self.taxonomy,self.search_tree.identify('item',event.x,event.y),self.taxon_list_displayer)
+		self.iid_iterator(self.taxonomy,self.annotation_list,self.taxon_list_displayer)
 
 	#####################
 	#   Panel Display   #
@@ -228,10 +243,8 @@ class search_display(cache_maintenance):
 		# Display Notes
 		self.note_displayer(selection_coordinates)
 	
-	def taxon_list_displayer(self,database,key):
+	def taxon_list_displayer(self,database,current_id):
 	# Displays Taxon Editor Panel
-	
-		current_id = database[key]['iid']
 	
 		# Delete Any Existing Information
 		try:
@@ -258,49 +271,58 @@ class search_display(cache_maintenance):
 		# Set Up segment listbox
 		self.segments = Listbox(self.pane_two)
 		self.segments.pack(anchor=W, fill=BOTH, expand=True)
-
+		self.get_annotations_button = Button(self.pane_two, text="Search For Taxons", command=self.get_checked_annotations)
+		self.get_annotations_button.pack()
+		self.list_of_items = ""
+        
 		#Populate Segment List Box
 		for collection_number,dictionary in self.database.items():
 			if collection_number != 'users':
 				for item_number,item_dictionary in self.database[collection_number]['items'].items():
 					for segment_number,segment_dictionary in self.database[collection_number]['items'][item_number]['segments'].items():
+						self.relatedterms = []
 						if 'annotations' in segment_dictionary:
 							for annotation in segment_dictionary['annotations']:
-								if annotation[0] == current_id:
-							
-									# If the segment is text
-									if self.database[collection_number]['items'][item_number]['item_type'] == "t":
-									
-										if 'fabio:pageRange' in self.database[collection_number]['items'][item_number]:
-		
-											if 'dc:description' in self.database[collection_number]['items'][item_number]['segments'][segment_number]:
-		
-												display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
-												
-											else:
-												display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
+								self.relatedterms.append(annotation[0])
+													  
+							# If the selected term is in the item list
+							if all(elem in self.relatedterms for elem in current_id):
+								
+								self.list_of_items = self.list_of_items + (collection_number + "/" + item_number+ "/" + segment_number + "; ")
+                                
+								# If the segment is text
+								if self.database[collection_number]['items'][item_number]['item_type'] == "t":
+								
+									if 'fabio:pageRange' in self.database[collection_number]['items'][item_number]:
+	
+										if 'dc:description' in self.database[collection_number]['items'][item_number]['segments'][segment_number]:
+	
+											display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
 											
+										else:
+											display_item = "Text " + str(int(segment_number) +1) + ' of Page ' + self.database[collection_number]['items'][item_number]['fabio:pageRange'][0] + ' of ' + self.database[collection_number]['dc:title'][0]
+										
+									else: 
+									
+										if 'dc:description' in self.database[collection_number]['items'][item_number]['segments'][segment_number]:
+											
+											display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
+										
 										else: 
 										
-											if 'dc:description' in self.database[collection_number]['items'][item_number]['segments'][segment_number]:
-												
-												display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0] + ': ' + self.database[collection_number]['items'][item_number]['segments'][segment_number]['dc:description'][0] 
-											
-											else: 
-											
-												display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
+											display_item = 'Text ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
 
-									# If the segment is an image
-									elif self.database[collection_number]['items'][item_number]['item_type'] == "i":
+								# If the segment is an image
+								elif self.database[collection_number]['items'][item_number]['item_type'] == "i":
 
-										display_item = 'Image ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
+									display_item = 'Image ' + str(int(item_number) + 1) + ":" + str(int(segment_number) +1) + ' of ' + self.database[collection_number]['dc:title'][0]
 
-									# Display the number and title
-									segment = display_item
-									self.segments.insert(END, segment)
-									
-									# Save to export list
-									self.export_list.append([collection_number,item_number,segment_number])
+								# Display the number and title
+								segment = display_item
+								self.segments.insert(END, segment)
+								
+								# Save to export list
+								self.export_list.append([collection_number,item_number,segment_number])
 			
 		# Bind scrollbar to listbox
 		self.segments.config(yscrollcommand=self.scrollbar.set)
@@ -309,22 +331,19 @@ class search_display(cache_maintenance):
 		# Bind command to double-click segment
 		self.segments.bind('<Double-Button>', self.result_viewer)
 
+		# Print list of items
+		self.citationlist = ttk.Entry(self.pane_two)
+		self.citationlist.insert(0,self.list_of_items[:-2])
+		self.citationlist.pack(expand=YES, fill=X)
+
 	def taxon_tree_displayer(self):
 	# Displays search Tree Panel
 	
 		window_width = self.search_window.winfo_screenwidth()
 		window_height = self.search_window.winfo_screenheight()
-		style = ttk.Style()		
-		
-		if window_width > 1200:
-			style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 10)) # Modify the font of the body
-			style.configure('Treeview', rowheight=20)
-		else:
-			style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 8)) # Modify the font of the body
-			style.configure('Treeview', rowheight=14)
 
 		# Create Tree
-		self.search_tree = ttk.Treeview(self.pane_one,height=int(window_height),selectmode='browse',show='tree',style="Treeview")
+		self.search_tree = CheckboxTreeview(self.pane_one,height=int(window_height),selectmode='browse',show='tree')
 
 		# Create Tree Layout
 		self.search_tree.column("#0", width=int(window_width/2), stretch=1)		
@@ -338,10 +357,12 @@ class search_display(cache_maintenance):
 		# Go through search alphabetically and build branches
 		for taxon in alpha_search:
 			self.iid_iterator(self.taxonomy,taxon,self.taxon_branch_builder)
-			
+
+		self.get_annotations_button = Button(self.pane_two, text="Search For Taxons", command=self.get_checked_annotations)
+
 		# Display Tree
-		self.search_tree.pack(anchor="w")
-		self.search_tree.bind('<Button-1>', self.taxon_informer)
+		self.search_tree.pack()
+		self.get_annotations_button.pack(anchor="nw")
 		
 		self.search_tree.update()
 		
@@ -388,5 +409,5 @@ class search_display(cache_maintenance):
 		#menubar.add_command(label="Add New Root", command=self.root_adder)
 
 		# Set Up Annotation Selection (Tree) Panel 
-		
+		self.annotation_list = []
 		self.taxon_tree_displayer()
