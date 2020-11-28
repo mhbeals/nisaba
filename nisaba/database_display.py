@@ -215,13 +215,13 @@ class database_display(cache_maintenance):
 			
 			# Implement Ratios for Portrait Images 
 			if self.cropped_image_width < self.cropped_image_height:
-				self.segment_sizeRatio = 600 / self.cropped_image_height
+				self.segment_sizeRatio = self.pane_two.winfo_screenheight()*.65 / self.cropped_image_height
 				self.segment_newImageSizeHeight = int(self.cropped_image_height*self.segment_sizeRatio)
 				self.segment_newImageSizeWidth = int(self.segment_newImageSizeHeight*self.cropped_image_ratio_w)
 			
 			# Implement Ratios for Landscape Images
 			else:
-				self.segment_sizeRatio = 600 / self.cropped_image_width
+				self.segment_sizeRatio = self.pane_two.winfo_screenheight()*.65 / self.cropped_image_width
 				self.segment_newImageSizeWidth = int(self.cropped_image_width*self.segment_sizeRatio)
 				self.segment_newImageSizeHeight = int(self.segment_newImageSizeWidth*self.cropped_image_ratio_h)
 
@@ -942,7 +942,7 @@ class database_display(cache_maintenance):
 			[imageSizeWidth, imageSizeHeight] = image.size
 
 			# Resize Image to Fit Canvas
-			sizeRatio = 600 / imageSizeWidth
+			sizeRatio = self.pane_two.winfo_screenheight()*.65 / imageSizeWidth
 			newImageSizeWidth = int(imageSizeWidth*sizeRatio)
 			newImageSizeHeight = int(imageSizeHeight*sizeRatio)
 			image = image.resize((newImageSizeWidth, newImageSizeHeight), PIL.Image.ANTIALIAS)
@@ -1125,8 +1125,9 @@ class database_display(cache_maintenance):
 		##############################
 
 		# Create text boxes
-		self.reference_image_label =ttk.Label(self.item_tab_four, text="Image File")
-		self.reference_image_filename = ttk.Entry(self.item_tab_four)			
+		self.reference_image_filename_box = ttk.Frame(self.item_tab_four)
+		self.reference_image_label =ttk.Label(self.reference_image_filename_box, text="Image File")
+		self.reference_image_filename = ttk.Entry(self.reference_image_filename_box)			
 		
 		# Fill Entry Boxes
 		try:
@@ -1137,8 +1138,9 @@ class database_display(cache_maintenance):
 			self.reference_image_filename.insert(4,self.database[self.collection_index]['items'][self.item_index]['reference_image_file'])
 
 		# Display Image Filename
-		self.reference_image_label.grid(column = 1, row = 0)
-		self.reference_image_filename.grid(column = 2, row = 0)
+		self.reference_image_filename_box.grid(column = 0, row = 0, columnspan=3)
+		self.reference_image_label.pack(side=LEFT)
+		self.reference_image_filename.pack(side=RIGHT,expand=True,fill=X)
 		
 		def reference_image_save_and_refresher():
 			self.database_entry_saver('i')
@@ -1148,14 +1150,6 @@ class database_display(cache_maintenance):
 			self.reference_image = self.reference_image.rotate(270, expand=True)
 			self.reference_image_rotation = self.reference_image_rotation + 270
 			reference_image_save_and_refresher()
-
-		# Create save/rotate button
-		self.reference_image_rotate_button = Button(self.item_tab_four, image=self.refresh_icon,command=lambda:reference_image_rotater(self.reference_imageCanvas))
-		reference_image_rotate_button_tt = ToolTip(self.reference_image_rotate_button, "Rotate Image",delay=0.01)
-		self.reference_image_rotate_button.grid(column = 4, row = 0)
-		self.reference_image_save_button = Button(self.item_tab_four, image=self.save_icon,command=reference_image_save_and_refresher)
-		reference_image_rotate_save_tt = ToolTip(self.reference_image_save_button, "Save Filename",delay=0.01)
-		self.reference_image_save_button.grid(column = 3, row = 0)
 
 		try:
 			# Set image file
@@ -1174,12 +1168,12 @@ class database_display(cache_maintenance):
 
 			# Resize Image to Fit Canvas
 			if imageSizeWidth < imageSizeHeight:
-				sizeRatio = self.item_tab_four.winfo_screenheight()*.75 / imageSizeHeight
+				sizeRatio = self.item_tab_four.winfo_screenheight()*.65 / imageSizeHeight
 				imageSizeWidth = int(imageSizeWidth*sizeRatio)
 				imageSizeHeight = int(imageSizeHeight*sizeRatio)
 				
 			else:
-				sizeRatio = self.item_tab_four.winfo_screenheight()*.75 / imageSizeWidth
+				sizeRatio = self.item_tab_four.winfo_screenheight()*.65 / imageSizeWidth
 				imageSizeWidth = int(imageSizeWidth*sizeRatio)
 				imageSizeHeight = int(imageSizeHeight*sizeRatio)
 				
@@ -1199,6 +1193,15 @@ class database_display(cache_maintenance):
 			label = ttk.Label(self.item_tab_four, text="Image Not Found!")
 			label.grid(column = 2, row = 1)		  
 
+		# Create save/rotate button
+		self.reference_image_buttons = ttk.Frame(self.item_tab_four)
+		self.reference_image_buttons.grid(column=3, row=0)
+		self.reference_image_save_button = Button(self.reference_image_buttons, image=self.save_icon,command=reference_image_save_and_refresher)
+		reference_image_rotate_save_tt = ToolTip(self.reference_image_save_button, "Save Filename",delay=0.01)
+		self.reference_image_save_button.pack(side=LEFT)
+		self.reference_image_rotate_button = Button(self.reference_image_buttons, image=self.rotate_icon,command=lambda:reference_image_rotater(self.reference_imageCanvas))
+		reference_image_rotate_button_tt = ToolTip(self.reference_image_rotate_button, "Rotate Image",delay=0.01)
+		self.reference_image_rotate_button.pack(side=RIGHT)
 			
 	def collection_metadata_panel_displayer(self):
 	# Creates Collection Metadata Panel
@@ -1469,6 +1472,7 @@ class database_display(cache_maintenance):
 		self.minus_icon=PhotoImage(file=Path(self.assets_path) / 'minus.png')		
 		self.save_icon=PhotoImage(file=Path(self.assets_path) / 'save.png')
 		self.refresh_icon=PhotoImage(file=Path(self.assets_path) / 'refresh.png')
+		self.rotate_icon=PhotoImage(file=Path(self.assets_path) / 'rotate.png')
 		self.text_icon=PhotoImage(file=Path(self.assets_path) / 'text.png')
 		self.image_icon=PhotoImage(file=Path(self.assets_path) / 'image.png')
 		self.audio_icon=PhotoImage(file=Path(self.assets_path) / 'audio.png')

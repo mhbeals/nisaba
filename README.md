@@ -1,11 +1,11 @@
-# Nisaba 0.3.18
+# Nisaba 0.3.19
 
 A tool for multi-modal annotation
 
 ## Most Recent Update
 
-+ Fixed errors associated with duplicate or missing taxonomy entries
-+ Some refactoring of code
++ Improved reference image interface
++ Improved image display on smaller resolution screens
 
 [Full Change Log](https://github.com/mhbeals/nisaba/blob/master/changelog.md) and [Development Roadmap](https://github.com/mhbeals/nisaba/blob/master/roadmap.md)
 

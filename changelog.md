@@ -1,5 +1,10 @@
 # Change Log
 
+## Nisaba 0.3.19
+
++ Improved reference image interface
++ Improved image display on smaller resolution screens
+
 ## Nisaba 0.3.18
 
 + Fixed errors associated with duplicate or missing taxonomy entries
