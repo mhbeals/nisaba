@@ -51,8 +51,8 @@ python -m nisaba
 
 
 ## Development History
-*Nisaba* was conceived by [M. H. Beals](https://github.com/mhbeals) (Loughborough University) and [Olivia Mitchell](https://www.lboro.ac.uk/departments/phir/staff/olivia-mitchell/) (Loughborough University) as part of her PhD project (2017-present).
+*Nisaba* was developed by [M. H. Wood (previously Beals) ](https://github.com/mhbeals) (Loughborough University) to assist [Olivia Mitchell](https://www.lboro.ac.uk/departments/phir/staff/olivia-mitchell/) (Loughborough University) in her PhD project (2017-2021).
 
-Initial development of the software (v.0.1.0) was undertaken by [M. H. Beals](https://github.com/mhbeals) in 2018-2019.
+Integration of Linked Open Data outputs was implemented with assistance from [Albert Meroño Peñuela](https://github.com/albertmeronyo) (Vrije Universiteit Amsterdam).
 
-The project is now being developed by [M. H. Beals](https://github.com/mhbeals) and [Albert Meroño Peñuela](https://github.com/albertmeronyo) (Vrije Universiteit Amsterdam). If you would like to contribute, please contact [M. H. Beals](https://github.com/mhbeals) (or submit a pull request!)
+If you would like to contribute, please contact [M. H. Wood](https://github.com/mhbeals) (or submit a pull request!)
